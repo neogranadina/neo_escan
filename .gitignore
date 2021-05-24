@@ -1,2 +1,8 @@
 chdkptp.py
 escaner
+*.jpg
+.*
+__*
+neo_escan/image_viewer.py
+/libclang
+../libclang-release_120-based-linux-Rhel7.6-gcc5.3-x86_64.7z
