@@ -55,4 +55,36 @@ cd ..
 >>>
 ```
 
+# USO
 
+
+Para tomar fotografías (requiere dos cámaras). Desde el directorio `neo_escan` 
+
+```python
+>>> import shoot
+>>> shoot.toma()
+Guardada exitosamente la imagen imgs/img_00001.jpg
+Guardada exitosamente la imagen imgs/img_00002.jpg
+```
+
+La función toma() acepta un parámetro para indicar la ruta del directorio para guardar las imágenes:
+
+```python
+>>> shoot.toma("mi_directorio")
+Guardada exitosamente la imagen mi_directorio/img_00001.jpg
+Guardada exitosamente la imagen mi_directorio/img_00002.jpg
+```
+
+# GUI
+
+1) Instalar PySide2
+
+```
+pip install PySide2==5.15.2
+```
+
+o 
+
+Instalar 
+
+`pip install pyqt5 pyqt5-tools`

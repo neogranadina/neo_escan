@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+
+# Copyright (C) 2021 Fundación Histórica Neogranadina
+# https://neogranadina.org/
+# Developer Jairo Antonio Melo Flórez jairomelo@neogranadina.org
+
 import chdkptp
 import os
 import glob
@@ -15,10 +21,15 @@ def nombre_img(directorio):
     ultima_img = [im.split("/")[-1] for im in imgs[-1:]]
     try:
         base_nombre = ultima_img[0].split(".")[0]
-        nombre = f"{base_nombre[0:4]}{int(base_nombre[4:]) + 1}.jpg"
+        consecutivo = int(base_nombre[4:]) + 1
+        serie = str(consecutivo).zfill(5)
+        nombre = f"{base_nombre[0:4]}{serie}.jpg"
         return os.path.join(directorio, nombre)
     except IndexError:
-        return os.path.join(directorio, "img_1.jpg")
+        # primera imagen en directorio vacío
+        serie = "1".zfill(5)
+        nombre = f"img_{serie}.jpg"
+        return os.path.join(directorio, nombre)
 
 
 def cam(camaras=chdkptp.list_devices()):
