@@ -1,8 +1,7 @@
-chdkptp.py
-escaner
-*.jpg
+test.py
+historial_de_cambios.md
+update_theme.sh
+/db
 .*
 __*
-neo_escan/image_viewer.py
-/libclang
-../libclang-release_120-based-linux-Rhel7.6-gcc5.3-x86_64.7z
+neo_escan.log
