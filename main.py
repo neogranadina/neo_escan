@@ -10,22 +10,22 @@
 import sys
 import logging
 from configparser import ConfigParser
+from locale import getdefaultlocale
 
 from PySide6.QtWidgets import (QApplication, QLabel, QPushButton, QDialog,
-                               QLineEdit, QVBoxLayout, QMainWindow)
-from PySide6.QtCore import Slot, QDir
+                               QLineEdit, QVBoxLayout, QMainWindow, QMessageBox)
+from PySide6.QtCore import Slot, QDir, QTranslator, QLibraryInfo
 from PySide6.QtSql import QSqlDatabase
 
 from ui_main import Ui_MainWindow
-
 from db import connectToDatabase, db_config_info, db_configurar
-
 
 # logs
 
 logging.basicConfig(filename="neo_escan.log",
                     level=logging.DEBUG, datefmt='%Y-%m-%d %H:%M:%S')
 logger = logging.getLogger("logger")
+
 
 
 class MainWindow(QMainWindow):
@@ -47,6 +47,7 @@ class MainWindow(QMainWindow):
 
         # Botones, menú
         widgets.homeButton.clicked.connect(self.buttonClick)
+        widgets.coleccionesButton.clicked.connect(self.buttonClick)
         widgets.configButton.clicked.connect(self.buttonClick)
 
         # Seleccionar página de inicio
@@ -61,35 +62,54 @@ class MainWindow(QMainWindow):
 
 
     def buttonClick(self):
-        # GET BUTTON CLICKED
+        # nombre del botón
         btn = self.sender()
         btnName = btn.objectName()
 
-        # SHOW HOME PAGE
+        # muestra la página de inicio
         if btnName == "homeButton":
             widgets.pages.setCurrentWidget(widgets.home)
 
-        # SHOW config PAGE
+        if btnName == "coleccionesButton":
+            widgets.pages.setCurrentWidget(widgets.crear_coleccion)
+
+        # muestra la página de configuración
         if btnName == "configButton":
             widgets.pages.setCurrentWidget(widgets.config)
 
 
     def configInfo(self):
-        db = widgets.tipoDB_cbox.currentText()
-        host = widgets.host_line.text()
-        usuario_config = widgets.usuario_line.text()
-        contra = widgets.contrasena_line.text()
-        basedd = widgets.dbname_line.text()
-        # escribe la nueva información en cofig.ini
-        db_configurar(db, host, basedd, usuario_config, contra)
-        # actualiza la información de la base de datos
-        widgets.tipo_db.setText(db_config_info())
+        dialogo = QMessageBox.warning(
+            self, "Advertencia", "¿Estás seguro de aplicar los cambios?",
+            buttons=QMessageBox.Apply | QMessageBox.Cancel,
+            defaultButton=QMessageBox.Cancel)
+
+        if dialogo == QMessageBox.Apply:
+            # obtener el texto del formulario de configuración
+            db = widgets.tipoDB_cbox.currentText()
+            host = widgets.host_line.text()
+            usuario_config = widgets.usuario_line.text()
+            contra = widgets.contrasena_line.text()
+            basedd = widgets.dbname_line.text()
+            # escribe la nueva información en config.ini
+            db_configurar(db, host, basedd, usuario_config, contra)
+        
+            # actualiza la información de la base de datos
+            widgets.tipo_db.setText(db_config_info())
 
 
 if __name__ == '__main__':
     # crear una aplicación Qt
     app = QApplication(sys.argv)
-    # Crear y mostrar la forma
+    locale = getdefaultlocale()
+
+    # Aplicar el traductor para español
+    translator = QTranslator(app)
+    translations = QLibraryInfo.location(QLibraryInfo.TranslationsPath)
+    translator.load("qt_es", translations)
+    app.installTranslator(translator)
+
+    # Crear y mostrar la ventana principal
     window = MainWindow()
     window.show()
     # correr el loop principal Qt

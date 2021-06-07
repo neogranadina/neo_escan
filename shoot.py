@@ -1,8 +1,11 @@
-# -*- coding: utf-8 -*-
-
-# Copyright (C) 2021 Fundación Histórica Neogranadina
-# https://neogranadina.org/
-# Developer Jairo Antonio Melo Flórez jairomelo@neogranadina.org
+# ///////////////////////////////////////////////////////////////
+#
+# Hecho por: Jairo Antonio Melo Flórez
+# Realizado con: Qt Designer y PySide6
+# © 2021 Fundación Histórica Neogranadina
+# V: 1.0.0
+#
+# ///////////////////////////////////////////////////////////////
 
 import chdkptp
 import os

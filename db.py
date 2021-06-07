@@ -14,9 +14,9 @@ from PySide6.QtCore import Qt, Slot, QDir
 from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
 
 
+# configuración general
 config = ConfigParser()
 config.read('config.ini')
-# configuración general
 tipo = config.get('db', 'tipo')
 try:
     host = config.get('db', 'hostname')
@@ -24,7 +24,7 @@ try:
     user = config.get('db', 'username')
     password = config.get('db', 'password')
 except Error:
-    pass
+    raise
 
 
 def connectToDatabase():
@@ -68,17 +68,17 @@ def db_config_info():
     '''
     Regresa la información de configuración de la base de datos en una lista HTML
     '''
-
+    # Lee nuevamente el archivo de configuración para actualizar la información
+    # del widget tipo_db
     config = ConfigParser()
     config.read('config.ini')
-    # configuración general
     tipo = config.get('db', 'tipo')
     try:
         host = config.get('db', 'hostname')
         db_name = config.get('db', 'database')
         user = config.get('db', 'username')
     except Error:
-        pass
+        raise
 
 
     if tipo == 'QSQLITE':
