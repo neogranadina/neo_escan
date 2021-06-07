@@ -22,8 +22,8 @@ from db import connectToDatabase, db_config_info, db_configurar
 
 # logs
 
-logging.basicConfig(filename="neo_escan.log",
-                    level=logging.DEBUG, datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(filename="logs/neo_escan.log",
+                    level=logging.DEBUG)
 logger = logging.getLogger("logger")
 
 
@@ -111,6 +111,6 @@ if __name__ == '__main__':
 
     # Crear y mostrar la ventana principal
     window = MainWindow()
-    window.show()
+    window.showMaximized()
     # correr el loop principal Qt
     sys.exit(app.exec())

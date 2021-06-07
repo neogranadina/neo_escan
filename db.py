@@ -9,6 +9,7 @@
 
 import logging
 from configparser import ConfigParser, Error
+import datetime
 
 from PySide6.QtCore import Qt, Slot, QDir
 from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
@@ -52,7 +53,7 @@ def connectToDatabase():
 
     write_dir = QDir("db")
     if not write_dir.mkpath("."):
-        logging.error("No fue posible escribir en el directorio")
+        logging.error(f"{datetime.datetime.now()} - No fue posible escribir en el directorio")
 
     # Garantizar la escritura en cualquier dispositivo
     abs_path = write_dir.absolutePath()
@@ -61,7 +62,7 @@ def connectToDatabase():
     # En SQLite, si no  existe la base de datos, esta es creada
     database.setDatabaseName(filename)
     if not database.open():
-        logging.error("No fue posible abrir la base de datos")
+        logging.error(f"{datetime.datetime.now()} - No fue posible abrir la base de datos")
 
 
 def db_config_info():
