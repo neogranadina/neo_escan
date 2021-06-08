@@ -14,7 +14,7 @@ Es sumamente recomendado crear un entorno virtual previamente:
 
 ```shell
 python -m venv escan_env
-source escan_env/bin activate
+source escan_env/bin/activate
 ```
 
 Posteriormente ejecutar `install_chdkptp.py.sh` para instalar `chdkptp.py` y `PySide6` con todas las dependencias necesarias.
