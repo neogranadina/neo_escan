@@ -1,8 +1,8 @@
 test.py
 historial_de_cambios.md
 update_theme.sh
-/db
 .*
 __*
 neo_escan.log
 chdkptp.py
+config.ini
