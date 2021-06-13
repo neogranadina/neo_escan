@@ -16,9 +16,10 @@ from PySide6.QtWidgets import (QApplication, QLabel, QPushButton, QDialog,
                                QLineEdit, QVBoxLayout, QMainWindow, QMessageBox)
 from PySide6.QtCore import Slot, QDir, QTranslator, QLibraryInfo
 from PySide6.QtSql import QSqlDatabase
+import resources_rc
 
 from ui_main import Ui_MainWindow
-from db import connectToDatabase, db_config_info, db_configurar
+from db import connectToDatabase
 
 # logs
 
@@ -46,19 +47,15 @@ class MainWindow(QMainWindow):
         connectToDatabase()
 
         # Botones, menú
-        widgets.homeButton.clicked.connect(self.buttonClick)
+        widgets.inicioButton.clicked.connect(self.buttonClick)
         widgets.coleccionesButton.clicked.connect(self.buttonClick)
-        widgets.configButton.clicked.connect(self.buttonClick)
+        widgets.escanerButton.clicked.connect(self.buttonClick)
+        widgets.imagenesButton.clicked.connect(self.buttonClick)
+        widgets.exportarButton.clicked.connect(self.buttonClick)
 
         # Seleccionar página de inicio
-        widgets.pages.setCurrentWidget(widgets.home)
+        widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
 
-        # Página de configuración
-        # Muestra la información actual de la base de datos
-        widgets.tipo_db.setText(db_config_info())
-
-        # Regresa los valores de la configuración de la base de datos
-        widgets.configSendButton.clicked.connect(self.configInfo)
 
 
     def buttonClick(self):
@@ -66,36 +63,19 @@ class MainWindow(QMainWindow):
         btn = self.sender()
         btnName = btn.objectName()
 
-        # muestra la página de inicio
-        if btnName == "homeButton":
-            widgets.pages.setCurrentWidget(widgets.home)
+        # navega por cada una de las páginas
+        if btnName == "inicioButton":
+            widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+        elif btnName == "coleccionesButton":
+            widgets.stackedWidget.setCurrentWidget(widgets.coleccionesPage)
+        elif btnName == "escanerButton":
+            widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
+        elif btnName == "imagenesButton":
+            widgets.stackedWidget.setCurrentWidget(widgets.imgsPage)
+        elif btnName == "exportarButton":
+            widgets.stackedWidget.setCurrentWidget(widgets.exportarPage)
 
-        if btnName == "coleccionesButton":
-            widgets.pages.setCurrentWidget(widgets.crear_coleccion)
 
-        # muestra la página de configuración
-        if btnName == "configButton":
-            widgets.pages.setCurrentWidget(widgets.config)
-
-
-    def configInfo(self):
-        dialogo = QMessageBox.warning(
-            self, "Advertencia", "¿Estás seguro de aplicar los cambios?",
-            buttons=QMessageBox.Apply | QMessageBox.Cancel,
-            defaultButton=QMessageBox.Cancel)
-
-        if dialogo == QMessageBox.Apply:
-            # obtener el texto del formulario de configuración
-            db = widgets.tipoDB_cbox.currentText()
-            host = widgets.host_line.text()
-            usuario_config = widgets.usuario_line.text()
-            contra = widgets.contrasena_line.text()
-            basedd = widgets.dbname_line.text()
-            # escribe la nueva información en config.ini
-            db_configurar(db, host, basedd, usuario_config, contra)
-        
-            # actualiza la información de la base de datos
-            widgets.tipo_db.setText(db_config_info())
 
 
 if __name__ == '__main__':
@@ -111,6 +91,6 @@ if __name__ == '__main__':
 
     # Crear y mostrar la ventana principal
     window = MainWindow()
-    window.showMaximized()
+    window.show()
     # correr el loop principal Qt
     sys.exit(app.exec())

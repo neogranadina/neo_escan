@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/imgs">
+        <file>imgs/icons/images-interface-symbol.svg</file>
+        <file>imgs/logo.png</file>
+        <file>imgs/logo_grande.png</file>
+        <file>imgs/logo_head.png</file>
+        <file>imgs/logo_head_inverted.png</file>
+        <file>imgs/Logo_Neogranadina_gris.png</file>
+        <file>imgs/logo_small.png</file>
+        <file>imgs/icons/camera-to-take-photos.svg</file>
+        <file>imgs/icons/window-of-four-rounded-squares.svg</file>
+        <file>imgs/logo_grande.svg</file>
+        <file>imgs/Neogranadina_header_white.svg</file>
+        <file>imgs/icons/pages-interface.svg</file>
+        <file>imgs/icons/download-symbol.svg</file>
+        <file>imgs/icons/resize.svg</file>
+    </qresource>
+</RCC>
