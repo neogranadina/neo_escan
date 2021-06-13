@@ -1,6 +1,6 @@
 # Escáner de Neogranadina *Nombre por definir :p
 
-> :warning: Este programa requiere [Lua](http://www.lua.org/home.html), por lo que se recomienda su instalación en sistemas Unix (Ubuntu, Debian, Raspbian, Mac OS X). Para Windows es necesario [compilar Lua](http://lua-users.org/wiki/BuildingLua) o simplemente intentar con [Lua Rocks](https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Windows)  
+> :warning: Este programa requiere [Lua](http://www.lua.org/home.html), por lo que se recomienda su instalación en sistemas Unix (Ubuntu, Debian, Raspbian, Mac OS X). Para Windows es necesario [compilar Lua](http://lua-users.org/wiki/BuildingLua) o simplemente intentar con [Lua Rocks](https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Windows), aunque no ha sido posible conectar chdkptp.py con LuaRocks.  
 
 ## Instalación
 
@@ -36,6 +36,8 @@ Es posible contribuir a este proyecto proponiendo commits directamente a este re
 ### Proponer cambios a la interface gráfica de usuario (GUI)
 
 Realizar estas modificaciones solamente al archivo `main.ui`. Se recomienda hacerlas desde 'Qt Designer', 'Qt Creator' o 'Qt Design Studio' para Qt6. Modificaciones en Qt5 deben asegurar la compatibilidad con Qt6, para ello se recomienda consultar el documento [Qt5 and Qt6 compatibility](https://doc-snapshots.qt.io/qt6-dev/cmake-qt5-and-qt6-compatibility.html).
+
+Imágenes e íconos se vinculan desde el objeto `resources_rc.py`. Para proponer cambios añadirlos al archivo `resources.qrc` y realizar la conversión a binarios con `pyside6-rcc resources.qrc -o resources_rc.py`.
 
 ### Proponer cambios a la funcionalidad de la aplicación
 

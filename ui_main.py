@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainDCVRlM.ui'
+## Form generated from reading UI file 'mainBJUEAM.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.1
 ##
@@ -194,6 +194,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.stackedWidget = QStackedWidget(self.pages)
         self.stackedWidget.setObjectName(u"stackedWidget")
+        self.stackedWidget.setStyleSheet(u"")
         self.inicioPage = QWidget()
         self.inicioPage.setObjectName(u"inicioPage")
         self.label = QLabel(self.inicioPage)
@@ -202,9 +203,47 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.inicioPage)
         self.coleccionesPage = QWidget()
         self.coleccionesPage.setObjectName(u"coleccionesPage")
-        self.label_2 = QLabel(self.coleccionesPage)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(100, 40, 91, 16))
+        self.verticalLayout_4 = QVBoxLayout(self.coleccionesPage)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.widget_3 = QWidget(self.coleccionesPage)
+        self.widget_3.setObjectName(u"widget_3")
+        self.widget_3.setStyleSheet(u"background-color: rgb(85, 255, 0);")
+        self.verticalLayout_5 = QVBoxLayout(self.widget_3)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.coleccionHeader = QWidget(self.widget_3)
+        self.coleccionHeader.setObjectName(u"coleccionHeader")
+        self.coleccionHeader.setStyleSheet(u"background-color: rgb(170, 85, 255);")
+        self.tipoColeccion = QComboBox(self.coleccionHeader)
+        self.tipoColeccion.addItem("")
+        self.tipoColeccion.addItem("")
+        self.tipoColeccion.addItem("")
+        self.tipoColeccion.addItem("")
+        self.tipoColeccion.addItem("")
+        self.tipoColeccion.setObjectName(u"tipoColeccion")
+        self.tipoColeccion.setGeometry(QRect(270, 90, 221, 22))
+
+        self.verticalLayout_5.addWidget(self.coleccionHeader)
+
+        self.widget = QWidget(self.widget_3)
+        self.widget.setObjectName(u"widget")
+        self.widget.setStyleSheet(u"background-color: rgb(85, 170, 127);")
+        self.formulariosColeccion = QStackedWidget(self.widget)
+        self.formulariosColeccion.setObjectName(u"formulariosColeccion")
+        self.formulariosColeccion.setGeometry(QRect(350, 50, 120, 80))
+        self.formulariosColeccion.setStyleSheet(u"background-color: rgb(255, 85, 0);")
+        self.udocComp = QWidget()
+        self.udocComp.setObjectName(u"udocComp")
+        self.formulariosColeccion.addWidget(self.udocComp)
+        self.udocSimple = QWidget()
+        self.udocSimple.setObjectName(u"udocSimple")
+        self.udocSimple.setStyleSheet(u"background-color: rgb(170, 170, 0);")
+        self.formulariosColeccion.addWidget(self.udocSimple)
+
+        self.verticalLayout_5.addWidget(self.widget)
+
+
+        self.verticalLayout_4.addWidget(self.widget_3)
+
         self.stackedWidget.addWidget(self.coleccionesPage)
         self.escanerPage = QWidget()
         self.escanerPage.setObjectName(u"escanerPage")
@@ -212,13 +251,16 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.widget = QWidget(self.escanerPage)
-        self.widget.setObjectName(u"widget")
-        self.widget.setMinimumSize(QSize(210, 0))
-        self.widget.setMaximumSize(QSize(225, 16777215))
-        self.widget.setStyleSheet(u"background-color: rgba(0, 0, 0, .3);")
+        self.controlPanel = QWidget(self.escanerPage)
+        self.controlPanel.setObjectName(u"controlPanel")
+        self.controlPanel.setMinimumSize(QSize(210, 0))
+        self.controlPanel.setMaximumSize(QSize(225, 16777215))
+        self.controlPanel.setStyleSheet(u"background-color: rgba(0, 0, 0, .3);")
+        self.pushButton = QPushButton(self.controlPanel)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setGeometry(QRect(10, 10, 75, 24))
 
-        self.horizontalLayout_5.addWidget(self.widget)
+        self.horizontalLayout_5.addWidget(self.controlPanel)
 
         self.layoutEscan = QWidget(self.escanerPage)
         self.layoutEscan.setObjectName(u"layoutEscan")
@@ -237,34 +279,64 @@ class Ui_MainWindow(object):
         self.widget_2.setStyleSheet(u"background-color: transparent;")
         self.horizontalLayout_6 = QHBoxLayout(self.widget_2)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.graphicsView = QGraphicsView(self.widget_2)
-        self.graphicsView.setObjectName(u"graphicsView")
-        self.graphicsView.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.leftCamera = QGraphicsView(self.widget_2)
+        self.leftCamera.setObjectName(u"leftCamera")
+        self.leftCamera.setStyleSheet(u"background-color: rgb(0, 0, 0);")
 
-        self.horizontalLayout_6.addWidget(self.graphicsView)
+        self.horizontalLayout_6.addWidget(self.leftCamera)
 
-        self.graphicsView_2 = QGraphicsView(self.widget_2)
-        self.graphicsView_2.setObjectName(u"graphicsView_2")
-        self.graphicsView_2.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.rightCamera = QGraphicsView(self.widget_2)
+        self.rightCamera.setObjectName(u"rightCamera")
+        self.rightCamera.setStyleSheet(u"background-color: rgb(0, 0, 0);")
 
-        self.horizontalLayout_6.addWidget(self.graphicsView_2)
+        self.horizontalLayout_6.addWidget(self.rightCamera)
 
 
         self.verticalLayout_3.addWidget(self.widget_2)
 
-        self.widget_3 = QWidget(self.layoutEscan)
-        self.widget_3.setObjectName(u"widget_3")
-        self.widget_3.setMinimumSize(QSize(0, 70))
-        self.widget_3.setMaximumSize(QSize(16777215, 70))
-        self.widget_3.setStyleSheet(u"background-color: transparent;")
-        self.capturaButton = QPushButton(self.widget_3)
-        self.capturaButton.setObjectName(u"capturaButton")
-        self.capturaButton.setGeometry(QRect(200, 20, 75, 24))
-        icon1 = QIcon()
-        icon1.addFile(u":/imgs/imgs/icons/camera-to-take-photos.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.capturaButton.setIcon(icon1)
+        self.captureControl = QWidget(self.layoutEscan)
+        self.captureControl.setObjectName(u"captureControl")
+        self.captureControl.setMinimumSize(QSize(0, 70))
+        self.captureControl.setMaximumSize(QSize(16777215, 70))
+        self.captureControl.setStyleSheet(u"QWidget {background-color: transparent;}\n"
+"\n"
+"QPushButton {\n"
+"	color:  rgba(0, 0, 0, .7);\n"
+"	background-color: transparent;\n"
+"	background-repeat: no-repeat;\n"
+"	border: none;\n"
+"}\n"
+"\n"
+"QPushButton::hover {background-color: rgba(242, 120, 75, .7);}\n"
+"\n"
+"QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}")
+        self.horizontalLayout_7 = QHBoxLayout(self.captureControl)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalSpacer_2 = QSpacerItem(165, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.verticalLayout_3.addWidget(self.widget_3)
+        self.horizontalLayout_7.addItem(self.horizontalSpacer_2)
+
+        self.capturaButton = QPushButton(self.captureControl)
+        self.capturaButton.setObjectName(u"capturaButton")
+        self.capturaButton.setMinimumSize(QSize(120, 35))
+        self.capturaButton.setMaximumSize(QSize(16777215, 35))
+        font1 = QFont()
+        font1.setPointSize(11)
+        self.capturaButton.setFont(font1)
+        self.capturaButton.setCursor(QCursor(Qt.PointingHandCursor))
+        icon1 = QIcon()
+        icon1.addFile(u":/imgs/imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.capturaButton.setIcon(icon1)
+        self.capturaButton.setIconSize(QSize(32, 32))
+
+        self.horizontalLayout_7.addWidget(self.capturaButton)
+
+        self.horizontalSpacer_3 = QSpacerItem(164, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_7.addItem(self.horizontalSpacer_3)
+
+
+        self.verticalLayout_3.addWidget(self.captureControl)
 
 
         self.horizontalLayout_5.addWidget(self.layoutEscan)
@@ -346,7 +418,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -372,7 +444,13 @@ class Ui_MainWindow(object):
 "\n"
 "Exportar", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"INICIO", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"COLECCIONES", None))
+        self.tipoColeccion.setItemText(0, QCoreApplication.translate("MainWindow", u"Legajo / expediente", None))
+        self.tipoColeccion.setItemText(1, QCoreApplication.translate("MainWindow", u"Libro / manuscrito", None))
+        self.tipoColeccion.setItemText(2, QCoreApplication.translate("MainWindow", u"Mapa / fotograf\u00eda / dibujo", None))
+        self.tipoColeccion.setItemText(3, QCoreApplication.translate("MainWindow", u"Unidad documental simple", None))
+        self.tipoColeccion.setItemText(4, QCoreApplication.translate("MainWindow", u"Toma simple", None))
+
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.capturaButton.setText(QCoreApplication.translate("MainWindow", u"capturar", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"IM\u00c1GENES", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"EXPORTAR", None))

@@ -507,8 +507,11 @@ Exportar</string>
           </property>
           <item>
            <widget class="QStackedWidget" name="stackedWidget">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="currentIndex">
-             <number>4</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="inicioPage">
              <widget class="QLabel" name="label">
@@ -526,19 +529,132 @@ Exportar</string>
              </widget>
             </widget>
             <widget class="QWidget" name="coleccionesPage">
-             <widget class="QLabel" name="label_2">
-              <property name="geometry">
-               <rect>
-                <x>100</x>
-                <y>40</y>
-                <width>91</width>
-                <height>16</height>
-               </rect>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <property name="spacing">
+               <number>0</number>
               </property>
-              <property name="text">
-               <string>COLECCIONES</string>
+              <property name="leftMargin">
+               <number>0</number>
               </property>
-             </widget>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QWidget" name="layoutcoleccionesPage" native="true">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_5">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QWidget" name="coleccionHeader" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_8">
+                    <item>
+                     <widget class="QLabel" name="label_2">
+                      <property name="text">
+                       <string>Escoja el tipo de proyecto</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="tipoColeccion">
+                      <item>
+                       <property name="text">
+                        <string>Legajo / expediente</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Libro / manuscrito</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Mapa / fotografía / dibujo</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Unidad documental simple</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Toma simple</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="widget" native="true">
+                   <layout class="QHBoxLayout" name="horizontalLayout_9">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QStackedWidget" name="formulariosColeccion">
+                      <widget class="QWidget" name="udocComp"/>
+                      <widget class="QWidget" name="udocSimple">
+                       <property name="styleSheet">
+                        <string notr="true">background-color: rgb(170, 170, 0);</string>
+                       </property>
+                      </widget>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
             </widget>
             <widget class="QWidget" name="escanerPage">
              <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -558,7 +674,7 @@ Exportar</string>
                <number>0</number>
               </property>
               <item>
-               <widget class="QWidget" name="widget" native="true">
+               <widget class="QWidget" name="controlPanel" native="true">
                 <property name="minimumSize">
                  <size>
                   <width>210</width>
@@ -574,6 +690,19 @@ Exportar</string>
                 <property name="styleSheet">
                  <string notr="true">background-color: rgba(0, 0, 0, .3);</string>
                 </property>
+                <widget class="QPushButton" name="pushButton">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>75</width>
+                   <height>24</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>PushButton</string>
+                 </property>
+                </widget>
                </widget>
               </item>
               <item>
@@ -613,14 +742,14 @@ Exportar</string>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_6">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView">
+                     <widget class="QGraphicsView" name="leftCamera">
                       <property name="styleSheet">
                        <string notr="true">background-color: rgb(0, 0, 0);</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_2">
+                     <widget class="QGraphicsView" name="rightCamera">
                       <property name="styleSheet">
                        <string notr="true">background-color: rgb(0, 0, 0);</string>
                       </property>
@@ -630,7 +759,7 @@ Exportar</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QWidget" name="widget_3" native="true">
+                  <widget class="QWidget" name="captureControl" native="true">
                    <property name="minimumSize">
                     <size>
                      <width>0</width>
@@ -644,25 +773,84 @@ Exportar</string>
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: transparent;</string>
+                    <string notr="true">QWidget {background-color: transparent;}
+
+QPushButton {
+	color:  rgba(0, 0, 0, .7);
+	background-color: transparent;
+	background-repeat: no-repeat;
+	border: none;
+}
+
+QPushButton::hover {background-color: rgba(242, 120, 75, .7);}
+
+QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                    </property>
-                   <widget class="QPushButton" name="capturaButton">
-                    <property name="geometry">
-                     <rect>
-                      <x>200</x>
-                      <y>20</y>
-                      <width>75</width>
-                      <height>24</height>
-                     </rect>
-                    </property>
-                    <property name="text">
-                     <string>capturar</string>
-                    </property>
-                    <property name="icon">
-                     <iconset resource="resources.qrc">
-                      <normaloff>:/imgs/imgs/icons/camera-to-take-photos.svg</normaloff>:/imgs/imgs/icons/camera-to-take-photos.svg</iconset>
-                    </property>
-                   </widget>
+                   <layout class="QHBoxLayout" name="horizontalLayout_7">
+                    <item>
+                     <spacer name="horizontalSpacer_2">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>165</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="capturaButton">
+                      <property name="minimumSize">
+                       <size>
+                        <width>120</width>
+                        <height>35</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>35</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <pointsize>11</pointsize>
+                       </font>
+                      </property>
+                      <property name="cursor">
+                       <cursorShape>PointingHandCursor</cursorShape>
+                      </property>
+                      <property name="text">
+                       <string>capturar</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="resources.qrc">
+                        <normaloff>:/imgs/imgs/icons/camera-to-take-photos_black.svg</normaloff>:/imgs/imgs/icons/camera-to-take-photos_black.svg</iconset>
+                      </property>
+                      <property name="iconSize">
+                       <size>
+                        <width>32</width>
+                        <height>32</height>
+                       </size>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_3">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>164</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                 </layout>

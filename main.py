@@ -12,11 +12,8 @@ import logging
 from configparser import ConfigParser
 from locale import getdefaultlocale
 
-from PySide6.QtWidgets import (QApplication, QLabel, QPushButton, QDialog,
-                               QLineEdit, QVBoxLayout, QMainWindow, QMessageBox)
-from PySide6.QtCore import Slot, QDir, QTranslator, QLibraryInfo
-from PySide6.QtSql import QSqlDatabase
-import resources_rc
+from PySide6.QtWidgets import (QApplication, QMainWindow)
+from PySide6.QtCore import QTranslator, QLibraryInfo
 
 from ui_main import Ui_MainWindow
 from db import connectToDatabase
@@ -27,7 +24,7 @@ logging.basicConfig(filename="logs/neo_escan.log",
                     level=logging.DEBUG)
 logger = logging.getLogger("logger")
 
-
+# Entorno de la aplicación
 
 class MainWindow(QMainWindow):
 
@@ -56,7 +53,11 @@ class MainWindow(QMainWindow):
         # Seleccionar página de inicio
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
 
+        # Página de colecciones
+        widgets.tipoColeccion.currentIndexChanged.connect(self.indexChange)
 
+
+    # Navegar por las páginas desde el menú principal
 
     def buttonClick(self):
         # nombre del botón
@@ -75,8 +76,18 @@ class MainWindow(QMainWindow):
         elif btnName == "exportarButton":
             widgets.stackedWidget.setCurrentWidget(widgets.exportarPage)
 
+    # navegar por los widgets de las colecciones
+
+    def indexChange(self):
+        index = widgets.tipoColeccion.currentIndex()
+
+        if not index == 4:
+            widgets.formulariosColeccion.setCurrentWidget(widgets.udocComp)
+        else:
+            widgets.formulariosColeccion.setCurrentWidget(widgets.udocSimple)
 
 
+# Fin de las funciones de la aplicación
 
 if __name__ == '__main__':
     # crear una aplicación Qt
