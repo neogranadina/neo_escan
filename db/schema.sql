@@ -71,3 +71,15 @@ CREATE TABLE IF NOT EXISTS usuarios_proyectos (
 	CONSTRAINT usuarios_proyectos_FK FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto),
 	CONSTRAINT usuarios_proyectos_FK_1 FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
+
+INSERT INTO tipos_proyecto (nombre_tipo_proyecto, descripcion_tipo_proyecto) 
+VALUES 
+("Legajo", "Legajo, expediente, unidad documental compuesta"),
+("Libro", "Libro, manuscrito, volumen"),
+("Publicación seriada", "Revista, periódico, publicación por entregas"),
+("Gráfico", "Mapa, fotografía, postal, dibujo"),
+("Unidad documental simple", "Carta, reporte, hoja suelta");
+
+INSERT INTO instituciones (nombre_institucion, tipo_institucion)
+VALUES
+("Institución ficticia", "Dummy institution");

@@ -4,5 +4,6 @@ update_theme.sh
 .*
 __*
 neo_escan.log
-chdkptp.py
+/chdkptp.py
 config.ini
+/escan_env

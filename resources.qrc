@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/imgs">
+    <file>imgs/icons/check-mark-in-a-circle.svg</file>
+    <file>imgs/icons/magnifying-glass.svg</file>
     <file>imgs/icons/camera-to-take-photos_black.svg</file>
     <file>imgs/icons/images-interface-symbol.svg</file>
     <file>imgs/logo.png</file>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainBJUEAM.ui'
+## Form generated from reading UI file 'mainyqKxzI.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.1
 ##
@@ -203,34 +203,223 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.inicioPage)
         self.coleccionesPage = QWidget()
         self.coleccionesPage.setObjectName(u"coleccionesPage")
+        self.coleccionesPage.setStyleSheet(u"")
         self.verticalLayout_4 = QVBoxLayout(self.coleccionesPage)
+        self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.widget_3 = QWidget(self.coleccionesPage)
-        self.widget_3.setObjectName(u"widget_3")
-        self.widget_3.setStyleSheet(u"background-color: rgb(85, 255, 0);")
-        self.verticalLayout_5 = QVBoxLayout(self.widget_3)
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.layoutcoleccionesPage = QWidget(self.coleccionesPage)
+        self.layoutcoleccionesPage.setObjectName(u"layoutcoleccionesPage")
+        self.layoutcoleccionesPage.setStyleSheet(u"QLabel {\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"QComboBox {\n"
+"	border-color: rgba(0, 0, 0,.7);\n"
+"	border-style: solid;\n"
+"	border-width: 2px;\n"
+"	border-radius: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"	border-color: rgba(0, 0, 0,.7);\n"
+"	border-style: solid;\n"
+"	border-width: 2px;\n"
+"	border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"	background-color: rgba(0, 0, 0, .7);\n"
+"	color: rgba(251,251,251,.7)\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"	background-color: rgba(242, 120, 75, .7);\n"
+"	color: rgba(0,0,0,.5);\n"
+"	border: none;\n"
+"}\n"
+"\n"
+"QPushButton::focus {\n"
+"	background-color: rgba(242, 120, 75, 1);\n"
+"	border: none;\n"
+"}")
+        self.verticalLayout_5 = QVBoxLayout(self.layoutcoleccionesPage)
+        self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.coleccionHeader = QWidget(self.widget_3)
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.coleccionHeader = QWidget(self.layoutcoleccionesPage)
         self.coleccionHeader.setObjectName(u"coleccionHeader")
-        self.coleccionHeader.setStyleSheet(u"background-color: rgb(170, 85, 255);")
-        self.tipoColeccion = QComboBox(self.coleccionHeader)
+        self.coleccionHeader.setMinimumSize(QSize(0, 80))
+        self.coleccionHeader.setMaximumSize(QSize(16777215, 80))
+        self.layoutWidget = QWidget(self.coleccionHeader)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 10, 514, 61))
+        self.headCollectionGrid = QGridLayout(self.layoutWidget)
+        self.headCollectionGrid.setObjectName(u"headCollectionGrid")
+        self.headCollectionGrid.setContentsMargins(0, 0, 0, 0)
+        self.escogerColeccion = QLabel(self.layoutWidget)
+        self.escogerColeccion.setObjectName(u"escogerColeccion")
+        self.escogerColeccion.setMinimumSize(QSize(180, 0))
+        self.escogerColeccion.setMaximumSize(QSize(200, 16777215))
+        self.escogerColeccion.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.headCollectionGrid.addWidget(self.escogerColeccion, 0, 0, 1, 1)
+
+        self.tipoColeccion = QComboBox(self.layoutWidget)
         self.tipoColeccion.addItem("")
         self.tipoColeccion.addItem("")
         self.tipoColeccion.addItem("")
         self.tipoColeccion.addItem("")
         self.tipoColeccion.addItem("")
         self.tipoColeccion.setObjectName(u"tipoColeccion")
-        self.tipoColeccion.setGeometry(QRect(270, 90, 221, 22))
+        self.tipoColeccion.setMinimumSize(QSize(245, 25))
+        self.tipoColeccion.setMaximumSize(QSize(245, 25))
+
+        self.headCollectionGrid.addWidget(self.tipoColeccion, 0, 1, 1, 1)
+
+        self.escogerUbicacion = QLabel(self.layoutWidget)
+        self.escogerUbicacion.setObjectName(u"escogerUbicacion")
+        self.escogerUbicacion.setMinimumSize(QSize(180, 0))
+        self.escogerUbicacion.setMaximumSize(QSize(200, 16777215))
+        self.escogerUbicacion.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.headCollectionGrid.addWidget(self.escogerUbicacion, 1, 0, 1, 1)
+
+        self.rutaLine = QLineEdit(self.layoutWidget)
+        self.rutaLine.setObjectName(u"rutaLine")
+        self.rutaLine.setMinimumSize(QSize(245, 22))
+        self.rutaLine.setMaximumSize(QSize(245, 22))
+        self.rutaLine.setStyleSheet(u"")
+
+        self.headCollectionGrid.addWidget(self.rutaLine, 1, 1, 1, 1)
+
+        self.browserDirButton = QPushButton(self.layoutWidget)
+        self.browserDirButton.setObjectName(u"browserDirButton")
+        self.browserDirButton.setMinimumSize(QSize(75, 22))
+        self.browserDirButton.setMaximumSize(QSize(75, 22))
+        self.browserDirButton.setCursor(QCursor(Qt.PointingHandCursor))
+        icon1 = QIcon()
+        icon1.addFile(u":/imgs/imgs/icons/magnifying-glass.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.browserDirButton.setIcon(icon1)
+
+        self.headCollectionGrid.addWidget(self.browserDirButton, 1, 2, 1, 1)
+
 
         self.verticalLayout_5.addWidget(self.coleccionHeader)
 
-        self.widget = QWidget(self.widget_3)
+        self.widget = QWidget(self.layoutcoleccionesPage)
         self.widget.setObjectName(u"widget")
-        self.widget.setStyleSheet(u"background-color: rgb(85, 170, 127);")
+        self.horizontalLayout_9 = QHBoxLayout(self.widget)
+        self.horizontalLayout_9.setSpacing(0)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
         self.formulariosColeccion = QStackedWidget(self.widget)
         self.formulariosColeccion.setObjectName(u"formulariosColeccion")
-        self.formulariosColeccion.setGeometry(QRect(350, 50, 120, 80))
-        self.formulariosColeccion.setStyleSheet(u"background-color: rgb(255, 85, 0);")
+        self.legajoForm = QWidget()
+        self.legajoForm.setObjectName(u"legajoForm")
+        self.horizontalLayout_8 = QHBoxLayout(self.legajoForm)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.contenedorlegajoForm = QWidget(self.legajoForm)
+        self.contenedorlegajoForm.setObjectName(u"contenedorlegajoForm")
+        self.verticalLayout_6 = QVBoxLayout(self.contenedorlegajoForm)
+        self.verticalLayout_6.setSpacing(0)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.legajoFormBody = QWidget(self.contenedorlegajoForm)
+        self.legajoFormBody.setObjectName(u"legajoFormBody")
+        self.legajoFormBody.setMinimumSize(QSize(500, 0))
+        self.legajoFormBody.setMaximumSize(QSize(800, 16777215))
+        self.legajoFormBody.setStyleSheet(u"")
+        self.widget1 = QWidget(self.legajoFormBody)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setGeometry(QRect(1, 1, 433, 243))
+        self.gridLayout = QGridLayout(self.widget1)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setVerticalSpacing(15)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.codRefLeg = QLabel(self.widget1)
+        self.codRefLeg.setObjectName(u"codRefLeg")
+        self.codRefLeg.setMinimumSize(QSize(180, 0))
+        self.codRefLeg.setMaximumSize(QSize(200, 16777215))
+        self.codRefLeg.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.codRefLeg, 0, 0, 1, 1)
+
+        self.codRefLegLine = QLineEdit(self.widget1)
+        self.codRefLegLine.setObjectName(u"codRefLegLine")
+        self.codRefLegLine.setMinimumSize(QSize(245, 25))
+        self.codRefLegLine.setMaximumSize(QSize(245, 25))
+        self.codRefLegLine.setStyleSheet(u"")
+
+        self.gridLayout.addWidget(self.codRefLegLine, 0, 1, 1, 1)
+
+        self.titulLegajoL = QLabel(self.widget1)
+        self.titulLegajoL.setObjectName(u"titulLegajoL")
+        self.titulLegajoL.setMinimumSize(QSize(180, 0))
+        self.titulLegajoL.setMaximumSize(QSize(200, 16777215))
+        self.titulLegajoL.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.titulLegajoL, 1, 0, 1, 1)
+
+        self.titulLegajo = QLineEdit(self.widget1)
+        self.titulLegajo.setObjectName(u"titulLegajo")
+        self.titulLegajo.setMinimumSize(QSize(245, 25))
+        self.titulLegajo.setMaximumSize(QSize(245, 25))
+        self.titulLegajo.setStyleSheet(u"")
+
+        self.gridLayout.addWidget(self.titulLegajo, 1, 1, 1, 1)
+
+        self.fechasLegL = QLabel(self.widget1)
+        self.fechasLegL.setObjectName(u"fechasLegL")
+        self.fechasLegL.setMinimumSize(QSize(180, 0))
+        self.fechasLegL.setMaximumSize(QSize(200, 16777215))
+        self.fechasLegL.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.fechasLegL, 2, 0, 1, 1)
+
+        self.fechasLegLine = QLineEdit(self.widget1)
+        self.fechasLegLine.setObjectName(u"fechasLegLine")
+        self.fechasLegLine.setMinimumSize(QSize(245, 25))
+        self.fechasLegLine.setMaximumSize(QSize(245, 25))
+        self.fechasLegLine.setStyleSheet(u"")
+
+        self.gridLayout.addWidget(self.fechasLegLine, 2, 1, 1, 1)
+
+        self.alcanceLegL = QLabel(self.widget1)
+        self.alcanceLegL.setObjectName(u"alcanceLegL")
+        self.alcanceLegL.setMinimumSize(QSize(180, 0))
+        self.alcanceLegL.setMaximumSize(QSize(200, 16777215))
+        self.alcanceLegL.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout.addWidget(self.alcanceLegL, 3, 0, 1, 1)
+
+        self.alcanceLegLine = QLineEdit(self.widget1)
+        self.alcanceLegLine.setObjectName(u"alcanceLegLine")
+        self.alcanceLegLine.setMinimumSize(QSize(245, 25))
+        self.alcanceLegLine.setMaximumSize(QSize(245, 25))
+        self.alcanceLegLine.setStyleSheet(u"")
+
+        self.gridLayout.addWidget(self.alcanceLegLine, 3, 1, 1, 1)
+
+        self.crearLegajoButton = QPushButton(self.widget1)
+        self.crearLegajoButton.setObjectName(u"crearLegajoButton")
+        self.crearLegajoButton.setMinimumSize(QSize(121, 41))
+        self.crearLegajoButton.setMaximumSize(QSize(121, 41))
+        self.crearLegajoButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.crearLegajoButton.setStyleSheet(u"")
+        icon2 = QIcon()
+        icon2.addFile(u":/imgs/imgs/icons/check-mark-in-a-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.crearLegajoButton.setIcon(icon2)
+
+        self.gridLayout.addWidget(self.crearLegajoButton, 4, 1, 1, 1)
+
+
+        self.verticalLayout_6.addWidget(self.legajoFormBody)
+
+
+        self.horizontalLayout_8.addWidget(self.contenedorlegajoForm)
+
+        self.formulariosColeccion.addWidget(self.legajoForm)
         self.udocComp = QWidget()
         self.udocComp.setObjectName(u"udocComp")
         self.formulariosColeccion.addWidget(self.udocComp)
@@ -239,10 +428,13 @@ class Ui_MainWindow(object):
         self.udocSimple.setStyleSheet(u"background-color: rgb(170, 170, 0);")
         self.formulariosColeccion.addWidget(self.udocSimple)
 
+        self.horizontalLayout_9.addWidget(self.formulariosColeccion)
+
+
         self.verticalLayout_5.addWidget(self.widget)
 
 
-        self.verticalLayout_4.addWidget(self.widget_3)
+        self.verticalLayout_4.addWidget(self.layoutcoleccionesPage)
 
         self.stackedWidget.addWidget(self.coleccionesPage)
         self.escanerPage = QWidget()
@@ -259,6 +451,10 @@ class Ui_MainWindow(object):
         self.pushButton = QPushButton(self.controlPanel)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(10, 10, 75, 24))
+        self.proyectData = QLabel(self.controlPanel)
+        self.proyectData.setObjectName(u"proyectData")
+        self.proyectData.setGeometry(QRect(10, 50, 151, 161))
+        self.proyectData.setStyleSheet(u"background-color: rgb(255, 255, 255);")
 
         self.horizontalLayout_5.addWidget(self.controlPanel)
 
@@ -324,9 +520,9 @@ class Ui_MainWindow(object):
         font1.setPointSize(11)
         self.capturaButton.setFont(font1)
         self.capturaButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon1 = QIcon()
-        icon1.addFile(u":/imgs/imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.capturaButton.setIcon(icon1)
+        icon3 = QIcon()
+        icon3.addFile(u":/imgs/imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.capturaButton.setIcon(icon3)
         self.capturaButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_7.addWidget(self.capturaButton)
@@ -418,7 +614,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
+        self.formulariosColeccion.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -433,7 +630,7 @@ class Ui_MainWindow(object):
 "Inicio", None))
         self.coleccionesButton.setText(QCoreApplication.translate("MainWindow", u"\n"
 "\n"
-"Colecciones", None))
+"Proyectos", None))
         self.escanerButton.setText(QCoreApplication.translate("MainWindow", u"\n"
 "\n"
 "Esc\u00e1ner", None))
@@ -444,13 +641,31 @@ class Ui_MainWindow(object):
 "\n"
 "Exportar", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"INICIO", None))
-        self.tipoColeccion.setItemText(0, QCoreApplication.translate("MainWindow", u"Legajo / expediente", None))
-        self.tipoColeccion.setItemText(1, QCoreApplication.translate("MainWindow", u"Libro / manuscrito", None))
-        self.tipoColeccion.setItemText(2, QCoreApplication.translate("MainWindow", u"Mapa / fotograf\u00eda / dibujo", None))
-        self.tipoColeccion.setItemText(3, QCoreApplication.translate("MainWindow", u"Unidad documental simple", None))
-        self.tipoColeccion.setItemText(4, QCoreApplication.translate("MainWindow", u"Toma simple", None))
+        self.escogerColeccion.setText(QCoreApplication.translate("MainWindow", u"Escoja el tipo de proyecto:", None))
+        self.tipoColeccion.setItemText(0, QCoreApplication.translate("MainWindow", u"Legajo", None))
+        self.tipoColeccion.setItemText(1, QCoreApplication.translate("MainWindow", u"Publicaci\u00f3n seriada", None))
+        self.tipoColeccion.setItemText(2, QCoreApplication.translate("MainWindow", u"Libro / manuscrito", None))
+        self.tipoColeccion.setItemText(3, QCoreApplication.translate("MainWindow", u"Mapa / fotograf\u00eda / dibujo", None))
+        self.tipoColeccion.setItemText(4, QCoreApplication.translate("MainWindow", u"Unidad documental simple", None))
 
+        self.escogerUbicacion.setText(QCoreApplication.translate("MainWindow", u"Escoja la ubicaci\u00f3n del proyecto:", None))
+        self.rutaLine.setText("")
+        self.browserDirButton.setText(QCoreApplication.translate("MainWindow", u"Buscar", None))
+        self.codRefLeg.setText(QCoreApplication.translate("MainWindow", u"C\u00f3digo de referencia:", None))
+        self.codRefLegLine.setText("")
+        self.codRefLegLine.setPlaceholderText("")
+        self.titulLegajoL.setText(QCoreApplication.translate("MainWindow", u"T\u00edtulo:", None))
+        self.titulLegajo.setText("")
+        self.titulLegajo.setPlaceholderText("")
+        self.fechasLegL.setText(QCoreApplication.translate("MainWindow", u"Fechas:", None))
+        self.fechasLegLine.setText("")
+        self.fechasLegLine.setPlaceholderText("")
+        self.alcanceLegL.setText(QCoreApplication.translate("MainWindow", u"Alcance y contenido:", None))
+        self.alcanceLegLine.setText("")
+        self.alcanceLegLine.setPlaceholderText("")
+        self.crearLegajoButton.setText(QCoreApplication.translate("MainWindow", u"Crear proyecto", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.proyectData.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.capturaButton.setText(QCoreApplication.translate("MainWindow", u"capturar", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"IM\u00c1GENES", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"EXPORTAR", None))
