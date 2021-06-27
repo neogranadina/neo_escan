@@ -21,7 +21,7 @@ from db import connectToDatabase, insertInfo, testProyDuplicados, regresa_info_p
 
 # logs
 
-logging.basicConfig(filename="logs/neo_escan.log",
+logging.basicConfig(filename="neo_esccan.log",
                     level=logging.DEBUG)
 logger = logging.getLogger("logger")
 
