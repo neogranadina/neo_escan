@@ -1,106 +1,95 @@
-# ///////////////////////////////////////////////////////////////
-#
-# Hecho por: Jairo Antonio Melo Flórez
-# Realizado con: Qt Designer y PySide6
-# © 2021 Fundación Histórica Neogranadina
-# V: 1.0.0
-#
-# ///////////////////////////////////////////////////////////////
-
 import chdkptp
-import os
-import traceback
-import time
 import chdkptp.util as util
+import concurrent.futures as cf
+import time
+import os
 
-def renombrar_img(nombre_img):
-    pass
+class Cam:
+    def __init__(self):
+        self.camaras = chdkptp.list_devices()
 
-def cam(camaras=chdkptp.list_devices()):
-    try:
-        dev_1 = chdkptp.ChdkDevice(camaras[0])
-        dev_2 = chdkptp.ChdkDevice(camaras[1])
-        return dev_1, dev_2
-    except IndexError:
-        print("Neograndina escan error: \n No hay cámaras conectadas o están apagadas \n")
-        print(traceback.print_stack())
-    except:
-        raise
+    def devs(self, index_cam):
+        dev = chdkptp.ChdkDevice(self.camaras[index_cam])
+        dev.switch_mode('record')
+        return dev
 
+    def cam(self):
+        devs = []
+        with cf.ThreadPoolExecutor(len(self.camaras)) as executor:
+            future_cam = {executor.submit(
+                self.devs, i): i for i in range(len(self.camaras))}
+            for future in cf.as_completed(future_cam):
+                devs.append(future.result())
+        return devs
 
-def descarga_img(f, rp, ddestino, cam):
-    try:
-        os.makedirs(os.path.join(ddestino, "RAW"), exist_ok=True)
-        os.makedirs(os.path.join(ddestino, "JPG"), exist_ok=True)
-    except OSError as error:
-        print(error)
-        raise
+    def _shoot(self, dev):
+        dev.shoot(dng=True, stream=False,
+                            download_after=False, remove_after=False)
 
-    for k,v in f.items():
-        if k == 'name':
-            img_path = f"{rp}/{v}"
-            print(img_path)
-            
-            raw_img = cam.download_file(img_path)
-            if v.endswith(".DNG"):
-                filename = os.path.join(ddestino, "RAW", v)
-            else:
-                filename = os.path.join(ddestino, "JPG", v)
-            if not os.path.exists(filename):
-                with open(filename, "wb") as fp:
-                    fp.write(raw_img)
-            
-            cam.delete_files(img_path)
+    def captura(self, dev_list):
+        
 
-def descarga_imgs(dir_destino='test/imgs'):
-    '''
-    dir_origen y dir_destino son iguales para ambas cámaras
-    '''
-    detailed = True
-    cam()[0].switch_mode('play')
-    cam()[1].switch_mode('play')
+        with cf.ThreadPoolExecutor(len(dev_list)) as executor:
+            future_shoot = {executor.submit(
+                self._shoot, dev): dev for dev in dev_list}
+            for futur in future_shoot:
+                futur
 
-    # directorios en la tarjeta de las cámaras
+    def descarga_img(self, img_path, ddestino, dev):
+        raw_img = dev.download_file(img_path)
+        if img_path.endswith(".DNG"):
+            filename = os.path.join(ddestino, "RAW", img_path.split("/")[-1])
+        else:
+            filename = os.path.join(ddestino, "JPG", img_path.split("/")[-1])
+        
+        if not os.path.exists(filename):
+            with open(filename, "wb") as fp:
+                fp.write(raw_img)
+        
+        dev.delete_files(img_path)
 
-    ruta_dirCam1 = cam()[0].list_files()[-1:][0][:-1]
-    ruta_dirCam2 = cam()[1].list_files()[-1:][0][:-1]
+    def archivos_descarga(self, dev_list, detailed=True):
+        a_desc = []
+        for d in dev_list:
+            ruta_dirCam = d.list_files()[-1:][0][:-1]
+            rp = util.to_camerapath(ruta_dirCam)
+            flist = d._lua.call("con:listdir", rp, dirsonly=False,
+                                stat="*" if detailed else "/")
+            a_desc.append(flist)
 
-    # ruta a la cámara
+        return a_desc
 
-    rp1 = util.to_camerapath(ruta_dirCam1)
-    rp2 = util.to_camerapath(ruta_dirCam2)
+    def descarga_imgs(self, dev_list, dir_destino='test/imgs'):
+        try:
+            os.makedirs(os.path.join(dir_destino, "RAW"), exist_ok=True)
+            os.makedirs(os.path.join(dir_destino, "JPG"), exist_ok=True)
+        except OSError as error:
+            print(error)
+            raise
 
-    flist1 = cam()[0]._lua.call("con:listdir", rp1, dirsonly=False,
-                               stat="*" if detailed else "/")
-    flist2 = cam()[1]._lua.call("con:listdir", rp2, dirsonly=False,
-                               stat="*" if detailed else "/")
+        flist = self.archivos_descarga(dev_list)
+        
+        ruta_dirCam = [dev.list_files()[-1:][0][:-1] for dev in dev_list]
 
-    for l, r in zip(flist1.values(), flist2.values()):
-        descarga_img(l, rp1, dir_destino, cam()[0])
-        descarga_img(r, rp2, dir_destino, cam()[1])
+        # ruta a la cámara
+        rp = [util.to_camerapath(r) for r in ruta_dirCam]
 
-    cam()[0].switch_mode('record')
-    cam()[1].switch_mode('record')
+        listal = []
+        listar = []
+        for l, r in zip(flist[0].values(), flist[1].values()):
+            for k,v in l.items():
+                if k == 'name':
+                    listal.append(f"{rp[0]}/{v}")
+            for k,v in r.items():
+                if k == 'name':
+                    listar.append(f"{rp[1]}/{v}")
+        
+        with cf.ThreadPoolExecutor(max_workers=5) as executor:
+            futura_izq = {executor.submit(self.descarga_img, li, dir_destino, dev_list[0]): li for li in listal}
+            futura_der = {executor.submit(self.descarga_img, lr, dir_destino, dev_list[1]): lr for lr in listar}
+        
+        for fut, futur in zip(futura_izq, futura_der):
+            fut, futur
 
-def shoots():
-    try:
-        cam()[0].switch_mode('record')
-        cam()[1].switch_mode('record')
-    except TypeError:
-        print(f"No es posible seleccionar la cámara.")
-        raise
-    
-    inicio_tiempo = time.time()
-
-    imgdata_1 = cam()[0].shoot(dng=True, stream=False, download_after=False, remove_after=False)
-    imgdata_2 = cam()[1].shoot(dng=True, stream=False, download_after=False, remove_after=False)
-
-    final_tiempo = time.time()
-    print(final_tiempo - inicio_tiempo)
-
-    return imgdata_1, imgdata_2
-
-
-def captura():
-    shoots()
-    descarga_imgs()
+if __name__ == 'main':
+    Cam()
