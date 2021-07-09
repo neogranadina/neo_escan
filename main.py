@@ -12,12 +12,15 @@ import logging
 import os
 from pathlib import Path
 from locale import getdefaultlocale
+from PySide6 import QtCore
+from PySide6.QtGui import QSessionManager
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from PySide6.QtCore import QTranslator, QLibraryInfo
 
 from ui_main import Ui_MainWindow
 from db import connectToDatabase, insertInfo, testProyDuplicados, regresa_info_proyecto, checkDirectorio
+from camcontrol import captura, cam
 
 # logs
 
@@ -27,6 +30,10 @@ logger = logging.getLogger("logger")
 
 # Entorno de la aplicación
 
+def restart():
+    QtCore.QCoreApplication.quit()
+    status =  QtCore.QProcess.startDetached(sys.executable, sys.argv)
+    print(status)
 
 class MainWindow(QMainWindow):
 
@@ -45,6 +52,15 @@ class MainWindow(QMainWindow):
         # Conectar a la base de datos
         connectToDatabase()
 
+        # Asegurarse que las cámaras estén conectadas desde el inicio
+        '''
+        while cam() == None:
+            msg = QMessageBox().warning(self, "Cámaras no conectadas",
+            "Las cámaras no están encendidas.", QMessageBox.Discard)
+            os.system("python main.py")
+            print("reiniciando la aplicación")
+            exit()
+        '''
         # Botones, menú
         widgets.inicioButton.clicked.connect(self.buttonClick)
         widgets.coleccionesButton.clicked.connect(self.buttonClick)
@@ -63,6 +79,10 @@ class MainWindow(QMainWindow):
 
         # guardar el legajo
         widgets.crearLegajoButton.clicked.connect(self.leg_db)
+
+        # tomar fotografía
+
+        widgets.capturaButton.clicked.connect(self.getCaptura)
 
     # Navegar por las páginas desde el menú principal
 
@@ -167,6 +187,18 @@ class MainWindow(QMainWindow):
         else:
             msg = QMessageBox().warning(self, "Error al crear el directorio",
                                         "El directorio ya está en uso por otro proyecto", QMessageBox.Discard)
+
+    # Funciones de control de la cámara
+
+    def getCaptura(self):
+        try:
+            captura()
+        except:
+            msg = QMessageBox().warning(self, "Cámaras no disponibles",
+                                        "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
+            restart()
+
+
 
 # Fin de las funciones de la aplicación
 
