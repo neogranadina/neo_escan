@@ -1,7 +1,15 @@
+# ///////////////////////////////////////////////////////////////
+#
+# Hecho por: Jairo Antonio Melo Flórez
+# Realizado con: Qt Designer y PySide6
+# © 2021 Fundación Histórica Neogranadina
+# V: 1.0.0
+#
+# ///////////////////////////////////////////////////////////////
+
 import chdkptp
 import chdkptp.util as util
 import concurrent.futures as cf
-import time
 import os
 
 class Cam:

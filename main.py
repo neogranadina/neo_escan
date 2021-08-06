@@ -193,7 +193,7 @@ class MainWindow(QMainWindow):
         try:
             cams = self.inicio_proyecto()
             Cam().captura(cams)
-            Cam().descarga_imgs(cams)
+            #Cam().descarga_imgs(cams)
         except:
             msg = QMessageBox().warning(self, "Cámaras no disponibles",
                                         "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
