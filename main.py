@@ -34,7 +34,12 @@ logger = logging.getLogger("logger")
 def restart():
     QtCore.QCoreApplication.quit()
     status = QtCore.QProcess.startDetached(sys.executable, sys.argv)
-    print(status)
+    # print(status)
+
+
+def inicio_proyecto():
+    devs = Cam().devs()
+    return devs
 
 
 class MainWindow(QMainWindow):
@@ -50,6 +55,12 @@ class MainWindow(QMainWindow):
         # Establece los widgets de la ui como globales
         global widgets
         widgets = self.ui
+        # crea las cámaras
+        global cams
+        cams = inicio_proyecto()
+        if len(cams) <= 1:
+            QMessageBox().warning(self, "Error",
+                                  "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
 
         # Conectar a la base de datos
         connectToDatabase()
@@ -91,6 +102,13 @@ class MainWindow(QMainWindow):
             widgets.stackedWidget.setCurrentWidget(widgets.coleccionesPage)
         elif btnName == "escanerButton":
             widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
+            try:
+                Cam().cam(cams)
+            except IndexError:
+                QMessageBox().warning(self, "Error",
+                                            "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
+                restart()
+
         elif btnName == "imagenesButton":
             widgets.stackedWidget.setCurrentWidget(widgets.imgsPage)
         elif btnName == "exportarButton":
@@ -161,8 +179,6 @@ class MainWindow(QMainWindow):
                                 widgets.escanerPage)
                             widgets.proyectData.setText(
                                 regresa_info_proyecto(titulo))
-                            # inicia las cámaras
-                            self.inicio_proyecto()
 
                         # Mensajes de error
                         except Exception as e:
@@ -183,17 +199,12 @@ class MainWindow(QMainWindow):
             msg = QMessageBox().warning(self, "Error al crear el directorio",
                                         "El directorio ya está en uso por otro proyecto", QMessageBox.Discard)
 
-    def inicio_proyecto(self):
-        devs = Cam().cam()
-        return devs
-
     # Funciones de control de la cámara
 
     def getCaptura(self):
         try:
-            cams = self.inicio_proyecto()
             Cam().captura(cams)
-            #Cam().descarga_imgs(cams)
+            # Cam().descarga_imgs(cams)
         except:
             msg = QMessageBox().warning(self, "Cámaras no disponibles",
                                         "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
