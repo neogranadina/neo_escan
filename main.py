@@ -21,6 +21,7 @@ from PySide6.QtCore import QTranslator, QLibraryInfo
 from ui_main import Ui_MainWindow
 from db import connectToDatabase, insertInfo, testProyDuplicados, regresa_info_proyecto, checkDirectorio
 from camcontrol import Cam
+from filecontrol import DescargarIMG
 
 # logs
 
@@ -62,6 +63,7 @@ class MainWindow(QMainWindow):
             QMessageBox().warning(self, "Error",
                                   "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
 
+        
         # Conectar a la base de datos
         connectToDatabase()
 
@@ -204,7 +206,6 @@ class MainWindow(QMainWindow):
     def getCaptura(self):
         try:
             Cam().captura(cams)
-            # Cam().descarga_imgs(cams)
         except:
             msg = QMessageBox().warning(self, "Cámaras no disponibles",
                                         "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)

@@ -530,3 +530,49 @@ DEBUG:chdkptp.lua:rc chunk get 1 2
 DEBUG:chdkptp.lua:rc chunk size:564431 offset:nil last:false
 DEBUG:chdkptp.lua:rc chunk get 1 3
 DEBUG:chdkptp.lua:rc chunk size:17920 offset:0 last:true
+DEBUG:chdkptp.lua:rc chunk get 1 0
+DEBUG:chdkptp.lua:rc chunk size:1035211 offset:nil last:true
+DEBUG:chdkptp.lua:rc chunk get 1 0
+DEBUG:chdkptp.lua:rc chunk size:1461760 offset:17920 last:false
+DEBUG:chdkptp.lua:rc chunk get 1 1
+DEBUG:chdkptp.lua:rc chunk size:1479168 offset:nil last:false
+DEBUG:chdkptp.lua:rc chunk get 1 2
+DEBUG:chdkptp.lua:rc chunk size:510351 offset:nil last:false
+DEBUG:chdkptp.lua:rc chunk get 1 3
+DEBUG:chdkptp.lua:rc chunk size:17920 offset:0 last:true
+DEBUG:chdkptp.lua:rc chunk get 1 0
+DEBUG:chdkptp.lua:rc chunk get 1 0
+DEBUG:chdkptp.lua:rc chunk size:1461248 offset:nil last:false
+DEBUG:chdkptp.lua:rc chunk get 1 1
+DEBUG:chdkptp.lua:rc chunk size:552829 offset:nil last:true
+DEBUG:chdkptp.lua:rc chunk size:1030009 offset:nil last:true
+DEBUG:chdkptp.lua:rc chunk get 1 0
+DEBUG:chdkptp.lua:rc chunk size:2002936 offset:nil last:true
+DEBUG:chdkptp.lua:rc chunk get 1 0
+DEBUG:chdkptp.lua:rc chunk size:893440 offset:nil last:false
+DEBUG:chdkptp.lua:rc chunk get 1 1
+DEBUG:chdkptp.lua:rc chunk size:137999 offset:nil last:true
+DEBUG:chdkptp.lua:rc chunk get 4 0
+DEBUG:chdkptp.lua:rc chunk size:1344 offset:nil last:true
+DEBUG:chdkptp.lua:rc chunk get 4 0
+DEBUG:chdkptp.lua:rc chunk size:1344 offset:nil last:true
+DEBUG:chdkptp.lua:dng 4704x3504x12
+DEBUG:chdkptp.lua:patching badpixels:
+DEBUG:chdkptp.lua:970
+DEBUG:chdkptp.lua:creating thumb: 128x96
+DEBUG:chdkptp.lua:dng 4704x3504x12
+DEBUG:chdkptp.lua:patching badpixels:
+DEBUG:chdkptp.lua:953
+DEBUG:chdkptp.lua:creating thumb: 128x96
+DEBUG:chdkptp.lua:rc chunk get 4 0
+DEBUG:chdkptp.lua:rc chunk size:1344 offset:nil last:true
+DEBUG:chdkptp.lua:rc chunk get 4 0
+DEBUG:chdkptp.lua:rc chunk size:1344 offset:nil last:true
+DEBUG:chdkptp.lua:dng 4704x3504x12
+DEBUG:chdkptp.lua:patching badpixels:
+DEBUG:chdkptp.lua:dng 4704x3504x12
+DEBUG:chdkptp.lua:patching badpixels:
+DEBUG:chdkptp.lua:970
+DEBUG:chdkptp.lua:creating thumb: 128x96
+DEBUG:chdkptp.lua:954
+DEBUG:chdkptp.lua:creating thumb: 128x96
