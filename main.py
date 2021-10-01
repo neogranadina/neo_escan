@@ -21,7 +21,7 @@ from PySide6.QtCore import QTranslator, QLibraryInfo
 from ui_main import Ui_MainWindow
 from db import connectToDatabase, insertInfo, testProyDuplicados, regresa_info_proyecto, checkDirectorio
 from camcontrol import Cam
-from filecontrol import DescargarIMG
+
 
 # logs
 

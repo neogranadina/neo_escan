@@ -5,14 +5,12 @@
 # © 2021 Fundación Histórica Neogranadina
 # V: 1.0.0
 #
+# Documentación de chdkptp.py en https://chdkptppy.readthedocs.io/en/latest/
 # ///////////////////////////////////////////////////////////////
 
 import chdkptp
-import chdkptp.util as util
-import concurrent.futures as cf
-import os
 import multiprocessing as mp
-import time
+from filecontrol import DescargarIMGS
 
 
 class Cam:
@@ -20,16 +18,32 @@ class Cam:
         self.camaras = chdkptp.list_devices()
 
     def devs(self):
+        '''
+        Convierte las dispositivos en ChdkDevices. Regresa dos objetos como lista.
+        Técnicamente, si se reconocen más de dos dispositivos, se crean igual cantidad
+        de ChdkDevices.
+        '''
         try:
             return [chdkptp.ChdkDevice(dev) for dev in self.camaras]
         except:
             raise
 
     def cam_init(self, dev):
+        '''
+        función llamada por self.cam() para asegurar que la cámara esté en modo
+        record y pueda iniciar la captura de imágenes.
+        usar de modo asincrónico para que no levante el error lupa._lupa.LuaRuntime.execute
+        '''
         if not dev.mode == 'record':
             dev.switch_mode('record')
 
     def cam(self, devs):
+        '''
+        Asegura que ambas cámaras estén en modo record.
+        devs = recibe un listado con ChdkDevices (usar Cam().devs())
+        Si hay más de dos dispositivos conectados solamente procesará 
+        los dos primeros en .list_devices()
+        '''
 
         c1_on = mp.Process(target=self.cam_init, args=(devs[0],))
         c2_on = mp.Process(target=self.cam_init, args=(devs[1],))
@@ -37,32 +51,31 @@ class Cam:
         c1_on.start()
         c2_on.start()
 
-    def _shoot(self, dev,dng=True):
+    def _shoot(self, dev, dng=True):
+        '''
+        dev = el dispositivo conectado y en modo rec() [usar camcontrol.Cam().cam()]
+        dng = True. En modo False no guarda imágenes dng en la memoria de la cámara. 
+              Marca error si stream=True.
+        '''
 
-        fileformat = "dng"
         shutter = 1/15.0
         iso = 400
         distancia = 150
-        
-        dir = "tmp_dir/JPG" # directorio = "nombre_de_proyecto/JPG"
-        os.makedirs(os.path.join(dir), exist_ok=True)
-        lista = os.listdir(dir)
-        print(lista)
-        number_files = len(lista)
 
-        fpath = os.path.join(dir, f"stream_{number_files + 1}.jpg")
+        # el binario jpg se guarda en imgdata
+        imgdata = dev.shoot(wait=True, dng=dng, stream=False,
+                            download_after=True, remove_after=True)
 
-        imgdata = dev.shoot(wait=True, dng=dng, stream=False, download_after=True, remove_after=True)
-        if os.path.exists(fpath):
-            dup_name = fpath.split("/")[-1]
-            nombre_file = dup_name.split(".")[0]
-            serie = nombre_file.split("_")[1]
-            fpath = os.path.join(dir, f"stream_{int(serie) + 1}.jpg") # ¿Podría ser R - V?
-        with open(fpath, 'wb') as fp:
-            fp.write(imgdata)
-
+        obj_descarga = DescargarIMGS(imgdata, 'testing', dev)
+        # descarga jpg
+        obj_descarga.descarga_jpg()
+        # descarga dng
+        obj_descarga.descarga_dng()
 
     def captura(self, dev_list):
+        '''
+        Realiza la captura en ambas cámaras casi simultáneamente.
+        '''
 
         c1 = mp.Process(target=self._shoot, args=(dev_list[0],))
         c2 = mp.Process(target=self._shoot, args=(dev_list[1],))

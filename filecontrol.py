@@ -7,96 +7,80 @@
 #
 # ///////////////////////////////////////////////////////////////
 
-import chdkptp
 import chdkptp.util as util
 import multiprocessing as mp
+from pathlib import Path
 import os
 
+DIR = Path("../capturas")
 
-class DescargarIMG:
 
-    def __init__(self, devs, nombre_img) -> None:
-        self.devs = devs  # lista de devices
-        self.dir_destino = 'capturas/imgs'
-        self.nombre_img = nombre_img
+class DescargarIMGS:
 
-    def descarga_img(self, lista_imgs, dev):
-        for img_path in lista_imgs:
-            print(img_path)
-            raw_img = dev.download_file(img_path)
-            if img_path.endswith(".DNG"):
-                filename = os.path.join(
-                    self.dir_destino, "RAW", img_path.split("/")[-1])
-            else:
-                filename = os.path.join(
-                    self.dir_destino, "JPG", img_path.split("/")[-1])
-            
-            if not os.path.exists(filename):
-                with open(filename, "wb") as fp:
-                    fp.write(raw_img)
-                    print(f"descargada {filename}")
+    def __init__(self, imgdata, nombre_proyecto, dev) -> None:
+        '''
+        imgdata(bin) = datos binarios de la imagen capturada (jpg)
+        nombre_proyecto(str) = nombre del proyecto
+        dev(object) = objeto chdkptp.ChdkDevice()
+        '''
+        self.dev = dev
+        self.imgdata = imgdata
+        self.nombre_proyecto = nombre_proyecto
 
-            dev.delete_files(img_path)
+    def nombrar_img(self, tipo_img):
+        jpg_dir = os.path.join(DIR, self.nombre_proyecto,
+                               f"{tipo_img.upper()}")
+        os.makedirs(jpg_dir, exist_ok=True)
+        lista = os.listdir(jpg_dir)
+        # print(lista)
+        number_files = len(lista)
+        # print(number_files)
+        fpath = os.path.join(jpg_dir, f"IMG_{number_files + 1}.{tipo_img}")
 
-    def archivos_descarga(self, dev_list, detailed=True):
-        a_desc = []
-        for d in dev_list:
-            ruta_dirCam = d.list_files()[-1:][0][:-1]
-            rp = util.to_camerapath(ruta_dirCam)
-            flist = d._lua.call("con:listdir", rp, dirsonly=False,
-                                stat="*" if detailed else "/")
-            a_desc.append(flist)
+        if os.path.exists(fpath):
+            dup_name = fpath.split("/")[-1]
+            nombre_file = dup_name.split(".")[0]
+            serie = nombre_file.split("_")[1]
+            # ¿Podría ser R - V?
+            fpath = os.path.join(jpg_dir, f"IMG_{int(serie) + 1}.{tipo_img}")
 
-        return a_desc
+        return fpath
 
-    def listado_imgs(self):
-        flist = self.archivos_descarga(self.devs)
+    def descarga_jpg(self):
+        jpg_path = self.nombrar_img('jpg')
+        with open(jpg_path, 'wb') as fp:
+            fp.write(self.imgdata)
+            print(f"descargada img {jpg_path}")
 
-        ruta_dirCam = [dev.list_files()[-1:][0][:-1] for dev in self.devs]
+    def descarga_dng(self):
+        img_path = self.dng_remoto()
 
-        # ruta a la cámara
-        rp = [util.to_camerapath(r) for r in ruta_dirCam]
+        raw_img = self.dev.download_file(img_path)
+        if img_path.endswith(".DNG"):
+            dng_path = self.nombrar_img('dng')
 
-        listal = []
-        listar = []
-        for l, r in zip(flist[0].values(), flist[1].values()):
-            for k, v in l.items():
-                if k == 'name':
-                    listal.append(f"{rp[0]}/{v}")
-            for k, v in r.items():
-                if k == 'name':
-                    listar.append(f"{rp[1]}/{v}")
+        if not os.path.exists(dng_path):
+            with open(dng_path, "wb") as fp:
+                fp.write(raw_img)
+                print(f"descargada img {dng_path}")
 
-        print(listal)
-        print(listar)
-        return listal, listar
+        self.dev.delete_files(img_path)
 
-    def descarga_imgs(self):
-        try:
-            os.makedirs(os.path.join(self.dir_destino, "RAW"), exist_ok=True)
-            os.makedirs(os.path.join(self.dir_destino, "JPG"), exist_ok=True)
-        except OSError as error:
-            print(error)
-            raise
+    def imgs_camara(self, detailed=True):
+        ruta_dirCam = self.dev.list_files()[-1:][0][:-1]
+        rp = util.to_camerapath(ruta_dirCam)
+        flist = self.dev._lua.call("con:listdir", rp, dirsonly=False,
+                                   stat="*" if detailed else "/")
 
-        lista_imgs = self.listado_imgs()
-        imgs_left = lista_imgs[0]  # listal
-        imgs_der = lista_imgs[1]  # listar
+        return flist
 
-        descargar_l = mp.Process(
-            target=self.descarga_img, args=(imgs_left, self.devs[0],))
-        descargar_r = mp.Process(
-            target=self.descarga_img, args=(imgs_der, self.devs[1]))
+    def dng_remoto(self):
+        flist = self.imgs_camara()
+        ruta_dirCam = self.dev.list_files()[-1:][0][:-1]
+        ruta_camara = util.to_camerapath(ruta_dirCam)
 
-        descargar_l.start()
-        descargar_r.start()
+        for l in flist.values():
+            listac = [f"{ruta_camara}/{v}" for k,
+                      v in l.items() if k == 'name']
 
-        print("Inicio del proceso de  descarga")
-
-'''
-if __name__ == '__main__':
-    cam = chdkptp.list_devices()
-    dev = [chdkptp.ChdkDevice(cs) for cs in cam]
-    imgs = DescargarIMG(dev, "testing_project")
-    descarga = imgs.descarga_imgs()
-'''
+        return listac[-1]
