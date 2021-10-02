@@ -3,7 +3,10 @@
 # Hecho por: Jairo Antonio Melo Flórez
 # Realizado con: Qt Designer y PySide6
 # © 2021 Fundación Histórica Neogranadina
-# V: 1.0.0
+# V: 0.1.0-alpha
+#
+# camcontrol:
+# módulo para facilitar la comunicación con chdkptp.py a través de dos cámaras
 #
 # Documentación de chdkptp.py en https://chdkptppy.readthedocs.io/en/latest/
 # ///////////////////////////////////////////////////////////////
@@ -11,6 +14,7 @@
 import chdkptp
 import multiprocessing as mp
 from filecontrol import DescargarIMGS
+#import configparser
 
 
 class Cam:
@@ -59,18 +63,19 @@ class Cam:
         '''
 
         shutter = 1/15.0
-        iso = 400
-        distancia = 150
+        #iso = 400
+        #distancia = 150
 
         # el binario jpg se guarda en imgdata
         imgdata = dev.shoot(wait=True, dng=dng, stream=False,
-                            download_after=True, remove_after=True)
+                            download_after=True, remove_after=True, shutter_speed=shutter)
 
         obj_descarga = DescargarIMGS(imgdata, 'testing', dev)
         # descarga jpg
         obj_descarga.descarga_jpg()
-        # descarga dng
-        obj_descarga.descarga_dng()
+        if not dng == False:
+            # descarga dng
+            obj_descarga.descarga_dng()
 
     def captura(self, dev_list):
         '''

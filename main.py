@@ -3,7 +3,7 @@
 # Hecho por: Jairo Antonio Melo Flórez
 # Realizado con: Qt Designer y PySide6
 # © 2021 Fundación Histórica Neogranadina
-# V: 1.0.0
+# V: 0.1.0-alpha
 #
 # ///////////////////////////////////////////////////////////////
 

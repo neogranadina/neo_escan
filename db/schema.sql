@@ -1,3 +1,7 @@
+/* 
+ Modificar estructura para que coincida con el workflow de Spreads
+ y luego escalar a partir de allí.
+ */
 CREATE TABLE IF NOT EXISTS folios_data (
 	id_folio INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	id_numerico_folio NUMERIC,
@@ -50,18 +54,18 @@ CREATE TABLE IF NOT EXISTS tipos_proyecto (
 
 CREATE TABLE IF NOT EXISTS unidad_documental (
 	id_unidad_documental INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    id_proyecto INTEGER NOT NULL,
+	id_proyecto INTEGER NOT NULL,
 	codigo_referencia TEXT,
 	titulo TEXT NOT NULL,
 	fechas TEXT NOT NULL,
-    CONSTRAINT unidad_documental_FK FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto)
+	CONSTRAINT unidad_documental_FK FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto)
 );
 
 CREATE TABLE IF NOT EXISTS usuarios (
 	id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	nombre_usuario TEXT NOT NULL,
-    password TEXT,
-    rol TEXT NOT NULL
+	password TEXT,
+	rol TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS usuarios_proyectos (
@@ -72,14 +76,26 @@ CREATE TABLE IF NOT EXISTS usuarios_proyectos (
 	CONSTRAINT usuarios_proyectos_FK_1 FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
-INSERT INTO tipos_proyecto (nombre_tipo_proyecto, descripcion_tipo_proyecto) 
-VALUES 
-("Legajo", "Legajo, expediente, unidad documental compuesta"),
-("Libro", "Libro, manuscrito, volumen"),
-("Publicación seriada", "Revista, periódico, publicación por entregas"),
-("Gráfico", "Mapa, fotografía, postal, dibujo"),
-("Unidad documental simple", "Carta, reporte, hoja suelta");
-
-INSERT INTO instituciones (nombre_institucion, tipo_institucion)
+INSERT INTO
+	tipos_proyecto (nombre_tipo_proyecto, descripcion_tipo_proyecto)
 VALUES
-("Institución ficticia", "Dummy institution");
+	(
+		"Legajo",
+		"Legajo, expediente, unidad documental compuesta"
+	),
+	("Libro", "Libro, manuscrito, volumen"),
+	(
+		"Publicación seriada",
+		"Revista, periódico, publicación por entregas"
+	),
+	("Gráfico", "Mapa, fotografía, postal, dibujo"),
+	(
+		"Unidad documental simple",
+		"Carta, reporte, hoja suelta"
+	);
+
+/* eliminar instituciones. Es innecesario. */
+INSERT INTO
+	instituciones (nombre_institucion, tipo_institucion)
+VALUES
+	("Institución ficticia", "Dummy institution");

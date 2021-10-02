@@ -5,6 +5,9 @@
 # © 2021 Fundación Histórica Neogranadina
 # V: 1.0.0
 #
+# db:
+# módulo para comunicar PySide6 con la base de datos sqlite3
+#
 # ///////////////////////////////////////////////////////////////
 
 import logging
