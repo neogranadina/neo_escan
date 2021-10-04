@@ -1,7 +1,3 @@
-echo crear un ambiente para la instalación
-python -m venv escan_env
-echo activar ambiente virtual
-./escan_env/bin/activate
 echo actualizar pip
 python -m pip install --upgrade pip
 git clone --recursive -j8  https://github.com/jairomelo/chdkptp.py.git

@@ -1,6 +1,6 @@
 # Escáner de Neogranadina *Nombre por definir :p
 
-> :warning: Este programa requiere [Lua](http://www.lua.org/home.html), por lo que se recomienda su instalación en sistemas Unix (Ubuntu, Debian, Raspbian, Mac OS X). Para Windows es necesario [compilar Lua](http://lua-users.org/wiki/BuildingLua) o simplemente intentar con [Lua Rocks](https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Windows), aunque no ha sido posible conectar chdkptp.py con LuaRocks.  
+> :warning: Este programa requiere [Lua](http://www.lua.org/home.html), por lo que se recomienda su instalación en sistemas Unix (Ubuntu, Debian, Raspbian, Mac OS X).   
 
 ## Instalación
 
@@ -13,7 +13,7 @@ git clone https://github.com/neogranadina/neo_escan.git
 Es sumamente recomendado crear un entorno virtual previamente:
 
 ```shell
-python -m venv escan_env
+python3 -m venv escan_env --system-site-packages
 source escan_env/bin/activate
 ```
 
