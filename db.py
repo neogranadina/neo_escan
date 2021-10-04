@@ -14,8 +14,8 @@ import logging
 import datetime
 from pathlib import Path
 
-from PySide6.QtCore import Qt, Slot, QDir
-from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
+from PySide2.QtCore import Qt, Slot, QDir
+from PySide2.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
 
 
 def connectToDatabase():

@@ -12,11 +12,11 @@ import logging
 import os
 from pathlib import Path
 from locale import getdefaultlocale
-from PySide6 import QtCore
-from PySide6.QtGui import QSessionManager
+from PySide2 import QtCore
+from PySide2.QtGui import QSessionManager
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
-from PySide6.QtCore import QTranslator, QLibraryInfo
+from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
+from PySide2.QtCore import QTranslator, QLibraryInfo
 
 from ui_main import Ui_MainWindow
 from db import connectToDatabase, insertInfo, testProyDuplicados, regresa_info_proyecto, checkDirectorio
@@ -229,4 +229,4 @@ if __name__ == '__main__':
     window = MainWindow()
     window.show()
     # correr el loop principal Qt
-    sys.exit(app.exec())
+    sys.exit(app.exec_())
