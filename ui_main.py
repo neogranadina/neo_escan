@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainyqKxzI.ui'
+## Form generated from reading UI file 'mainnlJfhC.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.1
 ##
@@ -131,7 +131,7 @@ class Ui_MainWindow(object):
         self.inicioButton.setMinimumSize(QSize(0, 81))
         self.inicioButton.setMaximumSize(QSize(16777215, 81))
         self.inicioButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.inicioButton.setStyleSheet(u"background-image: url(:/imgs/imgs/icons/window-of-four-rounded-squares.svg);\n"
+        self.inicioButton.setStyleSheet(u"background-image: url(:/imgs/imgs/icons/pages-interface.svg);\n"
 "background-origin: content;")
 
         self.verticalLayout_2.addWidget(self.inicioButton)
@@ -141,7 +141,7 @@ class Ui_MainWindow(object):
         self.coleccionesButton.setMinimumSize(QSize(0, 81))
         self.coleccionesButton.setMaximumSize(QSize(16777215, 81))
         self.coleccionesButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.coleccionesButton.setStyleSheet(u"background-image: url(:/imgs/imgs/icons/pages-interface.svg);\n"
+        self.coleccionesButton.setStyleSheet(u"background-image: url(:/imgs/imgs/icons/window-of-four-rounded-squares.svg);\n"
 "background-origin: content;")
 
         self.verticalLayout_2.addWidget(self.coleccionesButton)
@@ -201,242 +201,207 @@ class Ui_MainWindow(object):
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(60, 20, 49, 16))
         self.stackedWidget.addWidget(self.inicioPage)
-        self.coleccionesPage = QWidget()
-        self.coleccionesPage.setObjectName(u"coleccionesPage")
-        self.coleccionesPage.setStyleSheet(u"")
-        self.verticalLayout_4 = QVBoxLayout(self.coleccionesPage)
-        self.verticalLayout_4.setSpacing(0)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.layoutcoleccionesPage = QWidget(self.coleccionesPage)
-        self.layoutcoleccionesPage.setObjectName(u"layoutcoleccionesPage")
-        self.layoutcoleccionesPage.setStyleSheet(u"QLabel {\n"
-"	background-color: transparent;\n"
+        self.metadataPage = QWidget()
+        self.metadataPage.setObjectName(u"metadataPage")
+        self.metadataPage.setStyleSheet(u"QLabel {\n"
+"background-color: transparent;\n"
 "}\n"
 "\n"
 "QComboBox {\n"
-"	border-color: rgba(0, 0, 0,.7);\n"
-"	border-style: solid;\n"
-"	border-width: 2px;\n"
-"	border-radius: 4px;\n"
+"border-color: rgba(0,0,0,.7);\n"
+"border-style: solid;\n"
+"border-width: 2px;\n"
+"border-radius: 4px;\n"
 "}\n"
 "\n"
 "QLineEdit {\n"
-"	border-color: rgba(0, 0, 0,.7);\n"
-"	border-style: solid;\n"
-"	border-width: 2px;\n"
-"	border-radius: 4px;\n"
+"border-color: rgba(0,0,0,.7);\n"
+"border-style: solid;\n"
+"border-width: 2px;\n"
+"border-radius:4px;\n"
 "}\n"
 "\n"
 "QPushButton {\n"
-"	background-color: rgba(0, 0, 0, .7);\n"
-"	color: rgba(251,251,251,.7)\n"
+"background-color: rgba(0,0,0,.7);\n"
+"color: rgba(251,251,251,.7);\n"
 "}\n"
 "\n"
 "QPushButton::hover {\n"
-"	background-color: rgba(242, 120, 75, .7);\n"
-"	color: rgba(0,0,0,.5);\n"
-"	border: none;\n"
+"background-color: rgba(242,120,75,1);\n"
+"color: rgba(0,0,0,.5);\n"
+"border: none;\n"
 "}\n"
 "\n"
 "QPushButton::focus {\n"
-"	background-color: rgba(242, 120, 75, 1);\n"
-"	border: none;\n"
+"background-color: rgba(242,120,75,1);\n"
+"border: none;\n"
 "}")
-        self.verticalLayout_5 = QVBoxLayout(self.layoutcoleccionesPage)
-        self.verticalLayout_5.setSpacing(0)
+        self.verticalLayout_4 = QVBoxLayout(self.metadataPage)
+        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.scrollArea = QScrollArea(self.metadataPage)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -100, 678, 500))
+        self.scrollAreaWidgetContents.setStyleSheet(u"")
+        self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.coleccionHeader = QWidget(self.layoutcoleccionesPage)
-        self.coleccionHeader.setObjectName(u"coleccionHeader")
-        self.coleccionHeader.setMinimumSize(QSize(0, 80))
-        self.coleccionHeader.setMaximumSize(QSize(16777215, 80))
-        self.layoutWidget = QWidget(self.coleccionHeader)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 10, 514, 61))
-        self.headCollectionGrid = QGridLayout(self.layoutWidget)
-        self.headCollectionGrid.setObjectName(u"headCollectionGrid")
-        self.headCollectionGrid.setContentsMargins(0, 0, 0, 0)
-        self.escogerColeccion = QLabel(self.layoutWidget)
-        self.escogerColeccion.setObjectName(u"escogerColeccion")
-        self.escogerColeccion.setMinimumSize(QSize(180, 0))
-        self.escogerColeccion.setMaximumSize(QSize(200, 16777215))
-        self.escogerColeccion.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.H1Label = QLabel(self.scrollAreaWidgetContents)
+        self.H1Label.setObjectName(u"H1Label")
+        font1 = QFont()
+        font1.setPointSize(12)
+        font1.setBold(True)
+        self.H1Label.setFont(font1)
+        self.H1Label.setCursor(QCursor(Qt.ArrowCursor))
+        self.H1Label.setMargin(7)
 
-        self.headCollectionGrid.addWidget(self.escogerColeccion, 0, 0, 1, 1)
+        self.verticalLayout_5.addWidget(self.H1Label)
 
-        self.tipoColeccion = QComboBox(self.layoutWidget)
-        self.tipoColeccion.addItem("")
-        self.tipoColeccion.addItem("")
-        self.tipoColeccion.addItem("")
-        self.tipoColeccion.addItem("")
-        self.tipoColeccion.addItem("")
-        self.tipoColeccion.setObjectName(u"tipoColeccion")
-        self.tipoColeccion.setMinimumSize(QSize(245, 25))
-        self.tipoColeccion.setMaximumSize(QSize(245, 25))
+        self.formLayout = QFormLayout()
+        self.formLayout.setObjectName(u"formLayout")
+        self.formLayout.setFieldGrowthPolicy(QFormLayout.AllNonFixedFieldsGrow)
+        self.formLayout.setLabelAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.formLayout.setVerticalSpacing(24)
+        self.tipodocLabel = QLabel(self.scrollAreaWidgetContents)
+        self.tipodocLabel.setObjectName(u"tipodocLabel")
+        self.tipodocLabel.setMinimumSize(QSize(161, 0))
 
-        self.headCollectionGrid.addWidget(self.tipoColeccion, 0, 1, 1, 1)
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.tipodocLabel)
 
-        self.escogerUbicacion = QLabel(self.layoutWidget)
-        self.escogerUbicacion.setObjectName(u"escogerUbicacion")
-        self.escogerUbicacion.setMinimumSize(QSize(180, 0))
-        self.escogerUbicacion.setMaximumSize(QSize(200, 16777215))
-        self.escogerUbicacion.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.tipodocComboBox = QComboBox(self.scrollAreaWidgetContents)
+        self.tipodocComboBox.setObjectName(u"tipodocComboBox")
+        self.tipodocComboBox.setMinimumSize(QSize(450, 0))
+        self.tipodocComboBox.setStyleSheet(u"")
 
-        self.headCollectionGrid.addWidget(self.escogerUbicacion, 1, 0, 1, 1)
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.tipodocComboBox)
 
-        self.rutaLine = QLineEdit(self.layoutWidget)
-        self.rutaLine.setObjectName(u"rutaLine")
-        self.rutaLine.setMinimumSize(QSize(245, 22))
-        self.rutaLine.setMaximumSize(QSize(245, 22))
-        self.rutaLine.setStyleSheet(u"")
+        self.tituloLabel = QLabel(self.scrollAreaWidgetContents)
+        self.tituloLabel.setObjectName(u"tituloLabel")
+        self.tituloLabel.setMinimumSize(QSize(161, 0))
 
-        self.headCollectionGrid.addWidget(self.rutaLine, 1, 1, 1, 1)
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.tituloLabel)
 
-        self.browserDirButton = QPushButton(self.layoutWidget)
-        self.browserDirButton.setObjectName(u"browserDirButton")
-        self.browserDirButton.setMinimumSize(QSize(75, 22))
-        self.browserDirButton.setMaximumSize(QSize(75, 22))
-        self.browserDirButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.tituloLineEdit = QLineEdit(self.scrollAreaWidgetContents)
+        self.tituloLineEdit.setObjectName(u"tituloLineEdit")
+        self.tituloLineEdit.setMinimumSize(QSize(450, 0))
+
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.tituloLineEdit)
+
+        self.creadorLabel = QLabel(self.scrollAreaWidgetContents)
+        self.creadorLabel.setObjectName(u"creadorLabel")
+        self.creadorLabel.setMinimumSize(QSize(161, 0))
+
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.creadorLabel)
+
+        self.creadorLineEdit = QLineEdit(self.scrollAreaWidgetContents)
+        self.creadorLineEdit.setObjectName(u"creadorLineEdit")
+        self.creadorLineEdit.setMinimumSize(QSize(450, 0))
+
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.creadorLineEdit)
+
+        self.fechaLabel = QLabel(self.scrollAreaWidgetContents)
+        self.fechaLabel.setObjectName(u"fechaLabel")
+        self.fechaLabel.setMinimumSize(QSize(161, 0))
+
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.fechaLabel)
+
+        self.fechaLineEdit = QLineEdit(self.scrollAreaWidgetContents)
+        self.fechaLineEdit.setObjectName(u"fechaLineEdit")
+        self.fechaLineEdit.setMinimumSize(QSize(450, 0))
+
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.fechaLineEdit)
+
+        self.publicadorLabel = QLabel(self.scrollAreaWidgetContents)
+        self.publicadorLabel.setObjectName(u"publicadorLabel")
+        self.publicadorLabel.setMinimumSize(QSize(161, 0))
+
+        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.publicadorLabel)
+
+        self.publicadorLineEdit = QLineEdit(self.scrollAreaWidgetContents)
+        self.publicadorLineEdit.setObjectName(u"publicadorLineEdit")
+        self.publicadorLineEdit.setMinimumSize(QSize(450, 0))
+
+        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.publicadorLineEdit)
+
+        self.idiomaLabel = QLabel(self.scrollAreaWidgetContents)
+        self.idiomaLabel.setObjectName(u"idiomaLabel")
+        self.idiomaLabel.setMinimumSize(QSize(161, 0))
+
+        self.formLayout.setWidget(5, QFormLayout.LabelRole, self.idiomaLabel)
+
+        self.idiomaLineEdit = QLineEdit(self.scrollAreaWidgetContents)
+        self.idiomaLineEdit.setObjectName(u"idiomaLineEdit")
+        self.idiomaLineEdit.setMinimumSize(QSize(450, 0))
+
+        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.idiomaLineEdit)
+
+        self.numextLabel = QLabel(self.scrollAreaWidgetContents)
+        self.numextLabel.setObjectName(u"numextLabel")
+        self.numextLabel.setMinimumSize(QSize(161, 0))
+
+        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.numextLabel)
+
+        self.numextLineEdit = QLineEdit(self.scrollAreaWidgetContents)
+        self.numextLineEdit.setObjectName(u"numextLineEdit")
+        self.numextLineEdit.setMinimumSize(QSize(450, 0))
+
+        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.numextLineEdit)
+
+        self.numpagsLabel = QLabel(self.scrollAreaWidgetContents)
+        self.numpagsLabel.setObjectName(u"numpagsLabel")
+        self.numpagsLabel.setMinimumSize(QSize(161, 0))
+
+        self.formLayout.setWidget(7, QFormLayout.LabelRole, self.numpagsLabel)
+
+        self.numpagsLineEdit = QLineEdit(self.scrollAreaWidgetContents)
+        self.numpagsLineEdit.setObjectName(u"numpagsLineEdit")
+        self.numpagsLineEdit.setMinimumSize(QSize(450, 0))
+
+        self.formLayout.setWidget(7, QFormLayout.FieldRole, self.numpagsLineEdit)
+
+        self.identificadoresLabel = QLabel(self.scrollAreaWidgetContents)
+        self.identificadoresLabel.setObjectName(u"identificadoresLabel")
+
+        self.formLayout.setWidget(8, QFormLayout.LabelRole, self.identificadoresLabel)
+
+        self.identificadoresLineEdit = QLineEdit(self.scrollAreaWidgetContents)
+        self.identificadoresLineEdit.setObjectName(u"identificadoresLineEdit")
+        self.identificadoresLineEdit.setMinimumSize(QSize(450, 0))
+
+        self.formLayout.setWidget(8, QFormLayout.FieldRole, self.identificadoresLineEdit)
+
+        self.enviarformButton = QPushButton(self.scrollAreaWidgetContents)
+        self.enviarformButton.setObjectName(u"enviarformButton")
+        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.enviarformButton.sizePolicy().hasHeightForWidth())
+        self.enviarformButton.setSizePolicy(sizePolicy)
+        self.enviarformButton.setMinimumSize(QSize(75, 24))
+        self.enviarformButton.setMaximumSize(QSize(75, 24))
+        font2 = QFont()
+        font2.setPointSize(10)
+        self.enviarformButton.setFont(font2)
+        self.enviarformButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.enviarformButton.setLayoutDirection(Qt.LeftToRight)
         icon1 = QIcon()
-        icon1.addFile(u":/imgs/imgs/icons/magnifying-glass.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.browserDirButton.setIcon(icon1)
+        icon1.addFile(u":/imgs/imgs/icons/fast-forward-double-right-arrows.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.enviarformButton.setIcon(icon1)
+        self.enviarformButton.setIconSize(QSize(8, 8))
 
-        self.headCollectionGrid.addWidget(self.browserDirButton, 1, 2, 1, 1)
-
-
-        self.verticalLayout_5.addWidget(self.coleccionHeader)
-
-        self.widget = QWidget(self.layoutcoleccionesPage)
-        self.widget.setObjectName(u"widget")
-        self.horizontalLayout_9 = QHBoxLayout(self.widget)
-        self.horizontalLayout_9.setSpacing(0)
-        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
-        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
-        self.formulariosColeccion = QStackedWidget(self.widget)
-        self.formulariosColeccion.setObjectName(u"formulariosColeccion")
-        self.legajoForm = QWidget()
-        self.legajoForm.setObjectName(u"legajoForm")
-        self.horizontalLayout_8 = QHBoxLayout(self.legajoForm)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.contenedorlegajoForm = QWidget(self.legajoForm)
-        self.contenedorlegajoForm.setObjectName(u"contenedorlegajoForm")
-        self.verticalLayout_6 = QVBoxLayout(self.contenedorlegajoForm)
-        self.verticalLayout_6.setSpacing(0)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.legajoFormBody = QWidget(self.contenedorlegajoForm)
-        self.legajoFormBody.setObjectName(u"legajoFormBody")
-        self.legajoFormBody.setMinimumSize(QSize(500, 0))
-        self.legajoFormBody.setMaximumSize(QSize(800, 16777215))
-        self.legajoFormBody.setStyleSheet(u"")
-        self.widget1 = QWidget(self.legajoFormBody)
-        self.widget1.setObjectName(u"widget1")
-        self.widget1.setGeometry(QRect(1, 1, 433, 243))
-        self.gridLayout = QGridLayout(self.widget1)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.gridLayout.setVerticalSpacing(15)
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.codRefLeg = QLabel(self.widget1)
-        self.codRefLeg.setObjectName(u"codRefLeg")
-        self.codRefLeg.setMinimumSize(QSize(180, 0))
-        self.codRefLeg.setMaximumSize(QSize(200, 16777215))
-        self.codRefLeg.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.codRefLeg, 0, 0, 1, 1)
-
-        self.codRefLegLine = QLineEdit(self.widget1)
-        self.codRefLegLine.setObjectName(u"codRefLegLine")
-        self.codRefLegLine.setMinimumSize(QSize(245, 25))
-        self.codRefLegLine.setMaximumSize(QSize(245, 25))
-        self.codRefLegLine.setStyleSheet(u"")
-
-        self.gridLayout.addWidget(self.codRefLegLine, 0, 1, 1, 1)
-
-        self.titulLegajoL = QLabel(self.widget1)
-        self.titulLegajoL.setObjectName(u"titulLegajoL")
-        self.titulLegajoL.setMinimumSize(QSize(180, 0))
-        self.titulLegajoL.setMaximumSize(QSize(200, 16777215))
-        self.titulLegajoL.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.titulLegajoL, 1, 0, 1, 1)
-
-        self.titulLegajo = QLineEdit(self.widget1)
-        self.titulLegajo.setObjectName(u"titulLegajo")
-        self.titulLegajo.setMinimumSize(QSize(245, 25))
-        self.titulLegajo.setMaximumSize(QSize(245, 25))
-        self.titulLegajo.setStyleSheet(u"")
-
-        self.gridLayout.addWidget(self.titulLegajo, 1, 1, 1, 1)
-
-        self.fechasLegL = QLabel(self.widget1)
-        self.fechasLegL.setObjectName(u"fechasLegL")
-        self.fechasLegL.setMinimumSize(QSize(180, 0))
-        self.fechasLegL.setMaximumSize(QSize(200, 16777215))
-        self.fechasLegL.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.fechasLegL, 2, 0, 1, 1)
-
-        self.fechasLegLine = QLineEdit(self.widget1)
-        self.fechasLegLine.setObjectName(u"fechasLegLine")
-        self.fechasLegLine.setMinimumSize(QSize(245, 25))
-        self.fechasLegLine.setMaximumSize(QSize(245, 25))
-        self.fechasLegLine.setStyleSheet(u"")
-
-        self.gridLayout.addWidget(self.fechasLegLine, 2, 1, 1, 1)
-
-        self.alcanceLegL = QLabel(self.widget1)
-        self.alcanceLegL.setObjectName(u"alcanceLegL")
-        self.alcanceLegL.setMinimumSize(QSize(180, 0))
-        self.alcanceLegL.setMaximumSize(QSize(200, 16777215))
-        self.alcanceLegL.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.gridLayout.addWidget(self.alcanceLegL, 3, 0, 1, 1)
-
-        self.alcanceLegLine = QLineEdit(self.widget1)
-        self.alcanceLegLine.setObjectName(u"alcanceLegLine")
-        self.alcanceLegLine.setMinimumSize(QSize(245, 25))
-        self.alcanceLegLine.setMaximumSize(QSize(245, 25))
-        self.alcanceLegLine.setStyleSheet(u"")
-
-        self.gridLayout.addWidget(self.alcanceLegLine, 3, 1, 1, 1)
-
-        self.crearLegajoButton = QPushButton(self.widget1)
-        self.crearLegajoButton.setObjectName(u"crearLegajoButton")
-        self.crearLegajoButton.setMinimumSize(QSize(121, 41))
-        self.crearLegajoButton.setMaximumSize(QSize(121, 41))
-        self.crearLegajoButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.crearLegajoButton.setStyleSheet(u"")
-        icon2 = QIcon()
-        icon2.addFile(u":/imgs/imgs/icons/check-mark-in-a-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.crearLegajoButton.setIcon(icon2)
-
-        self.gridLayout.addWidget(self.crearLegajoButton, 4, 1, 1, 1)
+        self.formLayout.setWidget(9, QFormLayout.FieldRole, self.enviarformButton)
 
 
-        self.verticalLayout_6.addWidget(self.legajoFormBody)
+        self.verticalLayout_5.addLayout(self.formLayout)
 
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.horizontalLayout_8.addWidget(self.contenedorlegajoForm)
+        self.verticalLayout_4.addWidget(self.scrollArea)
 
-        self.formulariosColeccion.addWidget(self.legajoForm)
-        self.udocComp = QWidget()
-        self.udocComp.setObjectName(u"udocComp")
-        self.formulariosColeccion.addWidget(self.udocComp)
-        self.udocSimple = QWidget()
-        self.udocSimple.setObjectName(u"udocSimple")
-        self.udocSimple.setStyleSheet(u"background-color: rgb(170, 170, 0);")
-        self.formulariosColeccion.addWidget(self.udocSimple)
-
-        self.horizontalLayout_9.addWidget(self.formulariosColeccion)
-
-
-        self.verticalLayout_5.addWidget(self.widget)
-
-
-        self.verticalLayout_4.addWidget(self.layoutcoleccionesPage)
-
-        self.stackedWidget.addWidget(self.coleccionesPage)
+        self.stackedWidget.addWidget(self.metadataPage)
         self.escanerPage = QWidget()
         self.escanerPage.setObjectName(u"escanerPage")
         self.horizontalLayout_5 = QHBoxLayout(self.escanerPage)
@@ -466,11 +431,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.widget_2 = QWidget(self.layoutEscan)
         self.widget_2.setObjectName(u"widget_2")
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.widget_2.sizePolicy().hasHeightForWidth())
-        self.widget_2.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.widget_2.sizePolicy().hasHeightForWidth())
+        self.widget_2.setSizePolicy(sizePolicy1)
         self.widget_2.setMinimumSize(QSize(0, 0))
         self.widget_2.setStyleSheet(u"background-color: transparent;")
         self.horizontalLayout_6 = QHBoxLayout(self.widget_2)
@@ -516,13 +481,13 @@ class Ui_MainWindow(object):
         self.capturaButton.setObjectName(u"capturaButton")
         self.capturaButton.setMinimumSize(QSize(120, 35))
         self.capturaButton.setMaximumSize(QSize(16777215, 35))
-        font1 = QFont()
-        font1.setPointSize(11)
-        self.capturaButton.setFont(font1)
+        font3 = QFont()
+        font3.setPointSize(11)
+        self.capturaButton.setFont(font3)
         self.capturaButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon3 = QIcon()
-        icon3.addFile(u":/imgs/imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.capturaButton.setIcon(icon3)
+        icon2 = QIcon()
+        icon2.addFile(u":/imgs/imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.capturaButton.setIcon(icon2)
         self.capturaButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_7.addWidget(self.capturaButton)
@@ -546,9 +511,6 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.imgsPage)
         self.exportarPage = QWidget()
         self.exportarPage.setObjectName(u"exportarPage")
-        self.label_5 = QLabel(self.exportarPage)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setGeometry(QRect(200, 120, 91, 16))
         self.stackedWidget.addWidget(self.exportarPage)
 
         self.horizontalLayout_3.addWidget(self.stackedWidget)
@@ -614,8 +576,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
-        self.formulariosColeccion.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -630,7 +591,7 @@ class Ui_MainWindow(object):
 "Inicio", None))
         self.coleccionesButton.setText(QCoreApplication.translate("MainWindow", u"\n"
 "\n"
-"Proyectos", None))
+"Metadatos", None))
         self.escanerButton.setText(QCoreApplication.translate("MainWindow", u"\n"
 "\n"
 "Esc\u00e1ner", None))
@@ -641,34 +602,21 @@ class Ui_MainWindow(object):
 "\n"
 "Exportar", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"INICIO", None))
-        self.escogerColeccion.setText(QCoreApplication.translate("MainWindow", u"Escoja el tipo de proyecto:", None))
-        self.tipoColeccion.setItemText(0, QCoreApplication.translate("MainWindow", u"Legajo", None))
-        self.tipoColeccion.setItemText(1, QCoreApplication.translate("MainWindow", u"Publicaci\u00f3n seriada", None))
-        self.tipoColeccion.setItemText(2, QCoreApplication.translate("MainWindow", u"Libro / manuscrito", None))
-        self.tipoColeccion.setItemText(3, QCoreApplication.translate("MainWindow", u"Mapa / fotograf\u00eda / dibujo", None))
-        self.tipoColeccion.setItemText(4, QCoreApplication.translate("MainWindow", u"Unidad documental simple", None))
-
-        self.escogerUbicacion.setText(QCoreApplication.translate("MainWindow", u"Escoja la ubicaci\u00f3n del proyecto:", None))
-        self.rutaLine.setText("")
-        self.browserDirButton.setText(QCoreApplication.translate("MainWindow", u"Buscar", None))
-        self.codRefLeg.setText(QCoreApplication.translate("MainWindow", u"C\u00f3digo de referencia:", None))
-        self.codRefLegLine.setText("")
-        self.codRefLegLine.setPlaceholderText("")
-        self.titulLegajoL.setText(QCoreApplication.translate("MainWindow", u"T\u00edtulo:", None))
-        self.titulLegajo.setText("")
-        self.titulLegajo.setPlaceholderText("")
-        self.fechasLegL.setText(QCoreApplication.translate("MainWindow", u"Fechas:", None))
-        self.fechasLegLine.setText("")
-        self.fechasLegLine.setPlaceholderText("")
-        self.alcanceLegL.setText(QCoreApplication.translate("MainWindow", u"Alcance y contenido:", None))
-        self.alcanceLegLine.setText("")
-        self.alcanceLegLine.setPlaceholderText("")
-        self.crearLegajoButton.setText(QCoreApplication.translate("MainWindow", u"Crear proyecto", None))
+        self.H1Label.setText(QCoreApplication.translate("MainWindow", u"Metadatos", None))
+        self.tipodocLabel.setText(QCoreApplication.translate("MainWindow", u"Tipo de documento", None))
+        self.tituloLabel.setText(QCoreApplication.translate("MainWindow", u"T\u00edtulo", None))
+        self.creadorLabel.setText(QCoreApplication.translate("MainWindow", u"Creador", None))
+        self.fechaLabel.setText(QCoreApplication.translate("MainWindow", u"Fecha", None))
+        self.publicadorLabel.setText(QCoreApplication.translate("MainWindow", u"Publicador", None))
+        self.idiomaLabel.setText(QCoreApplication.translate("MainWindow", u"Idioma", None))
+        self.numextLabel.setText(QCoreApplication.translate("MainWindow", u"N\u00famero externo", None))
+        self.numpagsLabel.setText(QCoreApplication.translate("MainWindow", u"N\u00fam. folios/p\u00e1ginas", None))
+        self.identificadoresLabel.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
+        self.enviarformButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.proyectData.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.capturaButton.setText(QCoreApplication.translate("MainWindow", u"capturar", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"IM\u00c1GENES", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"EXPORTAR", None))
         self.c_neogranadina.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><a href=\"https://neogranadina.org/\" target=\"_blank\"><span style=\" font-size:7pt; text-decoration: underline;color:rgba(251,251,251,.8)\">\u00a9 2021 Fundaci\u00f3n Hist\u00f3rica Neogranadina</span></a></body></html>", None))
         self.down_arrow.setText("")
     # retranslateUi
