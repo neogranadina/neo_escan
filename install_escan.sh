@@ -51,3 +51,10 @@ cd ..
 
 echo instalar dependencias
 pip install -r requirements.txt
+
+echo deshabilitar gphoto2 para evitar conflictos con chdkptp
+sudo mv /usr/share/dbus-1/services/org.gtk.vfs.GPhoto2VolumeMonitor.service /usr/share/dbus-1/services/disable_org.gtk.vfs.GPhoto2VolumeMonitor.service
+sudo mv /usr/share/gvfs/mounts/gphoto2.mount /usr/share/gvfs/disable_mounts/gphoto2.mount
+sudo mv /usr/share/gvfs/remote-volume-monitors/gphoto2.monitor /usr/share/gvfs/remote-volume-monitors/disable_gphoto2.monitor
+sudo mv /usr/lib/gvfs/gvfs-gphoto2-volume-monitor /usr/lib/gvfs/disable_gvfs-gphoto2-volume-monitor
+
