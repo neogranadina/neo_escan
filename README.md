@@ -50,7 +50,7 @@ Es posible contribuir a este proyecto proponiendo commits directamente a este re
 
 Realizar estas modificaciones solamente al archivo `main.ui`. Se recomienda hacerlas desde 'Qt Designer', 'Qt Creator' o 'Qt Design Studio' para Qt6. Modificaciones en Qt5 deben asegurar la compatibilidad con Qt6, para ello se recomienda consultar el documento [Qt5 and Qt6 compatibility](https://doc-snapshots.qt.io/qt6-dev/cmake-qt5-and-qt6-compatibility.html).
 
-Imágenes e íconos se vinculan desde el objeto `resources_rc.py`. Para proponer cambios añadirlos al archivo `resources.qrc` y realizar la conversión a binarios con `pyside6-rcc resources.qrc -o resources_rc.py`.
+Imágenes e íconos se vinculan desde el objeto `resources_rc.py`. Para proponer cambios añadirlos al archivo `resources.qrc` y realizar la conversión a binarios con `pyside2-rcc resources.qrc -o resources_rc.py`.
 
 ### Proponer cambios a la funcionalidad de la aplicación
 
