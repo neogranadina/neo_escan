@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainnlJfhC.ui'
+## Form generated from reading UI file 'mainnyIlIh.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.1.1
+## Created by: Qt User Interface Compiler version 5.15.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *  # type: ignore
-from PySide2.QtGui import *  # type: ignore
-from PySide2.QtWidgets import *  # type: ignore
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
 
 import resources_rc
 
@@ -245,7 +245,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -100, 678, 500))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 678, 479))
         self.scrollAreaWidgetContents.setStyleSheet(u"")
         self.verticalLayout_5 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
@@ -254,6 +254,7 @@ class Ui_MainWindow(object):
         font1 = QFont()
         font1.setPointSize(12)
         font1.setBold(True)
+        font1.setWeight(75)
         self.H1Label.setFont(font1)
         self.H1Label.setCursor(QCursor(Qt.ArrowCursor))
         self.H1Label.setMargin(7)
