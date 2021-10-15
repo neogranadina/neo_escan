@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainnyIlIh.ui'
+## Form generated from reading UI file 'mainsuuHaN.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.1
+## Created by: Qt User Interface Compiler version 5.15.5
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+from PySide2.QtCore import *  # type: ignore
+from PySide2.QtGui import *  # type: ignore
+from PySide2.QtWidgets import *  # type: ignore
 
+import resources_rc
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -24,7 +25,7 @@ class Ui_MainWindow(object):
         font.setStyleStrategy(QFont.NoAntialias)
         MainWindow.setFont(font)
         icon = QIcon()
-        icon.addFile(u"imgs/logo.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"C:/Users/jairo/.designer/backup/imgs/logo.png", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"background-color: rgb(255, 255, 255);")
         self.centralwidget = QWidget(MainWindow)

@@ -20,7 +20,7 @@ from PySide2.QtCore import QTranslator, QLibraryInfo
 
 from ui_main import Ui_MainWindow
 from db import connectToDatabase, insertInfo, testProyDuplicados, regresa_info_proyecto, checkDirectorio
-from camcontrol import Cam
+#from camcontrol import Cam
 
 
 # logs
@@ -39,8 +39,9 @@ def restart():
 
 
 def inicio_proyecto():
-    devs = Cam().devs()
-    return devs
+    pass
+    #devs = Cam().devs()
+    #return devs
 
 
 class MainWindow(QMainWindow):
@@ -57,12 +58,13 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         # crea las cámaras
+        '''
         global cams
         cams = inicio_proyecto()
         if len(cams) <= 1:
             QMessageBox().warning(self, "Error",
                                   "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
-
+        '''
         
         # Conectar a la base de datos
         connectToDatabase()
@@ -78,13 +80,7 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
 
         # Página de colecciones
-        widgets.tipoColeccion.currentIndexChanged.connect(self.indexChange)
-
-        # obtener directorio de proyectos
-        widgets.browserDirButton.clicked.connect(self.getDirName)
-
-        # guardar el legajo
-        widgets.crearLegajoButton.clicked.connect(self.leg_db)
+        widgets.tipodocComboBox.currentIndexChanged.connect(self.indexChange)
 
         # tomar fotografía
 
@@ -101,11 +97,12 @@ class MainWindow(QMainWindow):
         if btnName == "inicioButton":
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
         elif btnName == "coleccionesButton":
-            widgets.stackedWidget.setCurrentWidget(widgets.coleccionesPage)
+            widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
         elif btnName == "escanerButton":
             widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
             try:
-                Cam().cam(cams)
+                pass
+                #Cam().cam(cams)
             except IndexError:
                 QMessageBox().warning(self, "Error",
                                             "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
@@ -205,7 +202,8 @@ class MainWindow(QMainWindow):
 
     def getCaptura(self):
         try:
-            Cam().captura(cams)
+            pass
+            #Cam().captura(cams)
         except:
             msg = QMessageBox().warning(self, "Cámaras no disponibles",
                                         "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
