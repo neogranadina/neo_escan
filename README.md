@@ -1,20 +1,20 @@
 # Escáner de Neogranadina *Nombre por definir :p
 
-> :warning: Este programa requiere [Lua](http://www.lua.org/home.html), por lo que se recomienda su instalación en sistemas Unix. El programa está construido para Raspberry Pi OS, pueden presentarse errores en Ubuntu, Debian u otras distribuciones de Linux.   
+> :warning: Este programa requiere [Lua](http://www.lua.org/home.html), por lo que se recomienda su instalación en sistemas Unix. El programa está construido para Raspberry Pi OS, pueden presentarse errores en Ubuntu, Debian u otras distribuciones de Linux.
 
 ## Instalación
+
+En entornos de desarrollo es sumamente recomendado crear previamente un entorno virtual:
+
+```shell
+python3 -m venv escan_env --system-site-packages
+source escan_env/bin/activate
+```
 
 Para instalar esta versión en desarrollo, simplemente clonar este repo:
 
 ```shell
 git clone https://github.com/neogranadina/neo_escan.git
-```
-
-Es sumamente recomendado crear un entorno virtual previamente:
-
-```shell
-python3 -m venv escan_env --system-site-packages
-source escan_env/bin/activate
 ```
 
 Ir al directorio del repositorio:
@@ -50,7 +50,15 @@ Es posible contribuir a este proyecto proponiendo commits directamente a este re
 
 ### Proponer cambios a la interface gráfica de usuario (GUI)
 
-Realizar estas modificaciones solamente al archivo `main.ui`. Se recomienda hacerlas desde 'Qt Designer', 'Qt Creator' o 'Qt Design Studio' para Qt5. Modificaciones en Qt6 deben asegurar la compatibilidad con Qt5, para ello se recomienda consultar el documento [Qt5 and Qt6 compatibility](https://doc-snapshots.qt.io/qt6-dev/cmake-qt5-and-qt6-compatibility.html).
+Realizar estas modificaciones solamente al archivo `main.ui`. Se recomienda hacerlas desde 'Qt Designer', 'Qt Creator' o 'Qt Design Studio' para **Qt5**. No se planea una actualización a Qt6 hasta que exista una versión estable de PySide6 compatible con Raspberry OS.
+
+Es posible crear el objeto `Ui_MainWindow` directamente con PySide2, para ello simplemente correr el siguiente comando después de hacer los cambios en `main.ui`:
+
+```shell
+pyside2-uic main.ui > ui_main.py
+```
+
+> :warning: En Windows es posible que lance un error "ValueError: source code string cannot contain null bytes". Puede consultar una posible solución al error en <https://es.stackoverflow.com/a/322753>
 
 Imágenes e íconos se vinculan desde el objeto `resources_rc.py`. Para proponer cambios añadirlos al archivo `resources.qrc` y realizar la conversión a binarios con `pyside2-rcc resources.qrc -o resources_rc.py`.
 

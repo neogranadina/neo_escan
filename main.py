@@ -25,7 +25,7 @@ from db import connectToDatabase, insertInfo, testProyDuplicados, regresa_info_p
 
 # logs
 
-logging.basicConfig(filename="neo_esccan.log",
+logging.basicConfig(filename="neo_escan.log",
                     level=logging.DEBUG)
 logger = logging.getLogger("logger")
 
@@ -41,7 +41,7 @@ def restart():
 def inicio_proyecto():
     pass
     #devs = Cam().devs()
-    #return devs
+    # return devs
 
 
 class MainWindow(QMainWindow):
@@ -65,7 +65,7 @@ class MainWindow(QMainWindow):
             QMessageBox().warning(self, "Error",
                                   "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
         '''
-        
+
         # Conectar a la base de datos
         connectToDatabase()
 
@@ -98,11 +98,12 @@ class MainWindow(QMainWindow):
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
         elif btnName == "coleccionesButton":
             widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
+            widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
         elif btnName == "escanerButton":
             widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
             try:
                 pass
-                #Cam().cam(cams)
+                # Cam().cam(cams)
             except IndexError:
                 QMessageBox().warning(self, "Error",
                                             "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
@@ -116,14 +117,24 @@ class MainWindow(QMainWindow):
     # navegar por los widgets de las colecciones
 
     def indexChange(self):
-        index = widgets.tipoColeccion.currentIndex()
+        '''
+        recupera el índice del ComboBox del tipo de documento
+        navega por el QStackedWidget
+        '''
+        index = widgets.tipodocComboBox.currentIndex()
 
         if index == 0:
-            widgets.formulariosColeccion.setCurrentWidget(widgets.legajoForm)
-        elif not index == 4:
-            widgets.formulariosColeccion.setCurrentWidget(widgets.udocComp)
-        else:
-            widgets.formulariosColeccion.setCurrentWidget(widgets.udocSimple)
+            widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
+        elif index == 1:
+            widgets.tipoColeccion.setCurrentWidget(widgets.formDocumento)
+        elif index == 2:
+            widgets.tipoColeccion.setCurrentWidget(widgets.formImagen)
+        elif index == 3:
+            widgets.tipoColeccion.setCurrentWidget(widgets.formSeriada)
+        elif index == 4:
+            widgets.tipoColeccion.setCurrentWidget(widgets.formLibro)
+        elif index == 5:
+            widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
 
     # Obtener la dirección del directorio de proyectos
 
@@ -203,7 +214,7 @@ class MainWindow(QMainWindow):
     def getCaptura(self):
         try:
             pass
-            #Cam().captura(cams)
+            # Cam().captura(cams)
         except:
             msg = QMessageBox().warning(self, "Cámaras no disponibles",
                                         "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
