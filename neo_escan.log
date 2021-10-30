@@ -1,0 +1,2 @@
+ERROR:root:Número de parámetros incorrecto
+ERROR:root:NOT NULL constraint failed: elements_metadata_text.element_metadata No es posible obtener la fila

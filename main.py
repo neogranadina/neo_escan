@@ -19,7 +19,7 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBo
 from PySide2.QtCore import QTranslator, QLibraryInfo
 
 from ui_main import Ui_MainWindow
-from db import connectToDatabase, insertInfo, testProyDuplicados, regresa_info_proyecto, checkDirectorio
+from db import connectToDatabase, createElement, getLastId, insertInfo
 #from camcontrol import Cam
 
 
@@ -79,11 +79,16 @@ class MainWindow(QMainWindow):
         # Seleccionar página de inicio
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
 
-        # Página de colecciones
+        # Página de metadatos
         widgets.tipodocComboBox.currentIndexChanged.connect(self.indexChange)
-
-        # get directorio
-        widgets.browserDirButton.clicked.connect(getDirName)
+        widgets.enviarFormLegajoButton.clicked.connect(self.enviarForm)
+        widgets.enviarFormDocumentoButton.clicked.connect(
+            self.enviarForm)
+        widgets.enviarFormImageButton.clicked.connect(self.enviarForm)
+        widgets.enviarFormSeriadaButton.clicked.connect(self.enviarForm)
+        widgets.enviarFormLibroButton.clicked.connect(self.enviarForm)
+        widgets.enviarFormSimpleButton.clicked.connect(self.enviarForm)
+        widgets.browserDirButton.clicked.connect(self.getDirName)
 
         # tomar fotografía
         widgets.capturaButton.clicked.connect(self.getCaptura)
@@ -116,7 +121,7 @@ class MainWindow(QMainWindow):
         elif btnName == "exportarButton":
             widgets.stackedWidget.setCurrentWidget(widgets.exportarPage)
 
-    # navegar por los widgets de las colecciones
+    # navegar por la página de metadatos
 
     def indexChange(self):
         '''
@@ -145,27 +150,7 @@ class MainWindow(QMainWindow):
             self,
             caption="Seleccionar el directorio"
         )
-        widgets.rutaLine.setText(response)
-
-    # guarda información en las tabla y fija la ventana en "Escáner"
-
-    def guardarInfo(self):
-        '''
-        save info from metadata page
-        '''
-        # Recupera los datos de la página de metadatos
-        titulo = widgets.tituloLine.text()
-        autor = widgets.autorLine.text()
-        fecha = widgets.fechaLine.text()
-        tipo = widgets.tipodocComboBox.currentText()
-        # Guarda los datos en la base de datos
-        insertInfo(titulo, autor, fecha, tipo)
-        # Limpia los campos
-        widgets.tituloLine.clear()
-        widgets.autorLine.clear()
-        widgets.fechaLine.clear()
-        # Pone la ventana en "Escáner"
-        widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
+        widgets.folderlineEdit.setText(response)
 
     # Funciones de control de la cámara
 
@@ -178,69 +163,61 @@ class MainWindow(QMainWindow):
                                         "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
             restart()
 
-    def getDirName(self):
-        '''
-        get the directory name
-        '''
-        response = QFileDialog.getExistingDirectory(
-            None, 'Seleccione una carpeta', './')
-        widgets.rutaLine.setText(response)
-
     def get_fields_info(self, tipo_de_documento):
         '''
         get the info for a specific form fields and return a dictionary
         '''
-        if tipo_de_documento == "Legajo":
+        if tipo_de_documento == 1:
             return {
-                'titulo': widgets.titulolineEdit.text(),
-                'descripción': widgets.descripcionlineEdit.text(),
+                'título': widgets.titulolineEdit.text(),
+                'descripción': widgets.descripcionlineEdit.toPlainText(),
                 'creador': widgets.creadorlineEdit.text(),
-                'fecha_inicial': widgets.fechaIlineEdit.text(),
+                'fecha': widgets.fechaIlineEdit.text(),
                 'fecha_final': widgets.fechaFlineEdit.text(),
-                'cobertura_espacial': widgets.coberturalineEdit.text(),
+                'espacio': widgets.coberturalineEdit.text(),
                 'idioma': widgets.idiomalineEdit.text(),
-                'num_folios': widgets.numfollineEdit.text(),
+                'folios': widgets.numfollineEdit.text(),
                 'identificadores': widgets.identificadoreslineEdit.text(),
             }
-        elif tipo_de_documento == "Documento":
+        elif tipo_de_documento == 2:
             return {
-                'titulo': widgets.titulodoclineEdit.text(),
-                'descripción': widgets.descripciondoclineEdit.text(),
+                'título': widgets.titulodoclineEdit.text(),
+                'descripción': widgets.descripciondoclineEdit.toPlainText(),
                 'creador': widgets.creadordoclineEdit.text(),
-                'fecha_inicial': widgets.fechaIdoclineEdit.text(),
+                'fecha': widgets.fechaIdoclineEdit.text(),
                 'fecha_final': widgets.fechaFdoclineEdit.text(),
-                'cobertura_espacial': widgets.coberturadoclineEdit.text(),
+                'espacio': widgets.coberturadoclineEdit.text(),
                 'idioma': widgets.idiomadoclineEdit.text(),
-                'num_folios': widgets.numfoliodoclineEdit.text(),
+                'folios': widgets.numfoliodoclineEdit.text(),
                 'identificadores': widgets.identificadoresdoclineEdit.text(),
             }
-        elif tipo_de_documento == "Imagen":
+        elif tipo_de_documento == 3:
             return {
-                'titulo': widgets.tituloimagenlineEdit.text(),
-                'descripción': widgets.descripcionimagenlineEdit.text(),
+                'título': widgets.tituloimagenlineEdit.text(),
+                'descripción': widgets.descripcionimagenlineEdit.toPlainText(),
                 'creador': widgets.creadorimagenlineEdit.text(),
                 'fecha': widgets.fechaimagenlineEdit.text(),
-                'cobertura_espacial': widgets.coberturaespacialimagenlineEdit.text(),
+                'espacio': widgets.coberturaespacialimagenlineEdit.text(),
                 'descripción_física': widgets.descripcionfisicaimagenlineEdit.text(),
-                'tipo': widgets.tipoimagenlineEdit.text(),
+                'tipo_imagen': widgets.tipoimagenlineEdit.text(),
                 'identificadores': widgets.identificadoresimagenlineEdit.text(),
             }
-        elif tipo_de_documento == "Seriada":
+        elif tipo_de_documento == 4:
             return {
                 'nombre': widgets.nombreserlineEdit.text(),
                 'volumen': widgets.volumenserlineEdit.text(),
                 'ejemplar': widgets.ejemplarserlineEdit.text(),
                 'fecha': widgets.fechaserlineEdit.text(),
                 'páginas': widgets.paginaserlineEdit.text(),
-                'descripción': widgets.descripcionserlineEdit.text(),
+                'descripción': widgets.descripcionserlineEdit.toPlainText(),
                 'idioma': widgets.idiomaserlineEdit.text(),
                 'issn': widgets.issnserlineEdit.text(),
                 'identificadores': widgets.identificadoreserlineEdit.text(),
             }
-        elif tipo_de_documento == "Libro":
+        elif tipo_de_documento == 5:
             return {
                 'título': widgets.titulolibrolineEdit.text(),
-                'autor': widgets.autorlibrolineEdit.text(),
+                'creador': widgets.autorlibrolineEdit.text(),
                 'volumen': widgets.volumelibrolineEdit.text(),
                 'serie': widgets.serieLibrolineEdit.text(),
                 'edición': widgets.edicionLibrolineEdit.text(),
@@ -248,16 +225,33 @@ class MainWindow(QMainWindow):
                 'editorial': widgets.editorialLibrolineEdit.text(),
                 'fecha': widgets.fechaLibrolineEdit.text(),
                 'páginas': widgets.paginasLibrolineEdit.text(),
-                'descripción': widgets.descripcionLibrolineEdit.text(),
+                'descripción': widgets.descripcionLibrolineEdit.toPlainText(),
                 'idioma': widgets.idiomaLibrolineEdit.text(),
                 'isbn': widgets.isbnLibrolineEdit.text(),
                 'identificadores': widgets.identificadoresLibrolineEdit.text(),
             }
-        elif tipo_de_documento == "Sin tipo":
+        elif tipo_de_documento == 6:
             return {
                 'nombre_archivo': widgets.nombrearchivolineEdit.text(),
                 'folder': widgets.folderlineEdit.text(),
             }
+        else:
+            return None
+
+    def enviarForm(self):
+        tipo_de_documento = widgets.tipodocComboBox.currentIndex() + 1
+        # create element
+        if not tipo_de_documento == 6:
+            createElement(tipo_de_documento, 0, 1)
+
+            # get the id of last element created
+            id_element = getLastId()
+
+            # get the info for the form fields
+            info = self.get_fields_info(tipo_de_documento)
+
+            # insert the info into the database
+            insertInfo(id_element, info)
 
 # Fin de las funciones de la aplicación
 

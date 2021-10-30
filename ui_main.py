@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainjnNAYa.ui'
+## Form generated from reading UI file 'mainmVplFz.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.5
 ##
@@ -362,19 +362,19 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.numextLabel)
 
-        self.descipcionlineEdit = QPlainTextEdit(self.scrollAreaWidgetContents)
-        self.descipcionlineEdit.setObjectName(u"descipcionlineEdit")
+        self.descripcionlineEdit = QPlainTextEdit(self.scrollAreaWidgetContents)
+        self.descripcionlineEdit.setObjectName(u"descripcionlineEdit")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.descipcionlineEdit.sizePolicy().hasHeightForWidth())
-        self.descipcionlineEdit.setSizePolicy(sizePolicy)
-        self.descipcionlineEdit.setMinimumSize(QSize(500, 70))
-        self.descipcionlineEdit.setMaximumSize(QSize(500, 250))
-        self.descipcionlineEdit.setFont(font2)
-        self.descipcionlineEdit.setStyleSheet(u"Breve resumen del tema del expediente")
+        sizePolicy.setHeightForWidth(self.descripcionlineEdit.sizePolicy().hasHeightForWidth())
+        self.descripcionlineEdit.setSizePolicy(sizePolicy)
+        self.descripcionlineEdit.setMinimumSize(QSize(500, 70))
+        self.descripcionlineEdit.setMaximumSize(QSize(500, 250))
+        self.descripcionlineEdit.setFont(font2)
+        self.descripcionlineEdit.setStyleSheet(u"Breve resumen del tema del expediente")
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.descipcionlineEdit)
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.descripcionlineEdit)
 
         self.creadorlineEdit = QLineEdit(self.scrollAreaWidgetContents)
         self.creadorlineEdit.setObjectName(u"creadorlineEdit")
@@ -454,22 +454,22 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(11, QFormLayout.FieldRole, self.identificadoreslineEdit)
 
-        self.enviarFormButton = QPushButton(self.scrollAreaWidgetContents)
-        self.enviarFormButton.setObjectName(u"enviarFormButton")
+        self.enviarFormLegajoButton = QPushButton(self.scrollAreaWidgetContents)
+        self.enviarFormLegajoButton.setObjectName(u"enviarFormLegajoButton")
         sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.enviarFormButton.sizePolicy().hasHeightForWidth())
-        self.enviarFormButton.setSizePolicy(sizePolicy1)
-        self.enviarFormButton.setMinimumSize(QSize(100, 34))
-        self.enviarFormButton.setMaximumSize(QSize(100, 34))
-        self.enviarFormButton.setFont(font2)
-        self.enviarFormButton.setCursor(QCursor(Qt.PointingHandCursor))
+        sizePolicy1.setHeightForWidth(self.enviarFormLegajoButton.sizePolicy().hasHeightForWidth())
+        self.enviarFormLegajoButton.setSizePolicy(sizePolicy1)
+        self.enviarFormLegajoButton.setMinimumSize(QSize(100, 34))
+        self.enviarFormLegajoButton.setMaximumSize(QSize(100, 34))
+        self.enviarFormLegajoButton.setFont(font2)
+        self.enviarFormLegajoButton.setCursor(QCursor(Qt.PointingHandCursor))
         icon7 = QIcon()
         icon7.addFile(u":/imgs/imgs/icons/fast-forward-double-right-arrows.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.enviarFormButton.setIcon(icon7)
+        self.enviarFormLegajoButton.setIcon(icon7)
 
-        self.formLayout.setWidget(12, QFormLayout.FieldRole, self.enviarFormButton)
+        self.formLayout.setWidget(12, QFormLayout.FieldRole, self.enviarFormLegajoButton)
 
         self.creadorLabel = QLabel(self.scrollAreaWidgetContents)
         self.creadorLabel.setObjectName(u"creadorLabel")
@@ -645,17 +645,17 @@ class Ui_MainWindow(object):
 
         self.formLayout_3.setWidget(8, QFormLayout.FieldRole, self.identificadoresdoclineEdit)
 
-        self.enviarFormButton_3 = QPushButton(self.scrollAreaWidgetContents_3)
-        self.enviarFormButton_3.setObjectName(u"enviarFormButton_3")
-        sizePolicy1.setHeightForWidth(self.enviarFormButton_3.sizePolicy().hasHeightForWidth())
-        self.enviarFormButton_3.setSizePolicy(sizePolicy1)
-        self.enviarFormButton_3.setMinimumSize(QSize(100, 34))
-        self.enviarFormButton_3.setMaximumSize(QSize(100, 34))
-        self.enviarFormButton_3.setFont(font2)
-        self.enviarFormButton_3.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormButton_3.setIcon(icon7)
+        self.enviarFormDocumentoButton = QPushButton(self.scrollAreaWidgetContents_3)
+        self.enviarFormDocumentoButton.setObjectName(u"enviarFormDocumentoButton")
+        sizePolicy1.setHeightForWidth(self.enviarFormDocumentoButton.sizePolicy().hasHeightForWidth())
+        self.enviarFormDocumentoButton.setSizePolicy(sizePolicy1)
+        self.enviarFormDocumentoButton.setMinimumSize(QSize(100, 34))
+        self.enviarFormDocumentoButton.setMaximumSize(QSize(100, 34))
+        self.enviarFormDocumentoButton.setFont(font2)
+        self.enviarFormDocumentoButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.enviarFormDocumentoButton.setIcon(icon7)
 
-        self.formLayout_3.setWidget(9, QFormLayout.FieldRole, self.enviarFormButton_3)
+        self.formLayout_3.setWidget(9, QFormLayout.FieldRole, self.enviarFormDocumentoButton)
 
 
         self.verticalLayout_9.addLayout(self.formLayout_3)
@@ -675,7 +675,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 660, 410))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, -104, 660, 410))
         self.scrollAreaWidgetContents_4.setStyleSheet(u"")
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
@@ -786,17 +786,17 @@ class Ui_MainWindow(object):
 
         self.formLayout_4.setWidget(7, QFormLayout.FieldRole, self.identificadoresimagenlineEdit)
 
-        self.enviarFormButton_4 = QPushButton(self.scrollAreaWidgetContents_4)
-        self.enviarFormButton_4.setObjectName(u"enviarFormButton_4")
-        sizePolicy1.setHeightForWidth(self.enviarFormButton_4.sizePolicy().hasHeightForWidth())
-        self.enviarFormButton_4.setSizePolicy(sizePolicy1)
-        self.enviarFormButton_4.setMinimumSize(QSize(100, 34))
-        self.enviarFormButton_4.setMaximumSize(QSize(100, 34))
-        self.enviarFormButton_4.setFont(font2)
-        self.enviarFormButton_4.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormButton_4.setIcon(icon7)
+        self.enviarFormImageButton = QPushButton(self.scrollAreaWidgetContents_4)
+        self.enviarFormImageButton.setObjectName(u"enviarFormImageButton")
+        sizePolicy1.setHeightForWidth(self.enviarFormImageButton.sizePolicy().hasHeightForWidth())
+        self.enviarFormImageButton.setSizePolicy(sizePolicy1)
+        self.enviarFormImageButton.setMinimumSize(QSize(100, 34))
+        self.enviarFormImageButton.setMaximumSize(QSize(100, 34))
+        self.enviarFormImageButton.setFont(font2)
+        self.enviarFormImageButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.enviarFormImageButton.setIcon(icon7)
 
-        self.formLayout_4.setWidget(8, QFormLayout.FieldRole, self.enviarFormButton_4)
+        self.formLayout_4.setWidget(8, QFormLayout.FieldRole, self.enviarFormImageButton)
 
         self.label_6 = QLabel(self.scrollAreaWidgetContents_4)
         self.label_6.setObjectName(u"label_6")
@@ -829,7 +829,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, -119, 723, 450))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, -144, 660, 450))
         self.verticalLayout_15 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.formLayout_2 = QFormLayout()
@@ -967,17 +967,17 @@ class Ui_MainWindow(object):
 
         self.formLayout_2.setWidget(8, QFormLayout.FieldRole, self.identificadoreserlineEdit)
 
-        self.enviarFormButton_5 = QPushButton(self.scrollAreaWidgetContents_5)
-        self.enviarFormButton_5.setObjectName(u"enviarFormButton_5")
-        sizePolicy1.setHeightForWidth(self.enviarFormButton_5.sizePolicy().hasHeightForWidth())
-        self.enviarFormButton_5.setSizePolicy(sizePolicy1)
-        self.enviarFormButton_5.setMinimumSize(QSize(100, 34))
-        self.enviarFormButton_5.setMaximumSize(QSize(100, 34))
-        self.enviarFormButton_5.setFont(font2)
-        self.enviarFormButton_5.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormButton_5.setIcon(icon7)
+        self.enviarFormSeriadaButton = QPushButton(self.scrollAreaWidgetContents_5)
+        self.enviarFormSeriadaButton.setObjectName(u"enviarFormSeriadaButton")
+        sizePolicy1.setHeightForWidth(self.enviarFormSeriadaButton.sizePolicy().hasHeightForWidth())
+        self.enviarFormSeriadaButton.setSizePolicy(sizePolicy1)
+        self.enviarFormSeriadaButton.setMinimumSize(QSize(100, 34))
+        self.enviarFormSeriadaButton.setMaximumSize(QSize(100, 34))
+        self.enviarFormSeriadaButton.setFont(font2)
+        self.enviarFormSeriadaButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.enviarFormSeriadaButton.setIcon(icon7)
 
-        self.formLayout_2.setWidget(9, QFormLayout.FieldRole, self.enviarFormButton_5)
+        self.formLayout_2.setWidget(9, QFormLayout.FieldRole, self.enviarFormSeriadaButton)
 
 
         self.verticalLayout_15.addLayout(self.formLayout_2)
@@ -996,7 +996,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, -100, 660, 610))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, -304, 660, 610))
         self.verticalLayout_16 = QVBoxLayout(self.scrollAreaWidgetContents_6)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.formLayout_5 = QFormLayout()
@@ -1191,17 +1191,17 @@ class Ui_MainWindow(object):
 
         self.formLayout_5.setWidget(12, QFormLayout.FieldRole, self.identificadoresLibrolineEdit)
 
-        self.enviarFormButton_6 = QPushButton(self.scrollAreaWidgetContents_6)
-        self.enviarFormButton_6.setObjectName(u"enviarFormButton_6")
-        sizePolicy1.setHeightForWidth(self.enviarFormButton_6.sizePolicy().hasHeightForWidth())
-        self.enviarFormButton_6.setSizePolicy(sizePolicy1)
-        self.enviarFormButton_6.setMinimumSize(QSize(100, 34))
-        self.enviarFormButton_6.setMaximumSize(QSize(100, 34))
-        self.enviarFormButton_6.setFont(font2)
-        self.enviarFormButton_6.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormButton_6.setIcon(icon7)
+        self.enviarFormLibroButton = QPushButton(self.scrollAreaWidgetContents_6)
+        self.enviarFormLibroButton.setObjectName(u"enviarFormLibroButton")
+        sizePolicy1.setHeightForWidth(self.enviarFormLibroButton.sizePolicy().hasHeightForWidth())
+        self.enviarFormLibroButton.setSizePolicy(sizePolicy1)
+        self.enviarFormLibroButton.setMinimumSize(QSize(100, 34))
+        self.enviarFormLibroButton.setMaximumSize(QSize(100, 34))
+        self.enviarFormLibroButton.setFont(font2)
+        self.enviarFormLibroButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.enviarFormLibroButton.setIcon(icon7)
 
-        self.formLayout_5.setWidget(13, QFormLayout.FieldRole, self.enviarFormButton_6)
+        self.formLayout_5.setWidget(13, QFormLayout.FieldRole, self.enviarFormLibroButton)
 
 
         self.verticalLayout_16.addLayout(self.formLayout_5)
@@ -1270,17 +1270,17 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.browserDirButton, 1, 2, 1, 1)
 
-        self.enviarFormButton_7 = QPushButton(self.scrollAreaWidgetContents_7)
-        self.enviarFormButton_7.setObjectName(u"enviarFormButton_7")
-        sizePolicy1.setHeightForWidth(self.enviarFormButton_7.sizePolicy().hasHeightForWidth())
-        self.enviarFormButton_7.setSizePolicy(sizePolicy1)
-        self.enviarFormButton_7.setMinimumSize(QSize(100, 34))
-        self.enviarFormButton_7.setMaximumSize(QSize(100, 34))
-        self.enviarFormButton_7.setFont(font2)
-        self.enviarFormButton_7.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormButton_7.setIcon(icon7)
+        self.enviarFormSimpleButton = QPushButton(self.scrollAreaWidgetContents_7)
+        self.enviarFormSimpleButton.setObjectName(u"enviarFormSimpleButton")
+        sizePolicy1.setHeightForWidth(self.enviarFormSimpleButton.sizePolicy().hasHeightForWidth())
+        self.enviarFormSimpleButton.setSizePolicy(sizePolicy1)
+        self.enviarFormSimpleButton.setMinimumSize(QSize(100, 34))
+        self.enviarFormSimpleButton.setMaximumSize(QSize(100, 34))
+        self.enviarFormSimpleButton.setFont(font2)
+        self.enviarFormSimpleButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.enviarFormSimpleButton.setIcon(icon7)
 
-        self.gridLayout.addWidget(self.enviarFormButton_7, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.enviarFormSimpleButton, 2, 1, 1, 1)
 
 
         self.verticalLayout_17.addLayout(self.gridLayout)
@@ -1473,7 +1473,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(1)
-        self.tipoColeccion.setCurrentIndex(5)
+        self.tipoColeccion.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1511,7 +1511,7 @@ class Ui_MainWindow(object):
         self.tituloLabel.setText(QCoreApplication.translate("MainWindow", u"T\u00edtulo", None))
         self.titulolineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"El nombre dado al expediente", None))
         self.numextLabel.setText(QCoreApplication.translate("MainWindow", u"Descripci\u00f3n", None))
-        self.descipcionlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Breve resumen del tema del expediente", None))
+        self.descripcionlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Breve resumen del tema del expediente", None))
         self.creadorlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Persona o entidad responsable del contenido del expediente", None))
         self.fechaILabel.setText(QCoreApplication.translate("MainWindow", u"Fecha inicial", None))
         self.fechaIlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"AAAA-MM-DD", None))
@@ -1523,7 +1523,7 @@ class Ui_MainWindow(object):
         self.numfollineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"n\u00famero de folios o p\u00e1ginas", None))
         self.identificadoresLabel.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoreslineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
+        self.enviarFormLegajoButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.creadorLabel.setText(QCoreApplication.translate("MainWindow", u"Creador", None))
         self.coberturaLabel.setText(QCoreApplication.translate("MainWindow", u"Cobertura espacial", None))
         self.coberturalineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"localidad, ciudad, regi\u00f3n, pa\u00eds, reino", None))
@@ -1545,7 +1545,7 @@ class Ui_MainWindow(object):
         self.numfoliodoclineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"n\u00famero de folios o p\u00e1ginas", None))
         self.identificadoresLabel_3.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoresdoclineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormButton_3.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
+        self.enviarFormDocumentoButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.tituloLabel_4.setText(QCoreApplication.translate("MainWindow", u"T\u00edtulo", None))
         self.tituloimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"El nombre dado a la imagen", None))
         self.tituloLabel_5.setText(QCoreApplication.translate("MainWindow", u"Creador", None))
@@ -1561,7 +1561,7 @@ class Ui_MainWindow(object):
         self.tipoimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"mapa, dibujo, ilustraci\u00f3n, plano...", None))
         self.identificadoresLabel_4.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoresimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormButton_4.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
+        self.enviarFormImageButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Cobertura espacial", None))
         self.coberturaespacialimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Lugar de producci\u00f3n o representaci\u00f3n de la imagen", None))
         self.tituloLabel_8.setText(QCoreApplication.translate("MainWindow", u"Nombre publicaci\u00f3n", None))
@@ -1585,7 +1585,7 @@ class Ui_MainWindow(object):
         self.issnserlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"n\u00famero estandarizado", None))
         self.identificadoresLabel_7.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoreserlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormButton_5.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
+        self.enviarFormSeriadaButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.tituloLabel_12.setText(QCoreApplication.translate("MainWindow", u"T\u00edtulo", None))
         self.titulolibrolineEdit.setText("")
         self.titulolibrolineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"T\u00edtulo y subt\u00edtulo del libro", None))
@@ -1616,7 +1616,7 @@ class Ui_MainWindow(object):
         self.isbnLibrolineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"n\u00famero estandarizado", None))
         self.identificadoresLabel_11.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoresLibrolineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormButton_6.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
+        self.enviarFormLibroButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.tituloLabel_17.setText(QCoreApplication.translate("MainWindow", u"Nombre del archivo", None))
         self.nombrearchivolineEdit.setText("")
         self.nombrearchivolineEdit.setPlaceholderText("")
@@ -1624,7 +1624,7 @@ class Ui_MainWindow(object):
         self.folderlineEdit.setText("")
         self.folderlineEdit.setPlaceholderText("")
         self.browserDirButton.setText("")
-        self.enviarFormButton_7.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
+        self.enviarFormSimpleButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.proyectData.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.capturaButton.setText(QCoreApplication.translate("MainWindow", u"capturar", None))

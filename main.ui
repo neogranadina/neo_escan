@@ -773,7 +773,7 @@ border: none;
                     <string notr="true"/>
                    </property>
                    <property name="currentIndex">
-                    <number>5</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="formLegajo">
                     <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -849,7 +849,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="1" column="1">
-                            <widget class="QPlainTextEdit" name="descipcionlineEdit">
+                            <widget class="QPlainTextEdit" name="descripcionlineEdit">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                <horstretch>0</horstretch>
@@ -1086,7 +1086,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="12" column="1">
-                            <widget class="QPushButton" name="enviarFormButton">
+                            <widget class="QPushButton" name="enviarFormLegajoButton">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -1540,7 +1540,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="9" column="1">
-                            <widget class="QPushButton" name="enviarFormButton_3">
+                            <widget class="QPushButton" name="enviarFormDocumentoButton">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -1598,7 +1598,7 @@ border: none;
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
+                          <y>-104</y>
                           <width>660</width>
                           <height>410</height>
                          </rect>
@@ -1886,7 +1886,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="8" column="1">
-                            <widget class="QPushButton" name="enviarFormButton_4">
+                            <widget class="QPushButton" name="enviarFormImageButton">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -1977,8 +1977,8 @@ border: none;
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>-119</y>
-                          <width>723</width>
+                          <y>-144</y>
+                          <width>660</width>
                           <height>450</height>
                          </rect>
                         </property>
@@ -2340,7 +2340,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="9" column="1">
-                            <widget class="QPushButton" name="enviarFormButton_5">
+                            <widget class="QPushButton" name="enviarFormSeriadaButton">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -2395,7 +2395,7 @@ border: none;
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>-100</y>
+                          <y>-304</y>
                           <width>660</width>
                           <height>610</height>
                          </rect>
@@ -2908,7 +2908,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="13" column="1">
-                            <widget class="QPushButton" name="enviarFormButton_6">
+                            <widget class="QPushButton" name="enviarFormLibroButton">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -3100,7 +3100,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="2" column="1">
-                            <widget class="QPushButton" name="enviarFormButton_7">
+                            <widget class="QPushButton" name="enviarFormSimpleButton">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                                <horstretch>0</horstretch>
