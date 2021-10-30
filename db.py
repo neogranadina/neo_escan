@@ -1,7 +1,14 @@
-'''
-connect pyside2 form with database and sqlite3
-and populate the tables of the database
-'''
+# ///////////////////////////////////////////////////////////////
+#
+# Hecho por: Jairo Antonio Melo Flórez
+# Realizado con: Qt Designer y PySide6
+# © 2021 Fundación Histórica Neogranadina
+# V: 1.0.0
+#
+# db:
+# módulo para comunicar PySide2 con la base de datos sqlite3
+#
+# ///////////////////////////////////////////////////////////////
 
 import datetime
 import logging

@@ -79,6 +79,12 @@ class MainWindow(QMainWindow):
         # Seleccionar página de inicio
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
 
+        # Botón nuevo proyecto
+        widgets.nuevoProyectoButton.clicked.connect(self.buttonClick)
+
+        # Botón regresar al inicio
+        widgets.backtoInicioButton.clicked.connect(self.buttonClick)
+
         # Página de metadatos
         widgets.tipodocComboBox.currentIndexChanged.connect(self.indexChange)
         widgets.enviarFormLegajoButton.clicked.connect(self.enviarForm)
@@ -89,9 +95,12 @@ class MainWindow(QMainWindow):
         widgets.enviarFormLibroButton.clicked.connect(self.enviarForm)
         widgets.enviarFormSimpleButton.clicked.connect(self.enviarForm)
         widgets.browserDirButton.clicked.connect(self.getDirName)
+        
 
         # tomar fotografía
         widgets.capturaButton.clicked.connect(self.getCaptura)
+
+    # navigation functions
 
     # Navegar por las páginas desde el menú principal
 
@@ -103,7 +112,22 @@ class MainWindow(QMainWindow):
         # navega por cada una de las páginas
         if btnName == "inicioButton":
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
-        elif btnName == "coleccionesButton":
+        elif btnName == "backtoInicioButton":
+            # warning message box
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Warning)
+            msgBox.setText("¿Está seguro que desea salir del formulario?")
+            msgBox.setWindowTitle("Volver al inicio")
+            msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            if msgBox.exec_() == QMessageBox.Yes:
+                index = widgets.tipodocComboBox.currentIndex() + 1
+                self.cleanForm(index)
+                widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+            else:
+                pass
+            
+            
+        elif btnName == "coleccionesButton" or btnName == "nuevoProyectoButton":
             widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
         elif btnName == "escanerButton":
@@ -152,16 +176,7 @@ class MainWindow(QMainWindow):
         )
         widgets.folderlineEdit.setText(response)
 
-    # Funciones de control de la cámara
-
-    def getCaptura(self):
-        try:
-            pass
-            # Cam().captura(cams)
-        except:
-            msg = QMessageBox().warning(self, "Cámaras no disponibles",
-                                        "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
-            restart()
+    # Forms de metadatos
 
     def get_fields_info(self, tipo_de_documento):
         '''
@@ -238,7 +253,73 @@ class MainWindow(QMainWindow):
         else:
             return None
 
+    def cleanForm(self, tipo_de_documento):
+        '''
+        set all Text to blank
+        '''
+        if tipo_de_documento == 1:
+            widgets.titulolineEdit.setText('')
+            widgets.descripcionlineEdit.setPlainText('')
+            widgets.creadorlineEdit.setText('')
+            widgets.fechaIlineEdit.setText('')
+            widgets.fechaFlineEdit.setText('')
+            widgets.coberturalineEdit.setText('')
+            widgets.idiomalineEdit.setText('')
+            widgets.numfollineEdit.setText('')
+            widgets.identificadoreslineEdit.setText('')
+        elif tipo_de_documento == 2:
+            widgets.titulodoclineEdit.setText('')
+            widgets.descripciondoclineEdit.setPlainText('')
+            widgets.creadordoclineEdit.setText('')
+            widgets.fechaIdoclineEdit.setText('')
+            widgets.fechaFdoclineEdit.setText('')
+            widgets.coberturadoclineEdit.setText('')
+            widgets.idiomadoclineEdit.setText('')
+            widgets.numfoliodoclineEdit.setText('')
+            widgets.identificadoresdoclineEdit.setText('')
+        elif tipo_de_documento == 3:
+            widgets.tituloimagenlineEdit.setText('')
+            widgets.descripcionimagenlineEdit.setPlainText('')
+            widgets.creadorimagenlineEdit.setText('')
+            widgets.fechaimagenlineEdit.setText('')
+            widgets.coberturaespacialimagenlineEdit.setText('')
+            widgets.descripcionfisicaimagenlineEdit.setText('')
+            widgets.tipoimagenlineEdit.setText('')
+            widgets.identificadoresimagenlineEdit.setText('')
+        elif tipo_de_documento == 4:
+            widgets.nombreserlineEdit.setText('')
+            widgets.volumenserlineEdit.setText('')
+            widgets.ejemplarserlineEdit.setText('')
+            widgets.fechaserlineEdit.setText('')
+            widgets.paginaserlineEdit.setText('')
+            widgets.descripcionserlineEdit.setPlainText('')
+            widgets.idiomaserlineEdit.setText('')
+            widgets.issnserlineEdit.setText('')
+            widgets.identificadoreserlineEdit.setText('')
+        elif tipo_de_documento == 5:
+            widgets.titulolibrolineEdit.setText('')
+            widgets.autorlibrolineEdit.setText('')
+            widgets.volumelibrolineEdit.setText('')
+            widgets.serieLibrolineEdit.setText('')
+            widgets.edicionLibrolineEdit.setText('')
+            widgets.lugarLibrolineEdit.setText('')
+            widgets.editorialLibrolineEdit.setText('')
+            widgets.fechaLibrolineEdit.setText('')
+            widgets.paginasLibrolineEdit.setText('')
+            widgets.descripcionLibrolineEdit.setPlainText('')
+            widgets.idiomaLibrolineEdit.setText('')
+            widgets.isbnLibrolineEdit.setText('')
+            widgets.identificadoresLibrolineEdit.setText('')
+        elif tipo_de_documento == 6:
+            widgets.nombrearchivolineEdit.setText('')
+            widgets.folderlineEdit.setText('')
+        else:
+            return None
+
     def enviarForm(self):
+        '''
+        envia el formulario a la base de datos
+        '''
         tipo_de_documento = widgets.tipodocComboBox.currentIndex() + 1
         # create element
         if not tipo_de_documento == 6:
@@ -252,6 +333,23 @@ class MainWindow(QMainWindow):
 
             # insert the info into the database
             insertInfo(id_element, info)
+
+            # clean form fields
+            self.cleanForm(tipo_de_documento)
+
+            # set current widget to escanerPage
+            widgets.tipoColeccion.setCurrentWidget(widgets.escanerPage)
+
+    # Funciones de control de la cámara
+
+    def getCaptura(self):
+        try:
+            pass
+            # Cam().captura(cams)
+        except:
+            msg = QMessageBox().warning(self, "Cámaras no disponibles",
+                                        "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
+            restart()
 
 # Fin de las funciones de la aplicación
 

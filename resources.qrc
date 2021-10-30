@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/imgs">
+    <file>imgs/icons/left-arrowhead-in-a-circle.svg</file>
+    <file>imgs/icons/plus-sign.svg</file>
     <file>imgs/icons/black-folder-shape-for-interface.svg</file>
     <file>imgs/icons/camera.svg</file>
     <file>imgs/icons/documents-rounded-square-symbol.svg</file>
