@@ -8,3 +8,5 @@ neo_esccan.log
 config.ini
 /escan_env
 /test
+deprecated*
+neoscan_db - copia.db

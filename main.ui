@@ -697,7 +697,7 @@ border: none;
                       </property>
                       <item>
                        <property name="text">
-                        <string>Legajo (unidad documental compuesta)</string>
+                        <string>Legajo</string>
                        </property>
                        <property name="icon">
                         <iconset resource="resources.qrc">
@@ -706,7 +706,7 @@ border: none;
                       </item>
                       <item>
                        <property name="text">
-                        <string>Documento (unidad documental simple)</string>
+                        <string>Documento</string>
                        </property>
                        <property name="icon">
                         <iconset resource="resources.qrc">
@@ -715,7 +715,7 @@ border: none;
                       </item>
                       <item>
                        <property name="text">
-                        <string>Imagen (dibujo, plano, mapa, pintura)</string>
+                        <string>Imagen</string>
                        </property>
                        <property name="icon">
                         <iconset resource="resources.qrc">
@@ -724,7 +724,7 @@ border: none;
                       </item>
                       <item>
                        <property name="text">
-                        <string>Periódico / revista (publicación seriada)</string>
+                        <string>Periódico / revista</string>
                        </property>
                        <property name="icon">
                         <iconset resource="resources.qrc">
@@ -733,7 +733,7 @@ border: none;
                       </item>
                       <item>
                        <property name="text">
-                        <string>Libro (encuadernados)</string>
+                        <string>Libro</string>
                        </property>
                        <property name="icon">
                         <iconset resource="resources.qrc">
@@ -742,7 +742,7 @@ border: none;
                       </item>
                       <item>
                        <property name="text">
-                        <string>Sin tipo (captura simple)</string>
+                        <string>Sin tipo</string>
                        </property>
                        <property name="icon">
                         <iconset resource="resources.qrc">
@@ -773,7 +773,7 @@ border: none;
                     <string notr="true"/>
                    </property>
                    <property name="currentIndex">
-                    <number>2</number>
+                    <number>5</number>
                    </property>
                    <widget class="QWidget" name="formLegajo">
                     <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -849,7 +849,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="1" column="1">
-                            <widget class="QPlainTextEdit" name="plainTextEdit">
+                            <widget class="QPlainTextEdit" name="descipcionlineEdit">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                <horstretch>0</horstretch>
@@ -1192,7 +1192,7 @@ border: none;
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
+                          <y>-144</y>
                           <width>660</width>
                           <height>450</height>
                          </rect>
@@ -1216,7 +1216,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="0" column="1">
-                            <widget class="QLineEdit" name="titulolineEdit_3">
+                            <widget class="QLineEdit" name="titulodoclineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1255,7 +1255,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="1" column="1">
-                            <widget class="QPlainTextEdit" name="plainTextEdit_3">
+                            <widget class="QPlainTextEdit" name="descripciondoclineEdit">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                <horstretch>0</horstretch>
@@ -1300,7 +1300,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="2" column="1">
-                            <widget class="QLineEdit" name="creadorlineEdit_3">
+                            <widget class="QLineEdit" name="creadordoclineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1336,7 +1336,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="3" column="1">
-                            <widget class="QLineEdit" name="fechaIlineEdit_3">
+                            <widget class="QLineEdit" name="fechaIdoclineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1372,7 +1372,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="4" column="1">
-                            <widget class="QLineEdit" name="fechaFlineEdit_3">
+                            <widget class="QLineEdit" name="fechaFdoclineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1408,7 +1408,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="5" column="1">
-                            <widget class="QLineEdit" name="coberturalineEdit_3">
+                            <widget class="QLineEdit" name="coberturadoclineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1444,7 +1444,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="6" column="1">
-                            <widget class="QLineEdit" name="idiomalineEdit_3">
+                            <widget class="QLineEdit" name="idiomadoclineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1480,7 +1480,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="7" column="1">
-                            <widget class="QLineEdit" name="numfollineEdit_3">
+                            <widget class="QLineEdit" name="numfoliodoclineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1516,7 +1516,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="8" column="1">
-                            <widget class="QLineEdit" name="identificadoreslineEdit_3">
+                            <widget class="QLineEdit" name="identificadoresdoclineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1622,7 +1622,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="0" column="1">
-                            <widget class="QLineEdit" name="titulolineEdit_4">
+                            <widget class="QLineEdit" name="tituloimagenlineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1661,7 +1661,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="1" column="1">
-                            <widget class="QLineEdit" name="titulolineEdit_5">
+                            <widget class="QLineEdit" name="creadorimagenlineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1700,7 +1700,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="2" column="1">
-                            <widget class="QLineEdit" name="titulolineEdit_6">
+                            <widget class="QLineEdit" name="fechaimagenlineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1739,7 +1739,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="4" column="1">
-                            <widget class="QLineEdit" name="titulolineEdit_7">
+                            <widget class="QLineEdit" name="descripcionfisicaimagenlineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1778,7 +1778,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="5" column="1">
-                            <widget class="QPlainTextEdit" name="plainTextEdit_4">
+                            <widget class="QPlainTextEdit" name="descripcionimagenlineEdit">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                                <horstretch>0</horstretch>
@@ -1823,7 +1823,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="6" column="1">
-                            <widget class="QLineEdit" name="identificadoreslineEdit_5">
+                            <widget class="QLineEdit" name="tipoimagenlineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1862,7 +1862,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="7" column="1">
-                            <widget class="QLineEdit" name="identificadoreslineEdit_4">
+                            <widget class="QLineEdit" name="identificadoresimagenlineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1935,7 +1935,7 @@ border: none;
                             </widget>
                            </item>
                            <item row="3" column="1">
-                            <widget class="QLineEdit" name="lineEdit">
+                            <widget class="QLineEdit" name="coberturaespacialimagenlineEdit">
                              <property name="minimumSize">
                               <size>
                                <width>500</width>
@@ -1977,24 +1977,408 @@ border: none;
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
-                          <width>677</width>
-                          <height>306</height>
+                          <y>-119</y>
+                          <width>723</width>
+                          <height>450</height>
                          </rect>
                         </property>
-                        <widget class="QLabel" name="label_2">
-                         <property name="geometry">
-                          <rect>
-                           <x>230</x>
-                           <y>60</y>
-                           <width>181</width>
-                           <height>91</height>
-                          </rect>
-                         </property>
-                         <property name="text">
-                          <string>EN PROCESO</string>
-                         </property>
-                        </widget>
+                        <layout class="QVBoxLayout" name="verticalLayout_15">
+                         <item>
+                          <layout class="QFormLayout" name="formLayout_2">
+                           <item row="0" column="0">
+                            <widget class="QLabel" name="tituloLabel_8">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Nombre publicación</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="1">
+                            <widget class="QLineEdit" name="nombreserlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string>El nombre del periódico o revista</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="tituloLabel_9">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Volumen</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="1">
+                            <widget class="QLineEdit" name="volumenserlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="placeholderText">
+                              <string>número del volúmen o serie</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="0">
+                            <widget class="QLabel" name="tituloLabel_10">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Ejemplar</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="1">
+                            <widget class="QLineEdit" name="ejemplarserlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="placeholderText">
+                              <string>El número del ejemplar</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="0">
+                            <widget class="QLabel" name="label_7">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Fecha</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="1">
+                            <widget class="QLineEdit" name="fechaserlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="placeholderText">
+                              <string>AAAA-MM-DD</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="4" column="0">
+                            <widget class="QLabel" name="tituloLabel_11">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Páginas</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="4" column="1">
+                            <widget class="QLineEdit" name="paginaserlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="placeholderText">
+                              <string>número de páginas</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="5" column="0">
+                            <widget class="QLabel" name="numextLabel_5">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Descripción</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="5" column="1">
+                            <widget class="QPlainTextEdit" name="descripcionserlineEdit">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>70</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>250</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">Breve resumen del tema del documento</string>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Breve descripción del ejemplar</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="6" column="0">
+                            <widget class="QLabel" name="identificadoresLabel_6">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Idioma</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="6" column="1">
+                            <widget class="QLineEdit" name="idiomaserlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string>idioma principal del ejemplar</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="7" column="0">
+                            <widget class="QLabel" name="identificadoresLabel_8">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>ISSN</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="7" column="1">
+                            <widget class="QLineEdit" name="issnserlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string>número estandarizado</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="8" column="0">
+                            <widget class="QLabel" name="identificadoresLabel_7">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Identificadores</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="8" column="1">
+                            <widget class="QLineEdit" name="identificadoreserlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="placeholderText">
+                              <string>referencia, índice, número de catalogación...</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="9" column="1">
+                            <widget class="QPushButton" name="enviarFormButton_5">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>100</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>100</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="text">
+                              <string>enviar</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resources.qrc">
+                               <normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
                        </widget>
                       </widget>
                      </item>
@@ -2011,24 +2395,558 @@ border: none;
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
-                          <width>677</width>
-                          <height>306</height>
+                          <y>-100</y>
+                          <width>660</width>
+                          <height>610</height>
                          </rect>
                         </property>
-                        <widget class="QLabel" name="label_3">
-                         <property name="geometry">
-                          <rect>
-                           <x>140</x>
-                           <y>50</y>
-                           <width>231</width>
-                           <height>121</height>
-                          </rect>
-                         </property>
-                         <property name="text">
-                          <string>EN PROCESO</string>
-                         </property>
-                        </widget>
+                        <layout class="QVBoxLayout" name="verticalLayout_16">
+                         <item>
+                          <layout class="QFormLayout" name="formLayout_5">
+                           <item row="0" column="0">
+                            <widget class="QLabel" name="tituloLabel_12">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Título</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="1">
+                            <widget class="QLineEdit" name="titulolibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Título y subtítulo del libro</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="tituloLabel_16">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Autor(es)</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="1">
+                            <widget class="QLineEdit" name="autorlibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Autor o autores del libro</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="0">
+                            <widget class="QLabel" name="tituloLabel_13">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Volumen</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="1">
+                            <widget class="QLineEdit" name="volumelibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="placeholderText">
+                              <string>número del volúmen o serie</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="0">
+                            <widget class="QLabel" name="tituloLabel_14">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Serie</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="1">
+                            <widget class="QLineEdit" name="serieLibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Nombre de la serie de la colección de libros</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="4" column="0">
+                            <widget class="QLabel" name="label_9">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Edición</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="4" column="1">
+                            <widget class="QLineEdit" name="edicionLibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Número de la edición</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="5" column="0">
+                            <widget class="QLabel" name="label_10">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Lugar</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="5" column="1">
+                            <widget class="QLineEdit" name="lugarLibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Ciudad de publicación</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="6" column="0">
+                            <widget class="QLabel" name="label_11">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Editorial</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="6" column="1">
+                            <widget class="QLineEdit" name="editorialLibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Nombre del impresor o editorial</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="7" column="0">
+                            <widget class="QLabel" name="label_8">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Fecha</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="7" column="1">
+                            <widget class="QLineEdit" name="fechaLibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="placeholderText">
+                              <string>AAAA</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="8" column="0">
+                            <widget class="QLabel" name="tituloLabel_15">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Páginas</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="8" column="1">
+                            <widget class="QLineEdit" name="paginasLibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="placeholderText">
+                              <string>número de páginas</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="9" column="0">
+                            <widget class="QLabel" name="numextLabel_6">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Descripción</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="9" column="1">
+                            <widget class="QPlainTextEdit" name="descripcionLibrolineEdit">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>70</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>250</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">Breve resumen del tema del documento</string>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Breve descripción del libro</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="10" column="0">
+                            <widget class="QLabel" name="identificadoresLabel_9">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Idioma</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="10" column="1">
+                            <widget class="QLineEdit" name="idiomaLibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string>idioma principal del ejemplar</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="11" column="0">
+                            <widget class="QLabel" name="identificadoresLabel_10">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>ISBN</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="11" column="1">
+                            <widget class="QLineEdit" name="isbnLibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string>número estandarizado</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="12" column="0">
+                            <widget class="QLabel" name="identificadoresLabel_11">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Identificadores</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="12" column="1">
+                            <widget class="QLineEdit" name="identificadoresLibrolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="placeholderText">
+                              <string>referencia, índice, número de catalogación...</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="13" column="1">
+                            <widget class="QPushButton" name="enviarFormButton_6">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>100</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>100</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="text">
+                              <string>enviar</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resources.qrc">
+                               <normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
                        </widget>
                       </widget>
                      </item>
@@ -2050,19 +2968,190 @@ border: none;
                           <height>306</height>
                          </rect>
                         </property>
-                        <widget class="QLabel" name="label_5">
-                         <property name="geometry">
-                          <rect>
-                           <x>120</x>
-                           <y>50</y>
-                           <width>251</width>
-                           <height>131</height>
-                          </rect>
-                         </property>
-                         <property name="text">
-                          <string>EN PROCESO</string>
-                         </property>
-                        </widget>
+                        <layout class="QVBoxLayout" name="verticalLayout_17">
+                         <item>
+                          <layout class="QGridLayout" name="gridLayout">
+                           <property name="sizeConstraint">
+                            <enum>QLayout::SetDefaultConstraint</enum>
+                           </property>
+                           <item row="0" column="0">
+                            <widget class="QLabel" name="tituloLabel_17">
+                             <property name="minimumSize">
+                              <size>
+                               <width>121</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Nombre del archivo</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="1" colspan="2">
+                            <widget class="QLineEdit" name="nombrearchivolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string/>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="tituloLabel_18">
+                             <property name="minimumSize">
+                              <size>
+                               <width>121</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Guardar en...</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="1">
+                            <widget class="QLineEdit" name="folderlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>450</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>450</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string/>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="2">
+                            <widget class="QPushButton" name="browserDirButton">
+                             <property name="minimumSize">
+                              <size>
+                               <width>42</width>
+                               <height>42</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>42</width>
+                               <height>42</height>
+                              </size>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">background-color: rgb(225, 225, 225);</string>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resources.qrc">
+                               <normaloff>:/imgs/imgs/icons/black-folder-shape-for-interface.svg</normaloff>:/imgs/imgs/icons/black-folder-shape-for-interface.svg</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="1">
+                            <widget class="QPushButton" name="enviarFormButton_7">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>100</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>100</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="text">
+                              <string>enviar</string>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="resources.qrc">
+                               <normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <spacer name="verticalSpacer_2">
+                           <property name="orientation">
+                            <enum>Qt::Vertical</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>20</width>
+                             <height>40</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
                        </widget>
                       </widget>
                      </item>

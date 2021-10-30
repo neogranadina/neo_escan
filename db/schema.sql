@@ -1,101 +1,90 @@
-/* 
- Modificar estructura para que coincida con el workflow de Spreads
- y luego escalar a partir de allí.
- */
-CREATE TABLE IF NOT EXISTS folios_data (
-	id_folio INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	id_numerico_folio NUMERIC,
-	folio_rov TEXT,
-	raw_img INTEGER NOT NULL,
-	edited_img INTEGER,
-	pic_asociada INTEGER NOT NULL,
-	unidad_documental INTEGER NOT NULL,
-	CONSTRAINT folios_data_FK FOREIGN KEY (pic_asociada) REFERENCES pics_data(id_pic) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT folios_data_FK_1 FOREIGN KEY (unidad_documental) REFERENCES unidad_documental(id_unidad_documental) ON DELETE CASCADE ON UPDATE CASCADE
+BEGIN TRANSACTION;
+DROP TABLE IF EXISTS "elements_metadata";
+CREATE TABLE IF NOT EXISTS "elements_metadata" (
+	"element_metadata_id"	INTEGER NOT NULL,
+	"name"	TEXT,
+	"description"	INTEGER,
+	"URI"	TEXT,
+	PRIMARY KEY("element_metadata_id")
 );
-
-CREATE TABLE IF NOT EXISTS instituciones (
-	id_institucion INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	nombre_institucion TEXT NOT NULL,
-	tipo_institucion TEXT
+DROP TABLE IF EXISTS "document_type";
+CREATE TABLE IF NOT EXISTS "document_type" (
+	"document_type_id"	INTEGER NOT NULL,
+	"name"	TEXT,
+	"description"	TEXT,
+	PRIMARY KEY("document_type_id")
 );
-
-CREATE TABLE IF NOT EXISTS pics_data (
-	id_pic INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	unidad_documental INTEGER NOT NULL,
-	raw_file_path TEXT NOT NULL,
-	mod_file_path TEXT,
-	camara TEXT NOT NULL,
-	filename TEXT NOT NULL,
-	shutter_speed TEXT,
-	valorISO TEXT,
-	apertura TEXT,
-	ts_toma TEXT
+DROP TABLE IF EXISTS "images";
+CREATE TABLE IF NOT EXISTS "images" (
+	"images_id"	INTEGER NOT NULL,
+	"element_id"	INTEGER,
+	"order"	INTEGER,
+	"size"	INTEGER,
+	"mime_type"	TEXT,
+	"filename"	TEXT,
+	"path"	TEXT,
+	"img_ts"	TEXT,
+	"img_modified_ts"	TEXT,
+	"img_metadata"	TEXT,
+	PRIMARY KEY("images_id" AUTOINCREMENT),
+	FOREIGN KEY("element_id") REFERENCES "elements"("element_id")
 );
-
-CREATE TABLE IF NOT EXISTS proyectos (
-	id_proyecto INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	nombre_proyecto TEXT NOT NULL,
-	tipo_proyecto INTEGER NOT NULL,
-	institucion_proyecto INTEGER,
-	ts_creacion_proyecto TEXT NOT NULL,
-	path_proyecto TEXT NOT NULL,
-	cobertura_temporal TEXT,
-	cobertura_espacial TEXT,
-	CONSTRAINT proyectos_FK FOREIGN KEY (tipo_proyecto) REFERENCES tipos_proyecto(id_tipo_proyecto) ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT proyectos_FK_1 FOREIGN KEY (institucion_proyecto) REFERENCES instituciones(id_institucion) ON DELETE CASCADE ON UPDATE CASCADE
+DROP TABLE IF EXISTS "elements";
+CREATE TABLE IF NOT EXISTS "elements" (
+	"element_id"	INTEGER NOT NULL,
+	"document_type"	INTEGER NOT NULL,
+	"element_metadata"	INTEGER NOT NULL,
+	"text"	TEXT,
+	PRIMARY KEY("element_id" AUTOINCREMENT),
+	FOREIGN KEY("document_type") REFERENCES "document_type"("document_type_id"),
+	FOREIGN KEY("element_metadata") REFERENCES "elements_metadata"("element_metadata_id")
 );
-
-CREATE TABLE IF NOT EXISTS tipos_proyecto (
-	id_tipo_proyecto INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	nombre_tipo_proyecto TEXT NOT NULL,
-	descripcion_tipo_proyecto TEXT
+DROP TABLE IF EXISTS "users";
+CREATE TABLE IF NOT EXISTS "users" (
+	"user_id"	INTEGER NOT NULL,
+	"username"	TEXT NOT NULL,
+	"name"	TEXT,
+	"password"	TEXT,
+	"role"	TEXT,
+	PRIMARY KEY("user_id" AUTOINCREMENT)
 );
-
-CREATE TABLE IF NOT EXISTS unidad_documental (
-	id_unidad_documental INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	id_proyecto INTEGER NOT NULL,
-	codigo_referencia TEXT,
-	titulo TEXT NOT NULL,
-	fechas TEXT NOT NULL,
-	CONSTRAINT unidad_documental_FK FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto)
+DROP TABLE IF EXISTS "projects";
+CREATE TABLE IF NOT EXISTS "projects" (
+	"project_id"	INTEGER NOT NULL,
+	"element_id"	INTEGER NOT NULL,
+	"user_id"	INTEGER,
+	"public"	INTEGER,
+	"created_ts"	TEXT,
+	"modified_ts"	TEXT,
+	PRIMARY KEY("project_id" AUTOINCREMENT),
+	FOREIGN KEY("element_id") REFERENCES "elements"("element_id"),
+	FOREIGN KEY("user_id") REFERENCES "users"("user_id")
 );
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (1,'título','un nombre dado al recurso','http://purl.org/dc/terms/title');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (2,'descripción','resumen, índice, representación gráfica, o cualquier texto que de cuenta del recurso
 
-CREATE TABLE IF NOT EXISTS usuarios (
-	id_usuario INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	nombre_usuario TEXT NOT NULL,
-	password TEXT,
-	rol TEXT NOT NULL
-);
+','http://purl.org/dc/terms/description');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (3,'creador','autor, creador o entidad responsable por la hechura del recurso. Un creador puede ser una persona, una organización o un servicio.','http://purl.org/dc/terms/creator');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (4,'fecha','un periodo de tiempo asociado con un evento en la vida del recurso (creación, actualización, finalización)','http://purl.org/dc/terms/date');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (5,'espacio','Ubicación, región o cualquier otra referencia espacial asociada al recurso','http://purl.org/dc/terms/spatial');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (6,'idioma','lenguaje o lenguajes del recurso','http://purl.org/dc/elements/1.1/language');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (7,'folios','folios (hojas) en total del recurso',NULL);
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (8,'páginas','páginas del libro',NULL);
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (9,'identificadores','una referencia precisa del recurso en un contexto determinado (p. ej: catálogo bibliográfico)
 
-CREATE TABLE IF NOT EXISTS usuarios_proyectos (
-	id_relacion_uyp INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	id_proyecto INTEGER NOT NULL,
-	id_usuario INTEGER NOT NULL,
-	CONSTRAINT usuarios_proyectos_FK FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto),
-	CONSTRAINT usuarios_proyectos_FK_1 FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-);
-
-INSERT INTO
-	tipos_proyecto (nombre_tipo_proyecto, descripcion_tipo_proyecto)
-VALUES
-	(
-		"Legajo",
-		"Legajo, expediente, unidad documental compuesta"
-	),
-	("Libro", "Libro, manuscrito, volumen"),
-	(
-		"Publicación seriada",
-		"Revista, periódico, publicación por entregas"
-	),
-	("Gráfico", "Mapa, fotografía, postal, dibujo"),
-	(
-		"Unidad documental simple",
-		"Carta, reporte, hoja suelta"
-	);
-
-/* eliminar instituciones. Es innecesario. */
-INSERT INTO
-	instituciones (nombre_institucion, tipo_institucion)
-VALUES
-	("Institución ficticia", "Dummy institution");
+','http://purl.org/dc/terms/identifier');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (10,'descripción física','corta descripción de las características físicas del objeto','http://purl.org/dc/terms/format');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (11,'tipo imagen','MIME type de la imagen (image/jpg, image/png, image/tiff, image/x-adobe-dng)',NULL);
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (12,'volumen','volumen dentro de un conjunto de libros que compone la obra',NULL);
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (13,'ejemplar','número que corresponde a una publicación seriada. Puede ser único o parte de un volumen',NULL);
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (14,'ISBN','','http://purl.org/dc/terms/bibliographicCitation');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (15,'ISSN',NULL,'http://purl.org/dc/terms/bibliographicCitation');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (16,'Serie',NULL,'http://purl.org/dc/terms/bibliographicCitation');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (17,'edición',NULL,'http://purl.org/dc/terms/bibliographicCitation');
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (18,'editorial','editorial responsable del recurso','http://purl.org/dc/terms/publisher');
+INSERT INTO "document_type" ("document_type_id","name","description") VALUES (1,'legajo','conjunto de documentos en un expediente');
+INSERT INTO "document_type" ("document_type_id","name","description") VALUES (2,'documento','unidad documental simple compuesta de uno o varios folios');
+INSERT INTO "document_type" ("document_type_id","name","description") VALUES (3,'imagen','dibujo o impreso con una representación gráfica, se incluyen dibujos, mapas, banderas, escudos, entre otros');
+INSERT INTO "document_type" ("document_type_id","name","description") VALUES (4,'seriada','periódico o revista');
+INSERT INTO "document_type" ("document_type_id","name","description") VALUES (5,'libro','impresos o manuscritos empastados');
+COMMIT;

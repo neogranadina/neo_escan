@@ -82,8 +82,10 @@ class MainWindow(QMainWindow):
         # Página de colecciones
         widgets.tipodocComboBox.currentIndexChanged.connect(self.indexChange)
 
-        # tomar fotografía
+        # get directorio
+        widgets.browserDirButton.clicked.connect(getDirName)
 
+        # tomar fotografía
         widgets.capturaButton.clicked.connect(self.getCaptura)
 
     # Navegar por las páginas desde el menú principal
@@ -147,67 +149,23 @@ class MainWindow(QMainWindow):
 
     # guarda información en las tabla y fija la ventana en "Escáner"
 
-    def leg_db(self):
-        # comprueba la ruta del proyecto y crea el directorio si no existe y no está en uso
-        # por otro proyecto
-        ubicacion = Path(widgets.rutaLine.text())
-        if not checkDirectorio(ubicacion):
-            if len(os.listdir(ubicacion)) == 0:
-                try:
-                    os.makedirs(ubicacion, exist_ok=True)
-
-                    # recupera el texto de los demás campos del formulario
-
-                    tipo = widgets.tipoColeccion.currentText()
-                    refCode = widgets.codRefLegLine.text()
-                    titulo = widgets.titulLegajo.text()
-                    fechas = widgets.fechasLegLine.text()
-                    alcance = widgets.alcanceLegLine.text()
-
-                    # comprueba que no haya un proyecto con el mismo título
-
-                    if not testProyDuplicados(titulo):
-                        try:
-                            insertInfo(tipo, refCode, titulo,
-                                       fechas, alcance, ubicacion)
-
-                            # mensaje de éxito
-                            msg = QMessageBox()
-                            msg.setText(
-                                f"El proyecto {titulo} fue creado exitosamente")
-                            msg.exec()
-
-                            # Limpia el formulario
-                            widgets.rutaLine.setText("")
-                            widgets.codRefLegLine.setText("")
-                            widgets.titulLegajo.setText("")
-                            widgets.fechasLegLine.setText("")
-                            widgets.alcanceLegLine.setText("")
-
-                            # Muestra la página del escáner y el proyecto correspondiente
-                            widgets.stackedWidget.setCurrentWidget(
-                                widgets.escanerPage)
-                            widgets.proyectData.setText(
-                                regresa_info_proyecto(titulo))
-
-                        # Mensajes de error
-                        except Exception as e:
-                            msg = QMessageBox().warning(
-                                self, "Error desconocido", f"{e}", QMessageBox.Discard)
-                            logger.info(e)
-                    else:
-                        msg = QMessageBox().warning(self, "Posible duplicado",
-                                                    "Ya existe un proyecto con ese título", QMessageBox.Discard)
-                except OSError as error:
-                    msg = QMessageBox().warning(self, "Error al crear el directorio",
-                                                f"{error}", QMessageBox.Discard)
-                    logger.info(error)
-            else:
-                msg = QMessageBox().warning(self, "Error al crear el directorio",
-                                            "El directorio no está vacío", QMessageBox.Discard)
-        else:
-            msg = QMessageBox().warning(self, "Error al crear el directorio",
-                                        "El directorio ya está en uso por otro proyecto", QMessageBox.Discard)
+    def guardarInfo(self):
+        '''
+        save info from metadata page
+        '''
+        # Recupera los datos de la página de metadatos
+        titulo = widgets.tituloLine.text()
+        autor = widgets.autorLine.text()
+        fecha = widgets.fechaLine.text()
+        tipo = widgets.tipodocComboBox.currentText()
+        # Guarda los datos en la base de datos
+        insertInfo(titulo, autor, fecha, tipo)
+        # Limpia los campos
+        widgets.tituloLine.clear()
+        widgets.autorLine.clear()
+        widgets.fechaLine.clear()
+        # Pone la ventana en "Escáner"
+        widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
 
     # Funciones de control de la cámara
 
@@ -220,8 +178,89 @@ class MainWindow(QMainWindow):
                                         "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
             restart()
 
+    def getDirName(self):
+        '''
+        get the directory name
+        '''
+        response = QFileDialog.getExistingDirectory(
+            None, 'Seleccione una carpeta', './')
+        widgets.rutaLine.setText(response)
+
+    def get_fields_info(self, tipo_de_documento):
+        '''
+        get the info for a specific form fields and return a dictionary
+        '''
+        if tipo_de_documento == "Legajo":
+            return {
+                'titulo': widgets.titulolineEdit.text(),
+                'descripción': widgets.descripcionlineEdit.text(),
+                'creador': widgets.creadorlineEdit.text(),
+                'fecha_inicial': widgets.fechaIlineEdit.text(),
+                'fecha_final': widgets.fechaFlineEdit.text(),
+                'cobertura_espacial': widgets.coberturalineEdit.text(),
+                'idioma': widgets.idiomalineEdit.text(),
+                'num_folios': widgets.numfollineEdit.text(),
+                'identificadores': widgets.identificadoreslineEdit.text(),
+            }
+        elif tipo_de_documento == "Documento":
+            return {
+                'titulo': widgets.titulodoclineEdit.text(),
+                'descripción': widgets.descripciondoclineEdit.text(),
+                'creador': widgets.creadordoclineEdit.text(),
+                'fecha_inicial': widgets.fechaIdoclineEdit.text(),
+                'fecha_final': widgets.fechaFdoclineEdit.text(),
+                'cobertura_espacial': widgets.coberturadoclineEdit.text(),
+                'idioma': widgets.idiomadoclineEdit.text(),
+                'num_folios': widgets.numfoliodoclineEdit.text(),
+                'identificadores': widgets.identificadoresdoclineEdit.text(),
+            }
+        elif tipo_de_documento == "Imagen":
+            return {
+                'titulo': widgets.tituloimagenlineEdit.text(),
+                'descripción': widgets.descripcionimagenlineEdit.text(),
+                'creador': widgets.creadorimagenlineEdit.text(),
+                'fecha': widgets.fechaimagenlineEdit.text(),
+                'cobertura_espacial': widgets.coberturaespacialimagenlineEdit.text(),
+                'descripción_física': widgets.descripcionfisicaimagenlineEdit.text(),
+                'tipo': widgets.tipoimagenlineEdit.text(),
+                'identificadores': widgets.identificadoresimagenlineEdit.text(),
+            }
+        elif tipo_de_documento == "Seriada":
+            return {
+                'nombre': widgets.nombreserlineEdit.text(),
+                'volumen': widgets.volumenserlineEdit.text(),
+                'ejemplar': widgets.ejemplarserlineEdit.text(),
+                'fecha': widgets.fechaserlineEdit.text(),
+                'páginas': widgets.paginaserlineEdit.text(),
+                'descripción': widgets.descripcionserlineEdit.text(),
+                'idioma': widgets.idiomaserlineEdit.text(),
+                'issn': widgets.issnserlineEdit.text(),
+                'identificadores': widgets.identificadoreserlineEdit.text(),
+            }
+        elif tipo_de_documento == "Libro":
+            return {
+                'título': widgets.titulolibrolineEdit.text(),
+                'autor': widgets.autorlibrolineEdit.text(),
+                'volumen': widgets.volumelibrolineEdit.text(),
+                'serie': widgets.serieLibrolineEdit.text(),
+                'edición': widgets.edicionLibrolineEdit.text(),
+                'lugar': widgets.lugarLibrolineEdit.text(),
+                'editorial': widgets.editorialLibrolineEdit.text(),
+                'fecha': widgets.fechaLibrolineEdit.text(),
+                'páginas': widgets.paginasLibrolineEdit.text(),
+                'descripción': widgets.descripcionLibrolineEdit.text(),
+                'idioma': widgets.idiomaLibrolineEdit.text(),
+                'isbn': widgets.isbnLibrolineEdit.text(),
+                'identificadores': widgets.identificadoresLibrolineEdit.text(),
+            }
+        elif tipo_de_documento == "Sin tipo":
+            return {
+                'nombre_archivo': widgets.nombrearchivolineEdit.text(),
+                'folder': widgets.folderlineEdit.text(),
+            }
 
 # Fin de las funciones de la aplicación
+
 
 if __name__ == '__main__':
     # crear una aplicación Qt

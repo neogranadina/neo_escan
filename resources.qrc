@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/imgs">
+    <file>imgs/icons/black-folder-shape-for-interface.svg</file>
     <file>imgs/icons/camera.svg</file>
     <file>imgs/icons/documents-rounded-square-symbol.svg</file>
     <file>imgs/icons/folder-check-symbol.svg</file>
