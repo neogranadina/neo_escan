@@ -10,16 +10,15 @@
 import sys
 import logging
 import os
-from pathlib import Path
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QSessionManager
+from PySide2.QtGui import QPixmap, QRegExpValidator
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
-from PySide2.QtCore import QTranslator, QLibraryInfo
+from PySide2.QtCore import QTranslator, QLibraryInfo, QRegExp
 
 from ui_main import Ui_MainWindow
-from db import connectToDatabase, createElement, getLastId, insertInfo
+from db import connectToDatabase, createElement, getLastId, insertInfo, getElementInfo, getLastElementID
 #from camcontrol import Cam
 
 
@@ -95,10 +94,15 @@ class MainWindow(QMainWindow):
         widgets.enviarFormLibroButton.clicked.connect(self.enviarForm)
         widgets.enviarFormSimpleButton.clicked.connect(self.enviarForm)
         widgets.browserDirButton.clicked.connect(self.getDirName)
-        
+
+        # abrir directorio
+        widgets.openFolderButton.clicked.connect(self.openimagesDir)
 
         # tomar fotografía
         widgets.capturaButton.clicked.connect(self.getCaptura)
+        # validar fotografía
+        widgets.validateButton.clicked.connect(self.validateCaptura)
+        widgets.resetButton.clicked.connect(self.resetCaptura)
 
     # navigation functions
 
@@ -113,7 +117,6 @@ class MainWindow(QMainWindow):
         if btnName == "inicioButton":
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
         elif btnName == "backtoInicioButton":
-            # warning message box
             msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Warning)
             msgBox.setText("¿Está seguro que desea salir del formulario?")
@@ -125,21 +128,11 @@ class MainWindow(QMainWindow):
                 widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             else:
                 pass
-            
-            
         elif btnName == "coleccionesButton" or btnName == "nuevoProyectoButton":
             widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
         elif btnName == "escanerButton":
-            widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
-            try:
-                pass
-                # Cam().cam(cams)
-            except IndexError:
-                QMessageBox().warning(self, "Error",
-                                            "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
-                restart()
-
+            self.set_scanner_page()
         elif btnName == "imagenesButton":
             widgets.stackedWidget.setCurrentWidget(widgets.imgsPage)
         elif btnName == "exportarButton":
@@ -337,19 +330,137 @@ class MainWindow(QMainWindow):
             # clean form fields
             self.cleanForm(tipo_de_documento)
 
-            # set current widget to escanerPage
-            widgets.tipoColeccion.setCurrentWidget(widgets.escanerPage)
+            # set and config Scanner Page
+            self.set_scanner_page()
+
+    def openimagesDir(self):
+        '''
+        open images directory from label path
+        '''
+        ruta = widgets.directorio_elementos.text()
+        if sys.platform == 'linux':
+            # works on raspberry pi OS
+            os.system('xdg-open ' + ruta)
+        elif sys.platform == 'win32':
+            # this option is just for development
+            os.startfile(ruta)
+        else:
+            print('No se puede abrir la carpeta')
+
+    def lenImagenesDir(self, folder_path):
+        '''
+        return the number of images in the directory
+        and set the label with the number
+        '''
+        num_imagenes = len(os.listdir(folder_path))
+        widgets.cantidadimgsLabel.setText(str(num_imagenes))
+
+    def set_scanner_page(self):
+        # set current page to escanerPage
+        widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
+
+        # obtener datos para la barra izquierda
+        id_elemento = getLastElementID()
+        datos_elemento = getElementInfo(id_elemento)
+
+        # show data in labels
+        widgets.elementoIDLabel.setText(str(id_elemento))
+        widgets.elementoTituloLabel.setText(datos_elemento[1])
+
+        # create directory to save images
+        if sys.platform == 'linux':
+            folder_path = '/home/pi/neoescan_files' + str(id_elemento)
+        elif sys.platform == 'win32':
+            # opción solo para desarrollo
+            folder_path = '../neoescan_files/' + str(id_elemento)
+
+        try:
+            os.makedirs(folder_path, exist_ok=True)
+        except OSError as e:
+            print(e)
+            raise
+
+        # set folder_path to label
+        widgets.directorio_elementos.setText(os.path.abspath(folder_path))
+
+        self.lenImagenesDir(folder_path)
+
+        try:
+            pass
+            # Cam().cam(cams)
+        except IndexError:
+            QMessageBox().warning(self, "Error",
+                                        "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
+            restart()
 
     # Funciones de control de la cámara
 
     def getCaptura(self):
         try:
-            pass
+            self.lenImagenesDir(widgets.directorio_elementos.text())
             # Cam().captura(cams)
+            # get the last images from the directory
+            # and show it in the label
+
+            # set validator for the lineEdit
+            rx = QRegExp("^[a-zA-Z0-9-_]+$")
+            validator = QRegExpValidator(rx, self)
+
+            widgets.folioizqLineEdit.setValidator(validator)
+            widgets.folioderLineEdit.setValidator(validator)
+
+            # validate if text in folioizqLineEdit match regular expression
+            if widgets.folioizqLineEdit.hasAcceptableInput() and widgets.folioderLineEdit.hasAcceptableInput():
+                left_img_name = widgets.folioizqLineEdit.text() + '.png'
+                right_img_name = widgets.folioderLineEdit.text() + '.png'
+
+                left_img_path = widgets.directorio_elementos.text() + '/' + left_img_name
+                right_img_path = widgets.directorio_elementos.text() + '/' + right_img_name
+
+                widgets.imagenizqLabel.setPixmap(QPixmap(left_img_path))
+                widgets.imagederLabel.setPixmap(QPixmap(right_img_path))
+
+                # display validation buttons
+                widgets.controlesCamstackedWidget.setCurrentWidget(
+                    widgets.validar)
+            else:
+                QMessageBox().warning(self, "Error",
+                                            "El número de los folios solamente puede contener letras, números y guiones", QMessageBox.Ok)
+
         except:
             msg = QMessageBox().warning(self, "Cámaras no disponibles",
                                         "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
             restart()
+
+    def validateCaptura(self):
+        # erase the folio labels
+        widgets.folioizqLineEdit.setText('')
+        widgets.folioderLineEdit.setText('')
+        # erase the images
+        widgets.imagenizqLabel.setPixmap(QPixmap())
+        widgets.imagederLabel.setPixmap(QPixmap())
+        # back to captura widget
+        widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
+
+    def resetCaptura(self):
+        # delete images from directory
+        folder_path = widgets.directorio_elementos.text()
+        leftimage = folder_path + '/' + widgets.folioizqLineEdit.text() + '.png'
+        rightimage = folder_path + '/' + widgets.folioderLineEdit.text() + '.png'
+        try:
+            os.remove(leftimage)
+            os.remove(rightimage)
+        except:
+            pass
+
+        # erase image labels
+        widgets.imagenizqLabel.setPixmap(QPixmap())
+        widgets.imagederLabel.setPixmap(QPixmap())
+
+        # back to capture widget
+        widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
+        self.lenImagenesDir(folder_path)
+
 
 # Fin de las funciones de la aplicación
 

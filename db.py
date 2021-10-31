@@ -79,7 +79,8 @@ def metadata_id(key):
     Get metadata id from metadata table
     '''
     query = QSqlQuery()
-    query.prepare("SELECT element_metadata_id FROM elements_metadata WHERE name = :key")
+    query.prepare(
+        "SELECT element_metadata_id FROM elements_metadata WHERE name = :key")
     query.bindValue(':key', key)
     query.exec_()
     query.first()
@@ -104,3 +105,33 @@ def insertInfo(id_elemento, info):
             logging.error(query.lastError().text())
             return False
     return True
+
+
+def getLastElementID():
+    '''
+    get last element inserted
+    '''
+    # get id from last element inserted
+
+    query = QSqlQuery()
+    query.prepare("SELECT max(element_id) FROM elements")
+    query.exec_()
+    query.first()
+    id_elemento = query.value(0)
+    return id_elemento
+
+
+def getElementInfo(id_elemento):
+    '''
+    get info from last element inserted
+    '''
+
+    query = QSqlQuery()
+    query.prepare(
+        "SELECT element_metadata, text FROM elements_metadata_text WHERE element_id = :element_id")
+    query.bindValue(':element_id', id_elemento)
+    query.exec_()
+    info = {}
+    while query.next():
+        info[query.value(0)] = query.value(1)
+    return info

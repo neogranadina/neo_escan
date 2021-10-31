@@ -1,5 +1,10 @@
 <RCC>
   <qresource prefix="/imgs">
+    <file>imgs/icons/check-sign.svg</file>
+    <file>imgs/icons/undo-circular-arrow.svg</file>
+    <file>imgs/icons/open-black-folder-interface-symbol.svg</file>
+    <file>imgs/icons/label-black-shape-rotated-to-left.svg</file>
+    <file>imgs/icons/list-interface-symbol.svg</file>
     <file>imgs/icons/left-arrowhead-in-a-circle.svg</file>
     <file>imgs/icons/plus-sign.svg</file>
     <file>imgs/icons/black-folder-shape-for-interface.svg</file>

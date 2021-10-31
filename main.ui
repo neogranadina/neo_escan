@@ -511,7 +511,7 @@ Exportar</string>
              <string notr="true"/>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="inicioPage">
              <property name="styleSheet">
@@ -905,7 +905,7 @@ QPushButton#backtoInicioButton::hover {
                     <string notr="true"/>
                    </property>
                    <property name="currentIndex">
-                    <number>4</number>
+                    <number>5</number>
                    </property>
                    <widget class="QWidget" name="formLegajo">
                     <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -3096,8 +3096,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>675</width>
-                          <height>296</height>
+                          <width>677</width>
+                          <height>272</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -3297,6 +3297,9 @@ QPushButton#backtoInicioButton::hover {
              </layout>
             </widget>
             <widget class="QWidget" name="escanerPage">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <property name="spacing">
                <number>0</number>
@@ -3314,58 +3317,10 @@ QPushButton#backtoInicioButton::hover {
                <number>0</number>
               </property>
               <item>
-               <widget class="QWidget" name="controlPanel" native="true">
-                <property name="minimumSize">
-                 <size>
-                  <width>210</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>225</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgba(0, 0, 0, .3);</string>
-                </property>
-                <widget class="QLabel" name="elementoIDLabel">
-                 <property name="geometry">
-                  <rect>
-                   <x>10</x>
-                   <y>10</y>
-                   <width>151</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(255, 255, 255);</string>
-                 </property>
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="elementoTituloLabel">
-                 <property name="geometry">
-                  <rect>
-                   <x>10</x>
-                   <y>40</y>
-                   <width>151</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: rgb(255, 255, 255);</string>
-                 </property>
-                 <property name="text">
-                  <string>TextLabel</string>
-                 </property>
-                </widget>
-               </widget>
-              </item>
-              <item>
                <widget class="QWidget" name="layoutEscan" native="true">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <layout class="QVBoxLayout" name="verticalLayout_3">
                  <property name="spacing">
                   <number>5</number>
@@ -3401,16 +3356,375 @@ QPushButton#backtoInicioButton::hover {
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_6">
                     <item>
-                     <widget class="QGraphicsView" name="leftCamera">
+                     <widget class="QWidget" name="controlPanel" native="true">
+                      <property name="minimumSize">
+                       <size>
+                        <width>210</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>225</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(231, 231, 231);</string>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_18">
+                       <item>
+                        <layout class="QGridLayout" name="gridLayout_2">
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="titulelementoIDLabel">
+                           <property name="enabled">
+                            <bool>true</bool>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>16</width>
+                             <height>16</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>16</width>
+                             <height>16</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <pointsize>10</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="cursor">
+                            <cursorShape>ArrowCursor</cursorShape>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="pixmap">
+                            <pixmap resource="resources.qrc">:/imgs/imgs/icons/list-interface-symbol.svg</pixmap>
+                           </property>
+                           <property name="scaledContents">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="2">
+                          <widget class="QLabel" name="elementoIDLabel">
+                           <property name="minimumSize">
+                            <size>
+                             <width>75</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>190</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="1">
+                          <widget class="QLabel" name="titulelementoTituloLabel_2">
+                           <property name="font">
+                            <font>
+                             <pointsize>10</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                           </property>
+                           <property name="text">
+                            <string>ID elemento</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="titulelementoTituloLabel">
+                         <property name="font">
+                          <font>
+                           <pointsize>10</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                         </property>
+                         <property name="text">
+                          <string>Título</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="elementoTituloLabel">
+                         <property name="minimumSize">
+                          <size>
+                           <width>190</width>
+                           <height>70</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>190</width>
+                           <height>70</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="titulelementoTituloLabel_5">
+                         <property name="font">
+                          <font>
+                           <pointsize>10</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                         </property>
+                         <property name="text">
+                          <string>Directorio imágenes</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <layout class="QGridLayout" name="gridLayout_4">
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="directorio_elementos">
+                           <property name="minimumSize">
+                            <size>
+                             <width>150</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>190</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="1">
+                          <widget class="QPushButton" name="openFolderButton">
+                           <property name="minimumSize">
+                            <size>
+                             <width>42</width>
+                             <height>42</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>42</width>
+                             <height>42</height>
+                            </size>
+                           </property>
+                           <property name="cursor">
+                            <cursorShape>PointingHandCursor</cursorShape>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">QPushButton {
+	border-radius: 5px;
+}
+
+QPushButton::hover {
+	background-color: rgb(182, 182, 182);
+}
+</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="icon">
+                            <iconset resource="resources.qrc">
+                             <normaloff>:/imgs/imgs/icons/open-black-folder-interface-symbol.svg</normaloff>:/imgs/imgs/icons/open-black-folder-interface-symbol.svg</iconset>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>24</width>
+                             <height>24</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QGridLayout" name="gridLayout_5">
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="titulelementoTituloLabel_6">
+                           <property name="font">
+                            <font>
+                             <pointsize>10</pointsize>
+                             <weight>75</weight>
+                             <bold>true</bold>
+                            </font>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+                           </property>
+                           <property name="text">
+                            <string>Número de imgs</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="1">
+                          <widget class="QLabel" name="cantidadimgsLabel">
+                           <property name="minimumSize">
+                            <size>
+                             <width>70</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>70</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QFormLayout" name="formLayout_7">
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="folioIzqLabel">
+                           <property name="text">
+                            <string>folio izq.</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="1">
+                          <widget class="QLineEdit" name="folioizqLineEdit">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
+                           </property>
+                           <property name="placeholderText">
+                            <string># folio recto</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QFormLayout" name="formLayout_8">
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="folioderLabel">
+                           <property name="text">
+                            <string>folio der.</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="1">
+                          <widget class="QLineEdit" name="folioderLineEdit">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
+                           </property>
+                           <property name="placeholderText">
+                            <string># folio verso</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="imagenizqLabel">
+                      <property name="minimumSize">
+                       <size>
+                        <width>200</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="styleSheet">
                        <string notr="true">background-color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="scaledContents">
+                       <bool>true</bool>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QGraphicsView" name="rightCamera">
+                     <widget class="QLabel" name="imagederLabel">
+                      <property name="minimumSize">
+                       <size>
+                        <width>200</width>
+                        <height>0</height>
+                       </size>
+                      </property>
                       <property name="styleSheet">
                        <string notr="true">background-color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                      <property name="scaledContents">
+                       <bool>true</bool>
                       </property>
                      </widget>
                     </item>
@@ -3447,67 +3761,162 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_7">
                     <item>
-                     <spacer name="horizontalSpacer_2">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>165</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="capturaButton">
+                     <widget class="QStackedWidget" name="controlesCamstackedWidget">
                       <property name="minimumSize">
                        <size>
-                        <width>120</width>
-                        <height>35</height>
+                        <width>200</width>
+                        <height>0</height>
                        </size>
                       </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>35</height>
-                       </size>
+                      <property name="currentIndex">
+                       <number>0</number>
                       </property>
-                      <property name="font">
-                       <font>
-                        <pointsize>11</pointsize>
-                       </font>
-                      </property>
-                      <property name="cursor">
-                       <cursorShape>PointingHandCursor</cursorShape>
-                      </property>
-                      <property name="text">
-                       <string>capturar</string>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="resources.qrc">
-                        <normaloff>:/imgs/imgs/icons/camera-to-take-photos_black.svg</normaloff>:/imgs/imgs/icons/camera-to-take-photos_black.svg</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>32</width>
-                        <height>32</height>
-                       </size>
-                      </property>
+                      <widget class="QWidget" name="captura">
+                       <layout class="QHBoxLayout" name="horizontalLayout_10">
+                        <item>
+                         <spacer name="horizontalSpacer_3">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="capturaButton">
+                          <property name="minimumSize">
+                           <size>
+                            <width>120</width>
+                            <height>35</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>35</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>11</pointsize>
+                           </font>
+                          </property>
+                          <property name="cursor">
+                           <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="text">
+                           <string>capturar</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="resources.qrc">
+                            <normaloff>:/imgs/imgs/icons/camera-to-take-photos_black.svg</normaloff>:/imgs/imgs/icons/camera-to-take-photos_black.svg</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>32</width>
+                            <height>32</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                      <widget class="QWidget" name="validar">
+                       <layout class="QHBoxLayout" name="horizontalLayout_11">
+                        <item>
+                         <spacer name="horizontalSpacer_2">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="validateButton">
+                          <property name="minimumSize">
+                           <size>
+                            <width>120</width>
+                            <height>35</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>35</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>11</pointsize>
+                           </font>
+                          </property>
+                          <property name="cursor">
+                           <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="text">
+                           <string>validar</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="resources.qrc">
+                            <normaloff>:/imgs/imgs/icons/check-sign.svg</normaloff>:/imgs/imgs/icons/check-sign.svg</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>32</width>
+                            <height>32</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="resetButton">
+                          <property name="minimumSize">
+                           <size>
+                            <width>120</width>
+                            <height>35</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>35</height>
+                           </size>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>11</pointsize>
+                           </font>
+                          </property>
+                          <property name="cursor">
+                           <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="text">
+                           <string>retomar</string>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="resources.qrc">
+                            <normaloff>:/imgs/imgs/icons/undo-circular-arrow.svg</normaloff>:/imgs/imgs/icons/undo-circular-arrow.svg</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>32</width>
+                            <height>32</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
                      </widget>
-                    </item>
-                    <item>
-                     <spacer name="horizontalSpacer_3">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>164</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
                     </item>
                    </layout>
                   </widget>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainomEmwo.ui'
+## Form generated from reading UI file 'mainvDuakj.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.5
 ##
@@ -1294,7 +1294,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 675, 296))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 677, 272))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.gridLayout = QGridLayout()
@@ -1377,28 +1377,14 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.metadataPage)
         self.escanerPage = QWidget()
         self.escanerPage.setObjectName(u"escanerPage")
+        self.escanerPage.setStyleSheet(u"")
         self.horizontalLayout_5 = QHBoxLayout(self.escanerPage)
         self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.controlPanel = QWidget(self.escanerPage)
-        self.controlPanel.setObjectName(u"controlPanel")
-        self.controlPanel.setMinimumSize(QSize(210, 0))
-        self.controlPanel.setMaximumSize(QSize(225, 16777215))
-        self.controlPanel.setStyleSheet(u"background-color: rgba(0, 0, 0, .3);")
-        self.elementoIDLabel = QLabel(self.controlPanel)
-        self.elementoIDLabel.setObjectName(u"elementoIDLabel")
-        self.elementoIDLabel.setGeometry(QRect(10, 10, 151, 21))
-        self.elementoIDLabel.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-        self.elementoTituloLabel = QLabel(self.controlPanel)
-        self.elementoTituloLabel.setObjectName(u"elementoTituloLabel")
-        self.elementoTituloLabel.setGeometry(QRect(10, 40, 151, 21))
-        self.elementoTituloLabel.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-
-        self.horizontalLayout_5.addWidget(self.controlPanel)
-
         self.layoutEscan = QWidget(self.escanerPage)
         self.layoutEscan.setObjectName(u"layoutEscan")
+        self.layoutEscan.setStyleSheet(u"")
         self.verticalLayout_3 = QVBoxLayout(self.layoutEscan)
         self.verticalLayout_3.setSpacing(5)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -1411,17 +1397,184 @@ class Ui_MainWindow(object):
         self.widget_2.setStyleSheet(u"background-color: transparent;")
         self.horizontalLayout_6 = QHBoxLayout(self.widget_2)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.leftCamera = QGraphicsView(self.widget_2)
-        self.leftCamera.setObjectName(u"leftCamera")
-        self.leftCamera.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.controlPanel = QWidget(self.widget_2)
+        self.controlPanel.setObjectName(u"controlPanel")
+        self.controlPanel.setMinimumSize(QSize(210, 0))
+        self.controlPanel.setMaximumSize(QSize(225, 16777215))
+        self.controlPanel.setStyleSheet(u"background-color: rgb(231, 231, 231);")
+        self.verticalLayout_18 = QVBoxLayout(self.controlPanel)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.gridLayout_2 = QGridLayout()
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.titulelementoIDLabel = QLabel(self.controlPanel)
+        self.titulelementoIDLabel.setObjectName(u"titulelementoIDLabel")
+        self.titulelementoIDLabel.setEnabled(True)
+        self.titulelementoIDLabel.setMinimumSize(QSize(16, 16))
+        self.titulelementoIDLabel.setMaximumSize(QSize(16, 16))
+        font5 = QFont()
+        font5.setPointSize(10)
+        font5.setBold(True)
+        font5.setWeight(75)
+        self.titulelementoIDLabel.setFont(font5)
+        self.titulelementoIDLabel.setCursor(QCursor(Qt.ArrowCursor))
+        self.titulelementoIDLabel.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
+        self.titulelementoIDLabel.setPixmap(QPixmap(u":/imgs/imgs/icons/list-interface-symbol.svg"))
+        self.titulelementoIDLabel.setScaledContents(True)
 
-        self.horizontalLayout_6.addWidget(self.leftCamera)
+        self.gridLayout_2.addWidget(self.titulelementoIDLabel, 0, 0, 1, 1)
 
-        self.rightCamera = QGraphicsView(self.widget_2)
-        self.rightCamera.setObjectName(u"rightCamera")
-        self.rightCamera.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.elementoIDLabel = QLabel(self.controlPanel)
+        self.elementoIDLabel.setObjectName(u"elementoIDLabel")
+        self.elementoIDLabel.setMinimumSize(QSize(75, 25))
+        self.elementoIDLabel.setMaximumSize(QSize(190, 25))
+        self.elementoIDLabel.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius: 5px;")
 
-        self.horizontalLayout_6.addWidget(self.rightCamera)
+        self.gridLayout_2.addWidget(self.elementoIDLabel, 0, 2, 1, 1)
+
+        self.titulelementoTituloLabel_2 = QLabel(self.controlPanel)
+        self.titulelementoTituloLabel_2.setObjectName(u"titulelementoTituloLabel_2")
+        self.titulelementoTituloLabel_2.setFont(font5)
+        self.titulelementoTituloLabel_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
+
+        self.gridLayout_2.addWidget(self.titulelementoTituloLabel_2, 0, 1, 1, 1)
+
+
+        self.verticalLayout_18.addLayout(self.gridLayout_2)
+
+        self.titulelementoTituloLabel = QLabel(self.controlPanel)
+        self.titulelementoTituloLabel.setObjectName(u"titulelementoTituloLabel")
+        self.titulelementoTituloLabel.setFont(font5)
+        self.titulelementoTituloLabel.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
+
+        self.verticalLayout_18.addWidget(self.titulelementoTituloLabel)
+
+        self.elementoTituloLabel = QLabel(self.controlPanel)
+        self.elementoTituloLabel.setObjectName(u"elementoTituloLabel")
+        self.elementoTituloLabel.setMinimumSize(QSize(190, 70))
+        self.elementoTituloLabel.setMaximumSize(QSize(190, 70))
+        self.elementoTituloLabel.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius: 5px;")
+        self.elementoTituloLabel.setWordWrap(True)
+
+        self.verticalLayout_18.addWidget(self.elementoTituloLabel)
+
+        self.titulelementoTituloLabel_5 = QLabel(self.controlPanel)
+        self.titulelementoTituloLabel_5.setObjectName(u"titulelementoTituloLabel_5")
+        self.titulelementoTituloLabel_5.setFont(font5)
+        self.titulelementoTituloLabel_5.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
+
+        self.verticalLayout_18.addWidget(self.titulelementoTituloLabel_5)
+
+        self.gridLayout_4 = QGridLayout()
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.directorio_elementos = QLabel(self.controlPanel)
+        self.directorio_elementos.setObjectName(u"directorio_elementos")
+        self.directorio_elementos.setMinimumSize(QSize(150, 25))
+        self.directorio_elementos.setMaximumSize(QSize(190, 25))
+        self.directorio_elementos.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius: 5px;")
+
+        self.gridLayout_4.addWidget(self.directorio_elementos, 0, 0, 1, 1)
+
+        self.openFolderButton = QPushButton(self.controlPanel)
+        self.openFolderButton.setObjectName(u"openFolderButton")
+        self.openFolderButton.setMinimumSize(QSize(42, 42))
+        self.openFolderButton.setMaximumSize(QSize(42, 42))
+        self.openFolderButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.openFolderButton.setStyleSheet(u"QPushButton {\n"
+"	border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"	background-color: rgb(182, 182, 182);\n"
+"}\n"
+"")
+        icon11 = QIcon()
+        icon11.addFile(u":/imgs/imgs/icons/open-black-folder-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.openFolderButton.setIcon(icon11)
+        self.openFolderButton.setIconSize(QSize(24, 24))
+
+        self.gridLayout_4.addWidget(self.openFolderButton, 0, 1, 1, 1)
+
+
+        self.verticalLayout_18.addLayout(self.gridLayout_4)
+
+        self.gridLayout_5 = QGridLayout()
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.titulelementoTituloLabel_6 = QLabel(self.controlPanel)
+        self.titulelementoTituloLabel_6.setObjectName(u"titulelementoTituloLabel_6")
+        self.titulelementoTituloLabel_6.setFont(font5)
+        self.titulelementoTituloLabel_6.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
+
+        self.gridLayout_5.addWidget(self.titulelementoTituloLabel_6, 0, 0, 1, 1)
+
+        self.cantidadimgsLabel = QLabel(self.controlPanel)
+        self.cantidadimgsLabel.setObjectName(u"cantidadimgsLabel")
+        self.cantidadimgsLabel.setMinimumSize(QSize(70, 25))
+        self.cantidadimgsLabel.setMaximumSize(QSize(70, 25))
+        self.cantidadimgsLabel.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius: 5px;")
+
+        self.gridLayout_5.addWidget(self.cantidadimgsLabel, 0, 1, 1, 1)
+
+
+        self.verticalLayout_18.addLayout(self.gridLayout_5)
+
+        self.formLayout_7 = QFormLayout()
+        self.formLayout_7.setObjectName(u"formLayout_7")
+        self.folioIzqLabel = QLabel(self.controlPanel)
+        self.folioIzqLabel.setObjectName(u"folioIzqLabel")
+
+        self.formLayout_7.setWidget(0, QFormLayout.LabelRole, self.folioIzqLabel)
+
+        self.folioizqLineEdit = QLineEdit(self.controlPanel)
+        self.folioizqLineEdit.setObjectName(u"folioizqLineEdit")
+        self.folioizqLineEdit.setMinimumSize(QSize(0, 25))
+        self.folioizqLineEdit.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius: 5px;")
+
+        self.formLayout_7.setWidget(0, QFormLayout.FieldRole, self.folioizqLineEdit)
+
+
+        self.verticalLayout_18.addLayout(self.formLayout_7)
+
+        self.formLayout_8 = QFormLayout()
+        self.formLayout_8.setObjectName(u"formLayout_8")
+        self.folioderLabel = QLabel(self.controlPanel)
+        self.folioderLabel.setObjectName(u"folioderLabel")
+
+        self.formLayout_8.setWidget(0, QFormLayout.LabelRole, self.folioderLabel)
+
+        self.folioderLineEdit = QLineEdit(self.controlPanel)
+        self.folioderLineEdit.setObjectName(u"folioderLineEdit")
+        self.folioderLineEdit.setMinimumSize(QSize(0, 25))
+        self.folioderLineEdit.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius: 5px;")
+
+        self.formLayout_8.setWidget(0, QFormLayout.FieldRole, self.folioderLineEdit)
+
+
+        self.verticalLayout_18.addLayout(self.formLayout_8)
+
+
+        self.horizontalLayout_6.addWidget(self.controlPanel)
+
+        self.imagenizqLabel = QLabel(self.widget_2)
+        self.imagenizqLabel.setObjectName(u"imagenizqLabel")
+        self.imagenizqLabel.setMinimumSize(QSize(200, 0))
+        self.imagenizqLabel.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.imagenizqLabel.setScaledContents(True)
+
+        self.horizontalLayout_6.addWidget(self.imagenizqLabel)
+
+        self.imagederLabel = QLabel(self.widget_2)
+        self.imagederLabel.setObjectName(u"imagederLabel")
+        self.imagederLabel.setMinimumSize(QSize(200, 0))
+        self.imagederLabel.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.imagederLabel.setScaledContents(True)
+
+        self.horizontalLayout_6.addWidget(self.imagederLabel)
 
 
         self.verticalLayout_3.addWidget(self.widget_2)
@@ -1444,28 +1597,70 @@ class Ui_MainWindow(object):
 "QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}")
         self.horizontalLayout_7 = QHBoxLayout(self.captureControl)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.horizontalSpacer_2 = QSpacerItem(165, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.controlesCamstackedWidget = QStackedWidget(self.captureControl)
+        self.controlesCamstackedWidget.setObjectName(u"controlesCamstackedWidget")
+        self.controlesCamstackedWidget.setMinimumSize(QSize(200, 0))
+        self.captura = QWidget()
+        self.captura.setObjectName(u"captura")
+        self.horizontalLayout_10 = QHBoxLayout(self.captura)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout_7.addItem(self.horizontalSpacer_2)
+        self.horizontalLayout_10.addItem(self.horizontalSpacer_3)
 
-        self.capturaButton = QPushButton(self.captureControl)
+        self.capturaButton = QPushButton(self.captura)
         self.capturaButton.setObjectName(u"capturaButton")
         self.capturaButton.setMinimumSize(QSize(120, 35))
         self.capturaButton.setMaximumSize(QSize(16777215, 35))
-        font5 = QFont()
-        font5.setPointSize(11)
-        self.capturaButton.setFont(font5)
+        font6 = QFont()
+        font6.setPointSize(11)
+        self.capturaButton.setFont(font6)
         self.capturaButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon11 = QIcon()
-        icon11.addFile(u":/imgs/imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.capturaButton.setIcon(icon11)
+        icon12 = QIcon()
+        icon12.addFile(u":/imgs/imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.capturaButton.setIcon(icon12)
         self.capturaButton.setIconSize(QSize(32, 32))
 
-        self.horizontalLayout_7.addWidget(self.capturaButton)
+        self.horizontalLayout_10.addWidget(self.capturaButton)
 
-        self.horizontalSpacer_3 = QSpacerItem(164, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.controlesCamstackedWidget.addWidget(self.captura)
+        self.validar = QWidget()
+        self.validar.setObjectName(u"validar")
+        self.horizontalLayout_11 = QHBoxLayout(self.validar)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout_7.addItem(self.horizontalSpacer_3)
+        self.horizontalLayout_11.addItem(self.horizontalSpacer_2)
+
+        self.validateButton = QPushButton(self.validar)
+        self.validateButton.setObjectName(u"validateButton")
+        self.validateButton.setMinimumSize(QSize(120, 35))
+        self.validateButton.setMaximumSize(QSize(16777215, 35))
+        self.validateButton.setFont(font6)
+        self.validateButton.setCursor(QCursor(Qt.PointingHandCursor))
+        icon13 = QIcon()
+        icon13.addFile(u":/imgs/imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.validateButton.setIcon(icon13)
+        self.validateButton.setIconSize(QSize(32, 32))
+
+        self.horizontalLayout_11.addWidget(self.validateButton)
+
+        self.resetButton = QPushButton(self.validar)
+        self.resetButton.setObjectName(u"resetButton")
+        self.resetButton.setMinimumSize(QSize(120, 35))
+        self.resetButton.setMaximumSize(QSize(16777215, 35))
+        self.resetButton.setFont(font6)
+        self.resetButton.setCursor(QCursor(Qt.PointingHandCursor))
+        icon14 = QIcon()
+        icon14.addFile(u":/imgs/imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.resetButton.setIcon(icon14)
+        self.resetButton.setIconSize(QSize(32, 32))
+
+        self.horizontalLayout_11.addWidget(self.resetButton)
+
+        self.controlesCamstackedWidget.addWidget(self.validar)
+
+        self.horizontalLayout_7.addWidget(self.controlesCamstackedWidget)
 
 
         self.verticalLayout_3.addWidget(self.captureControl)
@@ -1547,8 +1742,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
-        self.tipoColeccion.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(2)
+        self.tipoColeccion.setCurrentIndex(5)
+        self.controlesCamstackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1703,9 +1899,25 @@ class Ui_MainWindow(object):
         self.folderlineEdit.setPlaceholderText("")
         self.browserDirButton.setText("")
         self.enviarFormSimpleButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
-        self.elementoIDLabel.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.elementoTituloLabel.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.titulelementoIDLabel.setText("")
+        self.elementoIDLabel.setText("")
+        self.titulelementoTituloLabel_2.setText(QCoreApplication.translate("MainWindow", u"ID elemento", None))
+        self.titulelementoTituloLabel.setText(QCoreApplication.translate("MainWindow", u"T\u00edtulo", None))
+        self.elementoTituloLabel.setText("")
+        self.titulelementoTituloLabel_5.setText(QCoreApplication.translate("MainWindow", u"Directorio im\u00e1genes", None))
+        self.directorio_elementos.setText("")
+        self.openFolderButton.setText("")
+        self.titulelementoTituloLabel_6.setText(QCoreApplication.translate("MainWindow", u"N\u00famero de imgs", None))
+        self.cantidadimgsLabel.setText("")
+        self.folioIzqLabel.setText(QCoreApplication.translate("MainWindow", u"folio izq.", None))
+        self.folioizqLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"# folio recto", None))
+        self.folioderLabel.setText(QCoreApplication.translate("MainWindow", u"folio der.", None))
+        self.folioderLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"# folio verso", None))
+        self.imagenizqLabel.setText("")
+        self.imagederLabel.setText("")
         self.capturaButton.setText(QCoreApplication.translate("MainWindow", u"capturar", None))
+        self.validateButton.setText(QCoreApplication.translate("MainWindow", u"validar", None))
+        self.resetButton.setText(QCoreApplication.translate("MainWindow", u"retomar", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"IM\u00c1GENES", None))
         self.c_neogranadina.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><a href=\"https://neogranadina.org/\" target=\"_blank\"><span style=\" font-size:7pt; text-decoration: underline;color:rgba(251,251,251,.8)\">\u00a9 2021 Fundaci\u00f3n Hist\u00f3rica Neogranadina</span></a></body></html>", None))
         self.down_arrow.setText("")
