@@ -14,7 +14,7 @@ from locale import getdefaultlocale
 from PySide2 import QtCore
 from PySide2.QtGui import QPixmap, QRegExpValidator
 
-from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
+from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QFormLayout
 from PySide2.QtCore import QTranslator, QLibraryInfo, QRegExp
 
 from ui_main import Ui_MainWindow
@@ -77,6 +77,28 @@ class MainWindow(QMainWindow):
 
         # Seleccionar página de inicio
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+
+        # create table to display elements data
+
+        widgets.elementslayout = QFormLayout()
+        widgets.elementslayout.setVerticalSpacing(10)
+        widgets.elementslayout.setHorizontalSpacing(0)
+        widgets.elementslayout.setContentsMargins(0, 0, 0, 0)
+        widgets.elementslayout.setObjectName("elementslayout")
+
+        for i in range(50):
+            widgets.elabel1 = QLabel(widgets.scrollAreaWidgetContents_2)
+            widgets.elabel1.setObjectName(f"elabel{i}")
+            widgets.elabel1.setText(f"{i}")
+            widgets.elementslayout.setWidget(i, QFormLayout.LabelRole, widgets.elabel1)
+            #widgets.elabel1.setGeometry(QtCore.QRect(10, 10 + i * 30, 20, 20))
+            widgets.elabel1.setStyleSheet("background-color: rgb(255, 255, 255);")
+            widgets.elabel1.setAlignment(QtCore.Qt.AlignCenter)
+            widgets.elabel1.setVisible(True)
+        
+        widgets.verticalLayout_20.addLayout(widgets.elementslayout)
+
+
 
         # Botón nuevo proyecto
         widgets.nuevoProyectoButton.clicked.connect(self.buttonClick)
@@ -171,10 +193,69 @@ class MainWindow(QMainWindow):
 
     # Forms de metadatos
 
+    def requiredFields(self, tipo_documento):
+        '''
+        check if fields are empty and return error
+        '''
+        if tipo_documento == 1:
+            if widgets.titulolineEdit.text() == "":
+                QMessageBox().warning(self, "Error",
+                                      "El campo Título no puede estar vacío.", QMessageBox.Discard)
+                widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
+                return False
+            else:
+                return True
+        elif tipo_documento == 2:
+            if widgets.titulodoclineEdit.text() == "":
+                QMessageBox().warning(self, "Error",
+                                      "El campo Título no puede estar vacío.", QMessageBox.Discard)
+                widgets.tipoColeccion.setCurrentWidget(widgets.formDocumento)
+                return False
+            else:
+                return True
+        elif tipo_documento == 3:
+            if widgets.tituloimagenlineEdit.text() == "":
+                QMessageBox().warning(self, "Error",
+                                      "El campo Título no puede estar vacío.", QMessageBox.Discard)
+                widgets.tipoColeccion.setCurrentWidget(widgets.formImagen)
+                return False
+            else:
+                return True
+        elif tipo_documento == 4:
+            if widgets.nombreserlineEdit.text() == "":
+                QMessageBox().warning(self, "Error",
+                                      "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
+                widgets.tipoColeccion.setCurrentWidget(widgets.formSeriada)
+                return False
+            else:
+                return True
+        elif tipo_documento == 5:
+            if widgets.titulolibrolineEdit.text() == "":
+                QMessageBox().warning(self, "Error",
+                                      "El campo Título no puede estar vacío.", QMessageBox.Discard)
+                widgets.tipoColeccion.setCurrentWidget(widgets.formLibro)
+                return False
+            else:
+                return True
+        elif tipo_documento == 6:
+            if widgets.nombrearchivolineEdit.text() == "":
+                QMessageBox().warning(self, "Error",
+                                      "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
+                widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
+                return False
+            elif widgets.folderlineEdit.text() == "":
+                QMessageBox().warning(self, "Error",
+                                      "El campo Directorio no puede estar vacío.", QMessageBox.Discard)
+                widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
+                return False
+            else:
+                return True
+
     def get_fields_info(self, tipo_de_documento):
         '''
         get the info for a specific form fields and return a dictionary
         '''
+
         if tipo_de_documento == 1:
             return {
                 'título': widgets.titulolineEdit.text(),
@@ -314,24 +395,28 @@ class MainWindow(QMainWindow):
         envia el formulario a la base de datos
         '''
         tipo_de_documento = widgets.tipodocComboBox.currentIndex() + 1
-        # create element
-        if not tipo_de_documento == 6:
-            createElement(tipo_de_documento, 0, 1)
 
-            # get the id of last element created
-            id_element = getLastId()
+        # validate required items
+        if self.requiredFields(tipo_de_documento):
+            # create element
+            if not tipo_de_documento == 6:
+                print("creando docu")
+                createElement(tipo_de_documento, 0, 1)
 
-            # get the info for the form fields
-            info = self.get_fields_info(tipo_de_documento)
+                # get the id of last element created
+                id_element = getLastId()
 
-            # insert the info into the database
-            insertInfo(id_element, info)
+                # get the info for the form fields
+                info = self.get_fields_info(tipo_de_documento)
 
-            # clean form fields
-            self.cleanForm(tipo_de_documento)
+                # insert the info into the database
+                insertInfo(id_element, info)
 
-            # set and config Scanner Page
-            self.set_scanner_page()
+                # clean form fields
+                self.cleanForm(tipo_de_documento)
+
+                # set and config Scanner Page
+                self.set_scanner_page()
 
     def openimagesDir(self):
         '''

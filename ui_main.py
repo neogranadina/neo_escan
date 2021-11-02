@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainvDuakj.ui'
+## Form generated from reading UI file 'mainjMSock.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.5
 ##
@@ -215,16 +215,13 @@ class Ui_MainWindow(object):
 "	border: none;\n"
 "}\n"
 "")
-        self.label = QLabel(self.inicioPage)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(30, 70, 591, 281))
-        self.widget = QWidget(self.inicioPage)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(450, 10, 254, 42))
-        self.formLayout_6 = QFormLayout(self.widget)
+        self.verticalLayout_19 = QVBoxLayout(self.inicioPage)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.formLayout_6 = QFormLayout()
         self.formLayout_6.setObjectName(u"formLayout_6")
-        self.formLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.label_2 = QLabel(self.widget)
+        self.formLayout_6.setLabelAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.formLayout_6.setFormAlignment(Qt.AlignRight|Qt.AlignTop|Qt.AlignTrailing)
+        self.label_2 = QLabel(self.inicioPage)
         self.label_2.setObjectName(u"label_2")
         font1 = QFont()
         font1.setPointSize(12)
@@ -234,7 +231,7 @@ class Ui_MainWindow(object):
 
         self.formLayout_6.setWidget(0, QFormLayout.LabelRole, self.label_2)
 
-        self.nuevoProyectoButton = QPushButton(self.widget)
+        self.nuevoProyectoButton = QPushButton(self.inicioPage)
         self.nuevoProyectoButton.setObjectName(u"nuevoProyectoButton")
         self.nuevoProyectoButton.setMinimumSize(QSize(40, 40))
         self.nuevoProyectoButton.setMaximumSize(QSize(40, 40))
@@ -245,6 +242,22 @@ class Ui_MainWindow(object):
         self.nuevoProyectoButton.setIconSize(QSize(20, 20))
 
         self.formLayout_6.setWidget(0, QFormLayout.FieldRole, self.nuevoProyectoButton)
+
+
+        self.verticalLayout_19.addLayout(self.formLayout_6)
+
+        self.scrollArea_7 = QScrollArea(self.inicioPage)
+        self.scrollArea_7.setObjectName(u"scrollArea_7")
+        self.scrollArea_7.setStyleSheet(u"background-color: rgb(85, 255, 127);")
+        self.scrollArea_7.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_2 = QWidget()
+        self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 677, 334))
+        self.verticalLayout_20 = QVBoxLayout(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.scrollArea_7.setWidget(self.scrollAreaWidgetContents_2)
+
+        self.verticalLayout_19.addWidget(self.scrollArea_7)
 
         self.stackedWidget.addWidget(self.inicioPage)
         self.metadataPage = QWidget()
@@ -293,13 +306,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.widget1 = QWidget(self.metadataPage)
-        self.widget1.setObjectName(u"widget1")
-        self.verticalLayout = QVBoxLayout(self.widget1)
+        self.widget = QWidget(self.metadataPage)
+        self.widget.setObjectName(u"widget")
+        self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.headerMetadatos = QFrame(self.widget1)
+        self.headerMetadatos = QFrame(self.widget)
         self.headerMetadatos.setObjectName(u"headerMetadatos")
         self.headerMetadatos.setMinimumSize(QSize(0, 65))
         self.headerMetadatos.setStyleSheet(u"QPushButton#backtoInicioButton {\n"
@@ -347,7 +360,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.headerMetadatos)
 
-        self.formChanger = QWidget(self.widget1)
+        self.formChanger = QWidget(self.widget)
         self.formChanger.setObjectName(u"formChanger")
         self.formChanger.setMinimumSize(QSize(0, 45))
         self.formChanger.setStyleSheet(u"")
@@ -397,7 +410,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.formChanger)
 
-        self.tipoColeccion = QStackedWidget(self.widget1)
+        self.tipoColeccion = QStackedWidget(self.widget)
         self.tipoColeccion.setObjectName(u"tipoColeccion")
         self.tipoColeccion.setStyleSheet(u"")
         self.formLegajo = QWidget()
@@ -410,7 +423,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -166, 660, 468))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 633, 468))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.formLayout = QFormLayout()
@@ -583,7 +596,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -144, 660, 450))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 633, 450))
         self.scrollAreaWidgetContents_3.setStyleSheet(u"")
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
@@ -749,7 +762,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, -104, 660, 410))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 633, 410))
         self.scrollAreaWidgetContents_4.setStyleSheet(u"")
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
@@ -903,7 +916,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, -144, 660, 450))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 638, 450))
         self.verticalLayout_15 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.formLayout_2 = QFormLayout()
@@ -1070,7 +1083,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 660, 610))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 610, 610))
         self.verticalLayout_16 = QVBoxLayout(self.scrollAreaWidgetContents_6)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.formLayout_5 = QFormLayout()
@@ -1372,7 +1385,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.tipoColeccion)
 
 
-        self.verticalLayout_4.addWidget(self.widget1)
+        self.verticalLayout_4.addWidget(self.widget)
 
         self.stackedWidget.addWidget(self.metadataPage)
         self.escanerPage = QWidget()
@@ -1742,7 +1755,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         self.tipoColeccion.setCurrentIndex(5)
         self.controlesCamstackedWidget.setCurrentIndex(0)
 
@@ -1769,7 +1782,6 @@ class Ui_MainWindow(object):
         self.exportarButton.setText(QCoreApplication.translate("MainWindow", u"\n"
 "\n"
 "Exportar", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"espacio para mostrar din\u00e1micamente los elementos disponibles en esta instalaci\u00f3n", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Iniciar nuevo proyecto", None))
         self.nuevoProyectoButton.setText("")
         self.H1metadatosLabel.setText(QCoreApplication.translate("MainWindow", u"Metadatos", None))
