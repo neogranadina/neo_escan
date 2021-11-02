@@ -10,6 +10,7 @@
 import sys
 import logging
 import os
+from pathlib import Path
 from locale import getdefaultlocale
 from PySide2 import QtCore
 from PySide2.QtGui import QPixmap, QRegExpValidator
@@ -18,7 +19,7 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBo
 from PySide2.QtCore import QTranslator, QLibraryInfo, QRegExp
 
 from ui_main import Ui_MainWindow
-from db import connectToDatabase, createElement, getLastId, insertInfo, getElementInfo, getLastElementID
+from db import connectToDatabase, createElement, getLastId, insertInfo, getElementInfo, getLastElementID, getElementData
 #from camcontrol import Cam
 
 
@@ -78,7 +79,9 @@ class MainWindow(QMainWindow):
         # Seleccionar página de inicio
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
 
-        # create table to display elements data
+        # display elements in home page
+
+        elementos = getElementData()
 
         widgets.elementslayout = QFormLayout()
         widgets.elementslayout.setVerticalSpacing(10)
@@ -86,19 +89,41 @@ class MainWindow(QMainWindow):
         widgets.elementslayout.setContentsMargins(0, 0, 0, 0)
         widgets.elementslayout.setObjectName("elementslayout")
 
-        for i in range(50):
+        for i in range(32):
             widgets.elabel1 = QLabel(widgets.scrollAreaWidgetContents_2)
             widgets.elabel1.setObjectName(f"elabel{i}")
             widgets.elabel1.setText(f"{i}")
-            widgets.elementslayout.setWidget(i, QFormLayout.LabelRole, widgets.elabel1)
+            widgets.elementslayout.setWidget(
+                i, QFormLayout.LabelRole, widgets.elabel1)
             #widgets.elabel1.setGeometry(QtCore.QRect(10, 10 + i * 30, 20, 20))
-            widgets.elabel1.setStyleSheet("background-color: rgb(255, 255, 255);")
+            widgets.elabel1.setStyleSheet(
+                "background-color: rgb(255, 255, 255);")
             widgets.elabel1.setAlignment(QtCore.Qt.AlignCenter)
             widgets.elabel1.setVisible(True)
-        
+
+            image_path = Path("../neoescan_files/" + f'{i + 1}')
+            print(image_path)
+            try:
+                listado_imgs = os.listdir(image_path)[0]
+                img_path = os.path.join(image_path, listado_imgs)
+            except FileNotFoundError:
+                img_path = "../neoescan_files/no_image.png"
+            except IndexError:
+                img_path = "../neoescan_files/no_image.png"
+
+            widgets.elabel2 = QLabel(widgets.scrollAreaWidgetContents_2)
+            widgets.elabel2.setObjectName(f"elabel2{i}")
+            widgets.elabel2.pixmap = QPixmap(img_path)
+            widgets.elabel2.setPixmap(widgets.elabel2.pixmap.scaled(
+                widgets.elabel2.size(), QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation))
+            widgets.elementslayout.setWidget(
+                i, QFormLayout.FieldRole, widgets.elabel2)
+            widgets.elabel2.setStyleSheet(
+                "background-color: rgb(255, 255, 255);")
+            widgets.elabel2.setAlignment(QtCore.Qt.AlignCenter)
+            widgets.elabel2.setVisible(True)
+
         widgets.verticalLayout_20.addLayout(widgets.elementslayout)
-
-
 
         # Botón nuevo proyecto
         widgets.nuevoProyectoButton.clicked.connect(self.buttonClick)

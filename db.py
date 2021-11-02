@@ -135,3 +135,44 @@ def getElementInfo(id_elemento):
     while query.next():
         info[query.value(0)] = query.value(1)
     return info
+
+
+def getElementData():
+    '''
+    get all data from each element in database from multiple tables
+    '''
+
+    query = QSqlQuery()
+    query.prepare(
+        """
+        SELECT 
+        elements.element_id,
+        elements.created_ts,
+        elements.modified_ts,
+        elements_metadata.name,
+        elements_metadata_text.text
+        FROM elements
+        JOIN elements_metadata_text
+        ON elements_metadata_text.element_id = elements.element_id
+        JOIN elements_metadata
+        ON elements_metadata_text.element_metadata = elements_metadata.element_metadata_id 
+        """
+        )
+    query.exec_()
+    data = []
+    while query.next():
+        data.append(
+            {
+                'element_id': query.value(0),
+                'created_ts': query.value(1),
+                'modified_ts': query.value(2),
+                'metadata': query.value(3),
+                'value': query.value(4)
+            }
+        )
+    return data
+
+
+if __name__ == '__main__':
+    connectToDatabase()
+    print(getElementData())
