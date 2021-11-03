@@ -17,6 +17,8 @@ from pathlib import Path
 from PySide2.QtCore import QDir, Qt, Slot
 from PySide2.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
 
+import pandas as pd
+import time
 
 def connectToDatabase():
     '''
@@ -155,9 +157,9 @@ def getElementData():
         JOIN elements_metadata_text
         ON elements_metadata_text.element_id = elements.element_id
         JOIN elements_metadata
-        ON elements_metadata_text.element_metadata = elements_metadata.element_metadata_id 
+        ON elements_metadata_text.element_metadata = elements_metadata.element_metadata_id
         """
-        )
+        ) # TODO: add join path to images folder
     query.exec_()
     data = []
     while query.next():
@@ -167,12 +169,30 @@ def getElementData():
                 'created_ts': query.value(1),
                 'modified_ts': query.value(2),
                 'metadata': query.value(3),
-                'value': query.value(4)
+                'value': query.value(4),
+                'images_path': query.value(5)
             }
         )
     return data
 
-
 if __name__ == '__main__':
+    start = time.time()
     connectToDatabase()
-    print(getElementData())
+
+    elementos = pd.DataFrame()  # create empty dataframe
+
+    lista_elementos = getElementData()
+    for elemento in lista_elementos:
+        df_elemento = pd.DataFrame([elemento])
+        elementos = elementos.append(df_elemento)
+        
+    #print(elementos)
+    end = time.time()
+    print(end - start)
+
+    titulo_elemento = elementos.loc[(elementos['metadata'] == 'título') | (elementos['metadata'] == 'descripción')]
+    #titulo_elemento.set_index([['element_id', 'created_ts', 'modified_ts']]).stack().rename_axis(['element_id', 'created_ts', 'modified_ts', 'metadata']).reset_index(name='value')
+    elements_ids = titulo_elemento.loc[:, 'element_id'].unique()
+    for eid in elements_ids:
+        elemento = titulo_elemento.loc[(titulo_elemento['element_id'] == eid) & (titulo_elemento['metadata'] == 'título')]
+        print(elemento)

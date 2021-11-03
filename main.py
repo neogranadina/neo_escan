@@ -102,26 +102,25 @@ class MainWindow(QMainWindow):
             widgets.elabel1.setVisible(True)
 
             image_path = Path("../neoescan_files/" + f'{i + 1}')
-            print(image_path)
             try:
                 listado_imgs = os.listdir(image_path)[0]
                 img_path = os.path.join(image_path, listado_imgs)
-            except FileNotFoundError:
-                img_path = "../neoescan_files/no_image.png"
-            except IndexError:
-                img_path = "../neoescan_files/no_image.png"
+                widgets.elabel2 = QLabel(widgets.scrollAreaWidgetContents_2)
+                widgets.elabel2.setObjectName(f"elabel2{i}")
+                widgets.elabel2.pixmap = QPixmap(img_path)
+                widgets.elabel2.setPixmap(widgets.elabel2.pixmap.scaled(
+                    widgets.elabel2.size(), QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation))
+                widgets.elementslayout.setWidget(
+                    i, QFormLayout.FieldRole, widgets.elabel2)
+                widgets.elabel2.setStyleSheet(
+                    "background-color: rgb(255, 255, 255);")
+                widgets.elabel2.setAlignment(QtCore.Qt.AlignCenter)
+                widgets.elabel2.setVisible(True)
 
-            widgets.elabel2 = QLabel(widgets.scrollAreaWidgetContents_2)
-            widgets.elabel2.setObjectName(f"elabel2{i}")
-            widgets.elabel2.pixmap = QPixmap(img_path)
-            widgets.elabel2.setPixmap(widgets.elabel2.pixmap.scaled(
-                widgets.elabel2.size(), QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation))
-            widgets.elementslayout.setWidget(
-                i, QFormLayout.FieldRole, widgets.elabel2)
-            widgets.elabel2.setStyleSheet(
-                "background-color: rgb(255, 255, 255);")
-            widgets.elabel2.setAlignment(QtCore.Qt.AlignCenter)
-            widgets.elabel2.setVisible(True)
+            except FileNotFoundError:
+                img_path = None
+            except IndexError:
+                img_path = None
 
         widgets.verticalLayout_20.addLayout(widgets.elementslayout)
 
@@ -521,18 +520,22 @@ class MainWindow(QMainWindow):
 
             # validate if text in folioizqLineEdit match regular expression
             if widgets.folioizqLineEdit.hasAcceptableInput() and widgets.folioderLineEdit.hasAcceptableInput():
-                left_img_name = widgets.folioizqLineEdit.text() + '.png'
-                right_img_name = widgets.folioderLineEdit.text() + '.png'
+                if widgets.folioizqLineEdit.text() != widgets.folioderLineEdit.text():
+                    left_img_name = widgets.folioizqLineEdit.text() + '.png'
+                    right_img_name = widgets.folioderLineEdit.text() + '.png'
 
-                left_img_path = widgets.directorio_elementos.text() + '/' + left_img_name
-                right_img_path = widgets.directorio_elementos.text() + '/' + right_img_name
+                    left_img_path = widgets.directorio_elementos.text() + '/' + left_img_name
+                    right_img_path = widgets.directorio_elementos.text() + '/' + right_img_name
 
-                widgets.imagenizqLabel.setPixmap(QPixmap(left_img_path))
-                widgets.imagederLabel.setPixmap(QPixmap(right_img_path))
+                    widgets.imagenizqLabel.setPixmap(QPixmap(left_img_path))
+                    widgets.imagederLabel.setPixmap(QPixmap(right_img_path))
 
-                # display validation buttons
-                widgets.controlesCamstackedWidget.setCurrentWidget(
-                    widgets.validar)
+                    # display validation buttons
+                    widgets.controlesCamstackedWidget.setCurrentWidget(
+                        widgets.validar)
+                else:
+                    QMessageBox().warning(self, "Error",
+                                                "Los número de los folios deben ser diferentes", QMessageBox.Ok)
             else:
                 QMessageBox().warning(self, "Error",
                                             "El número de los folios solamente puede contener letras, números y guiones", QMessageBox.Ok)
