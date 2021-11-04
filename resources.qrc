@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/imgs">
+    <file>imgs/icons/pencil-on-a-square-outline.svg</file>
+    <file>imgs/icons/trash-can-with-cover-from-side-view.svg</file>
     <file>imgs/icons/check-sign.svg</file>
     <file>imgs/icons/undo-circular-arrow.svg</file>
     <file>imgs/icons/open-black-folder-interface-symbol.svg</file>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainjMSock.ui'
+## Form generated from reading UI file 'mainYqTbAb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.5
 ##
@@ -246,13 +246,42 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_19.addLayout(self.formLayout_6)
 
+        self.proyectos_actuales_label = QLabel(self.inicioPage)
+        self.proyectos_actuales_label.setObjectName(u"proyectos_actuales_label")
+        font2 = QFont()
+        font2.setPointSize(11)
+        font2.setBold(True)
+        font2.setWeight(75)
+        self.proyectos_actuales_label.setFont(font2)
+
+        self.verticalLayout_19.addWidget(self.proyectos_actuales_label)
+
         self.scrollArea_7 = QScrollArea(self.inicioPage)
         self.scrollArea_7.setObjectName(u"scrollArea_7")
-        self.scrollArea_7.setStyleSheet(u"background-color: rgb(85, 255, 127);")
+        self.scrollArea_7.setStyleSheet(u"QPushButton {\n"
+"background-color: rgba(0, 0, 0, .7);\n"
+"color: rgba(251,251,251,1);\n"
+"border-radius:5px;\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"background-color: rgba(242,120,75,1);\n"
+"color: rgba(0,0,0,.5);\n"
+"border: none;\n"
+"}\n"
+"\n"
+"QPushButton::focus {\n"
+"background-color: rgba(242,120,75,1);\n"
+"border: none;\n"
+"}\n"
+"\n"
+"QLabel {\n"
+"	border-top: 1px dotted;\n"
+"}")
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 677, 334))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 677, 310))
         self.verticalLayout_20 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
         self.scrollArea_7.setWidget(self.scrollAreaWidgetContents_2)
@@ -332,10 +361,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.H1metadatosLabel = QLabel(self.headerMetadatos)
         self.H1metadatosLabel.setObjectName(u"H1metadatosLabel")
-        font2 = QFont()
-        font2.setPointSize(11)
-        font2.setBold(True)
-        font2.setWeight(75)
         self.H1metadatosLabel.setFont(font2)
 
         self.horizontalLayout_9.addWidget(self.H1metadatosLabel)
@@ -423,7 +448,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 633, 468))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 660, 468))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.formLayout = QFormLayout()
@@ -1307,7 +1332,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 677, 272))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 647, 148))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.gridLayout = QGridLayout()
@@ -1756,7 +1781,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(0)
-        self.tipoColeccion.setCurrentIndex(5)
+        self.tipoColeccion.setCurrentIndex(0)
         self.controlesCamstackedWidget.setCurrentIndex(0)
 
 
@@ -1784,6 +1809,7 @@ class Ui_MainWindow(object):
 "Exportar", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Iniciar nuevo proyecto", None))
         self.nuevoProyectoButton.setText("")
+        self.proyectos_actuales_label.setText(QCoreApplication.translate("MainWindow", u"Proyectos actuales", None))
         self.H1metadatosLabel.setText(QCoreApplication.translate("MainWindow", u"Metadatos", None))
         self.backtoInicioButton.setText(QCoreApplication.translate("MainWindow", u"  Volver al inicio", None))
         self.tipodocLabel.setText(QCoreApplication.translate("MainWindow", u"Tipo de documento", None))

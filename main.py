@@ -13,13 +13,13 @@ import os
 from pathlib import Path
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QPixmap, QRegExpValidator
+from PySide2.QtGui import QIcon, QImage, QPixmap, QRegExpValidator, Qt
 
-from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QFormLayout
-from PySide2.QtCore import QTranslator, QLibraryInfo, QRegExp
+from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QFormLayout, QGridLayout, QPushButton
+from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp
 
 from ui_main import Ui_MainWindow
-from db import connectToDatabase, createElement, getLastId, insertInfo, getElementInfo, getLastElementID, getElementData
+from db import connectToDatabase, createElement, getElementsDataFrame, getLastId, insertInfo, getElementInfo, getLastElementID, getElementsDataFrame
 #from camcontrol import Cam
 
 
@@ -79,53 +79,9 @@ class MainWindow(QMainWindow):
         # Seleccionar página de inicio
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
 
-        # display elements in home page
-
-        elementos = getElementData()
-
-        widgets.elementslayout = QFormLayout()
-        widgets.elementslayout.setVerticalSpacing(10)
-        widgets.elementslayout.setHorizontalSpacing(0)
-        widgets.elementslayout.setContentsMargins(0, 0, 0, 0)
-        widgets.elementslayout.setObjectName("elementslayout")
-
-        for i in range(32):
-            widgets.elabel1 = QLabel(widgets.scrollAreaWidgetContents_2)
-            widgets.elabel1.setObjectName(f"elabel{i}")
-            widgets.elabel1.setText(f"{i}")
-            widgets.elementslayout.setWidget(
-                i, QFormLayout.LabelRole, widgets.elabel1)
-            #widgets.elabel1.setGeometry(QtCore.QRect(10, 10 + i * 30, 20, 20))
-            widgets.elabel1.setStyleSheet(
-                "background-color: rgb(255, 255, 255);")
-            widgets.elabel1.setAlignment(QtCore.Qt.AlignCenter)
-            widgets.elabel1.setVisible(True)
-
-            image_path = Path("../neoescan_files/" + f'{i + 1}')
-            try:
-                listado_imgs = os.listdir(image_path)[0]
-                img_path = os.path.join(image_path, listado_imgs)
-                widgets.elabel2 = QLabel(widgets.scrollAreaWidgetContents_2)
-                widgets.elabel2.setObjectName(f"elabel2{i}")
-                widgets.elabel2.pixmap = QPixmap(img_path)
-                widgets.elabel2.setPixmap(widgets.elabel2.pixmap.scaled(
-                    widgets.elabel2.size(), QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation))
-                widgets.elementslayout.setWidget(
-                    i, QFormLayout.FieldRole, widgets.elabel2)
-                widgets.elabel2.setStyleSheet(
-                    "background-color: rgb(255, 255, 255);")
-                widgets.elabel2.setAlignment(QtCore.Qt.AlignCenter)
-                widgets.elabel2.setVisible(True)
-
-            except FileNotFoundError:
-                img_path = None
-            except IndexError:
-                img_path = None
-
-        widgets.verticalLayout_20.addLayout(widgets.elementslayout)
-
-        # Botón nuevo proyecto
+        # set home page
         widgets.nuevoProyectoButton.clicked.connect(self.buttonClick)
+        self.display_elements()
 
         # Botón regresar al inicio
         widgets.backtoInicioButton.clicked.connect(self.buttonClick)
@@ -162,6 +118,7 @@ class MainWindow(QMainWindow):
         # navega por cada una de las páginas
         if btnName == "inicioButton":
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+            self.display_elements()
         elif btnName == "backtoInicioButton":
             msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Warning)
@@ -184,7 +141,118 @@ class MainWindow(QMainWindow):
         elif btnName == "exportarButton":
             widgets.stackedWidget.setCurrentWidget(widgets.exportarPage)
 
+    # Funciones para la página de elementos
+
+    def display_elements(self):
+        elementos = getElementsDataFrame()
+
+        widgets.elementslayout = QGridLayout()
+        widgets.elementslayout.setVerticalSpacing(10)
+        widgets.elementslayout.setHorizontalSpacing(10)
+        widgets.elementslayout.setContentsMargins(0, 0, 0, 0)
+        widgets.elementslayout.setObjectName("elementslayout")
+
+        cantidad_elementos = len(elementos)
+
+        if cantidad_elementos > 0:
+            widgets.proyectos_actuales_label.setText(
+                f"Proyectos actuales [{cantidad_elementos}]")
+        else:
+            widgets.proyectos_actuales_label.setText(
+                "No se han creado proyectos.")
+
+        for i in range(cantidad_elementos):
+
+            elemento = elementos.iloc[i]
+            element_id = elemento['element_id']
+            element_name = elemento['título']
+            element_description = elemento['descripción']
+
+            image_path = Path("../neoescan_files/" + f'{element_id}')
+            image_not_found = "imgs/No-Photo-Available.png"
+
+            # Display image in the grid
+            try:
+                num_imagenes = len(os.listdir(image_path))
+                img_path = os.listdir(image_path)[0]
+                img_path = os.path.join(image_path, img_path)
+            except FileNotFoundError:
+                num_imagenes = 0
+                img_path = image_not_found
+            except IndexError:
+                num_imagenes = 0
+                img_path = image_not_found
+
+            img = QPixmap(img_path)
+            img = img.scaled(80, 80, Qt.KeepAspectRatio)
+            label = QLabel()
+            label.setPixmap(img)
+            label.setObjectName(f"element_{element_id}")
+            label.setMaximumSize(100, 100)
+            label.setAlignment(Qt.AlignLeft)
+            widgets.elementslayout.addWidget(label, i, 0)
+
+            # Display element name in the grid
+            label = QLabel()
+            label.setText(
+                f'<h3>{element_name}</h3> [{num_imagenes} imágenes]\n{element_description}')
+            label.setObjectName(f"element_name_{element_id}")
+            label.setMinimumSize(QSize(400, 70))
+            label.setWordWrap(True)
+            label.setAlignment(Qt.AlignLeft)
+            widgets.elementslayout.addWidget(label, i, 1)
+
+            # Set three buttons in the grid
+            button = QPushButton()
+            # button.setText("Editar")
+            button.setObjectName(f"edit_element_{element_id}")
+            button.setMinimumSize(QSize(42, 42))
+            button.setMaximumSize(QSize(42, 42))
+            icon1 = QIcon()
+            icon1.addFile(u":/imgs/imgs/icons/pencil-on-a-square-outline.svg",
+                          QSize(), QIcon.Normal, QIcon.Off)
+            button.setIcon(icon1)
+            button.setIconSize(QSize(20, 20))
+            button.clicked.connect(self.edit_element)
+            widgets.elementslayout.addWidget(button, i, 2)
+
+            button = QPushButton()
+            # button.setText("Exportar")
+            button.setObjectName(f"export_element_{element_id}")
+            button.setMinimumSize(QSize(42, 42))
+            button.setMaximumSize(QSize(42, 42))
+            icon2 = QIcon()
+            icon2.addFile(u":/imgs/imgs/icons/download-symbol.svg",
+                          QSize(), QIcon.Normal, QIcon.Off)
+            button.setIcon(icon2)
+            button.setIconSize(QSize(20, 20))
+            button.clicked.connect(self.export_element)
+            widgets.elementslayout.addWidget(button, i, 3)
+
+            button = QPushButton()
+            # button.setText("Eliminar")
+            button.setObjectName(f"delete_element_{element_id}")
+            button.setMinimumSize(QSize(42, 42))
+            button.setMaximumSize(QSize(42, 42))
+            icon3 = QIcon()
+            icon3.addFile(u":/imgs/imgs/icons/trash-can-with-cover-from-side-view.svg",
+                          QSize(), QIcon.Normal, QIcon.Off)
+            button.setIcon(icon3)
+            button.setIconSize(QSize(20, 20))
+            button.clicked.connect(self.delete_element)
+            widgets.elementslayout.addWidget(button, i, 4)
+
+        widgets.verticalLayout_20.addLayout(widgets.elementslayout)
+
+    def edit_element(self):
+        print("add :)")
     # navegar por la página de metadatos
+
+    def export_element(self):
+        print("export :)")
+
+    def delete_element(self):
+        print("delete :)")
 
     def indexChange(self):
         '''

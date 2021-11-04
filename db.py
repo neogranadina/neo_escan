@@ -152,12 +152,17 @@ def getElementData():
         elements.created_ts,
         elements.modified_ts,
         elements_metadata.name,
-        elements_metadata_text.text
+        elements_metadata_text.text,
+        images.path
         FROM elements
         JOIN elements_metadata_text
         ON elements_metadata_text.element_id = elements.element_id
+        JOIN images
+        ON elements.element_id = images.element_id
         JOIN elements_metadata
         ON elements_metadata_text.element_metadata = elements_metadata.element_metadata_id
+        WHERE elements_metadata.element_metadata_id = 1 
+        OR elements_metadata.element_metadata_id = 2
         """
         ) # TODO: add join path to images folder
     query.exec_()
@@ -175,24 +180,20 @@ def getElementData():
         )
     return data
 
-if __name__ == '__main__':
-    start = time.time()
-    connectToDatabase()
+def getElementsDataFrame():
+    '''
+    build a dataframe with the title and description from getElementData
+    '''
+    data = getElementData()
+    df = pd.DataFrame(data)
+    if len(df) != 0:
+        df = df.pivot(index=['element_id', 'created_ts', 'modified_ts', 'images_path'], columns='metadata', values='value')
+        df.columns = ["".join(str(s).strip() for s in col if s) for col in df.columns]
+        df.reset_index(inplace=True)
+        return df
+    else:
+        return None
 
-    elementos = pd.DataFrame()  # create empty dataframe
 
-    lista_elementos = getElementData()
-    for elemento in lista_elementos:
-        df_elemento = pd.DataFrame([elemento])
-        elementos = elementos.append(df_elemento)
-        
-    #print(elementos)
-    end = time.time()
-    print(end - start)
-
-    titulo_elemento = elementos.loc[(elementos['metadata'] == 'título') | (elementos['metadata'] == 'descripción')]
-    #titulo_elemento.set_index([['element_id', 'created_ts', 'modified_ts']]).stack().rename_axis(['element_id', 'created_ts', 'modified_ts', 'metadata']).reset_index(name='value')
-    elements_ids = titulo_elemento.loc[:, 'element_id'].unique()
-    for eid in elements_ids:
-        elemento = titulo_elemento.loc[(titulo_elemento['element_id'] == eid) & (titulo_elemento['metadata'] == 'título')]
-        print(elemento)
+#connectToDatabase()
+#print(getElementsDataFrame())
