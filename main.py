@@ -13,21 +13,39 @@ import os
 from pathlib import Path
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QIcon, QImage, QPixmap, QRegExpValidator, Qt
+from PySide2.QtGui import QIcon, QPixmap, QRegExpValidator, Qt
 
-from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QFormLayout, QGridLayout, QPushButton
+from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGridLayout, QPushButton
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp
 
 from ui_main import Ui_MainWindow
 from db import connectToDatabase, createElement, getElementsDataFrame, getLastId, insertInfo, getElementInfo, getLastElementID, getElementsDataFrame
-from camcontrol import Cam
-
+#from camcontrol import Cam
+import configparser
+import ctypes
 
 # logs
 
 logging.basicConfig(filename="neo_escan.log",
                     level=logging.DEBUG)
 logger = logging.getLogger("logger")
+
+# config
+
+config = configparser.ConfigParser()
+config.read('config.cfg')
+
+version = config['DEFAULT']['version']
+
+# Check compatibility and return images directory
+
+if sys.platform == 'linux':
+    IMGDIR = config['DEFAULT']['img_dir']
+elif sys.platform == 'win32':
+    IMGDIR = config['DEFAULT']['images_dir_windows']
+else:
+    ctypes.windll.user32.MessageBoxW(0, "Sistema operativo no soportado", "Error", 0)
+    sys.exit(0)
 
 # Entorno de la aplicación
 
@@ -39,9 +57,9 @@ def restart():
 
 
 def inicio_proyecto():
+    #devs = Cam().devs()
+    #return devs
     pass
-    devs = Cam().devs()
-    return devs
 
 
 class MainWindow(QMainWindow):
@@ -60,12 +78,16 @@ class MainWindow(QMainWindow):
         # crea las cámaras
         global cams
         cams = inicio_proyecto()
-        if len(cams) <= 1:
-            QMessageBox().warning(self, "Error",
-                                  "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
+        #if len(cams) <= 1:
+        #    QMessageBox().warning(self, "Error",
+        #                          "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
         
         # Conectar a la base de datos
         connectToDatabase()
+
+        # set version
+        
+        widgets.versionLabel.setText(f'v{version}')
 
         # Botones, menú
         widgets.inicioButton.clicked.connect(self.buttonClick)
@@ -166,7 +188,7 @@ class MainWindow(QMainWindow):
             element_name = elemento['título']
             element_description = elemento['descripción']
 
-            image_path = Path("../neoescan_files/" + f'{element_id}')
+            image_path = Path(IMGDIR + f'{element_id}')
             image_not_found = "imgs/No-Photo-Available.png"
 
             # Display image in the grid
@@ -490,7 +512,6 @@ class MainWindow(QMainWindow):
         if self.requiredFields(tipo_de_documento):
             # create element
             if not tipo_de_documento == 6:
-                print("creando docu")
                 createElement(tipo_de_documento, 0, 1)
 
                 # get the id of last element created
@@ -543,11 +564,7 @@ class MainWindow(QMainWindow):
         widgets.elementoTituloLabel.setText(datos_elemento[1])
 
         # create directory to save images
-        if sys.platform == 'linux':
-            folder_path = '/home/pi/neoescan_files' + str(id_elemento)
-        elif sys.platform == 'win32':
-            # opción solo para desarrollo
-            folder_path = '../neoescan_files/' + str(id_elemento)
+        folder_path = IMGDIR + str(id_elemento)
 
         try:
             os.makedirs(folder_path, exist_ok=True)
@@ -561,7 +578,8 @@ class MainWindow(QMainWindow):
         self.lenImagenesDir(folder_path)
 
         try:
-            Cam().cam(cams)
+            #Cam().cam(cams)
+            pass
         except IndexError:
             QMessageBox().warning(self, "Error",
                                         "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
@@ -572,7 +590,7 @@ class MainWindow(QMainWindow):
     def getCaptura(self):
         try:
             self.lenImagenesDir(widgets.directorio_elementos.text())
-            Cam().captura(cams)
+            #Cam().captura(cams)
             # get the last images from the directory
             # and show it in the label
 
@@ -586,8 +604,8 @@ class MainWindow(QMainWindow):
             # validate if text in folioizqLineEdit match regular expression
             if widgets.folioizqLineEdit.hasAcceptableInput() and widgets.folioderLineEdit.hasAcceptableInput():
                 if widgets.folioizqLineEdit.text() != widgets.folioderLineEdit.text():
-                    left_img_name = widgets.folioizqLineEdit.text() + '.png'
-                    right_img_name = widgets.folioderLineEdit.text() + '.png'
+                    left_img_name = widgets.folioizqLineEdit.text() + '.jpg'
+                    right_img_name = widgets.folioderLineEdit.text() + '.jpg'
 
                     left_img_path = widgets.directorio_elementos.text() + '/' + left_img_name
                     right_img_path = widgets.directorio_elementos.text() + '/' + right_img_name
