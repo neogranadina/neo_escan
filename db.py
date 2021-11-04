@@ -6,120 +6,194 @@
 # V: 1.0.0
 #
 # db:
-# módulo para comunicar PySide6 con la base de datos sqlite3
+# módulo para comunicar PySide2 con la base de datos sqlite3
 #
 # ///////////////////////////////////////////////////////////////
 
-import logging
 import datetime
+import logging
 from pathlib import Path
 
-from PySide2.QtCore import Qt, Slot, QDir
+from PySide2.QtCore import QDir, Qt, Slot
 from PySide2.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
 
+import pandas as pd
+import time
 
 def connectToDatabase():
     '''
-    Conecta a la base de datos a través de la clase QSqlDatabase
-    https://doc.qt.io/qt-6/qsqldatabase.html
+    Connect to the database
     '''
-    database = QSqlDatabase.database()
-    database = QSqlDatabase.addDatabase('QSQLITE')
-    if not database.isValid():
-        logging.error("No es posible conectarse a la base de datos")
-
+    db = QSqlDatabase.addDatabase('QSQLITE')
+    if not db.isValid():
+        logging.error('No es posible conectarse a la base de datos')
+        return False
     write_dir = QDir("db")
 
-    if not write_dir.mkpath("."):
-        logging.error(
-            f"{datetime.datetime.now()} - No fue posible escribir en el directorio")
+    if not write_dir.exists():
+        try:
+            write_dir.mkpath(".")
+        except Exception as e:
+            logging.error(e)
+            return False
 
-    # Garantizar la escritura en cualquier dispositivo
-    abs_path = write_dir.absolutePath()
-    filename = f"{abs_path}/neo_scan.sqlite3"
+    db.setDatabaseName(str(Path(write_dir.absolutePath(), 'neo_escan.db')))
 
-    # En SQLite, si no  existe la base de datos, esta es creada
-    database.setDatabaseName(filename)
-    if not database.open():
-        logging.error(
-            f"{datetime.datetime.now()} - No fue posible abrir la base de datos")
+    if not db.open():
+        logging.error('No es posible conectarse a la base de datos')
+        return False
+    return db
 
 
-def insertInfo(tipo, refCode, titulo, fechas, alcance, ubicacion):
+def createElement(tipo_elemento, usuario, publico):
     '''
-    Escribe la información de un proyecto en la base de datos
+    Create new item in elements table
+    '''
+    now = datetime.datetime.now()
+    ts = now.strftime("%Y-%m-%d %H:%M:%S")
+
+    query = QSqlQuery()
+    query.prepare("INSERT INTO elements (document_type, user_id, public, created_ts, modified_ts) VALUES (:doctype, :user, :public, :created_at, :updated_at)")
+    query.bindValue(':doctype', tipo_elemento)
+    query.bindValue(':user', usuario)
+    query.bindValue(':public', publico)
+    query.bindValue(':created_at', ts)
+    query.bindValue(':updated_at', ts)
+
+    if not query.exec_():
+        logging.error(query.lastError().text())
+        return False
+
+
+def getLastId():
+    '''
+    Get last id from elements table
+    '''
+    query = QSqlQuery()
+    query.prepare("SELECT last_insert_rowid()")
+    query.exec_()
+    query.first()
+    return query.value(0)
+
+
+def metadata_id(key):
+    '''
+    Get metadata id from metadata table
+    '''
+    query = QSqlQuery()
+    query.prepare(
+        "SELECT element_metadata_id FROM elements_metadata WHERE name = :key")
+    query.bindValue(':key', key)
+    query.exec_()
+    query.first()
+    return query.value(0)
+
+
+def insertInfo(id_elemento, info):
+    '''
+    Insert info in info table from dictionary
     '''
 
-    if ubicacion == Path("."):
-        ubicacion = Path(f"archivos_proyectos/{tipo}/{titulo}")
+    query = QSqlQuery()
+    query.prepare(
+        "INSERT INTO elements_metadata_text (element_id, element_metadata, text) VALUES (:element_id, :key, :value)")
+    query.bindValue(':element_id', id_elemento)
 
-    query_script = f"""
-        SELECT id_tipo_proyecto
-        FROM tipos_proyecto
-        WHERE nombre_tipo_proyecto = "{tipo}"
+    for key, value in info.items():
+        key = metadata_id(key)
+        query.bindValue(':key', key)
+        query.bindValue(':value', value)
+        if not query.exec_():
+            logging.error(query.lastError().text())
+            return False
+    return True
+
+
+def getLastElementID():
+    '''
+    get last element inserted
+    '''
+    # get id from last element inserted
+
+    query = QSqlQuery()
+    query.prepare("SELECT max(element_id) FROM elements")
+    query.exec_()
+    query.first()
+    id_elemento = query.value(0)
+    return id_elemento
+
+
+def getElementInfo(id_elemento):
+    '''
+    get info from last element inserted
+    '''
+
+    query = QSqlQuery()
+    query.prepare(
+        "SELECT element_metadata, text FROM elements_metadata_text WHERE element_id = :element_id")
+    query.bindValue(':element_id', id_elemento)
+    query.exec_()
+    info = {}
+    while query.next():
+        info[query.value(0)] = query.value(1)
+    return info
+
+
+def getElementData():
+    '''
+    get all data from each element in database from multiple tables
+    '''
+
+    query = QSqlQuery()
+    query.prepare(
         """
+        SELECT 
+        elements.element_id,
+        elements.created_ts,
+        elements.modified_ts,
+        elements_metadata.name,
+        elements_metadata_text.text,
+        images.path
+        FROM elements
+        JOIN elements_metadata_text
+        ON elements_metadata_text.element_id = elements.element_id
+        JOIN images
+        ON elements.element_id = images.element_id
+        JOIN elements_metadata
+        ON elements_metadata_text.element_metadata = elements_metadata.element_metadata_id
+        WHERE elements_metadata.element_metadata_id = 1 
+        OR elements_metadata.element_metadata_id = 2
+        """
+        ) # TODO: add join path to images folder
+    query.exec_()
+    data = []
+    while query.next():
+        data.append(
+            {
+                'element_id': query.value(0),
+                'created_ts': query.value(1),
+                'modified_ts': query.value(2),
+                'metadata': query.value(3),
+                'value': query.value(4),
+                'images_path': query.value(5)
+            }
+        )
+    return data
 
-    query = QSqlQuery()
-    if not query.exec(query_script):
-        logging.info(query)
-
-    query.first()
-    tipo_id = query.value(0)
-
-    # Este id deberá modificarse si se hace un cambio a la dinámica de instituciones
-    default_institucion = 1
-
-    if not query.exec(f"""
-    INSERT INTO proyectos 
-    (nombre_proyecto, tipo_proyecto, institucion_proyecto, 
-    ts_creacion_proyecto, path_proyecto, cobertura_temporal, cobertura_espacial)
-    VALUES
-    ("{titulo}", {tipo_id}, {default_institucion}, "{datetime.datetime.now()}", "{ubicacion}", "{fechas}", "")
-    """):
-        logging.info(query)
-
-    # Ahora guarda la información en la tabla de unidades documentales compuestas
-
-    if not query.exec("SELECT id_proyecto FROM proyectos ORDER BY id_proyecto DESC LIMIT 1"):
-        logging.info(query)
-
-    query.first()
-    proyecto_id = query.value(0)
-
-    if not query.exec(f"""
-    INSERT INTO unidad_documental (id_proyecto, codigo_referencia, titulo, fechas)
-    VALUES
-    ({proyecto_id}, "{refCode}", "{titulo}", "{fechas}")
-    """):
-        logging.info(query)
-
-
-def testProyDuplicados(titulo):
+def getElementsDataFrame():
     '''
-    Busca coincidencia del título de un proyecto
+    build a dataframe with the title and description from getElementData
     '''
-    query = QSqlQuery()
-    if not query.exec(f"""SELECT * FROM unidad_documental WHERE titulo = "{titulo}" """):
-        logging.info(query)
+    data = getElementData()
+    df = pd.DataFrame(data)
+    if len(df) != 0:
+        df = df.pivot(index=['element_id', 'created_ts', 'modified_ts', 'images_path'], columns='metadata', values='value')
+        df.columns = ["".join(str(s).strip() for s in col if s) for col in df.columns]
+        df.reset_index(inplace=True)
+        return df
+    else:
+        return None
 
-    return query.first()
 
-def regresa_info_proyecto(titulo):
-    query = QSqlQuery()
-    if not query.exec(f"""
-    SELECT * FROM unidad_documental WHERE titulo = "{titulo}"
-    """):
-        logging.info(query)
-
-    query.first()
-    return f"Proyecto: {query.value(3)} \nCódigo: {query.value(2)} \nFechas: {query.value(4)}"
-
-def checkDirectorio(ruta):
-    '''
-    Busca coincidencia del directorio de un proyecto
-    '''
-    query = QSqlQuery()
-    if not query.exec(f"""SELECT * FROM proyectos WHERE path_proyecto = "{ruta}" """):
-        logging.info(query)
-
-    return query.first()
+#connectToDatabase()
+#print(getElementsDataFrame())

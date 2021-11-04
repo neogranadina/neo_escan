@@ -102,3 +102,10 @@ class DescargarIMGS:
                       v in l.items() if k == 'name']
 
         return listac[-1]
+
+
+    def associateImageWithElement():
+        '''
+        Associate the image taked with the element
+        '''
+        pass

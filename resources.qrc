@@ -1,5 +1,21 @@
 <RCC>
   <qresource prefix="/imgs">
+    <file>imgs/icons/pencil-on-a-square-outline.svg</file>
+    <file>imgs/icons/trash-can-with-cover-from-side-view.svg</file>
+    <file>imgs/icons/check-sign.svg</file>
+    <file>imgs/icons/undo-circular-arrow.svg</file>
+    <file>imgs/icons/open-black-folder-interface-symbol.svg</file>
+    <file>imgs/icons/label-black-shape-rotated-to-left.svg</file>
+    <file>imgs/icons/list-interface-symbol.svg</file>
+    <file>imgs/icons/left-arrowhead-in-a-circle.svg</file>
+    <file>imgs/icons/plus-sign.svg</file>
+    <file>imgs/icons/black-folder-shape-for-interface.svg</file>
+    <file>imgs/icons/camera.svg</file>
+    <file>imgs/icons/documents-rounded-square-symbol.svg</file>
+    <file>imgs/icons/folder-check-symbol.svg</file>
+    <file>imgs/icons/image-interface-symbol-with-a-landscape.svg</file>
+    <file>imgs/icons/news-interface-symbol.svg</file>
+    <file>imgs/icons/open-book.svg</file>
     <file>imgs/icons/fast-forward-double-right-arrows.svg</file>
     <file>imgs/icons/check-mark-in-a-circle.svg</file>
     <file>imgs/icons/magnifying-glass.svg</file>
