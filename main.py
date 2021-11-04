@@ -20,7 +20,7 @@ from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp
 
 from ui_main import Ui_MainWindow
 from db import connectToDatabase, createElement, getElementsDataFrame, getLastId, insertInfo, getElementInfo, getLastElementID, getElementsDataFrame
-#from camcontrol import Cam
+from camcontrol import Cam
 import configparser
 import ctypes
 
@@ -44,7 +44,8 @@ if sys.platform == 'linux':
 elif sys.platform == 'win32':
     IMGDIR = config['DEFAULT']['images_dir_windows']
 else:
-    ctypes.windll.user32.MessageBoxW(0, "Sistema operativo no soportado", "Error", 0)
+    ctypes.windll.user32.MessageBoxW(
+        0, "Sistema operativo no soportado", "Error", 0)
     sys.exit(0)
 
 # Entorno de la aplicación
@@ -57,9 +58,8 @@ def restart():
 
 
 def inicio_proyecto():
-    #devs = Cam().devs()
-    #return devs
-    pass
+    devs = Cam().devs()
+    return devs
 
 
 class MainWindow(QMainWindow):
@@ -78,15 +78,15 @@ class MainWindow(QMainWindow):
         # crea las cámaras
         global cams
         cams = inicio_proyecto()
-        #if len(cams) <= 1:
-        #    QMessageBox().warning(self, "Error",
-        #                          "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
-        
+        if len(cams) <= 1:
+            QMessageBox().warning(self, "Error",
+                                  "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
+
         # Conectar a la base de datos
         connectToDatabase()
 
         # set version
-        
+
         widgets.versionLabel.setText(f'v{version}')
 
         # Botones, menú
@@ -578,8 +578,7 @@ class MainWindow(QMainWindow):
         self.lenImagenesDir(folder_path)
 
         try:
-            #Cam().cam(cams)
-            pass
+            Cam().cam(cams)
         except IndexError:
             QMessageBox().warning(self, "Error",
                                         "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
@@ -590,7 +589,7 @@ class MainWindow(QMainWindow):
     def getCaptura(self):
         try:
             self.lenImagenesDir(widgets.directorio_elementos.text())
-            #Cam().captura(cams)
+            Cam().captura(cams)
             # get the last images from the directory
             # and show it in the label
 
