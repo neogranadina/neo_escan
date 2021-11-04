@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainYqTbAb.ui'
+## Form generated from reading UI file 'mainFMPdXo.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.5
 ##
@@ -63,7 +63,8 @@ class Ui_MainWindow(object):
 
         self.versionLabel = QLabel(self.header)
         self.versionLabel.setObjectName(u"versionLabel")
-        self.versionLabel.setStyleSheet(u"padding-right: 10px;")
+        self.versionLabel.setStyleSheet(u"color: rgba(255,255,255,.7);\n"
+"padding-right: 10px;")
         self.versionLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.versionLabel)
@@ -1791,7 +1792,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"NeoEscan", None))
         self.neoLabel.setText("")
-        self.versionLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" color: rgba(255,255,255,.7);\">V. beta01</span></p></body></html>", None))
+        self.versionLabel.setText("")
         self.inicioButton.setText(QCoreApplication.translate("MainWindow", u"\n"
 "\n"
 "Inicio", None))
