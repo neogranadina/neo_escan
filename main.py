@@ -20,7 +20,7 @@ from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp
 
 from ui_main import Ui_MainWindow
 from db import connectToDatabase, createElement, getElementsDataFrame, getLastId, insertInfo, getElementInfo, getLastElementID, getElementsDataFrame
-#from camcontrol import Cam
+from camcontrol import Cam
 
 
 # logs
@@ -40,8 +40,8 @@ def restart():
 
 def inicio_proyecto():
     pass
-    #devs = Cam().devs()
-    # return devs
+    devs = Cam().devs()
+    return devs
 
 
 class MainWindow(QMainWindow):
@@ -58,14 +58,12 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         # crea las cámaras
-        '''
         global cams
         cams = inicio_proyecto()
         if len(cams) <= 1:
             QMessageBox().warning(self, "Error",
                                   "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
-        '''
-
+        
         # Conectar a la base de datos
         connectToDatabase()
 
@@ -563,8 +561,7 @@ class MainWindow(QMainWindow):
         self.lenImagenesDir(folder_path)
 
         try:
-            pass
-            # Cam().cam(cams)
+            Cam().cam(cams)
         except IndexError:
             QMessageBox().warning(self, "Error",
                                         "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
@@ -575,7 +572,7 @@ class MainWindow(QMainWindow):
     def getCaptura(self):
         try:
             self.lenImagenesDir(widgets.directorio_elementos.text())
-            # Cam().captura(cams)
+            Cam().captura(cams)
             # get the last images from the directory
             # and show it in the label
 
