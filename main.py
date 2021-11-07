@@ -13,10 +13,10 @@ import os
 from pathlib import Path
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QIcon, QPixmap, QRegExpValidator, Qt
+from PySide2.QtGui import QIcon, QPixmap, QRegExpValidator
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGridLayout, QPushButton
-from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp
+from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp, Qt
 
 from ui_main import Ui_MainWindow
 from db import connectToDatabase, createElement, getElementsDataFrame, getLastId, insertInfo, getElementInfo, getLastElementID, getElementsDataFrame
