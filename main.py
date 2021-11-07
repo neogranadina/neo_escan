@@ -165,6 +165,9 @@ class MainWindow(QMainWindow):
 
     def display_elements(self):
         elementos = getElementsDataFrame()
+        print(elementos)
+        print(elementos.shape)
+        print(elementos.columns)
 
         widgets.elementslayout = QGridLayout()
         widgets.elementslayout.setVerticalSpacing(10)
@@ -185,8 +188,8 @@ class MainWindow(QMainWindow):
 
             elemento = elementos.iloc[i]
             element_id = elemento['element_id']
-            element_name = elemento['título']
-            element_description = elemento['descripción']
+            element_name = elemento['titulo']
+            element_description = elemento['descripcion']
 
             image_path = Path(IMGDIR + f'{element_id}')
             image_not_found = "imgs/No-Photo-Available.png"

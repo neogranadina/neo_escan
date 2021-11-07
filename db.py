@@ -187,13 +187,20 @@ def getElementsDataFrame():
     data = getElementData()
     df = pd.DataFrame(data)
     if len(df) != 0:
-        df = df.pivot(index=['element_id', 'created_ts', 'modified_ts', 'images_path'], columns='metadata', values='value')
-        df.columns = ["".join(str(s).strip() for s in col if s) for col in df.columns]
-        df.reset_index(inplace=True)
-        return df
+        df_pivot = df.set_index(['element_id', 'created_ts', 'modified_ts', 'images_path']).pivot(columns='metadata')['value'].reset_index()
+        df_pivot.rename(columns={'descripción':'descripcion', 'título':'titulo'}, inplace=True)
+        return df_pivot
     else:
         return None
 
-
-#connectToDatabase()
-#print(getElementsDataFrame())
+'''
+connectToDatabase()
+#data = getElementData()
+#df = pd.DataFrame(data)
+#df = df.set_index(['element_id', 'created_ts', 'modified_ts', 'images_path']).pivot(columns='metadata')['value'].reset_index()
+#print(df.columns)
+#print(type(getElementsDataFrame()))
+elementos = getElementsDataFrame()
+elemento = elementos.iloc[0]
+print(elemento['descripcion'])
+'''
