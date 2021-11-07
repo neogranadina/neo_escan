@@ -30,7 +30,7 @@ cd ..
 cd neo_escan
 
 echo actualizar pip
-python3 -m pip3 install --upgrade pip
+python3 -m pip install --upgrade pip
 
 echo preparar chdkptp.py
 rm -rf chdkptp.py
