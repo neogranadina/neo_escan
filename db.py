@@ -17,8 +17,6 @@ from pathlib import Path
 from PySide2.QtCore import QDir, Qt, Slot
 from PySide2.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
 
-import pandas as pd
-import time
 
 def connectToDatabase():
     '''
@@ -139,68 +137,71 @@ def getElementInfo(id_elemento):
     return info
 
 
-def getElementData():
+def count_elementos():
+    """
+    count rows in element table
+    """
+    query = QSqlQuery()
+    query.prepare("SELECT count(*) FROM elements")
+    query.exec_()
+    query.first()
+    return query.value(0)
+
+
+def listofIDs():
     '''
-    get all data from each element in database from multiple tables
+    get all ids from elements table
+    '''
+    query = QSqlQuery()
+    query.prepare("SELECT element_id FROM elements")
+    query.exec_()
+    ids = []
+    while query.next():
+        ids.append(query.value(0))
+    return ids
+
+
+def getElementInfobyID(id_elemento):
+    '''
+    get the title and description of an element
+    '''
+    query = QSqlQuery()
+    query.prepare(
+        "SELECT element_metadata, text FROM elements_metadata_text WHERE element_id = :element_id")
+    query.bindValue(':element_id', id_elemento)
+    query.exec_()
+    info = {}
+    while query.next():
+        info[query.value(0)] = query.value(1)
+    return info
+
+
+def wrap_imageWithElement(element_id, order, size, mime_type,
+                          filename, path, img_timestamp,
+                          img_modified_ts, img_metadata):
+    '''
+    insert image in images table
     '''
 
     query = QSqlQuery()
     query.prepare(
         """
-        SELECT 
-        elements.element_id,
-        elements.created_ts,
-        elements.modified_ts,
-        elements_metadata.name,
-        elements_metadata_text.text,
-        images.path
-        FROM elements
-        JOIN elements_metadata_text
-        ON elements_metadata_text.element_id = elements.element_id
-        JOIN images
-        ON elements.element_id = images.element_id
-        JOIN elements_metadata
-        ON elements_metadata_text.element_metadata = elements_metadata.element_metadata_id
-        WHERE elements_metadata.element_metadata_id = 1 
-        OR elements_metadata.element_metadata_id = 2
-        """
-        ) # TODO: add join path to images folder
-    query.exec_()
-    data = []
-    while query.next():
-        data.append(
-            {
-                'element_id': query.value(0),
-                'created_ts': query.value(1),
-                'modified_ts': query.value(2),
-                'metadata': query.value(3),
-                'value': query.value(4),
-                'images_path': query.value(5)
-            }
-        )
-    return data
+        INSERT INTO 
+        images (element_id, "order", size, mime_type, filename, path, img_ts, img_modified_ts, img_metadata) 
+        VALUES (:element_id, :order, :size, :mime_type, :filename, :path, :created_ts, :modified_ts, :metadata)
+        """)
+    query.bindValue(':element_id', element_id)
+    query.bindValue(':order', order)
+    query.bindValue(':size', size)
+    query.bindValue(':mime_type', mime_type)
+    query.bindValue(':filename', filename)
+    query.bindValue(':path', path)
+    query.bindValue(':created_ts', img_timestamp)
+    query.bindValue(':modified_ts', img_modified_ts)
+    query.bindValue(':metadata', img_metadata)
 
-def getElementsDataFrame():
-    '''
-    build a dataframe with the title and description from getElementData
-    '''
-    data = getElementData()
-    df = pd.DataFrame(data)
-    if len(df) != 0:
-        df_pivot = df.set_index(['element_id', 'created_ts', 'modified_ts', 'images_path']).pivot(columns='metadata')['value'].reset_index()
-        df_pivot.rename(columns={'descripción':'descripcion', 'título':'titulo'}, inplace=True)
-        return df_pivot
-    else:
-        return None
+    if not query.exec_():
+        logging.error(query.lastError().text())
+        return False
+    return True
 
-'''
-connectToDatabase()
-#data = getElementData()
-#df = pd.DataFrame(data)
-#df = df.set_index(['element_id', 'created_ts', 'modified_ts', 'images_path']).pivot(columns='metadata')['value'].reset_index()
-#print(df.columns)
-#print(type(getElementsDataFrame()))
-elementos = getElementsDataFrame()
-elemento = elementos.iloc[0]
-print(elemento['descripcion'])
-'''

@@ -19,7 +19,7 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBo
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp, Qt
 
 from ui_main import Ui_MainWindow
-from db import connectToDatabase, createElement, getElementsDataFrame, getLastId, insertInfo, getElementInfo, getLastElementID, getElementsDataFrame
+from db import connectToDatabase, createElement, getLastId, insertInfo, getElementInfo, getLastElementID, listofIDs, getElementInfobyID
 from camcontrol import Cam
 import configparser
 import ctypes
@@ -33,7 +33,7 @@ logger = logging.getLogger("logger")
 # config
 
 config = configparser.ConfigParser()
-config.read('config.cfg')
+config.read(Path('config.cfg'))
 
 version = config['DEFAULT']['version']
 
@@ -164,10 +164,6 @@ class MainWindow(QMainWindow):
     # Funciones para la página de elementos
 
     def display_elements(self):
-        elementos = getElementsDataFrame()
-        print(elementos)
-        print(elementos.shape)
-        print(elementos.columns)
 
         widgets.elementslayout = QGridLayout()
         widgets.elementslayout.setVerticalSpacing(10)
@@ -175,23 +171,27 @@ class MainWindow(QMainWindow):
         widgets.elementslayout.setContentsMargins(0, 0, 0, 0)
         widgets.elementslayout.setObjectName("elementslayout")
 
-        cantidad_elementos = len(elementos)
+        element_ids = listofIDs()
 
-        if cantidad_elementos > 0:
+        if len(element_ids) > 0:
             widgets.proyectos_actuales_label.setText(
-                f"Proyectos actuales [{cantidad_elementos}]")
+                f"Proyectos actuales [{len(element_ids)}]")
         else:
             widgets.proyectos_actuales_label.setText(
                 "No se han creado proyectos.")
 
-        for i in range(cantidad_elementos):
+        for id in reversed(element_ids):
 
-            elemento = elementos.iloc[i]
-            element_id = elemento['element_id']
-            element_name = elemento['titulo']
-            element_description = elemento['descripcion']
+            elemento = getElementInfobyID(id)
+            element_id = id
+            element_name = elemento[1]
+            element_description = elemento[2]
 
-            image_path = Path(IMGDIR + f'{element_id}')
+            print(element_name)
+            print(element_description)
+
+            image_path = Path(IMGDIR + f'/{element_id}/' + 'JPG')
+            print(image_path)
             image_not_found = "imgs/No-Photo-Available.png"
 
             # Display image in the grid
@@ -213,7 +213,7 @@ class MainWindow(QMainWindow):
             label.setObjectName(f"element_{element_id}")
             label.setMaximumSize(100, 100)
             label.setAlignment(Qt.AlignLeft)
-            widgets.elementslayout.addWidget(label, i, 0)
+            widgets.elementslayout.addWidget(label, id, 0)
 
             # Display element name in the grid
             label = QLabel()
@@ -223,7 +223,7 @@ class MainWindow(QMainWindow):
             label.setMinimumSize(QSize(400, 70))
             label.setWordWrap(True)
             label.setAlignment(Qt.AlignLeft)
-            widgets.elementslayout.addWidget(label, i, 1)
+            widgets.elementslayout.addWidget(label, id, 1)
 
             # Set three buttons in the grid
             button = QPushButton()
@@ -237,7 +237,7 @@ class MainWindow(QMainWindow):
             button.setIcon(icon1)
             button.setIconSize(QSize(20, 20))
             button.clicked.connect(self.edit_element)
-            widgets.elementslayout.addWidget(button, i, 2)
+            widgets.elementslayout.addWidget(button, id, 2)
 
             button = QPushButton()
             # button.setText("Exportar")
@@ -250,7 +250,7 @@ class MainWindow(QMainWindow):
             button.setIcon(icon2)
             button.setIconSize(QSize(20, 20))
             button.clicked.connect(self.export_element)
-            widgets.elementslayout.addWidget(button, i, 3)
+            widgets.elementslayout.addWidget(button, id, 3)
 
             button = QPushButton()
             # button.setText("Eliminar")
@@ -263,7 +263,7 @@ class MainWindow(QMainWindow):
             button.setIcon(icon3)
             button.setIconSize(QSize(20, 20))
             button.clicked.connect(self.delete_element)
-            widgets.elementslayout.addWidget(button, i, 4)
+            widgets.elementslayout.addWidget(button, id, 4)
 
         widgets.verticalLayout_20.addLayout(widgets.elementslayout)
 
@@ -551,7 +551,10 @@ class MainWindow(QMainWindow):
         return the number of images in the directory
         and set the label with the number
         '''
-        num_imagenes = len(os.listdir(folder_path))
+        try:
+            num_imagenes = len(os.listdir(folder_path))
+        except FileNotFoundError:
+            num_imagenes = 0
         widgets.cantidadimgsLabel.setText(str(num_imagenes))
 
     def set_scanner_page(self):
@@ -567,7 +570,7 @@ class MainWindow(QMainWindow):
         widgets.elementoTituloLabel.setText(datos_elemento[1])
 
         # create directory to save images
-        folder_path = IMGDIR + str(id_elemento)
+        folder_path = Path(IMGDIR, str(id_elemento))
 
         try:
             os.makedirs(folder_path, exist_ok=True)
@@ -578,7 +581,7 @@ class MainWindow(QMainWindow):
         # set folder_path to label
         widgets.directorio_elementos.setText(os.path.abspath(folder_path))
 
-        self.lenImagenesDir(folder_path)
+        self.lenImagenesDir(Path(folder_path, 'JPG'))
 
         try:
             Cam().cam(cams)
@@ -592,7 +595,7 @@ class MainWindow(QMainWindow):
     def getCaptura(self):
         try:
             self.lenImagenesDir(widgets.directorio_elementos.text())
-            Cam().captura(cams)
+            
             # get the last images from the directory
             # and show it in the label
 
@@ -608,6 +611,11 @@ class MainWindow(QMainWindow):
                 if widgets.folioizqLineEdit.text() != widgets.folioderLineEdit.text():
                     left_img_name = widgets.folioizqLineEdit.text() + '.jpg'
                     right_img_name = widgets.folioderLineEdit.text() + '.jpg'
+
+                    # save the images
+                    element_id = widgets.elementoIDLabel.text()
+
+                    Cam().captura(cams, element_id, left_img_name.replace('.jpg', ''), right_img_name.replace('.jpg', ''))
 
                     left_img_path = widgets.directorio_elementos.text() + '/' + left_img_name
                     right_img_path = widgets.directorio_elementos.text() + '/' + right_img_name
@@ -637,6 +645,9 @@ class MainWindow(QMainWindow):
         # erase the images
         widgets.imagenizqLabel.setPixmap(QPixmap())
         widgets.imagederLabel.setPixmap(QPixmap())
+        # actualiza la cantidad de imagenes en la carpeta
+        self.lenImagenesDir(Path(widgets.directorio_elementos.text(), 'JPG'))
+
         # back to captura widget
         widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
 

@@ -639,7 +639,7 @@ QLabel {
                    <x>0</x>
                    <y>0</y>
                    <width>677</width>
-                   <height>310</height>
+                   <height>307</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -964,7 +964,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>660</width>
+                          <width>634</width>
                           <height>468</height>
                          </rect>
                         </property>
@@ -1367,7 +1367,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>633</width>
+                          <width>634</width>
                           <height>450</height>
                          </rect>
                         </property>
@@ -1773,7 +1773,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>633</width>
+                          <width>634</width>
                           <height>410</height>
                          </rect>
                         </property>
@@ -2152,7 +2152,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>638</width>
+                          <width>641</width>
                           <height>450</height>
                          </rect>
                         </property>
@@ -2570,7 +2570,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>610</width>
+                          <width>611</width>
                           <height>610</height>
                          </rect>
                         </property>

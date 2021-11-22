@@ -55,7 +55,7 @@ class Cam:
         c1_on.start()
         c2_on.start()
 
-    def _shoot(self, dev, dng=True):
+    def _shoot(self, dev, element_id, folio, dng=True):
         '''
         dev = el dispositivo conectado y en modo rec() [usar camcontrol.Cam().cam()]
         dng = True. En modo False no guarda imágenes dng en la memoria de la cámara. 
@@ -70,20 +70,20 @@ class Cam:
         imgdata = dev.shoot(wait=True, dng=dng, stream=False,
                             download_after=True, remove_after=True, shutter_speed=shutter)
 
-        obj_descarga = DescargarIMGS(imgdata, 'testing', dev)
+        obj_descarga = DescargarIMGS(imgdata, element_id, folio, dev)
         # descarga jpg
         obj_descarga.descarga_jpg()
         if not dng == False:
             # descarga dng
             obj_descarga.descarga_dng()
 
-    def captura(self, dev_list):
+    def captura(self, dev_list, element_id, left_folio, right_folio):
         '''
         Realiza la captura en ambas cámaras casi simultáneamente.
         '''
 
-        c1 = mp.Process(target=self._shoot, args=(dev_list[0],))
-        c2 = mp.Process(target=self._shoot, args=(dev_list[1],))
+        c1 = mp.Process(target=self._shoot, args=(dev_list[0], element_id, left_folio))
+        c2 = mp.Process(target=self._shoot, args=(dev_list[1], element_id, right_folio))
 
         c1.start()
         c2.start()
