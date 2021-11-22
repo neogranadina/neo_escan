@@ -68,6 +68,13 @@ sudo mv /usr/share/gvfs/mounts/gphoto2.mount /usr/share/gvfs/mounts/disable_gpho
 sudo mv /usr/share/gvfs/remote-volume-monitors/gphoto2.monitor /usr/share/gvfs/remote-volume-monitors/disable_gphoto2.monitor
 sudo mv /usr/lib/gvfs/gvfs-gphoto2-volume-monitor /usr/lib/gvfs/disable_gvfs-gphoto2-volume-monitor
 
+echo crear un acceso directo en el escritorio de pi
+touch /home/pi/Desktop/neo_escan.sh
+echo "echo abrir Neo Escan" > /home/pi/Desktop/neo_escan.sh
+echo "cd ../Documents/neo_escan" >> /home/pi/Desktop/neo_escan.sh
+echo "python3 main.py" >> /home/pi/Desktop/neo_escan.sh
+chmod +x /home/pi/Desktop/neo_escan.sh
+
 echo el sistema se reiniciará en cinco segundos
 sleep 5
 sudo reboot

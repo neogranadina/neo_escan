@@ -1,10 +1,12 @@
 # Escáner de Neogranadina *Nombre por definir :p
 
-> :warning: Este programa requiere [Lua](http://www.lua.org/home.html), por lo que se recomienda su instalación en sistemas Unix. El programa está construido para Raspberry Pi OS, pueden presentarse errores en Ubuntu, Debian u otras distribuciones de Linux.
+> :warning: Este programa requiere [Lua](http://www.lua.org/home.html), por lo que se recomienda su instalación en sistemas Unix. El programa está construido para Raspberry Pi OS 32 bit "Buster".
+
+[Descargar la imagen de Raspberry desde este enlace](https://downloads.raspberrypi.org/raspios_full_armhf/images/raspios_full_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-full.zip)
 
 ## Instalación
 
-En entornos de desarrollo es sumamente recomendado crear previamente un entorno virtual:
+En entornos de desarrollo es recomendado crear previamente un entorno virtual (opcional):
 
 ```shell
 python3 -m venv escan_env --system-site-packages
@@ -30,7 +32,7 @@ chmod +x install_escan.sh
 ./install_escan.sh
 ```
 
-> :warning: En Raspberry es necesario reiniciar la máquina para que la aplicación corra sin errores.
+> :warning: Se reiniciará el sistema después de ejecutar el script.
 
 Lanzar la aplicación con
 
