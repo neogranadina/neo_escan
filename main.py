@@ -232,7 +232,7 @@ class MainWindow(QMainWindow):
             button.setMinimumSize(QSize(42, 42))
             button.setMaximumSize(QSize(42, 42))
             icon1 = QIcon()
-            icon1.addFile(u":/imgs/imgs/icons/pencil-on-a-square-outline.svg",
+            icon1.addFile("imgs/icons/pencil-on-a-square-outline.svg",
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon1)
             button.setIconSize(QSize(20, 20))
@@ -245,7 +245,7 @@ class MainWindow(QMainWindow):
             button.setMinimumSize(QSize(42, 42))
             button.setMaximumSize(QSize(42, 42))
             icon2 = QIcon()
-            icon2.addFile(u":/imgs/imgs/icons/download-symbol.svg",
+            icon2.addFile("imgs/icons/download-symbol.svg",
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon2)
             button.setIconSize(QSize(20, 20))
@@ -258,7 +258,7 @@ class MainWindow(QMainWindow):
             button.setMinimumSize(QSize(42, 42))
             button.setMaximumSize(QSize(42, 42))
             icon3 = QIcon()
-            icon3.addFile(u":/imgs/imgs/icons/trash-can-with-cover-from-side-view.svg",
+            icon3.addFile("imgs/icons/trash-can-with-cover-from-side-view.svg",
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon3)
             button.setIconSize(QSize(20, 20))

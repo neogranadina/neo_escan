@@ -121,7 +121,7 @@ padding-bottom: 5px;
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="resources.qrc">:/imgs/imgs/Neogranadina_header_white.svg</pixmap>
+          <pixmap>imgs/Neogranadina_header_white.svg</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -284,11 +284,20 @@ border: none;</string>
          <property name="styleSheet">
           <string notr="true">QWidget {background-color: rgba(0, 0, 0,.7);}
 
+QLabel {
+	color: rgba(255,255,255,.9);
+	background-color: transparent;
+	background-position: center top;
+	padding-bottom: 5px;
+	background-repeat: no-repeat;
+}
+
 QPushButton {
 	color: rgba(255,255,255,.9);
 	background-color: transparent;
 	background-position: center top;
-	padding-top: 15px;
+	padding-top: 5px;
+	padding-bottom:5px;
 	background-repeat: no-repeat;
 }
 
@@ -327,26 +336,58 @@ background-color: rgba(255, 255, 255,.5);
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-image: url(:/imgs/imgs/icons/pages-interface.svg);
-background-origin: content;</string>
+             <string notr="true"/>
             </property>
             <property name="text">
-             <string>
-
-Inicio</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>imgs/icons/pages-interface.svg</normaloff>imgs/icons/pages-interface.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="inicioLabel">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>18</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>18</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Inicio</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -355,26 +396,43 @@ Inicio</string>
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-image: url(:/imgs/imgs/icons/window-of-four-rounded-squares.svg);
-background-origin: content;</string>
+             <string notr="true"/>
             </property>
             <property name="text">
-             <string>
-
-Metadatos</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>imgs/icons/window-of-four-rounded-squares.svg</normaloff>imgs/icons/window-of-four-rounded-squares.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="metadataLabel">
+            <property name="text">
+             <string>Metadatos</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -383,27 +441,43 @@ Metadatos</string>
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-image: url(:/imgs/imgs/icons/camera-to-take-photos.svg);
-background-origin: content;
-</string>
+             <string notr="true"/>
             </property>
             <property name="text">
-             <string>
-
-Escáner</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>imgs/icons/camera-to-take-photos.svg</normaloff>imgs/icons/camera-to-take-photos.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="escaneLabel">
+            <property name="text">
+             <string>Escáner</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -412,32 +486,43 @@ Escáner</string>
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-image: url(:/imgs/imgs/icons/images-interface-symbol.svg);
-background-origin: content;</string>
+             <string notr="true"/>
             </property>
             <property name="text">
-             <string>
-
-Imágenes</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>imgs/icons/images-interface-symbol.svg</normaloff>imgs/icons/images-interface-symbol.svg</iconset>
             </property>
             <property name="iconSize">
              <size>
-              <width>34</width>
-              <height>34</height>
+              <width>40</width>
+              <height>40</height>
              </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="imagenesLabel">
+            <property name="text">
+             <string>Imágenes</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -446,26 +531,43 @@ Imágenes</string>
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
               <width>16777215</width>
-              <height>81</height>
+              <height>70</height>
              </size>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-image: url(:/imgs/imgs/icons/download-symbol.svg);
-background-origin: content;</string>
+             <string notr="true"/>
             </property>
             <property name="text">
-             <string>
-
-Exportar</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>imgs/icons/download-symbol.svg</normaloff>imgs/icons/download-symbol.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>40</width>
+              <height>40</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="exportarLabel">
+            <property name="text">
+             <string>Exportar</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -512,7 +614,7 @@ Exportar</string>
              <string notr="true"/>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="inicioPage">
              <property name="styleSheet">
@@ -797,8 +899,8 @@ QPushButton#backtoInicioButton::hover {
                        <string>  Volver al inicio</string>
                       </property>
                       <property name="icon">
-                       <iconset resource="resources.qrc">
-                        <normaloff>:/imgs/imgs/icons/left-arrowhead-in-a-circle.svg</normaloff>:/imgs/imgs/icons/left-arrowhead-in-a-circle.svg</iconset>
+                       <iconset>
+                        <normaloff>imgs/icons/left-arrowhead-in-a-circle.svg</normaloff>imgs/icons/left-arrowhead-in-a-circle.svg</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -874,8 +976,8 @@ QPushButton#backtoInicioButton::hover {
                         <string>Legajo</string>
                        </property>
                        <property name="icon">
-                        <iconset resource="resources.qrc">
-                         <normaloff>:/imgs/imgs/icons/folder-check-symbol.svg</normaloff>:/imgs/imgs/icons/folder-check-symbol.svg</iconset>
+                        <iconset>
+                         <normaloff>imgs/icons/folder-check-symbol.svg</normaloff>imgs/icons/folder-check-symbol.svg</iconset>
                        </property>
                       </item>
                       <item>
@@ -883,8 +985,8 @@ QPushButton#backtoInicioButton::hover {
                         <string>Documento</string>
                        </property>
                        <property name="icon">
-                        <iconset resource="resources.qrc">
-                         <normaloff>:/imgs/imgs/icons/documents-rounded-square-symbol.svg</normaloff>:/imgs/imgs/icons/documents-rounded-square-symbol.svg</iconset>
+                        <iconset>
+                         <normaloff>imgs/icons/documents-rounded-square-symbol.svg</normaloff>imgs/icons/documents-rounded-square-symbol.svg</iconset>
                        </property>
                       </item>
                       <item>
@@ -892,8 +994,8 @@ QPushButton#backtoInicioButton::hover {
                         <string>Imagen</string>
                        </property>
                        <property name="icon">
-                        <iconset resource="resources.qrc">
-                         <normaloff>:/imgs/imgs/icons/image-interface-symbol-with-a-landscape.svg</normaloff>:/imgs/imgs/icons/image-interface-symbol-with-a-landscape.svg</iconset>
+                        <iconset>
+                         <normaloff>imgs/icons/image-interface-symbol-with-a-landscape.svg</normaloff>imgs/icons/image-interface-symbol-with-a-landscape.svg</iconset>
                        </property>
                       </item>
                       <item>
@@ -901,8 +1003,8 @@ QPushButton#backtoInicioButton::hover {
                         <string>Periódico / revista</string>
                        </property>
                        <property name="icon">
-                        <iconset resource="resources.qrc">
-                         <normaloff>:/imgs/imgs/icons/news-interface-symbol.svg</normaloff>:/imgs/imgs/icons/news-interface-symbol.svg</iconset>
+                        <iconset>
+                         <normaloff>imgs/icons/news-interface-symbol.svg</normaloff>imgs/icons/news-interface-symbol.svg</iconset>
                        </property>
                       </item>
                       <item>
@@ -910,8 +1012,8 @@ QPushButton#backtoInicioButton::hover {
                         <string>Libro</string>
                        </property>
                        <property name="icon">
-                        <iconset resource="resources.qrc">
-                         <normaloff>:/imgs/imgs/icons/open-book.svg</normaloff>:/imgs/imgs/icons/open-book.svg</iconset>
+                        <iconset>
+                         <normaloff>imgs/icons/open-book.svg</normaloff>imgs/icons/open-book.svg</iconset>
                        </property>
                       </item>
                       <item>
@@ -919,8 +1021,8 @@ QPushButton#backtoInicioButton::hover {
                         <string>Sin tipo</string>
                        </property>
                        <property name="icon">
-                        <iconset resource="resources.qrc">
-                         <normaloff>:/imgs/imgs/icons/camera.svg</normaloff>:/imgs/imgs/icons/camera.svg</iconset>
+                        <iconset>
+                         <normaloff>imgs/icons/camera.svg</normaloff>imgs/icons/camera.svg</iconset>
                        </property>
                       </item>
                      </widget>
@@ -964,7 +1066,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>633</width>
+                          <width>660</width>
                           <height>468</height>
                          </rect>
                         </property>
@@ -1291,8 +1393,8 @@ QPushButton#backtoInicioButton::hover {
                               <string>enviar</string>
                              </property>
                              <property name="icon">
-                              <iconset resource="resources.qrc">
-                               <normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                              <iconset>
+                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
                              </property>
                             </widget>
                            </item>
@@ -1366,8 +1468,8 @@ QPushButton#backtoInicioButton::hover {
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
-                          <width>633</width>
+                          <y>-178</y>
+                          <width>660</width>
                           <height>450</height>
                          </rect>
                         </property>
@@ -1745,8 +1847,8 @@ QPushButton#backtoInicioButton::hover {
                               <string>enviar</string>
                              </property>
                              <property name="icon">
-                              <iconset resource="resources.qrc">
-                               <normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                              <iconset>
+                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
                              </property>
                             </widget>
                            </item>
@@ -1772,8 +1874,8 @@ QPushButton#backtoInicioButton::hover {
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
-                          <width>633</width>
+                          <y>-138</y>
+                          <width>660</width>
                           <height>410</height>
                          </rect>
                         </property>
@@ -2091,8 +2193,8 @@ QPushButton#backtoInicioButton::hover {
                               <string>enviar</string>
                              </property>
                              <property name="icon">
-                              <iconset resource="resources.qrc">
-                               <normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                              <iconset>
+                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
                              </property>
                             </widget>
                            </item>
@@ -2151,8 +2253,8 @@ QPushButton#backtoInicioButton::hover {
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
-                          <width>638</width>
+                          <y>-178</y>
+                          <width>660</width>
                           <height>450</height>
                          </rect>
                         </property>
@@ -2545,8 +2647,8 @@ QPushButton#backtoInicioButton::hover {
                               <string>enviar</string>
                              </property>
                              <property name="icon">
-                              <iconset resource="resources.qrc">
-                               <normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                              <iconset>
+                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
                              </property>
                             </widget>
                            </item>
@@ -2569,8 +2671,8 @@ QPushButton#backtoInicioButton::hover {
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
-                          <width>610</width>
+                          <y>-338</y>
+                          <width>660</width>
                           <height>610</height>
                          </rect>
                         </property>
@@ -3113,8 +3215,8 @@ QPushButton#backtoInicioButton::hover {
                               <string>enviar</string>
                              </property>
                              <property name="icon">
-                              <iconset resource="resources.qrc">
-                               <normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                              <iconset>
+                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
                              </property>
                             </widget>
                            </item>
@@ -3138,8 +3240,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>647</width>
-                          <height>148</height>
+                          <width>677</width>
+                          <height>272</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -3268,8 +3370,8 @@ QPushButton#backtoInicioButton::hover {
                               <string/>
                              </property>
                              <property name="icon">
-                              <iconset resource="resources.qrc">
-                               <normaloff>:/imgs/imgs/icons/black-folder-shape-for-interface.svg</normaloff>:/imgs/imgs/icons/black-folder-shape-for-interface.svg</iconset>
+                              <iconset>
+                               <normaloff>imgs/icons/black-folder-shape-for-interface.svg</normaloff>imgs/icons/black-folder-shape-for-interface.svg</iconset>
                              </property>
                             </widget>
                            </item>
@@ -3305,8 +3407,8 @@ QPushButton#backtoInicioButton::hover {
                               <string>enviar</string>
                              </property>
                              <property name="icon">
-                              <iconset resource="resources.qrc">
-                               <normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</normaloff>:/imgs/imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                              <iconset>
+                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
                              </property>
                             </widget>
                            </item>
@@ -3451,7 +3553,7 @@ QPushButton#backtoInicioButton::hover {
                             <string/>
                            </property>
                            <property name="pixmap">
-                            <pixmap resource="resources.qrc">:/imgs/imgs/icons/list-interface-symbol.svg</pixmap>
+                            <pixmap>imgs/icons/list-interface-symbol.svg</pixmap>
                            </property>
                            <property name="scaledContents">
                             <bool>true</bool>
@@ -3616,8 +3718,8 @@ QPushButton::hover {
                             <string/>
                            </property>
                            <property name="icon">
-                            <iconset resource="resources.qrc">
-                             <normaloff>:/imgs/imgs/icons/open-black-folder-interface-symbol.svg</normaloff>:/imgs/imgs/icons/open-black-folder-interface-symbol.svg</iconset>
+                            <iconset>
+                             <normaloff>imgs/icons/open-black-folder-interface-symbol.svg</normaloff>imgs/icons/open-black-folder-interface-symbol.svg</iconset>
                            </property>
                            <property name="iconSize">
                             <size>
@@ -3811,7 +3913,7 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                        </size>
                       </property>
                       <property name="currentIndex">
-                       <number>0</number>
+                       <number>1</number>
                       </property>
                       <widget class="QWidget" name="captura">
                        <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -3854,8 +3956,8 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                            <string>capturar</string>
                           </property>
                           <property name="icon">
-                           <iconset resource="resources.qrc">
-                            <normaloff>:/imgs/imgs/icons/camera-to-take-photos_black.svg</normaloff>:/imgs/imgs/icons/camera-to-take-photos_black.svg</iconset>
+                           <iconset>
+                            <normaloff>imgs/icons/camera-to-take-photos_black.svg</normaloff>imgs/icons/camera-to-take-photos_black.svg</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -3908,8 +4010,8 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                            <string>validar</string>
                           </property>
                           <property name="icon">
-                           <iconset resource="resources.qrc">
-                            <normaloff>:/imgs/imgs/icons/check-sign.svg</normaloff>:/imgs/imgs/icons/check-sign.svg</iconset>
+                           <iconset>
+                            <normaloff>imgs/icons/check-sign.svg</normaloff>imgs/icons/check-sign.svg</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -3945,8 +4047,8 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                            <string>retomar</string>
                           </property>
                           <property name="icon">
-                           <iconset resource="resources.qrc">
-                            <normaloff>:/imgs/imgs/icons/undo-circular-arrow.svg</normaloff>:/imgs/imgs/icons/undo-circular-arrow.svg</iconset>
+                           <iconset>
+                            <normaloff>imgs/icons/undo-circular-arrow.svg</normaloff>imgs/icons/undo-circular-arrow.svg</iconset>
                           </property>
                           <property name="iconSize">
                            <size>

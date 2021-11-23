@@ -56,7 +56,7 @@ class Ui_MainWindow(object):
 "padding-top: 5px;\n"
 "padding-bottom: 5px;\n"
 "")
-        self.neoLabel.setPixmap(QPixmap(u":/imgs/imgs/Neogranadina_header_white.svg"))
+        self.neoLabel.setPixmap(QPixmap(u"imgs/Neogranadina_header_white.svg"))
         self.neoLabel.setScaledContents(True)
 
         self.horizontalLayout_2.addWidget(self.neoLabel)
@@ -102,11 +102,20 @@ class Ui_MainWindow(object):
         self.menu_bar.setPalette(palette)
         self.menu_bar.setStyleSheet(u"QWidget {background-color: rgba(0, 0, 0,.7);}\n"
 "\n"
+"QLabel {\n"
+"	color: rgba(255,255,255,.9);\n"
+"	background-color: transparent;\n"
+"	background-position: center top;\n"
+"	padding-bottom: 5px;\n"
+"	background-repeat: no-repeat;\n"
+"}\n"
+"\n"
 "QPushButton {\n"
 "	color: rgba(255,255,255,.9);\n"
 "	background-color: transparent;\n"
 "	background-position: center top;\n"
-"	padding-top: 15px;\n"
+"	padding-top: 5px;\n"
+"	padding-bottom:5px;\n"
 "	background-repeat: no-repeat;\n"
 "}\n"
 "\n"
@@ -129,55 +138,101 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.inicioButton = QPushButton(self.menu_bar)
         self.inicioButton.setObjectName(u"inicioButton")
-        self.inicioButton.setMinimumSize(QSize(0, 81))
-        self.inicioButton.setMaximumSize(QSize(16777215, 81))
+        self.inicioButton.setMinimumSize(QSize(0, 70))
+        self.inicioButton.setMaximumSize(QSize(16777215, 70))
         self.inicioButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.inicioButton.setStyleSheet(u"background-image: url(:/imgs/imgs/icons/pages-interface.svg);\n"
-"background-origin: content;")
+        self.inicioButton.setStyleSheet(u"")
+        icon1 = QIcon()
+        icon1.addFile(u"imgs/icons/pages-interface.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.inicioButton.setIcon(icon1)
+        self.inicioButton.setIconSize(QSize(40, 40))
 
         self.verticalLayout_2.addWidget(self.inicioButton)
 
+        self.inicioLabel = QLabel(self.menu_bar)
+        self.inicioLabel.setObjectName(u"inicioLabel")
+        self.inicioLabel.setMinimumSize(QSize(0, 18))
+        self.inicioLabel.setMaximumSize(QSize(16777215, 18))
+        self.inicioLabel.setStyleSheet(u"color: rgb(255, 255, 255);")
+        self.inicioLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.inicioLabel)
+
         self.coleccionesButton = QPushButton(self.menu_bar)
         self.coleccionesButton.setObjectName(u"coleccionesButton")
-        self.coleccionesButton.setMinimumSize(QSize(0, 81))
-        self.coleccionesButton.setMaximumSize(QSize(16777215, 81))
+        self.coleccionesButton.setMinimumSize(QSize(0, 70))
+        self.coleccionesButton.setMaximumSize(QSize(16777215, 70))
         self.coleccionesButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.coleccionesButton.setStyleSheet(u"background-image: url(:/imgs/imgs/icons/window-of-four-rounded-squares.svg);\n"
-"background-origin: content;")
+        self.coleccionesButton.setStyleSheet(u"")
+        icon2 = QIcon()
+        icon2.addFile(u"imgs/icons/window-of-four-rounded-squares.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.coleccionesButton.setIcon(icon2)
+        self.coleccionesButton.setIconSize(QSize(40, 40))
 
         self.verticalLayout_2.addWidget(self.coleccionesButton)
 
+        self.metadataLabel = QLabel(self.menu_bar)
+        self.metadataLabel.setObjectName(u"metadataLabel")
+        self.metadataLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.metadataLabel)
+
         self.escanerButton = QPushButton(self.menu_bar)
         self.escanerButton.setObjectName(u"escanerButton")
-        self.escanerButton.setMinimumSize(QSize(0, 81))
-        self.escanerButton.setMaximumSize(QSize(16777215, 81))
+        self.escanerButton.setMinimumSize(QSize(0, 70))
+        self.escanerButton.setMaximumSize(QSize(16777215, 70))
         self.escanerButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.escanerButton.setStyleSheet(u"background-image: url(:/imgs/imgs/icons/camera-to-take-photos.svg);\n"
-"background-origin: content;\n"
-"")
+        self.escanerButton.setStyleSheet(u"")
+        icon3 = QIcon()
+        icon3.addFile(u"imgs/icons/camera-to-take-photos.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.escanerButton.setIcon(icon3)
+        self.escanerButton.setIconSize(QSize(40, 40))
 
         self.verticalLayout_2.addWidget(self.escanerButton)
 
+        self.escaneLabel = QLabel(self.menu_bar)
+        self.escaneLabel.setObjectName(u"escaneLabel")
+        self.escaneLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.escaneLabel)
+
         self.imagenesButton = QPushButton(self.menu_bar)
         self.imagenesButton.setObjectName(u"imagenesButton")
-        self.imagenesButton.setMinimumSize(QSize(0, 81))
-        self.imagenesButton.setMaximumSize(QSize(16777215, 81))
+        self.imagenesButton.setMinimumSize(QSize(0, 70))
+        self.imagenesButton.setMaximumSize(QSize(16777215, 70))
         self.imagenesButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.imagenesButton.setStyleSheet(u"background-image: url(:/imgs/imgs/icons/images-interface-symbol.svg);\n"
-"background-origin: content;")
-        self.imagenesButton.setIconSize(QSize(34, 34))
+        self.imagenesButton.setStyleSheet(u"")
+        icon4 = QIcon()
+        icon4.addFile(u"imgs/icons/images-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.imagenesButton.setIcon(icon4)
+        self.imagenesButton.setIconSize(QSize(40, 40))
 
         self.verticalLayout_2.addWidget(self.imagenesButton)
 
+        self.imagenesLabel = QLabel(self.menu_bar)
+        self.imagenesLabel.setObjectName(u"imagenesLabel")
+        self.imagenesLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.imagenesLabel)
+
         self.exportarButton = QPushButton(self.menu_bar)
         self.exportarButton.setObjectName(u"exportarButton")
-        self.exportarButton.setMinimumSize(QSize(0, 81))
-        self.exportarButton.setMaximumSize(QSize(16777215, 81))
+        self.exportarButton.setMinimumSize(QSize(0, 70))
+        self.exportarButton.setMaximumSize(QSize(16777215, 70))
         self.exportarButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.exportarButton.setStyleSheet(u"background-image: url(:/imgs/imgs/icons/download-symbol.svg);\n"
-"background-origin: content;")
+        self.exportarButton.setStyleSheet(u"")
+        icon5 = QIcon()
+        icon5.addFile(u"imgs/icons/download-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.exportarButton.setIcon(icon5)
+        self.exportarButton.setIconSize(QSize(40, 40))
 
         self.verticalLayout_2.addWidget(self.exportarButton)
+
+        self.exportarLabel = QLabel(self.menu_bar)
+        self.exportarLabel.setObjectName(u"exportarLabel")
+        self.exportarLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.exportarLabel)
 
         self.verticalSpacer = QSpacerItem(20, 384, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -237,9 +292,9 @@ class Ui_MainWindow(object):
         self.nuevoProyectoButton.setMinimumSize(QSize(40, 40))
         self.nuevoProyectoButton.setMaximumSize(QSize(40, 40))
         self.nuevoProyectoButton.setStyleSheet(u"")
-        icon1 = QIcon()
-        icon1.addFile(u"imgs/icons/plus-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.nuevoProyectoButton.setIcon(icon1)
+        icon6 = QIcon()
+        icon6.addFile(u"imgs/icons/plus-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.nuevoProyectoButton.setIcon(icon6)
         self.nuevoProyectoButton.setIconSize(QSize(20, 20))
 
         self.formLayout_6.setWidget(0, QFormLayout.FieldRole, self.nuevoProyectoButton)
@@ -376,9 +431,9 @@ class Ui_MainWindow(object):
         font3.setUnderline(False)
         self.backtoInicioButton.setFont(font3)
         self.backtoInicioButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon2 = QIcon()
-        icon2.addFile(u":/imgs/imgs/icons/left-arrowhead-in-a-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.backtoInicioButton.setIcon(icon2)
+        icon7 = QIcon()
+        icon7.addFile(u"imgs/icons/left-arrowhead-in-a-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.backtoInicioButton.setIcon(icon7)
         self.backtoInicioButton.setIconSize(QSize(25, 25))
 
         self.horizontalLayout_9.addWidget(self.backtoInicioButton)
@@ -404,24 +459,24 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.addWidget(self.tipodocLabel)
 
         self.tipodocComboBox = QComboBox(self.formChanger)
-        icon3 = QIcon()
-        icon3.addFile(u":/imgs/imgs/icons/folder-check-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tipodocComboBox.addItem(icon3, "")
-        icon4 = QIcon()
-        icon4.addFile(u":/imgs/imgs/icons/documents-rounded-square-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tipodocComboBox.addItem(icon4, "")
-        icon5 = QIcon()
-        icon5.addFile(u":/imgs/imgs/icons/image-interface-symbol-with-a-landscape.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tipodocComboBox.addItem(icon5, "")
-        icon6 = QIcon()
-        icon6.addFile(u":/imgs/imgs/icons/news-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tipodocComboBox.addItem(icon6, "")
-        icon7 = QIcon()
-        icon7.addFile(u":/imgs/imgs/icons/open-book.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tipodocComboBox.addItem(icon7, "")
         icon8 = QIcon()
-        icon8.addFile(u":/imgs/imgs/icons/camera.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon8.addFile(u"imgs/icons/folder-check-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.tipodocComboBox.addItem(icon8, "")
+        icon9 = QIcon()
+        icon9.addFile(u"imgs/icons/documents-rounded-square-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tipodocComboBox.addItem(icon9, "")
+        icon10 = QIcon()
+        icon10.addFile(u"imgs/icons/image-interface-symbol-with-a-landscape.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tipodocComboBox.addItem(icon10, "")
+        icon11 = QIcon()
+        icon11.addFile(u"imgs/icons/news-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tipodocComboBox.addItem(icon11, "")
+        icon12 = QIcon()
+        icon12.addFile(u"imgs/icons/open-book.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tipodocComboBox.addItem(icon12, "")
+        icon13 = QIcon()
+        icon13.addFile(u"imgs/icons/camera.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tipodocComboBox.addItem(icon13, "")
         self.tipodocComboBox.setObjectName(u"tipodocComboBox")
         self.tipodocComboBox.setMinimumSize(QSize(300, 34))
         self.tipodocComboBox.setMaximumSize(QSize(300, 34))
@@ -449,7 +504,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 633, 468))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 660, 468))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.formLayout = QFormLayout()
@@ -578,9 +633,9 @@ class Ui_MainWindow(object):
         self.enviarFormLegajoButton.setMaximumSize(QSize(100, 34))
         self.enviarFormLegajoButton.setFont(font4)
         self.enviarFormLegajoButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon9 = QIcon()
-        icon9.addFile(u":/imgs/imgs/icons/fast-forward-double-right-arrows.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.enviarFormLegajoButton.setIcon(icon9)
+        icon14 = QIcon()
+        icon14.addFile(u"imgs/icons/fast-forward-double-right-arrows.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.enviarFormLegajoButton.setIcon(icon14)
 
         self.formLayout.setWidget(12, QFormLayout.FieldRole, self.enviarFormLegajoButton)
 
@@ -622,7 +677,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 633, 450))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -178, 660, 450))
         self.scrollAreaWidgetContents_3.setStyleSheet(u"")
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
@@ -766,7 +821,7 @@ class Ui_MainWindow(object):
         self.enviarFormDocumentoButton.setMaximumSize(QSize(100, 34))
         self.enviarFormDocumentoButton.setFont(font4)
         self.enviarFormDocumentoButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormDocumentoButton.setIcon(icon9)
+        self.enviarFormDocumentoButton.setIcon(icon14)
 
         self.formLayout_3.setWidget(9, QFormLayout.FieldRole, self.enviarFormDocumentoButton)
 
@@ -788,7 +843,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 633, 410))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, -138, 660, 410))
         self.scrollAreaWidgetContents_4.setStyleSheet(u"")
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
@@ -907,7 +962,7 @@ class Ui_MainWindow(object):
         self.enviarFormImageButton.setMaximumSize(QSize(100, 34))
         self.enviarFormImageButton.setFont(font4)
         self.enviarFormImageButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormImageButton.setIcon(icon9)
+        self.enviarFormImageButton.setIcon(icon14)
 
         self.formLayout_4.setWidget(8, QFormLayout.FieldRole, self.enviarFormImageButton)
 
@@ -942,7 +997,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 638, 450))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, -178, 660, 450))
         self.verticalLayout_15 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.formLayout_2 = QFormLayout()
@@ -1088,7 +1143,7 @@ class Ui_MainWindow(object):
         self.enviarFormSeriadaButton.setMaximumSize(QSize(100, 34))
         self.enviarFormSeriadaButton.setFont(font4)
         self.enviarFormSeriadaButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormSeriadaButton.setIcon(icon9)
+        self.enviarFormSeriadaButton.setIcon(icon14)
 
         self.formLayout_2.setWidget(9, QFormLayout.FieldRole, self.enviarFormSeriadaButton)
 
@@ -1109,7 +1164,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 610, 610))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, -338, 660, 610))
         self.verticalLayout_16 = QVBoxLayout(self.scrollAreaWidgetContents_6)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.formLayout_5 = QFormLayout()
@@ -1312,7 +1367,7 @@ class Ui_MainWindow(object):
         self.enviarFormLibroButton.setMaximumSize(QSize(100, 34))
         self.enviarFormLibroButton.setFont(font4)
         self.enviarFormLibroButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormLibroButton.setIcon(icon9)
+        self.enviarFormLibroButton.setIcon(icon14)
 
         self.formLayout_5.setWidget(13, QFormLayout.FieldRole, self.enviarFormLibroButton)
 
@@ -1333,7 +1388,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 647, 148))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 677, 272))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.gridLayout = QGridLayout()
@@ -1377,9 +1432,9 @@ class Ui_MainWindow(object):
         self.browserDirButton.setMaximumSize(QSize(42, 42))
         self.browserDirButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.browserDirButton.setStyleSheet(u"background-color: rgb(225, 225, 225);")
-        icon10 = QIcon()
-        icon10.addFile(u":/imgs/imgs/icons/black-folder-shape-for-interface.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.browserDirButton.setIcon(icon10)
+        icon15 = QIcon()
+        icon15.addFile(u"imgs/icons/black-folder-shape-for-interface.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.browserDirButton.setIcon(icon15)
 
         self.gridLayout.addWidget(self.browserDirButton, 1, 2, 1, 1)
 
@@ -1391,7 +1446,7 @@ class Ui_MainWindow(object):
         self.enviarFormSimpleButton.setMaximumSize(QSize(100, 34))
         self.enviarFormSimpleButton.setFont(font4)
         self.enviarFormSimpleButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormSimpleButton.setIcon(icon9)
+        self.enviarFormSimpleButton.setIcon(icon14)
 
         self.gridLayout.addWidget(self.enviarFormSimpleButton, 2, 1, 1, 1)
 
@@ -1457,7 +1512,7 @@ class Ui_MainWindow(object):
         self.titulelementoIDLabel.setFont(font5)
         self.titulelementoIDLabel.setCursor(QCursor(Qt.ArrowCursor))
         self.titulelementoIDLabel.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
-        self.titulelementoIDLabel.setPixmap(QPixmap(u":/imgs/imgs/icons/list-interface-symbol.svg"))
+        self.titulelementoIDLabel.setPixmap(QPixmap(u"imgs/icons/list-interface-symbol.svg"))
         self.titulelementoIDLabel.setScaledContents(True)
 
         self.gridLayout_2.addWidget(self.titulelementoIDLabel, 0, 0, 1, 1)
@@ -1529,9 +1584,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(182, 182, 182);\n"
 "}\n"
 "")
-        icon11 = QIcon()
-        icon11.addFile(u":/imgs/imgs/icons/open-black-folder-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.openFolderButton.setIcon(icon11)
+        icon16 = QIcon()
+        icon16.addFile(u"imgs/icons/open-black-folder-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.openFolderButton.setIcon(icon16)
         self.openFolderButton.setIconSize(QSize(24, 24))
 
         self.gridLayout_4.addWidget(self.openFolderButton, 0, 1, 1, 1)
@@ -1655,9 +1710,9 @@ class Ui_MainWindow(object):
         font6.setPointSize(11)
         self.capturaButton.setFont(font6)
         self.capturaButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon12 = QIcon()
-        icon12.addFile(u":/imgs/imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.capturaButton.setIcon(icon12)
+        icon17 = QIcon()
+        icon17.addFile(u"imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.capturaButton.setIcon(icon17)
         self.capturaButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_10.addWidget(self.capturaButton)
@@ -1677,9 +1732,9 @@ class Ui_MainWindow(object):
         self.validateButton.setMaximumSize(QSize(16777215, 35))
         self.validateButton.setFont(font6)
         self.validateButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon13 = QIcon()
-        icon13.addFile(u":/imgs/imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.validateButton.setIcon(icon13)
+        icon18 = QIcon()
+        icon18.addFile(u"imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.validateButton.setIcon(icon18)
         self.validateButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_11.addWidget(self.validateButton)
@@ -1690,9 +1745,9 @@ class Ui_MainWindow(object):
         self.resetButton.setMaximumSize(QSize(16777215, 35))
         self.resetButton.setFont(font6)
         self.resetButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon14 = QIcon()
-        icon14.addFile(u":/imgs/imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.resetButton.setIcon(icon14)
+        icon19 = QIcon()
+        icon19.addFile(u"imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.resetButton.setIcon(icon19)
         self.resetButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_11.addWidget(self.resetButton)
@@ -1781,9 +1836,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.tipoColeccion.setCurrentIndex(0)
-        self.controlesCamstackedWidget.setCurrentIndex(0)
+        self.controlesCamstackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1793,21 +1848,16 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"NeoEscan", None))
         self.neoLabel.setText("")
         self.versionLabel.setText("")
-        self.inicioButton.setText(QCoreApplication.translate("MainWindow", u"\n"
-"\n"
-"Inicio", None))
-        self.coleccionesButton.setText(QCoreApplication.translate("MainWindow", u"\n"
-"\n"
-"Metadatos", None))
-        self.escanerButton.setText(QCoreApplication.translate("MainWindow", u"\n"
-"\n"
-"Esc\u00e1ner", None))
-        self.imagenesButton.setText(QCoreApplication.translate("MainWindow", u"\n"
-"\n"
-"Im\u00e1genes", None))
-        self.exportarButton.setText(QCoreApplication.translate("MainWindow", u"\n"
-"\n"
-"Exportar", None))
+        self.inicioButton.setText("")
+        self.inicioLabel.setText(QCoreApplication.translate("MainWindow", u"Inicio", None))
+        self.coleccionesButton.setText("")
+        self.metadataLabel.setText(QCoreApplication.translate("MainWindow", u"Metadatos", None))
+        self.escanerButton.setText("")
+        self.escaneLabel.setText(QCoreApplication.translate("MainWindow", u"Esc\u00e1ner", None))
+        self.imagenesButton.setText("")
+        self.imagenesLabel.setText(QCoreApplication.translate("MainWindow", u"Im\u00e1genes", None))
+        self.exportarButton.setText("")
+        self.exportarLabel.setText(QCoreApplication.translate("MainWindow", u"Exportar", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Iniciar nuevo proyecto", None))
         self.nuevoProyectoButton.setText("")
         self.proyectos_actuales_label.setText(QCoreApplication.translate("MainWindow", u"Proyectos actuales", None))
