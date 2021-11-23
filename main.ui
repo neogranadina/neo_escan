@@ -579,8 +579,8 @@ QPushButto#nuevoProyectoButtonn::focus {
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset resource="resources.qrc">
-                    <normaloff>:/imgs/imgs/icons/plus-sign.svg</normaloff>:/imgs/imgs/icons/plus-sign.svg</iconset>
+                   <iconset>
+                    <normaloff>imgs/icons/plus-sign.svg</normaloff>imgs/icons/plus-sign.svg</iconset>
                   </property>
                   <property name="iconSize">
                    <size>
@@ -639,7 +639,7 @@ QLabel {
                    <x>0</x>
                    <y>0</y>
                    <width>677</width>
-                   <height>307</height>
+                   <height>310</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -964,7 +964,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>634</width>
+                          <width>633</width>
                           <height>468</height>
                          </rect>
                         </property>
@@ -1367,7 +1367,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>634</width>
+                          <width>633</width>
                           <height>450</height>
                          </rect>
                         </property>
@@ -1773,7 +1773,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>634</width>
+                          <width>633</width>
                           <height>410</height>
                          </rect>
                         </property>
@@ -2152,7 +2152,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>641</width>
+                          <width>638</width>
                           <height>450</height>
                          </rect>
                         </property>
@@ -2570,7 +2570,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>611</width>
+                          <width>610</width>
                           <height>610</height>
                          </rect>
                         </property>

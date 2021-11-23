@@ -75,6 +75,12 @@ echo "cd ../Documents/neo_escan" >> /home/pi/Desktop/neo_escan.sh
 echo "python3 main.py" >> /home/pi/Desktop/neo_escan.sh
 chmod +x /home/pi/Desktop/neo_escan.sh
 
+echo limpiar archivos de la instalación
+rm -rf lua
+cd ..
+rm -rf lua-5.2.4.tar.gz
+rm -rf lua-5.2.4
+
 echo el sistema se reiniciará en cinco segundos
 sleep 5
 sudo reboot
