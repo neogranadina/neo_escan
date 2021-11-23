@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QIcon, QPixmap, QRegExpValidator
+from PySide2.QtGui import QIcon, QPixmap, QRegExpValidator, QMovie
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGridLayout, QPushButton
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp, Qt
@@ -23,6 +23,7 @@ from db import connectToDatabase, createElement, getLastId, insertInfo, getEleme
 from camcontrol import Cam
 import configparser
 import ctypes
+import time
 
 # logs
 
@@ -156,6 +157,7 @@ class MainWindow(QMainWindow):
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
         elif btnName == "escanerButton":
             self.set_scanner_page()
+            widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
         elif btnName == "imagenesButton":
             widgets.stackedWidget.setCurrentWidget(widgets.imgsPage)
         elif btnName == "exportarButton":
@@ -180,18 +182,14 @@ class MainWindow(QMainWindow):
             widgets.proyectos_actuales_label.setText(
                 "No se han creado proyectos.")
 
-        for id in reversed(element_ids):
+        for id in reversed(element_ids[-5:]):
 
             elemento = getElementInfobyID(id)
             element_id = id
             element_name = elemento[1]
             element_description = elemento[2]
 
-            print(element_name)
-            print(element_description)
-
             image_path = Path(IMGDIR + f'/{element_id}/' + 'JPG')
-            print(image_path)
             image_not_found = "imgs/No-Photo-Available.png"
 
             # Display image in the grid
@@ -617,8 +615,16 @@ class MainWindow(QMainWindow):
 
                     Cam().captura(cams, element_id, left_img_name.replace('.jpg', ''), right_img_name.replace('.jpg', ''))
 
-                    left_img_path = widgets.directorio_elementos.text() + '/' + left_img_name
-                    right_img_path = widgets.directorio_elementos.text() + '/' + right_img_name
+                    left_img_path = widgets.directorio_elementos.text() + '/JPG/' + left_img_name
+                    right_img_path = widgets.directorio_elementos.text() + '/JPG/' + right_img_name
+
+                    movie = QMovie("imgs/ajax-loader.gif")
+                    widgets.imagenizqLabel.setMovie(movie)
+                    widgets.imagederLabel.setMovie(movie)
+                    movie.start() 
+
+                    while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
+                        time.sleep(0.1)
 
                     widgets.imagenizqLabel.setPixmap(QPixmap(left_img_path))
                     widgets.imagederLabel.setPixmap(QPixmap(right_img_path))
@@ -669,7 +675,6 @@ class MainWindow(QMainWindow):
         # back to capture widget
         widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
         self.lenImagenesDir(folder_path)
-
 
 # Fin de las funciones de la aplicación
 
