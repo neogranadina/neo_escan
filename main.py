@@ -24,6 +24,7 @@ from camcontrol import Cam
 import configparser
 import ctypes
 import time
+import threading
 
 # logs
 
@@ -610,28 +611,34 @@ class MainWindow(QMainWindow):
                     left_img_name = widgets.folioizqLineEdit.text() + '.jpg'
                     right_img_name = widgets.folioderLineEdit.text() + '.jpg'
 
-                    # save the images
-                    element_id = widgets.elementoIDLabel.text()
-
-                    Cam().captura(cams, element_id, left_img_name.replace('.jpg', ''), right_img_name.replace('.jpg', ''))
-
                     left_img_path = widgets.directorio_elementos.text() + '/JPG/' + left_img_name
                     right_img_path = widgets.directorio_elementos.text() + '/JPG/' + right_img_name
 
-                    movie = QMovie("imgs/ajax-loader.gif")
-                    widgets.imagenizqLabel.setMovie(movie)
-                    widgets.imagederLabel.setMovie(movie)
-                    movie.start() 
+                    if not os.path.isfile(left_img_path) or not os.path.isfile(right_img_path):
 
-                    while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
-                        time.sleep(0.1)
+                        # save the images
+                        element_id = widgets.elementoIDLabel.text()
 
-                    widgets.imagenizqLabel.setPixmap(QPixmap(left_img_path))
-                    widgets.imagederLabel.setPixmap(QPixmap(right_img_path))
+                        # create a thread to save the images
+                        widgets.statusLabel.setText("capturando imágenes...")
 
-                    # display validation buttons
-                    widgets.controlesCamstackedWidget.setCurrentWidget(
-                        widgets.validar)
+                        Cam().captura(cams, element_id, left_img_name.replace('.jpg', ''), right_img_name.replace('.jpg', ''))
+
+                        while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
+                            time.sleep(0.1)
+
+                        widgets.statusLabel.setText(f"imagen capturada de folios {left_img_name.replace('.jpg', '')} y {right_img_name.replace('.jpg', '')}")
+
+                        widgets.imagenizqLabel.setPixmap(QPixmap(left_img_path))
+                        widgets.imagederLabel.setPixmap(QPixmap(right_img_path))
+
+                        # display validation buttons
+                        widgets.controlesCamstackedWidget.setCurrentWidget(
+                            widgets.validar)
+
+                    else:
+                        QMessageBox().warning(self, "Error",
+                                                    "Las imágenes ya existen", QMessageBox.Ok)
                 else:
                     QMessageBox().warning(self, "Error",
                                                 "Los número de los folios deben ser diferentes", QMessageBox.Ok)
@@ -645,6 +652,7 @@ class MainWindow(QMainWindow):
             restart()
 
     def validateCaptura(self):
+        widgets.statusLabel.setText(f"últimos folios capturados {widgets.folioizqLineEdit.text()} y {widgets.folioderLineEdit.text()}")
         # erase the folio labels
         widgets.folioizqLineEdit.setText('')
         widgets.folioderLineEdit.setText('')
