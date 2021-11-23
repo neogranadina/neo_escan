@@ -88,7 +88,7 @@ class Ui_MainWindow(object):
         self.menu_bar.setMinimumSize(QSize(105, 0))
         self.menu_bar.setMaximumSize(QSize(105, 16777215))
         palette = QPalette()
-        brush = QBrush(QColor(0, 0, 0, 178))
+        brush = QBrush(QColor(255, 255, 255, 255))
         brush.setStyle(Qt.SolidPattern)
         palette.setBrush(QPalette.Active, QPalette.Button, brush)
         palette.setBrush(QPalette.Active, QPalette.Base, brush)
@@ -100,7 +100,7 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Disabled, QPalette.Base, brush)
         palette.setBrush(QPalette.Disabled, QPalette.Window, brush)
         self.menu_bar.setPalette(palette)
-        self.menu_bar.setStyleSheet(u"QWidget {background-color: rgba(0, 0, 0,.7);}\n"
+        self.menu_bar.setStyleSheet(u"QFrame {background-color: rgba(0, 0, 0,.7);}\n"
 "\n"
 "QLabel {\n"
 "	color: rgba(255,255,255,.9);\n"
@@ -136,7 +136,15 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.inicioButton = QPushButton(self.menu_bar)
+        self.frame = QFrame(self.menu_bar)
+        self.frame.setObjectName(u"frame")
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_21 = QVBoxLayout(self.frame)
+        self.verticalLayout_21.setSpacing(0)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
+        self.inicioButton = QPushButton(self.frame)
         self.inicioButton.setObjectName(u"inicioButton")
         self.inicioButton.setMinimumSize(QSize(0, 80))
         self.inicioButton.setMaximumSize(QSize(16777215, 80))
@@ -147,18 +155,18 @@ class Ui_MainWindow(object):
         self.inicioButton.setIcon(icon1)
         self.inicioButton.setIconSize(QSize(40, 40))
 
-        self.verticalLayout_2.addWidget(self.inicioButton)
+        self.verticalLayout_21.addWidget(self.inicioButton)
 
-        self.inicioLabel = QLabel(self.menu_bar)
+        self.inicioLabel = QLabel(self.frame)
         self.inicioLabel.setObjectName(u"inicioLabel")
         self.inicioLabel.setMinimumSize(QSize(0, 18))
         self.inicioLabel.setMaximumSize(QSize(16777215, 18))
         self.inicioLabel.setStyleSheet(u"color: rgb(255, 255, 255);")
         self.inicioLabel.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_2.addWidget(self.inicioLabel)
+        self.verticalLayout_21.addWidget(self.inicioLabel)
 
-        self.coleccionesButton = QPushButton(self.menu_bar)
+        self.coleccionesButton = QPushButton(self.frame)
         self.coleccionesButton.setObjectName(u"coleccionesButton")
         self.coleccionesButton.setMinimumSize(QSize(0, 80))
         self.coleccionesButton.setMaximumSize(QSize(16777215, 80))
@@ -169,15 +177,15 @@ class Ui_MainWindow(object):
         self.coleccionesButton.setIcon(icon2)
         self.coleccionesButton.setIconSize(QSize(40, 40))
 
-        self.verticalLayout_2.addWidget(self.coleccionesButton)
+        self.verticalLayout_21.addWidget(self.coleccionesButton)
 
-        self.metadataLabel = QLabel(self.menu_bar)
+        self.metadataLabel = QLabel(self.frame)
         self.metadataLabel.setObjectName(u"metadataLabel")
         self.metadataLabel.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_2.addWidget(self.metadataLabel)
+        self.verticalLayout_21.addWidget(self.metadataLabel)
 
-        self.escanerButton = QPushButton(self.menu_bar)
+        self.escanerButton = QPushButton(self.frame)
         self.escanerButton.setObjectName(u"escanerButton")
         self.escanerButton.setMinimumSize(QSize(0, 80))
         self.escanerButton.setMaximumSize(QSize(16777215, 80))
@@ -188,15 +196,15 @@ class Ui_MainWindow(object):
         self.escanerButton.setIcon(icon3)
         self.escanerButton.setIconSize(QSize(40, 40))
 
-        self.verticalLayout_2.addWidget(self.escanerButton)
+        self.verticalLayout_21.addWidget(self.escanerButton)
 
-        self.escaneLabel = QLabel(self.menu_bar)
+        self.escaneLabel = QLabel(self.frame)
         self.escaneLabel.setObjectName(u"escaneLabel")
         self.escaneLabel.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_2.addWidget(self.escaneLabel)
+        self.verticalLayout_21.addWidget(self.escaneLabel)
 
-        self.imagenesButton = QPushButton(self.menu_bar)
+        self.imagenesButton = QPushButton(self.frame)
         self.imagenesButton.setObjectName(u"imagenesButton")
         self.imagenesButton.setMinimumSize(QSize(0, 80))
         self.imagenesButton.setMaximumSize(QSize(16777215, 80))
@@ -207,15 +215,15 @@ class Ui_MainWindow(object):
         self.imagenesButton.setIcon(icon4)
         self.imagenesButton.setIconSize(QSize(40, 40))
 
-        self.verticalLayout_2.addWidget(self.imagenesButton)
+        self.verticalLayout_21.addWidget(self.imagenesButton)
 
-        self.imagenesLabel = QLabel(self.menu_bar)
+        self.imagenesLabel = QLabel(self.frame)
         self.imagenesLabel.setObjectName(u"imagenesLabel")
         self.imagenesLabel.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_2.addWidget(self.imagenesLabel)
+        self.verticalLayout_21.addWidget(self.imagenesLabel)
 
-        self.exportarButton = QPushButton(self.menu_bar)
+        self.exportarButton = QPushButton(self.frame)
         self.exportarButton.setObjectName(u"exportarButton")
         self.exportarButton.setMinimumSize(QSize(0, 80))
         self.exportarButton.setMaximumSize(QSize(16777215, 80))
@@ -226,13 +234,16 @@ class Ui_MainWindow(object):
         self.exportarButton.setIcon(icon5)
         self.exportarButton.setIconSize(QSize(40, 40))
 
-        self.verticalLayout_2.addWidget(self.exportarButton)
+        self.verticalLayout_21.addWidget(self.exportarButton)
 
-        self.exportarLabel = QLabel(self.menu_bar)
+        self.exportarLabel = QLabel(self.frame)
         self.exportarLabel.setObjectName(u"exportarLabel")
         self.exportarLabel.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_2.addWidget(self.exportarLabel)
+        self.verticalLayout_21.addWidget(self.exportarLabel)
+
+
+        self.verticalLayout_2.addWidget(self.frame)
 
         self.verticalSpacer = QSpacerItem(20, 384, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -677,7 +688,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, -178, 660, 450))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 633, 450))
         self.scrollAreaWidgetContents_3.setStyleSheet(u"")
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
@@ -843,7 +854,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, -138, 660, 410))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 633, 410))
         self.scrollAreaWidgetContents_4.setStyleSheet(u"")
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
@@ -997,7 +1008,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, -178, 660, 450))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 638, 450))
         self.verticalLayout_15 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.formLayout_2 = QFormLayout()
@@ -1164,7 +1175,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, -338, 660, 610))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 610, 610))
         self.verticalLayout_16 = QVBoxLayout(self.scrollAreaWidgetContents_6)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.formLayout_5 = QFormLayout()
@@ -1388,7 +1399,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 677, 272))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 647, 148))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.gridLayout = QGridLayout()
@@ -1836,7 +1847,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         self.tipoColeccion.setCurrentIndex(0)
         self.controlesCamstackedWidget.setCurrentIndex(1)
 
