@@ -140,10 +140,13 @@ class Ui_MainWindow(object):
         self.frame.setObjectName(u"frame")
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_21 = QVBoxLayout(self.frame)
+        self.verticalLayout_22 = QVBoxLayout(self.frame)
+        self.verticalLayout_22.setSpacing(0)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.verticalLayout_22.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_21 = QVBoxLayout()
         self.verticalLayout_21.setSpacing(0)
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
-        self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
         self.inicioButton = QPushButton(self.frame)
         self.inicioButton.setObjectName(u"inicioButton")
         self.inicioButton.setMinimumSize(QSize(0, 80))
@@ -241,6 +244,9 @@ class Ui_MainWindow(object):
         self.exportarLabel.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_21.addWidget(self.exportarLabel)
+
+
+        self.verticalLayout_22.addLayout(self.verticalLayout_21)
 
 
         self.verticalLayout_2.addWidget(self.frame)
@@ -1501,6 +1507,7 @@ class Ui_MainWindow(object):
         self.widget_2.setMinimumSize(QSize(0, 0))
         self.widget_2.setStyleSheet(u"background-color: transparent;")
         self.horizontalLayout_6 = QHBoxLayout(self.widget_2)
+        self.horizontalLayout_6.setSpacing(6)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.controlPanel = QWidget(self.widget_2)
         self.controlPanel.setObjectName(u"controlPanel")
@@ -1684,6 +1691,62 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.widget_2)
 
+        self.statusbar = QFrame(self.layoutEscan)
+        self.statusbar.setObjectName(u"statusbar")
+        self.statusbar.setMinimumSize(QSize(0, 20))
+        self.statusbar.setStyleSheet(u"")
+        self.statusbar.setFrameShape(QFrame.StyledPanel)
+        self.statusbar.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_12 = QHBoxLayout(self.statusbar)
+        self.horizontalLayout_12.setSpacing(0)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.frame_2 = QFrame(self.statusbar)
+        self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setMinimumSize(QSize(210, 0))
+        self.frame_2.setMaximumSize(QSize(240, 16777215))
+        font6 = QFont()
+        font6.setFamily(u"Consolas")
+        self.frame_2.setFont(font6)
+        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_14 = QHBoxLayout(self.frame_2)
+        self.horizontalLayout_14.setSpacing(0)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.statusLabel = QLabel(self.frame_2)
+        self.statusLabel.setObjectName(u"statusLabel")
+        self.statusLabel.setFont(font6)
+        self.statusLabel.setWordWrap(True)
+        self.statusLabel.setMargin(4)
+
+        self.horizontalLayout_14.addWidget(self.statusLabel)
+
+
+        self.horizontalLayout_12.addWidget(self.frame_2)
+
+        self.frame_3 = QFrame(self.statusbar)
+        self.frame_3.setObjectName(u"frame_3")
+        self.frame_3.setStyleSheet(u"")
+        self.frame_3.setFrameShape(QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_13 = QHBoxLayout(self.frame_3)
+        self.horizontalLayout_13.setSpacing(0)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.spinnerLabel = QLabel(self.frame_3)
+        self.spinnerLabel.setObjectName(u"spinnerLabel")
+        self.spinnerLabel.setMinimumSize(QSize(20, 20))
+        self.spinnerLabel.setMaximumSize(QSize(20, 20))
+
+        self.horizontalLayout_13.addWidget(self.spinnerLabel)
+
+
+        self.horizontalLayout_12.addWidget(self.frame_3)
+
+
+        self.verticalLayout_3.addWidget(self.statusbar)
+
         self.captureControl = QWidget(self.layoutEscan)
         self.captureControl.setObjectName(u"captureControl")
         self.captureControl.setMinimumSize(QSize(0, 70))
@@ -1717,9 +1780,9 @@ class Ui_MainWindow(object):
         self.capturaButton.setObjectName(u"capturaButton")
         self.capturaButton.setMinimumSize(QSize(120, 35))
         self.capturaButton.setMaximumSize(QSize(16777215, 35))
-        font6 = QFont()
-        font6.setPointSize(11)
-        self.capturaButton.setFont(font6)
+        font7 = QFont()
+        font7.setPointSize(11)
+        self.capturaButton.setFont(font7)
         self.capturaButton.setCursor(QCursor(Qt.PointingHandCursor))
         icon17 = QIcon()
         icon17.addFile(u"imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
@@ -1741,7 +1804,7 @@ class Ui_MainWindow(object):
         self.validateButton.setObjectName(u"validateButton")
         self.validateButton.setMinimumSize(QSize(120, 35))
         self.validateButton.setMaximumSize(QSize(16777215, 35))
-        self.validateButton.setFont(font6)
+        self.validateButton.setFont(font7)
         self.validateButton.setCursor(QCursor(Qt.PointingHandCursor))
         icon18 = QIcon()
         icon18.addFile(u"imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
@@ -1754,7 +1817,7 @@ class Ui_MainWindow(object):
         self.resetButton.setObjectName(u"resetButton")
         self.resetButton.setMinimumSize(QSize(120, 35))
         self.resetButton.setMaximumSize(QSize(16777215, 35))
-        self.resetButton.setFont(font6)
+        self.resetButton.setFont(font7)
         self.resetButton.setCursor(QCursor(Qt.PointingHandCursor))
         icon19 = QIcon()
         icon19.addFile(u"imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
@@ -1847,9 +1910,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
         self.tipoColeccion.setCurrentIndex(0)
-        self.controlesCamstackedWidget.setCurrentIndex(1)
+        self.controlesCamstackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2015,6 +2078,8 @@ class Ui_MainWindow(object):
         self.folioderLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"# folio verso", None))
         self.imagenizqLabel.setText("")
         self.imagederLabel.setText("")
+        self.statusLabel.setText("")
+        self.spinnerLabel.setText("")
         self.capturaButton.setText(QCoreApplication.translate("MainWindow", u"capturar", None))
         self.validateButton.setText(QCoreApplication.translate("MainWindow", u"validar", None))
         self.resetButton.setText(QCoreApplication.translate("MainWindow", u"retomar", None))
