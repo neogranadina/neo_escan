@@ -14,8 +14,8 @@ import datetime
 import logging
 from pathlib import Path
 
-from PySide2.QtCore import QDir, Qt, Slot
-from PySide2.QtSql import QSqlDatabase, QSqlQuery, QSqlRecord, QSqlTableModel
+from PySide2.QtCore import QDir
+from PySide2.QtSql import QSqlDatabase, QSqlQuery
 
 
 def connectToDatabase():
@@ -47,16 +47,16 @@ def createElement(tipo_elemento, usuario, publico):
     '''
     Create new item in elements table
     '''
-    now = datetime.datetime.now()
-    ts = now.strftime("%Y-%m-%d %H:%M:%S")
 
     query = QSqlQuery()
     query.prepare("INSERT INTO elements (document_type, user_id, public, created_ts, modified_ts) VALUES (:doctype, :user, :public, :created_at, :updated_at)")
     query.bindValue(':doctype', tipo_elemento)
     query.bindValue(':user', usuario)
     query.bindValue(':public', publico)
-    query.bindValue(':created_at', ts)
-    query.bindValue(':updated_at', ts)
+    query.bindValue(
+        ':created_at', datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    query.bindValue(
+        ':updated_at', datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     if not query.exec_():
         logging.error(query.lastError().text())
@@ -123,17 +123,20 @@ def getLastElementID():
 
 def getElementInfo(id_elemento):
     '''
-    get info from last element inserted
+    get info from element table
     '''
-
     query = QSqlQuery()
     query.prepare(
-        "SELECT element_metadata, text FROM elements_metadata_text WHERE element_id = :element_id")
+        "SELECT document_type, user_id, public, created_ts, modified_ts FROM elements WHERE element_id = :element_id")
     query.bindValue(':element_id', id_elemento)
     query.exec_()
+    query.first()
     info = {}
-    while query.next():
-        info[query.value(0)] = query.value(1)
+    info['document_type'] = query.value(0)
+    info['user_id'] = query.value(1)
+    info['public'] = query.value(2)
+    info['created_ts'] = query.value(3)
+    info['modified_ts'] = query.value(4)
     return info
 
 
@@ -161,9 +164,9 @@ def listofIDs():
     return ids
 
 
-def getElementInfobyID(id_elemento):
+def getElementMetadatabyID(id_elemento):
     '''
-    get the title and description of an element
+    get all metadata text from id
     '''
     query = QSqlQuery()
     query.prepare(
@@ -205,3 +208,88 @@ def wrap_imageWithElement(element_id, order, size, mime_type,
         return False
     return True
 
+
+def editInfo(element_id, data):
+    '''
+    update rows by values in dict in element_metadata_text table
+    '''
+    query = QSqlQuery()
+    query.prepare(
+        """
+        UPDATE elements_metadata_text 
+        SET text = :value
+        WHERE element_id = :element_id AND element_metadata = :key
+        """)
+    query.bindValue(':element_id', element_id)
+    for key, value in data.items():
+        key = metadata_id(key)
+        query.bindValue(':key', key)
+        query.bindValue(':value', value)
+        if not query.exec_():
+            logging.error(query.lastError().text())
+            return False
+    # update element updated_at
+    query.prepare(
+        """
+        UPDATE elements
+        SET updated_at = :updated_at
+        WHERE element_id = :element_id
+        """)
+    query.bindValue(':element_id', element_id)
+    query.bindValue(
+        ':updated_at', datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    if not query.exec_():
+        logging.error(query.lastError().text())
+        return False
+    return True
+
+
+def erase_element(element_id):
+    '''
+    delete element info, metadata and images info from element
+    '''
+    query = QSqlQuery()
+    query.prepare(
+        """
+        begin;
+        DELETE FROM elements_metadata_text WHERE element_id = :element_id;
+        DELETE FROM images WHERE element_id = :element_id;
+        DELETE FROM elements WHERE element_id = :element_id;
+        commit;
+        """
+    )
+    query.bindValue(':element_id', element_id)
+    if not query.exec_():
+        logging.error(query.lastError().text())
+        return False
+    return True
+
+
+def export_data(element_id):
+    '''
+    get all info in database from element_id
+    '''
+    query = QSqlQuery()
+    query.prepare(
+        """
+        SELECT elements_metadata_text.element_metadata, elements_metadata_text.text, images.order, images.size, images.mime_type, images.filename, images.path, images.img_ts, images.img_modified_ts, images.img_metadata
+        FROM elements_metadata_text
+        INNER JOIN elements ON elements.element_id = elements_metadata_text.element_id
+        INNER JOIN images ON images.element_id = elements.element_id
+        WHERE elements.element_id = :element_id
+        """
+    )
+    query.bindValue(':element_id', element_id)
+    query.exec_()
+    data = {}
+    while query.next():
+        data[query.value(0)] = query.value(1)
+        data['order'] = query.value(2)
+        data['size'] = query.value(3)
+        data['mime_type'] = query.value(4)
+        data['filename'] = query.value(5)
+        data['path'] = query.value(6)
+        data['img_ts'] = query.value(7)
+        data['img_modified_ts'] = query.value(8)
+        data['img_metadata'] = query.value(9)
+    return data

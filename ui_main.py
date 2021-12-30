@@ -411,9 +411,7 @@ class Ui_MainWindow(object):
         self.widget = QWidget(self.metadataPage)
         self.widget.setObjectName(u"widget")
         self.verticalLayout = QVBoxLayout(self.widget)
-        self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.headerMetadatos = QFrame(self.widget)
         self.headerMetadatos.setObjectName(u"headerMetadatos")
         self.headerMetadatos.setMinimumSize(QSize(0, 65))
@@ -521,7 +519,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 660, 468))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 642, 428))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.formLayout = QFormLayout()
@@ -639,23 +637,6 @@ class Ui_MainWindow(object):
 
         self.formLayout.setWidget(11, QFormLayout.FieldRole, self.identificadoreslineEdit)
 
-        self.enviarFormLegajoButton = QPushButton(self.scrollAreaWidgetContents)
-        self.enviarFormLegajoButton.setObjectName(u"enviarFormLegajoButton")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.enviarFormLegajoButton.sizePolicy().hasHeightForWidth())
-        self.enviarFormLegajoButton.setSizePolicy(sizePolicy1)
-        self.enviarFormLegajoButton.setMinimumSize(QSize(100, 34))
-        self.enviarFormLegajoButton.setMaximumSize(QSize(100, 34))
-        self.enviarFormLegajoButton.setFont(font4)
-        self.enviarFormLegajoButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon14 = QIcon()
-        icon14.addFile(u"imgs/icons/fast-forward-double-right-arrows.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.enviarFormLegajoButton.setIcon(icon14)
-
-        self.formLayout.setWidget(12, QFormLayout.FieldRole, self.enviarFormLegajoButton)
-
         self.creadorLabel = QLabel(self.scrollAreaWidgetContents)
         self.creadorLabel.setObjectName(u"creadorLabel")
         self.creadorLabel.setFont(font4)
@@ -694,7 +675,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 633, 450))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 642, 410))
         self.scrollAreaWidgetContents_3.setStyleSheet(u"")
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
@@ -830,18 +811,6 @@ class Ui_MainWindow(object):
 
         self.formLayout_3.setWidget(8, QFormLayout.FieldRole, self.identificadoresdoclineEdit)
 
-        self.enviarFormDocumentoButton = QPushButton(self.scrollAreaWidgetContents_3)
-        self.enviarFormDocumentoButton.setObjectName(u"enviarFormDocumentoButton")
-        sizePolicy1.setHeightForWidth(self.enviarFormDocumentoButton.sizePolicy().hasHeightForWidth())
-        self.enviarFormDocumentoButton.setSizePolicy(sizePolicy1)
-        self.enviarFormDocumentoButton.setMinimumSize(QSize(100, 34))
-        self.enviarFormDocumentoButton.setMaximumSize(QSize(100, 34))
-        self.enviarFormDocumentoButton.setFont(font4)
-        self.enviarFormDocumentoButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormDocumentoButton.setIcon(icon14)
-
-        self.formLayout_3.setWidget(9, QFormLayout.FieldRole, self.enviarFormDocumentoButton)
-
 
         self.verticalLayout_9.addLayout(self.formLayout_3)
 
@@ -860,7 +829,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 633, 410))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, -168, 642, 370))
         self.scrollAreaWidgetContents_4.setStyleSheet(u"")
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
@@ -910,6 +879,20 @@ class Ui_MainWindow(object):
         self.fechaimagenlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_4.setWidget(2, QFormLayout.FieldRole, self.fechaimagenlineEdit)
+
+        self.label_6 = QLabel(self.scrollAreaWidgetContents_4)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setFont(font4)
+
+        self.formLayout_4.setWidget(3, QFormLayout.LabelRole, self.label_6)
+
+        self.coberturaespacialimagenlineEdit = QLineEdit(self.scrollAreaWidgetContents_4)
+        self.coberturaespacialimagenlineEdit.setObjectName(u"coberturaespacialimagenlineEdit")
+        self.coberturaespacialimagenlineEdit.setMinimumSize(QSize(500, 34))
+        self.coberturaespacialimagenlineEdit.setMaximumSize(QSize(500, 34))
+        self.coberturaespacialimagenlineEdit.setFont(font4)
+
+        self.formLayout_4.setWidget(3, QFormLayout.FieldRole, self.coberturaespacialimagenlineEdit)
 
         self.tituloLabel_7 = QLabel(self.scrollAreaWidgetContents_4)
         self.tituloLabel_7.setObjectName(u"tituloLabel_7")
@@ -971,32 +954,6 @@ class Ui_MainWindow(object):
 
         self.formLayout_4.setWidget(7, QFormLayout.FieldRole, self.identificadoresimagenlineEdit)
 
-        self.enviarFormImageButton = QPushButton(self.scrollAreaWidgetContents_4)
-        self.enviarFormImageButton.setObjectName(u"enviarFormImageButton")
-        sizePolicy1.setHeightForWidth(self.enviarFormImageButton.sizePolicy().hasHeightForWidth())
-        self.enviarFormImageButton.setSizePolicy(sizePolicy1)
-        self.enviarFormImageButton.setMinimumSize(QSize(100, 34))
-        self.enviarFormImageButton.setMaximumSize(QSize(100, 34))
-        self.enviarFormImageButton.setFont(font4)
-        self.enviarFormImageButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormImageButton.setIcon(icon14)
-
-        self.formLayout_4.setWidget(8, QFormLayout.FieldRole, self.enviarFormImageButton)
-
-        self.label_6 = QLabel(self.scrollAreaWidgetContents_4)
-        self.label_6.setObjectName(u"label_6")
-        self.label_6.setFont(font4)
-
-        self.formLayout_4.setWidget(3, QFormLayout.LabelRole, self.label_6)
-
-        self.coberturaespacialimagenlineEdit = QLineEdit(self.scrollAreaWidgetContents_4)
-        self.coberturaespacialimagenlineEdit.setObjectName(u"coberturaespacialimagenlineEdit")
-        self.coberturaespacialimagenlineEdit.setMinimumSize(QSize(500, 34))
-        self.coberturaespacialimagenlineEdit.setMaximumSize(QSize(500, 34))
-        self.coberturaespacialimagenlineEdit.setFont(font4)
-
-        self.formLayout_4.setWidget(3, QFormLayout.FieldRole, self.coberturaespacialimagenlineEdit)
-
 
         self.verticalLayout_11.addLayout(self.formLayout_4)
 
@@ -1014,7 +971,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 638, 450))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 642, 410))
         self.verticalLayout_15 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.formLayout_2 = QFormLayout()
@@ -1152,18 +1109,6 @@ class Ui_MainWindow(object):
 
         self.formLayout_2.setWidget(8, QFormLayout.FieldRole, self.identificadoreserlineEdit)
 
-        self.enviarFormSeriadaButton = QPushButton(self.scrollAreaWidgetContents_5)
-        self.enviarFormSeriadaButton.setObjectName(u"enviarFormSeriadaButton")
-        sizePolicy1.setHeightForWidth(self.enviarFormSeriadaButton.sizePolicy().hasHeightForWidth())
-        self.enviarFormSeriadaButton.setSizePolicy(sizePolicy1)
-        self.enviarFormSeriadaButton.setMinimumSize(QSize(100, 34))
-        self.enviarFormSeriadaButton.setMaximumSize(QSize(100, 34))
-        self.enviarFormSeriadaButton.setFont(font4)
-        self.enviarFormSeriadaButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormSeriadaButton.setIcon(icon14)
-
-        self.formLayout_2.setWidget(9, QFormLayout.FieldRole, self.enviarFormSeriadaButton)
-
 
         self.verticalLayout_15.addLayout(self.formLayout_2)
 
@@ -1181,7 +1126,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 610, 610))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 642, 570))
         self.verticalLayout_16 = QVBoxLayout(self.scrollAreaWidgetContents_6)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.formLayout_5 = QFormLayout()
@@ -1376,18 +1321,6 @@ class Ui_MainWindow(object):
 
         self.formLayout_5.setWidget(12, QFormLayout.FieldRole, self.identificadoresLibrolineEdit)
 
-        self.enviarFormLibroButton = QPushButton(self.scrollAreaWidgetContents_6)
-        self.enviarFormLibroButton.setObjectName(u"enviarFormLibroButton")
-        sizePolicy1.setHeightForWidth(self.enviarFormLibroButton.sizePolicy().hasHeightForWidth())
-        self.enviarFormLibroButton.setSizePolicy(sizePolicy1)
-        self.enviarFormLibroButton.setMinimumSize(QSize(100, 34))
-        self.enviarFormLibroButton.setMaximumSize(QSize(100, 34))
-        self.enviarFormLibroButton.setFont(font4)
-        self.enviarFormLibroButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormLibroButton.setIcon(icon14)
-
-        self.formLayout_5.setWidget(13, QFormLayout.FieldRole, self.enviarFormLibroButton)
-
 
         self.verticalLayout_16.addLayout(self.formLayout_5)
 
@@ -1405,28 +1338,12 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 647, 148))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 659, 202))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
-        self.tituloLabel_17 = QLabel(self.scrollAreaWidgetContents_7)
-        self.tituloLabel_17.setObjectName(u"tituloLabel_17")
-        self.tituloLabel_17.setMinimumSize(QSize(121, 0))
-        self.tituloLabel_17.setFont(font4)
-
-        self.gridLayout.addWidget(self.tituloLabel_17, 0, 0, 1, 1)
-
-        self.nombrearchivolineEdit = QLineEdit(self.scrollAreaWidgetContents_7)
-        self.nombrearchivolineEdit.setObjectName(u"nombrearchivolineEdit")
-        self.nombrearchivolineEdit.setMinimumSize(QSize(500, 34))
-        self.nombrearchivolineEdit.setMaximumSize(QSize(500, 34))
-        self.nombrearchivolineEdit.setFont(font4)
-        self.nombrearchivolineEdit.setLayoutDirection(Qt.LeftToRight)
-
-        self.gridLayout.addWidget(self.nombrearchivolineEdit, 0, 1, 1, 2)
-
         self.tituloLabel_18 = QLabel(self.scrollAreaWidgetContents_7)
         self.tituloLabel_18.setObjectName(u"tituloLabel_18")
         self.tituloLabel_18.setMinimumSize(QSize(121, 0))
@@ -1443,29 +1360,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.folderlineEdit, 1, 1, 1, 1)
 
+        self.nombrearchivolineEdit = QLineEdit(self.scrollAreaWidgetContents_7)
+        self.nombrearchivolineEdit.setObjectName(u"nombrearchivolineEdit")
+        self.nombrearchivolineEdit.setMinimumSize(QSize(500, 34))
+        self.nombrearchivolineEdit.setMaximumSize(QSize(500, 34))
+        self.nombrearchivolineEdit.setFont(font4)
+        self.nombrearchivolineEdit.setLayoutDirection(Qt.LeftToRight)
+
+        self.gridLayout.addWidget(self.nombrearchivolineEdit, 0, 1, 1, 2)
+
         self.browserDirButton = QPushButton(self.scrollAreaWidgetContents_7)
         self.browserDirButton.setObjectName(u"browserDirButton")
         self.browserDirButton.setMinimumSize(QSize(42, 42))
         self.browserDirButton.setMaximumSize(QSize(42, 42))
         self.browserDirButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.browserDirButton.setStyleSheet(u"background-color: rgb(225, 225, 225);")
-        icon15 = QIcon()
-        icon15.addFile(u"imgs/icons/black-folder-shape-for-interface.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.browserDirButton.setIcon(icon15)
+        icon14 = QIcon()
+        icon14.addFile(u"imgs/icons/black-folder-shape-for-interface.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.browserDirButton.setIcon(icon14)
 
         self.gridLayout.addWidget(self.browserDirButton, 1, 2, 1, 1)
 
-        self.enviarFormSimpleButton = QPushButton(self.scrollAreaWidgetContents_7)
-        self.enviarFormSimpleButton.setObjectName(u"enviarFormSimpleButton")
-        sizePolicy1.setHeightForWidth(self.enviarFormSimpleButton.sizePolicy().hasHeightForWidth())
-        self.enviarFormSimpleButton.setSizePolicy(sizePolicy1)
-        self.enviarFormSimpleButton.setMinimumSize(QSize(100, 34))
-        self.enviarFormSimpleButton.setMaximumSize(QSize(100, 34))
-        self.enviarFormSimpleButton.setFont(font4)
-        self.enviarFormSimpleButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormSimpleButton.setIcon(icon14)
+        self.tituloLabel_17 = QLabel(self.scrollAreaWidgetContents_7)
+        self.tituloLabel_17.setObjectName(u"tituloLabel_17")
+        self.tituloLabel_17.setMinimumSize(QSize(121, 0))
+        self.tituloLabel_17.setFont(font4)
 
-        self.gridLayout.addWidget(self.enviarFormSimpleButton, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.tituloLabel_17, 0, 0, 1, 1)
 
 
         self.verticalLayout_17.addLayout(self.gridLayout)
@@ -1481,6 +1402,56 @@ class Ui_MainWindow(object):
         self.tipoColeccion.addWidget(self.formSimple)
 
         self.verticalLayout.addWidget(self.tipoColeccion)
+
+        self.botones_metadata = QStackedWidget(self.widget)
+        self.botones_metadata.setObjectName(u"botones_metadata")
+        self.botones_metadata.setMinimumSize(QSize(0, 34))
+        self.botones_metadata.setMaximumSize(QSize(16777215, 34))
+        self.enviar = QWidget()
+        self.enviar.setObjectName(u"enviar")
+        self.horizontalLayout_13 = QHBoxLayout(self.enviar)
+        self.horizontalLayout_13.setSpacing(0)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.enviarFormButton = QPushButton(self.enviar)
+        self.enviarFormButton.setObjectName(u"enviarFormButton")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.enviarFormButton.sizePolicy().hasHeightForWidth())
+        self.enviarFormButton.setSizePolicy(sizePolicy1)
+        self.enviarFormButton.setMinimumSize(QSize(100, 34))
+        self.enviarFormButton.setMaximumSize(QSize(100, 34))
+        self.enviarFormButton.setFont(font4)
+        self.enviarFormButton.setCursor(QCursor(Qt.PointingHandCursor))
+        icon15 = QIcon()
+        icon15.addFile(u"imgs/icons/fast-forward-double-right-arrows.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.enviarFormButton.setIcon(icon15)
+
+        self.horizontalLayout_13.addWidget(self.enviarFormButton)
+
+        self.botones_metadata.addWidget(self.enviar)
+        self.editar = QWidget()
+        self.editar.setObjectName(u"editar")
+        self.horizontalLayout_14 = QHBoxLayout(self.editar)
+        self.horizontalLayout_14.setSpacing(0)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.enviarFormEditButton = QPushButton(self.editar)
+        self.enviarFormEditButton.setObjectName(u"enviarFormEditButton")
+        sizePolicy1.setHeightForWidth(self.enviarFormEditButton.sizePolicy().hasHeightForWidth())
+        self.enviarFormEditButton.setSizePolicy(sizePolicy1)
+        self.enviarFormEditButton.setMinimumSize(QSize(100, 34))
+        self.enviarFormEditButton.setMaximumSize(QSize(100, 34))
+        self.enviarFormEditButton.setFont(font4)
+        self.enviarFormEditButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.enviarFormEditButton.setIcon(icon15)
+
+        self.horizontalLayout_14.addWidget(self.enviarFormEditButton)
+
+        self.botones_metadata.addWidget(self.editar)
+
+        self.verticalLayout.addWidget(self.botones_metadata)
 
 
         self.verticalLayout_4.addWidget(self.widget)
@@ -1741,6 +1712,16 @@ class Ui_MainWindow(object):
         self.captura.setObjectName(u"captura")
         self.horizontalLayout_10 = QHBoxLayout(self.captura)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.finalizarButton = QPushButton(self.captura)
+        self.finalizarButton.setObjectName(u"finalizarButton")
+        self.finalizarButton.setCursor(QCursor(Qt.PointingHandCursor))
+        icon17 = QIcon()
+        icon17.addFile(u"imgs/icons/square-with-verification-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.finalizarButton.setIcon(icon17)
+        self.finalizarButton.setIconSize(QSize(32, 32))
+
+        self.horizontalLayout_10.addWidget(self.finalizarButton)
+
         self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_10.addItem(self.horizontalSpacer_3)
@@ -1752,10 +1733,10 @@ class Ui_MainWindow(object):
         font7 = QFont()
         font7.setPointSize(11)
         self.capturaButton.setFont(font7)
-        self.capturaButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon17 = QIcon()
-        icon17.addFile(u"imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.capturaButton.setIcon(icon17)
+        self.capturaButton.setCursor(QCursor(Qt.SplitHCursor))
+        icon18 = QIcon()
+        icon18.addFile(u"imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.capturaButton.setIcon(icon18)
         self.capturaButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_10.addWidget(self.capturaButton)
@@ -1775,9 +1756,9 @@ class Ui_MainWindow(object):
         self.validateButton.setMaximumSize(QSize(16777215, 35))
         self.validateButton.setFont(font7)
         self.validateButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon18 = QIcon()
-        icon18.addFile(u"imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.validateButton.setIcon(icon18)
+        icon19 = QIcon()
+        icon19.addFile(u"imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.validateButton.setIcon(icon19)
         self.validateButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_11.addWidget(self.validateButton)
@@ -1788,9 +1769,9 @@ class Ui_MainWindow(object):
         self.resetButton.setMaximumSize(QSize(16777215, 35))
         self.resetButton.setFont(font7)
         self.resetButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon19 = QIcon()
-        icon19.addFile(u"imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.resetButton.setIcon(icon19)
+        icon20 = QIcon()
+        icon20.addFile(u"imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.resetButton.setIcon(icon20)
         self.resetButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_11.addWidget(self.resetButton)
@@ -1881,6 +1862,7 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.setCurrentIndex(2)
         self.tipoColeccion.setCurrentIndex(0)
+        self.botones_metadata.setCurrentIndex(1)
         self.controlesCamstackedWidget.setCurrentIndex(0)
 
 
@@ -1929,7 +1911,6 @@ class Ui_MainWindow(object):
         self.numfollineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"n\u00famero de folios o p\u00e1ginas", None))
         self.identificadoresLabel.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoreslineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormLegajoButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.creadorLabel.setText(QCoreApplication.translate("MainWindow", u"Creador", None))
         self.coberturaLabel.setText(QCoreApplication.translate("MainWindow", u"Cobertura espacial", None))
         self.coberturalineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"localidad, ciudad, regi\u00f3n, pa\u00eds, reino", None))
@@ -1951,13 +1932,14 @@ class Ui_MainWindow(object):
         self.numfoliodoclineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"n\u00famero de folios o p\u00e1ginas", None))
         self.identificadoresLabel_3.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoresdoclineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormDocumentoButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.tituloLabel_4.setText(QCoreApplication.translate("MainWindow", u"T\u00edtulo", None))
         self.tituloimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"El nombre dado a la imagen", None))
         self.tituloLabel_5.setText(QCoreApplication.translate("MainWindow", u"Creador", None))
         self.creadorimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Autor, dibujante, pintor", None))
         self.tituloLabel_6.setText(QCoreApplication.translate("MainWindow", u"Fecha", None))
         self.fechaimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"AAAA-MM-DD", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Cobertura espacial", None))
+        self.coberturaespacialimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Lugar de producci\u00f3n o representaci\u00f3n de la imagen", None))
         self.tituloLabel_7.setText(QCoreApplication.translate("MainWindow", u"Descripci\u00f3n f\u00edsica", None))
         self.descripcionfisicaimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"tipo, dimensiones", None))
         self.numextLabel_4.setText(QCoreApplication.translate("MainWindow", u"Descripci\u00f3n", None))
@@ -1967,9 +1949,6 @@ class Ui_MainWindow(object):
         self.tipoimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"mapa, dibujo, ilustraci\u00f3n, plano...", None))
         self.identificadoresLabel_4.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoresimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormImageButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Cobertura espacial", None))
-        self.coberturaespacialimagenlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Lugar de producci\u00f3n o representaci\u00f3n de la imagen", None))
         self.tituloLabel_8.setText(QCoreApplication.translate("MainWindow", u"Nombre publicaci\u00f3n", None))
         self.nombreserlineEdit.setText("")
         self.nombreserlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"El nombre del peri\u00f3dico o revista", None))
@@ -1991,7 +1970,6 @@ class Ui_MainWindow(object):
         self.issnserlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"n\u00famero estandarizado", None))
         self.identificadoresLabel_7.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoreserlineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormSeriadaButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.tituloLabel_12.setText(QCoreApplication.translate("MainWindow", u"T\u00edtulo", None))
         self.titulolibrolineEdit.setText("")
         self.titulolibrolineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"T\u00edtulo y subt\u00edtulo del libro", None))
@@ -2022,15 +2000,15 @@ class Ui_MainWindow(object):
         self.isbnLibrolineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"n\u00famero estandarizado", None))
         self.identificadoresLabel_11.setText(QCoreApplication.translate("MainWindow", u"Identificadores", None))
         self.identificadoresLibrolineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"referencia, \u00edndice, n\u00famero de catalogaci\u00f3n...", None))
-        self.enviarFormLibroButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
-        self.tituloLabel_17.setText(QCoreApplication.translate("MainWindow", u"Nombre del archivo", None))
-        self.nombrearchivolineEdit.setText("")
-        self.nombrearchivolineEdit.setPlaceholderText("")
         self.tituloLabel_18.setText(QCoreApplication.translate("MainWindow", u"Guardar en...", None))
         self.folderlineEdit.setText("")
         self.folderlineEdit.setPlaceholderText("")
+        self.nombrearchivolineEdit.setText("")
+        self.nombrearchivolineEdit.setPlaceholderText("")
         self.browserDirButton.setText("")
-        self.enviarFormSimpleButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
+        self.tituloLabel_17.setText(QCoreApplication.translate("MainWindow", u"Nombre del archivo", None))
+        self.enviarFormButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
+        self.enviarFormEditButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.titulelementoIDLabel.setText("")
         self.elementoIDLabel.setText("")
         self.titulelementoTituloLabel_2.setText(QCoreApplication.translate("MainWindow", u"ID elemento", None))
@@ -2048,6 +2026,7 @@ class Ui_MainWindow(object):
         self.imagenizqLabel.setText("")
         self.imagederLabel.setText("")
         self.statusLabel.setText(QCoreApplication.translate("MainWindow", u"Clic en capturar para iniciar", None))
+        self.finalizarButton.setText(QCoreApplication.translate("MainWindow", u"Cerrar proyecto", None))
         self.capturaButton.setText(QCoreApplication.translate("MainWindow", u"capturar", None))
         self.validateButton.setText(QCoreApplication.translate("MainWindow", u"validar", None))
         self.resetButton.setText(QCoreApplication.translate("MainWindow", u"retomar", None))

@@ -11,20 +11,21 @@ import sys
 import logging
 import os
 from pathlib import Path
+import json
+import shutil
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QIcon, QPixmap, QRegExpValidator, QMovie
+from PySide2.QtGui import QIcon, QPixmap, QRegExpValidator
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGridLayout, QPushButton
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp, Qt
 
 from ui_main import Ui_MainWindow
-from db import connectToDatabase, createElement, getLastId, insertInfo, getElementInfo, getLastElementID, listofIDs, getElementInfobyID
+from db import connectToDatabase, createElement, getLastId, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, export_data
 from camcontrol import Cam
 import configparser
 import ctypes
 import time
-import threading
 
 # logs
 
@@ -110,13 +111,9 @@ class MainWindow(QMainWindow):
 
         # Página de metadatos
         widgets.tipodocComboBox.currentIndexChanged.connect(self.indexChange)
-        widgets.enviarFormLegajoButton.clicked.connect(self.enviarForm)
-        widgets.enviarFormDocumentoButton.clicked.connect(
-            self.enviarForm)
-        widgets.enviarFormImageButton.clicked.connect(self.enviarForm)
-        widgets.enviarFormSeriadaButton.clicked.connect(self.enviarForm)
-        widgets.enviarFormLibroButton.clicked.connect(self.enviarForm)
-        widgets.enviarFormSimpleButton.clicked.connect(self.enviarForm)
+        widgets.enviarFormButton.clicked.connect(self.enviarForm)
+        widgets.enviarFormEditButton.clicked.connect(
+            self.editarForm)
         widgets.browserDirButton.clicked.connect(self.getDirName)
 
         # abrir directorio
@@ -127,6 +124,8 @@ class MainWindow(QMainWindow):
         # validar fotografía
         widgets.validateButton.clicked.connect(self.validateCaptura)
         widgets.resetButton.clicked.connect(self.resetCaptura)
+        # cerrar escaner
+        widgets.finalizarButton.clicked.connect(self.finalizarCaptura)
 
     # navigation functions
 
@@ -156,6 +155,7 @@ class MainWindow(QMainWindow):
         elif btnName == "coleccionesButton" or btnName == "nuevoProyectoButton":
             widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
+            widgets.botones_metadata.setCurrentWidget(widgets.enviar)
         elif btnName == "escanerButton":
             self.set_scanner_page()
             widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
@@ -183,9 +183,9 @@ class MainWindow(QMainWindow):
             widgets.proyectos_actuales_label.setText(
                 "No se han creado proyectos.")
 
-        for id in reversed(element_ids[-5:]):
+        for id in reversed(element_ids[-10:]):
 
-            elemento = getElementInfobyID(id)
+            elemento = getElementMetadatabyID(id)
             element_id = id
             element_name = elemento[1]
             element_description = elemento[2]
@@ -224,7 +224,7 @@ class MainWindow(QMainWindow):
             label.setAlignment(Qt.AlignLeft)
             widgets.elementslayout.addWidget(label, id, 1)
 
-            # Set three buttons in the grid
+            # Set four buttons in the grid
             button = QPushButton()
             # button.setText("Editar")
             button.setObjectName(f"edit_element_{element_id}")
@@ -239,6 +239,19 @@ class MainWindow(QMainWindow):
             widgets.elementslayout.addWidget(button, id, 2)
 
             button = QPushButton()
+            # button.setText("Añadir imágenes")
+            button.setObjectName(f"edit_element_{element_id}")
+            button.setMinimumSize(QSize(42, 42))
+            button.setMaximumSize(QSize(42, 42))
+            icon1 = QIcon()
+            icon1.addFile("imgs/icons/camera-to-take-photos_black.svg",
+                          QSize(), QIcon.Normal, QIcon.Off)
+            button.setIcon(icon1)
+            button.setIconSize(QSize(20, 20))
+            button.clicked.connect(self.prepare_scanner(element_id))
+            widgets.elementslayout.addWidget(button, id, 2)
+
+            button = QPushButton()
             # button.setText("Exportar")
             button.setObjectName(f"export_element_{element_id}")
             button.setMinimumSize(QSize(42, 42))
@@ -248,7 +261,7 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon2)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(self.export_element)
+            button.clicked.connect(self.export_element(element_id, image_path))
             widgets.elementslayout.addWidget(button, id, 3)
 
             button = QPushButton()
@@ -261,20 +274,66 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon3)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(self.delete_element)
+            button.clicked.connect(self.delete_element(element_id))
             widgets.elementslayout.addWidget(button, id, 4)
 
         widgets.verticalLayout_20.addLayout(widgets.elementslayout)
 
-    def edit_element(self):
-        print("add :)")
-    # navegar por la página de metadatos
+    def edit_element(self, element_id):
+        '''
+        edit element from element_id
+        '''
+        # go to metadata page
+        widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
+        widgets.botones_metadata.setCurrentWidget(widgets.editar)
 
-    def export_element(self):
-        print("export :)")
+        # write element_id in the form
+        self.write_fields_info(element_id)
 
-    def delete_element(self):
-        print("delete :)")
+    def export_element(self, element_id, image_path):
+        '''
+        exportar datos e imágenes de un elemento
+        '''
+        EXPORTDIR = QFileDialog.getExistingDirectory(
+            self,
+            caption="Seleccionar el directorio para guardar los archivos"
+        )
+        data = export_data(element_id)
+        if data:
+            # data to dict
+            data = json.loads(data)
+            # data to json
+            data = json.dumps(data)
+            # save json to file
+            file_name = f"{element_id}.json"
+            with open(f"{EXPORTDIR}/{file_name}", "w") as f:
+                f.write(data)
+
+            # copy files from EXPORTDIR to image_path
+            for file in os.listdir(EXPORTDIR):
+                shutil.copy(f"{EXPORTDIR}/{file}", f"{image_path}/{file}")
+
+            QMessageBox.information(
+                widgets.stackedWidget, "Exportar", "Se ha exportado el elemento correctamente.")
+        else:
+            print("error")
+
+    def delete_element(self, element_id, image_path):
+        '''
+        borra datos y archivos de un elemento
+        '''
+        if QMessageBox.question(
+                widgets.stackedWidget, "Eliminar", "¿Está seguro de eliminar el elemento?") == QMessageBox.Yes:
+            erase_element(element_id)
+            # delete files from image_path
+            for file in os.listdir(image_path):
+                os.remove(f"{image_path}/{file}")
+            QMessageBox.information(
+                widgets.stackedWidget, "Eliminar", "Se ha eliminado el elemento correctamente.")
+
+        # return to home
+        widgets.stackedWidget.setCurrentWidget(widgets.homePage)
+        self.display_elements()
 
     def indexChange(self):
         '''
@@ -295,6 +354,9 @@ class MainWindow(QMainWindow):
             widgets.tipoColeccion.setCurrentWidget(widgets.formLibro)
         elif index == 5:
             widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
+
+        # assesst enviar button
+        widgets.botones_metadata.setCurrentWidget(widgets.enviar)
 
     # Obtener la dirección del directorio de proyectos
 
@@ -441,6 +503,77 @@ class MainWindow(QMainWindow):
         else:
             return None
 
+    def write_fields_info(self, element_id):
+        '''
+        display the form from an element according with its type
+        and write in its fields the information retrieved from the db
+        '''
+
+        tipo_documento = getElementInfo(element_id)['tipo_documento']
+        data = getElementMetadatabyID(element_id)
+
+        if tipo_documento == 1:
+            widgets.tipodocComboBox.setCurrentIndex(0)
+            widgets.titulolineEdit.setText(data[1])
+            widgets.descripcionlineEdit.setPlainText(data[2])
+            widgets.creadorlineEdit.setText(data[3])
+            widgets.fechaIlineEdit.setText(data[4])
+            widgets.fechaFlineEdit.setText(data[19])
+            widgets.coberturalineEdit.setText(data[5])
+            widgets.idiomalineEdit.setText(data[6])
+            widgets.numfollineEdit.setText(data[7])
+            widgets.identificadoreslineEdit.setText(data[9])
+        elif tipo_documento == 2:
+            widgets.tipodocComboBox.setCurrentIndex(1)
+            widgets.titulodoclineEdit.setText(data[1])
+            widgets.descripciondoclineEdit.setPlainText(data[2])
+            widgets.creadordoclineEdit.setText(data[3])
+            widgets.fechaIdoclineEdit.setText(data[4])
+            widgets.fechaFdoclineEdit.setText(data[19])
+            widgets.coberturadoclineEdit.setText(data[5])
+            widgets.idiomadoclineEdit.setText(data[6])
+            widgets.numfoliodoclineEdit.setText(data[7])
+            widgets.identificadoresdoclineEdit.setText(data[9])
+        elif tipo_documento == 3:
+            widgets.tipodocComboBox.setCurrentIndex(2)
+            widgets.tituloimagenlineEdit.setText(data[1])
+            widgets.descripcionimagenlineEdit.setPlainText(data[2])
+            widgets.creadorimagenlineEdit.setText(data[3])
+            widgets.fechaimagenlineEdit.setText(data[4])
+            widgets.coberturaespacialimagenlineEdit.setText(data[5])
+            widgets.descripcionfisicaimagenlineEdit.setText(data[10])
+            widgets.tipoimagenlineEdit.setText(data[11])
+            widgets.identificadoresimagenlineEdit.setText(data[9])
+        elif tipo_documento == 4:
+            widgets.tipodocComboBox.setCurrentIndex(3)
+            widgets.nombreserlineEdit.setText(data[1])
+            widgets.volumenserlineEdit.setText(data[12])
+            widgets.ejemplarserlineEdit.setText(data[13])
+            widgets.fechaserlineEdit.setText(data[4])
+            widgets.paginaserlineEdit.setText(data[8])
+            widgets.descripcionserlineEdit.setPlainText(data[2])
+            widgets.idiomaserlineEdit.setText(data[6])
+            widgets.issnserlineEdit.setText(data[15])
+            widgets.identificadoreserlineEdit.setText(data[9])
+        elif tipo_documento == 5:
+            widgets.tipodocComboBox.setCurrentIndex(4)
+            widgets.titulolibrolineEdit.setText(data[1])
+            widgets.autorlibrolineEdit.setText(data[3])
+            widgets.volumelibrolineEdit.setText(data[12])
+            widgets.serieLibrolineEdit.setText(data[16])
+            widgets.edicionLibrolineEdit.setText(data[17])
+            widgets.lugarLibrolineEdit.setText(data[5])
+            widgets.editorialLibrolineEdit.setText(data[18])
+            widgets.fechaLibrolineEdit.setText(data[4])
+            widgets.paginasLibrolineEdit.setText(data[8])
+            widgets.descripcionLibrolineEdit.setPlainText(data[2])
+            widgets.idiomaLibrolineEdit.setText(data[6])
+            widgets.isbnLibrolineEdit.setText(data[14])
+            widgets.identificadoresLibrolineEdit.setText(data[9])
+        elif tipo_documento == 6:
+            QMessageBox.information(
+                self, 'Error', 'No se puede editar un escaneo sencillo')
+
     def cleanForm(self, tipo_de_documento):
         '''
         set all Text to blank
@@ -529,7 +662,29 @@ class MainWindow(QMainWindow):
                 self.cleanForm(tipo_de_documento)
 
                 # set and config Scanner Page
-                self.set_scanner_page()
+                self.set_scanner_page(id_element)
+
+    def editarForm(self, element_id):
+        '''
+        edita el elemento en la base de datos
+        '''
+        tipo_de_documento = widgets.tipodocComboBox.currentIndex() + 1
+
+        # validate required items
+        if self.requiredFields(tipo_de_documento):
+
+            # get the info for the form fields
+            info = self.get_fields_info(tipo_de_documento)
+
+            # insert the info into the database
+            editInfo(element_id, info)
+
+            # clean form fields
+            self.cleanForm(tipo_de_documento)
+
+            # back to home
+            widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+            self.display_elements()
 
     def openimagesDir(self):
         '''
@@ -556,13 +711,14 @@ class MainWindow(QMainWindow):
             num_imagenes = 0
         widgets.cantidadimgsLabel.setText(str(num_imagenes))
 
-    def set_scanner_page(self):
+    def set_scanner_page(self, id_element=None):
         # set current page to escanerPage
         widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
 
         # obtener datos para la barra izquierda
-        id_elemento = getLastElementID()
-        datos_elemento = getElementInfo(id_elemento)
+        if id_element is None:
+            id_elemento = getLastElementID()
+        datos_elemento = getElementMetadatabyID(id_elemento)
 
         # show data in labels
         widgets.elementoIDLabel.setText(str(id_elemento))
@@ -594,7 +750,7 @@ class MainWindow(QMainWindow):
     def getCaptura(self):
         try:
             self.lenImagenesDir(widgets.directorio_elementos.text())
-            
+
             # get the last images from the directory
             # and show it in the label
 
@@ -622,15 +778,19 @@ class MainWindow(QMainWindow):
                         # create a thread to save the images
                         widgets.statusLabel.setText("capturando imágenes...")
 
-                        Cam().captura(cams, element_id, left_img_name.replace('.jpg', ''), right_img_name.replace('.jpg', ''))
+                        Cam().captura(cams, element_id, left_img_name.replace(
+                            '.jpg', ''), right_img_name.replace('.jpg', ''))
 
                         while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
                             time.sleep(0.1)
 
-                        widgets.statusLabel.setText(f"imagen capturada de folios {left_img_name.replace('.jpg', '')} y {right_img_name.replace('.jpg', '')}")
+                        widgets.statusLabel.setText(
+                            f"imagen capturada de folios {left_img_name.replace('.jpg', '')} y {right_img_name.replace('.jpg', '')}")
 
-                        widgets.imagenizqLabel.setPixmap(QPixmap(left_img_path))
-                        widgets.imagederLabel.setPixmap(QPixmap(right_img_path))
+                        widgets.imagenizqLabel.setPixmap(
+                            QPixmap(left_img_path))
+                        widgets.imagederLabel.setPixmap(
+                            QPixmap(right_img_path))
 
                         # display validation buttons
                         widgets.controlesCamstackedWidget.setCurrentWidget(
@@ -652,7 +812,8 @@ class MainWindow(QMainWindow):
             restart()
 
     def validateCaptura(self):
-        widgets.statusLabel.setText(f"últimos folios capturados {widgets.folioizqLineEdit.text()} y {widgets.folioderLineEdit.text()}")
+        widgets.statusLabel.setText(
+            f"últimos folios capturados {widgets.folioizqLineEdit.text()} y {widgets.folioderLineEdit.text()}")
         # erase the folio labels
         widgets.folioizqLineEdit.setText('')
         widgets.folioderLineEdit.setText('')
@@ -683,6 +844,25 @@ class MainWindow(QMainWindow):
         # back to capture widget
         widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
         self.lenImagenesDir(folder_path)
+
+    def finalizarCaptura(self):
+        '''
+        gentle close escanerPage and back to home
+        '''
+        if QMessageBox().question(self, "Cerrar el proyecto",
+                                  "¿Está seguro que desea cerrar el proyecto?", QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
+            widgets.imagederLabel.setPixmap(QPixmap())
+            widgets.imagenizqLabel.setPixmap(QPixmap())
+            widgets.elementoIDLabel.setText('')
+            widgets.elementoTituloLabel.setText('')
+            widgets.directorio_elementos.setText('')
+            widgets.cantidadimgsLabel.setText('')
+            widgets.folioizqLineEdit.setText('')
+            widgets.folioderLineEdit.setText('')
+            # back to home
+            widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+            self.display_elements()
+
 
 # Fin de las funciones de la aplicación
 

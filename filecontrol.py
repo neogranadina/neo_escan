@@ -11,11 +11,12 @@
 # ///////////////////////////////////////////////////////////////
 
 import chdkptp.util as util
-import multiprocessing as mp
 from pathlib import Path
 import os
 import datetime
 from db import wrap_imageWithElement
+from PIL import Image
+from PIL.ExifTags import TAGS
 
 DIR = Path("../capturas")
 
@@ -118,6 +119,16 @@ class DescargarIMGS:
         return listac[-1]
 
 
+    def imageMetadata(self, image_path):
+        '''
+        obtiene los metadatos de una imagen
+        '''
+        image = Image.open(image_path)
+        metadata = {}
+        for tag, value in image.tags.items():
+            metadata[tag] = value
+        return metadata
+
     def associateImageWithElement(self, element_id, img_path, tipo_img):
         '''
         get the metadata of each image and associate it with the element
@@ -140,9 +151,10 @@ class DescargarIMGS:
         path = os.path.dirname(img_path)
         img_timestamp = datetime.datetime.now()
         img_modified_ts = datetime.datetime.now()
-        img_metadata = "coming soon"
+        img_metadata = self.imageMetadata(img_path)
 
         #debug
+        '''
         print(f"element_id: {element_id}")
         print(f"order: {order}")
         print(f"img_path: {img_path}")
@@ -154,6 +166,7 @@ class DescargarIMGS:
         print(f"img_timestamp: {img_timestamp}")
         print(f"img_modified_ts: {img_modified_ts}")
         print(f"img_metadata: {img_metadata}")
+        '''
 
         wrap_imageWithElement(element_id, order, size, mime_type, filename,
                                 path, img_timestamp, img_modified_ts,

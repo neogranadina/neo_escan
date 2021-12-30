@@ -846,21 +846,6 @@ border: none;
               <item>
                <widget class="QWidget" name="widget" native="true">
                 <layout class="QVBoxLayout" name="verticalLayout">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
                  <item>
                   <widget class="QFrame" name="headerMetadatos">
                    <property name="minimumSize">
@@ -1100,8 +1085,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>660</width>
-                          <height>468</height>
+                          <width>642</width>
+                          <height>428</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -1395,43 +1380,6 @@ QPushButton#backtoInicioButton::hover {
                              </property>
                             </widget>
                            </item>
-                           <item row="12" column="1">
-                            <widget class="QPushButton" name="enviarFormLegajoButton">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                              </font>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="text">
-                              <string>enviar</string>
-                             </property>
-                             <property name="icon">
-                              <iconset>
-                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
-                             </property>
-                            </widget>
-                           </item>
                            <item row="4" column="0">
                             <widget class="QLabel" name="creadorLabel">
                              <property name="font">
@@ -1503,8 +1451,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>633</width>
-                          <height>450</height>
+                          <width>642</width>
+                          <height>410</height>
                          </rect>
                         </property>
                         <property name="styleSheet">
@@ -1849,43 +1797,6 @@ QPushButton#backtoInicioButton::hover {
                              </property>
                             </widget>
                            </item>
-                           <item row="9" column="1">
-                            <widget class="QPushButton" name="enviarFormDocumentoButton">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                              </font>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="text">
-                              <string>enviar</string>
-                             </property>
-                             <property name="icon">
-                              <iconset>
-                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
-                             </property>
-                            </widget>
-                           </item>
                           </layout>
                          </item>
                         </layout>
@@ -1908,9 +1819,9 @@ QPushButton#backtoInicioButton::hover {
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
-                          <width>633</width>
-                          <height>410</height>
+                          <y>-168</y>
+                          <width>642</width>
+                          <height>370</height>
                          </rect>
                         </property>
                         <property name="styleSheet">
@@ -2033,6 +1944,42 @@ QPushButton#backtoInicioButton::hover {
                              </property>
                              <property name="placeholderText">
                               <string>AAAA-MM-DD</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="0">
+                            <widget class="QLabel" name="label_6">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>Cobertura espacial</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="1">
+                            <widget class="QLineEdit" name="coberturaespacialimagenlineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="placeholderText">
+                              <string>Lugar de producción o representación de la imagen</string>
                              </property>
                             </widget>
                            </item>
@@ -2195,79 +2142,6 @@ QPushButton#backtoInicioButton::hover {
                              </property>
                             </widget>
                            </item>
-                           <item row="8" column="1">
-                            <widget class="QPushButton" name="enviarFormImageButton">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                              </font>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="text">
-                              <string>enviar</string>
-                             </property>
-                             <property name="icon">
-                              <iconset>
-                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="3" column="0">
-                            <widget class="QLabel" name="label_6">
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>Cobertura espacial</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="3" column="1">
-                            <widget class="QLineEdit" name="coberturaespacialimagenlineEdit">
-                             <property name="minimumSize">
-                              <size>
-                               <width>500</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>500</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                              </font>
-                             </property>
-                             <property name="placeholderText">
-                              <string>Lugar de producción o representación de la imagen</string>
-                             </property>
-                            </widget>
-                           </item>
                           </layout>
                          </item>
                         </layout>
@@ -2288,8 +2162,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>638</width>
-                          <height>450</height>
+                          <width>642</width>
+                          <height>410</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_15">
@@ -2649,43 +2523,6 @@ QPushButton#backtoInicioButton::hover {
                              </property>
                             </widget>
                            </item>
-                           <item row="9" column="1">
-                            <widget class="QPushButton" name="enviarFormSeriadaButton">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                              </font>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="text">
-                              <string>enviar</string>
-                             </property>
-                             <property name="icon">
-                              <iconset>
-                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
-                             </property>
-                            </widget>
-                           </item>
                           </layout>
                          </item>
                         </layout>
@@ -2706,8 +2543,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>610</width>
-                          <height>610</height>
+                          <width>642</width>
+                          <height>570</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -3217,43 +3054,6 @@ QPushButton#backtoInicioButton::hover {
                              </property>
                             </widget>
                            </item>
-                           <item row="13" column="1">
-                            <widget class="QPushButton" name="enviarFormLibroButton">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                              </font>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="text">
-                              <string>enviar</string>
-                             </property>
-                             <property name="icon">
-                              <iconset>
-                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
-                             </property>
-                            </widget>
-                           </item>
                           </layout>
                          </item>
                         </layout>
@@ -3274,8 +3074,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>647</width>
-                          <height>148</height>
+                          <width>659</width>
+                          <height>202</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -3284,54 +3084,6 @@ QPushButton#backtoInicioButton::hover {
                            <property name="sizeConstraint">
                             <enum>QLayout::SetDefaultConstraint</enum>
                            </property>
-                           <item row="0" column="0">
-                            <widget class="QLabel" name="tituloLabel_17">
-                             <property name="minimumSize">
-                              <size>
-                               <width>121</width>
-                               <height>0</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                              </font>
-                             </property>
-                             <property name="text">
-                              <string>Nombre del archivo</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="0" column="1" colspan="2">
-                            <widget class="QLineEdit" name="nombrearchivolineEdit">
-                             <property name="minimumSize">
-                              <size>
-                               <width>500</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>500</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                              </font>
-                             </property>
-                             <property name="layoutDirection">
-                              <enum>Qt::LeftToRight</enum>
-                             </property>
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="placeholderText">
-                              <string/>
-                             </property>
-                            </widget>
-                           </item>
                            <item row="1" column="0">
                             <widget class="QLabel" name="tituloLabel_18">
                              <property name="minimumSize">
@@ -3380,6 +3132,36 @@ QPushButton#backtoInicioButton::hover {
                              </property>
                             </widget>
                            </item>
+                           <item row="0" column="1" colspan="2">
+                            <widget class="QLineEdit" name="nombrearchivolineEdit">
+                             <property name="minimumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>500</width>
+                               <height>34</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                              </font>
+                             </property>
+                             <property name="layoutDirection">
+                              <enum>Qt::LeftToRight</enum>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="placeholderText">
+                              <string/>
+                             </property>
+                            </widget>
+                           </item>
                            <item row="1" column="2">
                             <widget class="QPushButton" name="browserDirButton">
                              <property name="minimumSize">
@@ -3409,24 +3191,12 @@ QPushButton#backtoInicioButton::hover {
                              </property>
                             </widget>
                            </item>
-                           <item row="2" column="1">
-                            <widget class="QPushButton" name="enviarFormSimpleButton">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
+                           <item row="0" column="0">
+                            <widget class="QLabel" name="tituloLabel_17">
                              <property name="minimumSize">
                               <size>
-                               <width>100</width>
-                               <height>34</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>100</width>
-                               <height>34</height>
+                               <width>121</width>
+                               <height>0</height>
                               </size>
                              </property>
                              <property name="font">
@@ -3434,15 +3204,8 @@ QPushButton#backtoInicioButton::hover {
                                <pointsize>10</pointsize>
                               </font>
                              </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
                              <property name="text">
-                              <string>enviar</string>
-                             </property>
-                             <property name="icon">
-                              <iconset>
-                               <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                              <string>Nombre del archivo</string>
                              </property>
                             </widget>
                            </item>
@@ -3463,6 +3226,137 @@ QPushButton#backtoInicioButton::hover {
                          </item>
                         </layout>
                        </widget>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QStackedWidget" name="botones_metadata">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>34</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>34</height>
+                    </size>
+                   </property>
+                   <property name="currentIndex">
+                    <number>1</number>
+                   </property>
+                   <widget class="QWidget" name="enviar">
+                    <layout class="QHBoxLayout" name="horizontalLayout_13">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QPushButton" name="enviarFormButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>100</width>
+                         <height>34</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>34</height>
+                        </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <pointsize>10</pointsize>
+                        </font>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="text">
+                        <string>enviar</string>
+                       </property>
+                       <property name="icon">
+                        <iconset>
+                         <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="editar">
+                    <layout class="QHBoxLayout" name="horizontalLayout_14">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>0</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>0</number>
+                     </property>
+                     <item>
+                      <widget class="QPushButton" name="enviarFormEditButton">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>100</width>
+                         <height>34</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>34</height>
+                        </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <pointsize>10</pointsize>
+                        </font>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="text">
+                        <string>enviar</string>
+                       </property>
+                       <property name="icon">
+                        <iconset>
+                         <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                       </property>
                       </widget>
                      </item>
                     </layout>
@@ -4013,6 +3907,26 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                       <widget class="QWidget" name="captura">
                        <layout class="QHBoxLayout" name="horizontalLayout_10">
                         <item>
+                         <widget class="QPushButton" name="finalizarButton">
+                          <property name="cursor">
+                           <cursorShape>PointingHandCursor</cursorShape>
+                          </property>
+                          <property name="text">
+                           <string>Cerrar proyecto</string>
+                          </property>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>imgs/icons/square-with-verification-sign.svg</normaloff>imgs/icons/square-with-verification-sign.svg</iconset>
+                          </property>
+                          <property name="iconSize">
+                           <size>
+                            <width>32</width>
+                            <height>32</height>
+                           </size>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
                          <spacer name="horizontalSpacer_3">
                           <property name="orientation">
                            <enum>Qt::Horizontal</enum>
@@ -4045,7 +3959,7 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                            </font>
                           </property>
                           <property name="cursor">
-                           <cursorShape>PointingHandCursor</cursorShape>
+                           <cursorShape>SplitHCursor</cursorShape>
                           </property>
                           <property name="text">
                            <string>capturar</string>
