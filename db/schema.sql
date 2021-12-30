@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS "images";
 CREATE TABLE IF NOT EXISTS "images" (
 	"images_id"	INTEGER NOT NULL,
 	"element_id"	INTEGER,
-	"order"	INTEGER,
+	"orden"	INTEGER,
 	"size"	INTEGER,
 	"mime_type"	TEXT,
 	"filename"	TEXT,
@@ -61,7 +61,8 @@ CREATE TABLE IF NOT EXISTS "elements" (
 	PRIMARY KEY("element_id")
 );
 INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (1,'título','un nombre dado al recurso','http://purl.org/dc/terms/title');
-INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (2,'descripción','resumen, índice, representación gráfica, o cualquier texto que de cuenta del recurso
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (2,'descripción','resumen, índice, representación gráfica, o cualquier texto que de cuenta del recurso
+
 ','http://purl.org/dc/terms/description');
 INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (3,'creador','autor, creador o entidad responsable por la hechura del recurso. Un creador puede ser una persona, una organización o un servicio.','http://purl.org/dc/terms/creator');
 INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (4,'fecha','un periodo de tiempo asociado con un evento en la vida del recurso (creación, actualización, finalización)','http://purl.org/dc/terms/date');
@@ -69,7 +70,8 @@ INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI
 INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (6,'idioma','lenguaje o lenguajes del recurso','http://purl.org/dc/elements/1.1/language');
 INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (7,'folios','folios (hojas) en total del recurso',NULL);
 INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (8,'páginas','páginas del libro',NULL);
-INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (9,'identificadores','una referencia precisa del recurso en un contexto determinado (p. ej: catálogo bibliográfico)
+INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (9,'identificadores','una referencia precisa del recurso en un contexto determinado (p. ej: catálogo bibliográfico)
+
 ','http://purl.org/dc/terms/identifier');
 INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (10,'descripción_física','corta descripción de las características físicas del objeto','http://purl.org/dc/terms/format');
 INSERT INTO "elements_metadata" ("element_metadata_id","name","description","URI") VALUES (11,'tipo_imagen','MIME type de la imagen (image/jpg, image/png, image/tiff, image/x-adobe-dng)',NULL);

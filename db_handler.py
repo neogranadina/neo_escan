@@ -12,7 +12,9 @@
 
 import datetime
 import logging
+import os
 from pathlib import Path
+from db.create_db import crear_basededatos
 
 from PySide2.QtCore import QDir
 from PySide2.QtSql import QSqlDatabase, QSqlQuery
@@ -34,6 +36,10 @@ def connectToDatabase():
         except Exception as e:
             logging.error(e)
             return False
+
+    # if not database create it
+    if not os.path.exists("db/neo_escan.db"):
+        crear_basededatos("db/neo_escan.db")
 
     db.setDatabaseName(str(Path(write_dir.absolutePath(), 'neo_escan.db')))
 
@@ -190,7 +196,7 @@ def wrap_imageWithElement(element_id, order, size, mime_type,
     query.prepare(
         """
         INSERT INTO 
-        images (element_id, "order", size, mime_type, filename, path, img_ts, img_modified_ts, img_metadata) 
+        images (element_id, orden, size, mime_type, filename, path, img_ts, img_modified_ts, img_metadata) 
         VALUES (:element_id, :order, :size, :mime_type, :filename, :path, :created_ts, :modified_ts, :metadata)
         """)
     query.bindValue(':element_id', element_id)
@@ -232,7 +238,7 @@ def editInfo(element_id, data):
     query.prepare(
         """
         UPDATE elements
-        SET updated_at = :updated_at
+        SET modified_ts = :updated_at
         WHERE element_id = :element_id
         """)
     query.bindValue(':element_id', element_id)
@@ -265,31 +271,28 @@ def erase_element(element_id):
     return True
 
 
-def export_data(element_id):
+def getImagesInfo(element_id):
     '''
-    get all info in database from element_id
+    get all info from images table from element_id
     '''
     query = QSqlQuery()
     query.prepare(
         """
-        SELECT elements_metadata_text.element_metadata, elements_metadata_text.text, images.order, images.size, images.mime_type, images.filename, images.path, images.img_ts, images.img_modified_ts, images.img_metadata
-        FROM elements_metadata_text
-        INNER JOIN elements ON elements.element_id = elements_metadata_text.element_id
-        INNER JOIN images ON images.element_id = elements.element_id
-        WHERE elements.element_id = :element_id
+        SELECT filename, size, mime_type, path, img_ts, img_modified_ts, img_metadata
+        FROM images
+        WHERE element_id = :element_id
         """
     )
     query.bindValue(':element_id', element_id)
     query.exec_()
     data = {}
     while query.next():
-        data[query.value(0)] = query.value(1)
-        data['order'] = query.value(2)
-        data['size'] = query.value(3)
-        data['mime_type'] = query.value(4)
-        data['filename'] = query.value(5)
-        data['path'] = query.value(6)
-        data['img_ts'] = query.value(7)
-        data['img_modified_ts'] = query.value(8)
-        data['img_metadata'] = query.value(9)
+        data[query.value(0)] = {
+            'size': query.value(1),
+            'mime_type': query.value(2),
+            'path': query.value(3),
+            'img_ts': query.value(4),
+            'img_modified_ts': query.value(5),
+            'img_metadata': query.value(6)
+        }
     return data

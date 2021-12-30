@@ -2,12 +2,13 @@ test.py
 historial_de_cambios.md
 update_theme.sh
 .*
-__*
+__pycache__
 neo_esccan.log
 /chdkptp.py
 config.ini
 /escan_env
 /test
 deprecated*
-neoscan_db - copia.db
+db/neoscan_db - copia.db
+db/neo_escan_test.db
 tempCodeRunnerFile.py

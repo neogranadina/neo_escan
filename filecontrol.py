@@ -14,7 +14,7 @@ import chdkptp.util as util
 from pathlib import Path
 import os
 import datetime
-from db import wrap_imageWithElement
+from db_handler import wrap_imageWithElement
 from PIL import Image
 from PIL.ExifTags import TAGS
 

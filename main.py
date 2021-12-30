@@ -21,7 +21,7 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBo
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp, Qt
 
 from ui_main import Ui_MainWindow
-from db import connectToDatabase, createElement, getLastId, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, export_data
+from db_handler import connectToDatabase, createElement, getLastId, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo
 from camcontrol import Cam
 import configparser
 import ctypes
@@ -86,7 +86,11 @@ class MainWindow(QMainWindow):
                                   "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
 
         # Conectar a la base de datos
-        connectToDatabase()
+        try:
+            connectToDatabase()
+        except:
+            print("Error en la conexión con la base de datos")
+            raise
 
         # set version
 
@@ -298,25 +302,49 @@ class MainWindow(QMainWindow):
             self,
             caption="Seleccionar el directorio para guardar los archivos"
         )
-        data = export_data(element_id)
-        if data:
+
+        element_info = getElementInfo(element_id)
+        if element_info:
             # data to dict
-            data = json.loads(data)
+            data = json.loads(element_info)
             # data to json
             data = json.dumps(data)
             # save json to file
-            file_name = f"{element_id}.json"
+            file_name = f"{element_id}_info.json"
+            with open(f"{EXPORTDIR}/{file_name}", "w") as f:
+                f.write(data)
+        else:
+            print("error al obtener datos del elemento")
+
+        metadata_info = getElementMetadatabyID(element_id)
+        if metadata_info:
+            # data to dict
+            data = json.loads(metadata_info)
+            # data to json
+            data = json.dumps(data)
+            # save json to file
+            file_name = f"{element_id}_metadata.json"
             with open(f"{EXPORTDIR}/{file_name}", "w") as f:
                 f.write(data)
 
-            # copy files from EXPORTDIR to image_path
-            for file in os.listdir(EXPORTDIR):
-                shutil.copy(f"{EXPORTDIR}/{file}", f"{image_path}/{file}")
+        # get images from element_id
+        images = getImagesInfo(element_id)
+        if images:
+            # data to dict
+            data = json.loads(images)
+            # data to json
+            data = json.dumps(data)
+            # save json to file
+            file_name = f"{element_id}_images.json"
+            with open(f"{EXPORTDIR}/{file_name}", "w") as f:
+                f.write(data)
 
-            QMessageBox.information(
-                widgets.stackedWidget, "Exportar", "Se ha exportado el elemento correctamente.")
-        else:
-            print("error")
+        # copy files from EXPORTDIR to image_path
+        for file in os.listdir(EXPORTDIR):
+            shutil.copy(f"{EXPORTDIR}/{file}", f"{image_path}/{file}")
+
+        QMessageBox.information(
+            widgets.stackedWidget, "Exportar", "Se ha exportado el elemento correctamente.")
 
     def delete_element(self, element_id, image_path):
         '''
