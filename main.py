@@ -252,7 +252,7 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon1)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(self.set_scanner_page(element_id))
+            button.clicked.connect(lambda: self.set_scanner_page(element_id))
             widgets.elementslayout.addWidget(button, id, 2)
 
             button = QPushButton()
@@ -265,7 +265,8 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon2)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(self.export_element(element_id, image_path))
+            button.clicked.connect(
+                lambda: self.export_element(element_id, image_path))
             widgets.elementslayout.addWidget(button, id, 3)
 
             button = QPushButton()
@@ -278,7 +279,7 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon3)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(self.delete_element(element_id))
+            button.clicked.connect(lambda: self.delete_element(element_id, image_path))
             widgets.elementslayout.addWidget(button, id, 4)
 
         widgets.verticalLayout_20.addLayout(widgets.elementslayout)
@@ -305,39 +306,18 @@ class MainWindow(QMainWindow):
 
         element_info = getElementInfo(element_id)
         if element_info:
-            # data to dict
-            data = json.loads(element_info)
-            # data to json
-            data = json.dumps(data)
-            # save json to file
-            file_name = f"{element_id}_info.json"
-            with open(f"{EXPORTDIR}/{file_name}", "w") as f:
-                f.write(data)
+            self.write_json(EXPORTDIR, element_info, element_id, "info")
         else:
             print("error al obtener datos del elemento")
 
         metadata_info = getElementMetadatabyID(element_id)
         if metadata_info:
-            # data to dict
-            data = json.loads(metadata_info)
-            # data to json
-            data = json.dumps(data)
-            # save json to file
-            file_name = f"{element_id}_metadata.json"
-            with open(f"{EXPORTDIR}/{file_name}", "w") as f:
-                f.write(data)
+            self.write_json(EXPORTDIR, element_info, element_id, "metadata")
 
         # get images from element_id
         images = getImagesInfo(element_id)
         if images:
-            # data to dict
-            data = json.loads(images)
-            # data to json
-            data = json.dumps(data)
-            # save json to file
-            file_name = f"{element_id}_images.json"
-            with open(f"{EXPORTDIR}/{file_name}", "w") as f:
-                f.write(data)
+            self.write_json(EXPORTDIR, element_info, element_id, "images")
 
         # copy files from EXPORTDIR to image_path
         for file in os.listdir(EXPORTDIR):
@@ -345,6 +325,13 @@ class MainWindow(QMainWindow):
 
         QMessageBox.information(
             widgets.stackedWidget, "Exportar", "Se ha exportado el elemento correctamente.")
+
+    def write_json(self, export_dir, element_info, element_id, tipo):
+        # dict to json
+        element_info_json = json.dumps(element_info)
+        # write json to file
+        with open(f'{export_dir}/{element_id}_{tipo}.json', 'w') as f:
+            f.write(element_info_json)
 
     def delete_element(self, element_id, image_path):
         '''
@@ -746,7 +733,7 @@ class MainWindow(QMainWindow):
         # obtener datos para la barra izquierda
         if id_element is None:
             id_element = getLastElementID()
-        
+
         datos_elemento = getElementMetadatabyID(id_element)
 
         # show data in labels
