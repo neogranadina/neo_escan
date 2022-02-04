@@ -15,8 +15,7 @@ from pathlib import Path
 import os
 import datetime
 from db_handler import wrap_imageWithElement
-from PIL import Image
-from PIL.ExifTags import TAGS
+from PIL import Image, ExifTags
 
 DIR = Path("../capturas")
 
@@ -124,10 +123,13 @@ class DescargarIMGS:
         obtiene los metadatos de una imagen
         '''
         image = Image.open(image_path)
-        metadata = {}
-        for tag, value in image.tags.items():
-            metadata[tag] = value
-        return metadata
+        img_exif = image.getexif()
+
+        if img_exif:
+            exif = {ExifTags.TAGS[k]: v for k, v in img_exif.items()}
+            return exif
+        else:
+            return {'No metadata': 'No metadata'}
 
     def associateImageWithElement(self, element_id, img_path, tipo_img):
         '''

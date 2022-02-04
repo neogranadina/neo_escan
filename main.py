@@ -172,6 +172,11 @@ class MainWindow(QMainWindow):
 
     def display_elements(self):
 
+        try:
+            widgets.verticalLayout_20.removeItem(widgets.elementslayout)
+        except AttributeError:
+            pass
+
         widgets.elementslayout = QGridLayout()
         widgets.elementslayout.setVerticalSpacing(10)
         widgets.elementslayout.setHorizontalSpacing(10)
@@ -312,12 +317,12 @@ class MainWindow(QMainWindow):
 
         metadata_info = getElementMetadatabyID(element_id)
         if metadata_info:
-            self.write_json(EXPORTDIR, element_info, element_id, "metadata")
+            self.write_json(EXPORTDIR, metadata_info, element_id, "metadata")
 
         # get images from element_id
         images = getImagesInfo(element_id)
         if images:
-            self.write_json(EXPORTDIR, element_info, element_id, "images")
+            self.write_json(EXPORTDIR, images, element_id, "images")
 
         # copy files from EXPORTDIR to image_path
         for file in os.listdir(EXPORTDIR):
