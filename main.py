@@ -745,15 +745,16 @@ class MainWindow(QMainWindow):
 
         # obtener datos para la barra izquierda
         if id_element is None:
-            id_elemento = getLastElementID()
-        datos_elemento = getElementMetadatabyID(id_elemento)
+            id_element = getLastElementID()
+        
+        datos_elemento = getElementMetadatabyID(id_element)
 
         # show data in labels
-        widgets.elementoIDLabel.setText(str(id_elemento))
+        widgets.elementoIDLabel.setText(str(id_element))
         widgets.elementoTituloLabel.setText(datos_elemento[1])
 
         # create directory to save images
-        folder_path = Path(IMGDIR, str(id_elemento))
+        folder_path = Path(IMGDIR, str(id_element))
 
         try:
             os.makedirs(folder_path, exist_ok=True)
