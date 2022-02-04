@@ -252,7 +252,7 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon1)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(self.prepare_scanner(element_id))
+            button.clicked.connect(self.set_scanner_page(element_id))
             widgets.elementslayout.addWidget(button, id, 2)
 
             button = QPushButton()
