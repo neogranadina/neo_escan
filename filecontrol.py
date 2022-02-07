@@ -123,10 +123,13 @@ class DescargarIMGS:
         obtiene los metadatos de una imagen
         '''
         image = Image.open(image_path)
-        img_exif = image.getexif()
+        if image.format == "JPEG":
+            img_exif = image._getexif()
+        elif image.format == "DNG":
+            img_exif = image.getexif()
 
         if img_exif:
-            exif = {ExifTags.TAGS[k]: v for k, v in img_exif.items()}
+            exif = {ExifTags.TAGS.get(k, "etiqueta desconocida"): v for k, v in img_exif.items()}
             return exif
         else:
             return {'No metadata': 'No metadata'}
@@ -153,7 +156,8 @@ class DescargarIMGS:
         path = os.path.dirname(img_path)
         img_timestamp = datetime.datetime.now()
         img_modified_ts = datetime.datetime.now()
-        img_metadata = self.imageMetadata(img_path)
+        #img_metadata = self.imageMetadata(img_path)
+        img_metadata = {}
 
         #debug
         '''
