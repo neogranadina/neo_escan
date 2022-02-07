@@ -150,8 +150,10 @@ class DescargarIMGS:
             img_exif = image._getexif()
         elif image.format == "DNG":
             img_exif = image.getexif()
+        else:
+            img_exif = None
 
-        if img_exif:
+        if img_exif is not None:
             exif = {ExifTags.TAGS.get(k, "etiqueta desconocida"): v for k, v in img_exif.items()}
             return exif
         else:

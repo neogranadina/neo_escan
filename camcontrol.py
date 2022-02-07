@@ -12,7 +12,7 @@
 # ///////////////////////////////////////////////////////////////
 
 import chdkptp
-from chdkptp.lua import global_lua
+from chdkptp.lua import LuaContext
 import multiprocessing as mp
 from filecontrol import DescargarIMGS
 #import configparser
@@ -89,13 +89,18 @@ class Cam:
         c1.start()
         c2.start()
 
-    def close_dev(self):
+    def close_dev(self, dev_list):
         '''
         Disconnect devs
         '''
-        devs = global_lua.execute("""
-            for i, dev in ipairs(chdkptp.list_devices()) do
-                local lcon = chdku.connection(dev)
-                lcon:disconnect()
-            end;
+        [dev.switch_mode('play') for dev in dev_list if dev.mode == 'record']
+
+        for cam in self.camaras:
+            info = cam
+            _lua = LuaContext()
+            _lua.globals.devspec = info._asdict()
+            _lua.pexecute("""
+            con = chdku.connection({bus = devspec.bus_num,
+                                dev = devspec.device_num})
+            con:disconnect()
             """)

@@ -102,8 +102,6 @@ class MainWindow(QMainWindow):
         widgets.inicioButton.clicked.connect(self.buttonClick)
         widgets.coleccionesButton.clicked.connect(self.buttonClick)
         widgets.escanerButton.clicked.connect(self.buttonClick)
-        widgets.imagenesButton.clicked.connect(self.buttonClick)
-        widgets.exportarButton.clicked.connect(self.buttonClick)
 
         # Seleccionar página de inicio
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
@@ -165,10 +163,6 @@ class MainWindow(QMainWindow):
         elif btnName == "escanerButton":
             self.set_scanner_page()
             widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
-        elif btnName == "imagenesButton":
-            widgets.stackedWidget.setCurrentWidget(widgets.imgsPage)
-        elif btnName == "exportarButton":
-            widgets.stackedWidget.setCurrentWidget(widgets.exportarPage)
 
     # Funciones para la página de elementos
 
@@ -897,11 +891,11 @@ class MainWindow(QMainWindow):
             self.display_elements()
 
 
-    def gentle_close():
+    def gentle_close(self):
         '''
         close cams session, close db connection and close application
         '''
-        Cam.close_dev()
+        Cam().close_dev(cams)
         kill_connection()
         window.close()
 
