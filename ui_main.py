@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
         icon = QIcon()
         icon.addFile(u"C:/Users/jairo/.designer/backup/imgs/logo.png", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
-        MainWindow.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        MainWindow.setStyleSheet(u"background-color: transparent;")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setEnabled(True)
@@ -37,9 +37,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.header = QFrame(self.centralwidget)
         self.header.setObjectName(u"header")
-        self.header.setMinimumSize(QSize(0, 60))
+        self.header.setMinimumSize(QSize(0, 0))
         self.header.setMaximumSize(QSize(16777215, 60))
-        self.header.setStyleSheet(u"background-color: rgba(0, 0, 0, .45);\n"
+        self.header.setStyleSheet(u"background-color: rgba(0, 0, 0, .7);\n"
 "border: none;")
         self.header.setFrameShape(QFrame.StyledPanel)
         self.header.setFrameShadow(QFrame.Raised)
@@ -55,6 +55,7 @@ class Ui_MainWindow(object):
         self.neoLabel.setStyleSheet(u"padding-left: 25px;\n"
 "padding-top: 5px;\n"
 "padding-bottom: 5px;\n"
+"background-color: transparent;\n"
 "")
         self.neoLabel.setPixmap(QPixmap(u"imgs/Neogranadina_header_white.svg"))
         self.neoLabel.setScaledContents(True)
@@ -63,11 +64,23 @@ class Ui_MainWindow(object):
 
         self.versionLabel = QLabel(self.header)
         self.versionLabel.setObjectName(u"versionLabel")
-        self.versionLabel.setStyleSheet(u"color: rgba(255,255,255,.7);\n"
-"padding-right: 10px;")
+        self.versionLabel.setStyleSheet(u"padding-right: 10px;\n"
+"background-color: transparent;\n"
+"color: rgba(255,255,255,.7);")
         self.versionLabel.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.horizontalLayout_2.addWidget(self.versionLabel)
+
+        self.closeButton = QPushButton(self.header)
+        self.closeButton.setObjectName(u"closeButton")
+        self.closeButton.setMinimumSize(QSize(32, 32))
+        self.closeButton.setMaximumSize(QSize(32, 16777215))
+        self.closeButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.closeButton.setStyleSheet(u"color: rgba(255, 255, 255,.7);\n"
+"background-color:transparent;")
+        self.closeButton.setIconSize(QSize(32, 32))
+
+        self.horizontalLayout_2.addWidget(self.closeButton)
 
 
         self.verticalLayout_5.addWidget(self.header)
@@ -88,7 +101,7 @@ class Ui_MainWindow(object):
         self.menu_bar.setMinimumSize(QSize(105, 0))
         self.menu_bar.setMaximumSize(QSize(105, 16777215))
         palette = QPalette()
-        brush = QBrush(QColor(255, 255, 255, 255))
+        brush = QBrush(QColor(0, 0, 0, 178))
         brush.setStyle(Qt.SolidPattern)
         palette.setBrush(QPalette.Active, QPalette.Button, brush)
         palette.setBrush(QPalette.Active, QPalette.Base, brush)
@@ -100,7 +113,10 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Disabled, QPalette.Base, brush)
         palette.setBrush(QPalette.Disabled, QPalette.Window, brush)
         self.menu_bar.setPalette(palette)
-        self.menu_bar.setStyleSheet(u"QFrame {background-color: rgba(0, 0, 0,.7);}\n"
+        self.menu_bar.setAutoFillBackground(False)
+        self.menu_bar.setStyleSheet(u"QWidget {background-color: rgba(0, 0, 0,.7);}\n"
+"\n"
+"QFrame {background-color: rgba(0, 0, 0,.7);}\n"
 "\n"
 "QLabel {\n"
 "	color: rgba(255,255,255,.9);\n"
@@ -151,7 +167,14 @@ class Ui_MainWindow(object):
         self.inicioButton.setObjectName(u"inicioButton")
         self.inicioButton.setMinimumSize(QSize(0, 80))
         self.inicioButton.setMaximumSize(QSize(16777215, 80))
+        font1 = QFont()
+        font1.setBold(True)
+        font1.setWeight(75)
+        self.inicioButton.setFont(font1)
         self.inicioButton.setCursor(QCursor(Qt.PointingHandCursor))
+#if QT_CONFIG(whatsthis)
+        self.inicioButton.setWhatsThis(u"")
+#endif // QT_CONFIG(whatsthis)
         self.inicioButton.setStyleSheet(u"")
         icon1 = QIcon()
         icon1.addFile(u"imgs/icons/pages-interface.svg", QSize(), QIcon.Normal, QIcon.Off)
@@ -164,7 +187,7 @@ class Ui_MainWindow(object):
         self.inicioLabel.setObjectName(u"inicioLabel")
         self.inicioLabel.setMinimumSize(QSize(0, 18))
         self.inicioLabel.setMaximumSize(QSize(16777215, 18))
-        self.inicioLabel.setStyleSheet(u"color: rgb(255, 255, 255);")
+        self.inicioLabel.setFont(font1)
         self.inicioLabel.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_21.addWidget(self.inicioLabel)
@@ -182,11 +205,14 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_21.addWidget(self.coleccionesButton)
 
-        self.metadataLabel = QLabel(self.frame)
-        self.metadataLabel.setObjectName(u"metadataLabel")
-        self.metadataLabel.setAlignment(Qt.AlignCenter)
+        self.metadatosLabel = QLabel(self.frame)
+        self.metadatosLabel.setObjectName(u"metadatosLabel")
+        self.metadatosLabel.setMinimumSize(QSize(0, 18))
+        self.metadatosLabel.setMaximumSize(QSize(16777215, 18))
+        self.metadatosLabel.setFont(font1)
+        self.metadatosLabel.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_21.addWidget(self.metadataLabel)
+        self.verticalLayout_21.addWidget(self.metadatosLabel)
 
         self.escanerButton = QPushButton(self.frame)
         self.escanerButton.setObjectName(u"escanerButton")
@@ -201,49 +227,14 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_21.addWidget(self.escanerButton)
 
-        self.escaneLabel = QLabel(self.frame)
-        self.escaneLabel.setObjectName(u"escaneLabel")
-        self.escaneLabel.setAlignment(Qt.AlignCenter)
+        self.escanerLabel = QLabel(self.frame)
+        self.escanerLabel.setObjectName(u"escanerLabel")
+        self.escanerLabel.setMinimumSize(QSize(0, 18))
+        self.escanerLabel.setMaximumSize(QSize(16777215, 18))
+        self.escanerLabel.setFont(font1)
+        self.escanerLabel.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_21.addWidget(self.escaneLabel)
-
-        self.imagenesButton = QPushButton(self.frame)
-        self.imagenesButton.setObjectName(u"imagenesButton")
-        self.imagenesButton.setMinimumSize(QSize(0, 80))
-        self.imagenesButton.setMaximumSize(QSize(16777215, 80))
-        self.imagenesButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.imagenesButton.setStyleSheet(u"")
-        icon4 = QIcon()
-        icon4.addFile(u"imgs/icons/images-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.imagenesButton.setIcon(icon4)
-        self.imagenesButton.setIconSize(QSize(40, 40))
-
-        self.verticalLayout_21.addWidget(self.imagenesButton)
-
-        self.imagenesLabel = QLabel(self.frame)
-        self.imagenesLabel.setObjectName(u"imagenesLabel")
-        self.imagenesLabel.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_21.addWidget(self.imagenesLabel)
-
-        self.exportarButton = QPushButton(self.frame)
-        self.exportarButton.setObjectName(u"exportarButton")
-        self.exportarButton.setMinimumSize(QSize(0, 80))
-        self.exportarButton.setMaximumSize(QSize(16777215, 80))
-        self.exportarButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.exportarButton.setStyleSheet(u"")
-        icon5 = QIcon()
-        icon5.addFile(u"imgs/icons/download-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.exportarButton.setIcon(icon5)
-        self.exportarButton.setIconSize(QSize(40, 40))
-
-        self.verticalLayout_21.addWidget(self.exportarButton)
-
-        self.exportarLabel = QLabel(self.frame)
-        self.exportarLabel.setObjectName(u"exportarLabel")
-        self.exportarLabel.setAlignment(Qt.AlignCenter)
-
-        self.verticalLayout_21.addWidget(self.exportarLabel)
+        self.verticalLayout_21.addWidget(self.escanerLabel)
 
 
         self.verticalLayout_22.addLayout(self.verticalLayout_21)
@@ -296,11 +287,11 @@ class Ui_MainWindow(object):
         self.formLayout_6.setFormAlignment(Qt.AlignRight|Qt.AlignTop|Qt.AlignTrailing)
         self.label_2 = QLabel(self.inicioPage)
         self.label_2.setObjectName(u"label_2")
-        font1 = QFont()
-        font1.setPointSize(12)
-        font1.setBold(True)
-        font1.setWeight(75)
-        self.label_2.setFont(font1)
+        font2 = QFont()
+        font2.setPointSize(12)
+        font2.setBold(True)
+        font2.setWeight(75)
+        self.label_2.setFont(font2)
 
         self.formLayout_6.setWidget(0, QFormLayout.LabelRole, self.label_2)
 
@@ -309,9 +300,9 @@ class Ui_MainWindow(object):
         self.nuevoProyectoButton.setMinimumSize(QSize(40, 40))
         self.nuevoProyectoButton.setMaximumSize(QSize(40, 40))
         self.nuevoProyectoButton.setStyleSheet(u"")
-        icon6 = QIcon()
-        icon6.addFile(u"imgs/icons/plus-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.nuevoProyectoButton.setIcon(icon6)
+        icon4 = QIcon()
+        icon4.addFile(u"imgs/icons/plus-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.nuevoProyectoButton.setIcon(icon4)
         self.nuevoProyectoButton.setIconSize(QSize(20, 20))
 
         self.formLayout_6.setWidget(0, QFormLayout.FieldRole, self.nuevoProyectoButton)
@@ -321,11 +312,11 @@ class Ui_MainWindow(object):
 
         self.proyectos_actuales_label = QLabel(self.inicioPage)
         self.proyectos_actuales_label.setObjectName(u"proyectos_actuales_label")
-        font2 = QFont()
-        font2.setPointSize(11)
-        font2.setBold(True)
-        font2.setWeight(75)
-        self.proyectos_actuales_label.setFont(font2)
+        font3 = QFont()
+        font3.setPointSize(11)
+        font3.setBold(True)
+        font3.setWeight(75)
+        self.proyectos_actuales_label.setFont(font3)
 
         self.verticalLayout_19.addWidget(self.proyectos_actuales_label)
 
@@ -354,7 +345,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 65, 18))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 677, 310))
         self.verticalLayout_20 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
         self.scrollArea_7.setWidget(self.scrollAreaWidgetContents_2)
@@ -432,7 +423,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.H1metadatosLabel = QLabel(self.headerMetadatos)
         self.H1metadatosLabel.setObjectName(u"H1metadatosLabel")
-        self.H1metadatosLabel.setFont(font2)
+        self.H1metadatosLabel.setFont(font3)
 
         self.horizontalLayout_9.addWidget(self.H1metadatosLabel)
 
@@ -440,15 +431,15 @@ class Ui_MainWindow(object):
         self.backtoInicioButton.setObjectName(u"backtoInicioButton")
         self.backtoInicioButton.setMinimumSize(QSize(100, 42))
         self.backtoInicioButton.setMaximumSize(QSize(150, 42))
-        font3 = QFont()
-        font3.setPointSize(10)
-        font3.setItalic(False)
-        font3.setUnderline(False)
-        self.backtoInicioButton.setFont(font3)
+        font4 = QFont()
+        font4.setPointSize(10)
+        font4.setItalic(False)
+        font4.setUnderline(False)
+        self.backtoInicioButton.setFont(font4)
         self.backtoInicioButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon7 = QIcon()
-        icon7.addFile(u"imgs/icons/left-arrowhead-in-a-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.backtoInicioButton.setIcon(icon7)
+        icon5 = QIcon()
+        icon5.addFile(u"imgs/icons/left-arrowhead-in-a-circle.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.backtoInicioButton.setIcon(icon5)
         self.backtoInicioButton.setIconSize(QSize(25, 25))
 
         self.horizontalLayout_9.addWidget(self.backtoInicioButton)
@@ -467,35 +458,35 @@ class Ui_MainWindow(object):
         self.tipodocLabel.setObjectName(u"tipodocLabel")
         self.tipodocLabel.setMinimumSize(QSize(120, 0))
         self.tipodocLabel.setMaximumSize(QSize(120, 16777215))
-        font4 = QFont()
-        font4.setPointSize(10)
-        self.tipodocLabel.setFont(font4)
+        font5 = QFont()
+        font5.setPointSize(10)
+        self.tipodocLabel.setFont(font5)
 
         self.horizontalLayout_8.addWidget(self.tipodocLabel)
 
         self.tipodocComboBox = QComboBox(self.formChanger)
+        icon6 = QIcon()
+        icon6.addFile(u"imgs/icons/folder-check-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tipodocComboBox.addItem(icon6, "")
+        icon7 = QIcon()
+        icon7.addFile(u"imgs/icons/documents-rounded-square-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.tipodocComboBox.addItem(icon7, "")
         icon8 = QIcon()
-        icon8.addFile(u"imgs/icons/folder-check-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon8.addFile(u"imgs/icons/image-interface-symbol-with-a-landscape.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.tipodocComboBox.addItem(icon8, "")
         icon9 = QIcon()
-        icon9.addFile(u"imgs/icons/documents-rounded-square-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon9.addFile(u"imgs/icons/news-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.tipodocComboBox.addItem(icon9, "")
         icon10 = QIcon()
-        icon10.addFile(u"imgs/icons/image-interface-symbol-with-a-landscape.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon10.addFile(u"imgs/icons/open-book.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.tipodocComboBox.addItem(icon10, "")
         icon11 = QIcon()
-        icon11.addFile(u"imgs/icons/news-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon11.addFile(u"imgs/icons/camera.svg", QSize(), QIcon.Normal, QIcon.Off)
         self.tipodocComboBox.addItem(icon11, "")
-        icon12 = QIcon()
-        icon12.addFile(u"imgs/icons/open-book.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tipodocComboBox.addItem(icon12, "")
-        icon13 = QIcon()
-        icon13.addFile(u"imgs/icons/camera.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.tipodocComboBox.addItem(icon13, "")
         self.tipodocComboBox.setObjectName(u"tipodocComboBox")
         self.tipodocComboBox.setMinimumSize(QSize(300, 34))
         self.tipodocComboBox.setMaximumSize(QSize(300, 34))
-        self.tipodocComboBox.setFont(font4)
+        self.tipodocComboBox.setFont(font5)
 
         self.horizontalLayout_8.addWidget(self.tipodocComboBox)
 
@@ -519,14 +510,14 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 633, 428))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 642, 428))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
         self.tituloLabel = QLabel(self.scrollAreaWidgetContents)
         self.tituloLabel.setObjectName(u"tituloLabel")
-        self.tituloLabel.setFont(font4)
+        self.tituloLabel.setFont(font5)
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.tituloLabel)
 
@@ -534,14 +525,14 @@ class Ui_MainWindow(object):
         self.titulolineEdit.setObjectName(u"titulolineEdit")
         self.titulolineEdit.setMinimumSize(QSize(500, 34))
         self.titulolineEdit.setMaximumSize(QSize(500, 34))
-        self.titulolineEdit.setFont(font4)
+        self.titulolineEdit.setFont(font5)
         self.titulolineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.titulolineEdit)
 
         self.numextLabel = QLabel(self.scrollAreaWidgetContents)
         self.numextLabel.setObjectName(u"numextLabel")
-        self.numextLabel.setFont(font4)
+        self.numextLabel.setFont(font5)
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.numextLabel)
 
@@ -554,7 +545,7 @@ class Ui_MainWindow(object):
         self.descripcionlineEdit.setSizePolicy(sizePolicy)
         self.descripcionlineEdit.setMinimumSize(QSize(500, 70))
         self.descripcionlineEdit.setMaximumSize(QSize(500, 250))
-        self.descripcionlineEdit.setFont(font4)
+        self.descripcionlineEdit.setFont(font5)
         self.descripcionlineEdit.setStyleSheet(u"Breve resumen del tema del expediente")
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.descripcionlineEdit)
@@ -563,13 +554,13 @@ class Ui_MainWindow(object):
         self.creadorlineEdit.setObjectName(u"creadorlineEdit")
         self.creadorlineEdit.setMinimumSize(QSize(500, 34))
         self.creadorlineEdit.setMaximumSize(QSize(500, 34))
-        self.creadorlineEdit.setFont(font4)
+        self.creadorlineEdit.setFont(font5)
 
         self.formLayout.setWidget(4, QFormLayout.FieldRole, self.creadorlineEdit)
 
         self.fechaILabel = QLabel(self.scrollAreaWidgetContents)
         self.fechaILabel.setObjectName(u"fechaILabel")
-        self.fechaILabel.setFont(font4)
+        self.fechaILabel.setFont(font5)
 
         self.formLayout.setWidget(5, QFormLayout.LabelRole, self.fechaILabel)
 
@@ -577,13 +568,13 @@ class Ui_MainWindow(object):
         self.fechaIlineEdit.setObjectName(u"fechaIlineEdit")
         self.fechaIlineEdit.setMinimumSize(QSize(500, 34))
         self.fechaIlineEdit.setMaximumSize(QSize(500, 34))
-        self.fechaIlineEdit.setFont(font4)
+        self.fechaIlineEdit.setFont(font5)
 
         self.formLayout.setWidget(5, QFormLayout.FieldRole, self.fechaIlineEdit)
 
         self.fechaFLabel = QLabel(self.scrollAreaWidgetContents)
         self.fechaFLabel.setObjectName(u"fechaFLabel")
-        self.fechaFLabel.setFont(font4)
+        self.fechaFLabel.setFont(font5)
 
         self.formLayout.setWidget(6, QFormLayout.LabelRole, self.fechaFLabel)
 
@@ -591,13 +582,13 @@ class Ui_MainWindow(object):
         self.fechaFlineEdit.setObjectName(u"fechaFlineEdit")
         self.fechaFlineEdit.setMinimumSize(QSize(500, 34))
         self.fechaFlineEdit.setMaximumSize(QSize(500, 34))
-        self.fechaFlineEdit.setFont(font4)
+        self.fechaFlineEdit.setFont(font5)
 
         self.formLayout.setWidget(6, QFormLayout.FieldRole, self.fechaFlineEdit)
 
         self.idiomaLabel = QLabel(self.scrollAreaWidgetContents)
         self.idiomaLabel.setObjectName(u"idiomaLabel")
-        self.idiomaLabel.setFont(font4)
+        self.idiomaLabel.setFont(font5)
 
         self.formLayout.setWidget(8, QFormLayout.LabelRole, self.idiomaLabel)
 
@@ -605,13 +596,13 @@ class Ui_MainWindow(object):
         self.idiomalineEdit.setObjectName(u"idiomalineEdit")
         self.idiomalineEdit.setMinimumSize(QSize(500, 34))
         self.idiomalineEdit.setMaximumSize(QSize(500, 34))
-        self.idiomalineEdit.setFont(font4)
+        self.idiomalineEdit.setFont(font5)
 
         self.formLayout.setWidget(8, QFormLayout.FieldRole, self.idiomalineEdit)
 
         self.numfolLabel = QLabel(self.scrollAreaWidgetContents)
         self.numfolLabel.setObjectName(u"numfolLabel")
-        self.numfolLabel.setFont(font4)
+        self.numfolLabel.setFont(font5)
 
         self.formLayout.setWidget(10, QFormLayout.LabelRole, self.numfolLabel)
 
@@ -619,13 +610,13 @@ class Ui_MainWindow(object):
         self.numfollineEdit.setObjectName(u"numfollineEdit")
         self.numfollineEdit.setMinimumSize(QSize(500, 34))
         self.numfollineEdit.setMaximumSize(QSize(500, 34))
-        self.numfollineEdit.setFont(font4)
+        self.numfollineEdit.setFont(font5)
 
         self.formLayout.setWidget(10, QFormLayout.FieldRole, self.numfollineEdit)
 
         self.identificadoresLabel = QLabel(self.scrollAreaWidgetContents)
         self.identificadoresLabel.setObjectName(u"identificadoresLabel")
-        self.identificadoresLabel.setFont(font4)
+        self.identificadoresLabel.setFont(font5)
 
         self.formLayout.setWidget(11, QFormLayout.LabelRole, self.identificadoresLabel)
 
@@ -633,19 +624,19 @@ class Ui_MainWindow(object):
         self.identificadoreslineEdit.setObjectName(u"identificadoreslineEdit")
         self.identificadoreslineEdit.setMinimumSize(QSize(500, 34))
         self.identificadoreslineEdit.setMaximumSize(QSize(500, 34))
-        self.identificadoreslineEdit.setFont(font4)
+        self.identificadoreslineEdit.setFont(font5)
 
         self.formLayout.setWidget(11, QFormLayout.FieldRole, self.identificadoreslineEdit)
 
         self.creadorLabel = QLabel(self.scrollAreaWidgetContents)
         self.creadorLabel.setObjectName(u"creadorLabel")
-        self.creadorLabel.setFont(font4)
+        self.creadorLabel.setFont(font5)
 
         self.formLayout.setWidget(4, QFormLayout.LabelRole, self.creadorLabel)
 
         self.coberturaLabel = QLabel(self.scrollAreaWidgetContents)
         self.coberturaLabel.setObjectName(u"coberturaLabel")
-        self.coberturaLabel.setFont(font4)
+        self.coberturaLabel.setFont(font5)
 
         self.formLayout.setWidget(7, QFormLayout.LabelRole, self.coberturaLabel)
 
@@ -653,7 +644,7 @@ class Ui_MainWindow(object):
         self.coberturalineEdit.setObjectName(u"coberturalineEdit")
         self.coberturalineEdit.setMinimumSize(QSize(500, 34))
         self.coberturalineEdit.setMaximumSize(QSize(500, 34))
-        self.coberturalineEdit.setFont(font4)
+        self.coberturalineEdit.setFont(font5)
 
         self.formLayout.setWidget(7, QFormLayout.FieldRole, self.coberturalineEdit)
 
@@ -683,7 +674,7 @@ class Ui_MainWindow(object):
         self.formLayout_3.setObjectName(u"formLayout_3")
         self.tituloLabel_3 = QLabel(self.scrollAreaWidgetContents_3)
         self.tituloLabel_3.setObjectName(u"tituloLabel_3")
-        self.tituloLabel_3.setFont(font4)
+        self.tituloLabel_3.setFont(font5)
 
         self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.tituloLabel_3)
 
@@ -691,14 +682,14 @@ class Ui_MainWindow(object):
         self.titulodoclineEdit.setObjectName(u"titulodoclineEdit")
         self.titulodoclineEdit.setMinimumSize(QSize(500, 34))
         self.titulodoclineEdit.setMaximumSize(QSize(500, 34))
-        self.titulodoclineEdit.setFont(font4)
+        self.titulodoclineEdit.setFont(font5)
         self.titulodoclineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_3.setWidget(0, QFormLayout.FieldRole, self.titulodoclineEdit)
 
         self.numextLabel_3 = QLabel(self.scrollAreaWidgetContents_3)
         self.numextLabel_3.setObjectName(u"numextLabel_3")
-        self.numextLabel_3.setFont(font4)
+        self.numextLabel_3.setFont(font5)
 
         self.formLayout_3.setWidget(1, QFormLayout.LabelRole, self.numextLabel_3)
 
@@ -708,14 +699,14 @@ class Ui_MainWindow(object):
         self.descripciondoclineEdit.setSizePolicy(sizePolicy)
         self.descripciondoclineEdit.setMinimumSize(QSize(500, 70))
         self.descripciondoclineEdit.setMaximumSize(QSize(500, 250))
-        self.descripciondoclineEdit.setFont(font4)
+        self.descripciondoclineEdit.setFont(font5)
         self.descripciondoclineEdit.setStyleSheet(u"Breve resumen del tema del documento")
 
         self.formLayout_3.setWidget(1, QFormLayout.FieldRole, self.descripciondoclineEdit)
 
         self.creadorLabel_3 = QLabel(self.scrollAreaWidgetContents_3)
         self.creadorLabel_3.setObjectName(u"creadorLabel_3")
-        self.creadorLabel_3.setFont(font4)
+        self.creadorLabel_3.setFont(font5)
 
         self.formLayout_3.setWidget(2, QFormLayout.LabelRole, self.creadorLabel_3)
 
@@ -723,13 +714,13 @@ class Ui_MainWindow(object):
         self.creadordoclineEdit.setObjectName(u"creadordoclineEdit")
         self.creadordoclineEdit.setMinimumSize(QSize(500, 34))
         self.creadordoclineEdit.setMaximumSize(QSize(500, 34))
-        self.creadordoclineEdit.setFont(font4)
+        self.creadordoclineEdit.setFont(font5)
 
         self.formLayout_3.setWidget(2, QFormLayout.FieldRole, self.creadordoclineEdit)
 
         self.fechaILabel_3 = QLabel(self.scrollAreaWidgetContents_3)
         self.fechaILabel_3.setObjectName(u"fechaILabel_3")
-        self.fechaILabel_3.setFont(font4)
+        self.fechaILabel_3.setFont(font5)
 
         self.formLayout_3.setWidget(3, QFormLayout.LabelRole, self.fechaILabel_3)
 
@@ -737,13 +728,13 @@ class Ui_MainWindow(object):
         self.fechaIdoclineEdit.setObjectName(u"fechaIdoclineEdit")
         self.fechaIdoclineEdit.setMinimumSize(QSize(500, 34))
         self.fechaIdoclineEdit.setMaximumSize(QSize(500, 34))
-        self.fechaIdoclineEdit.setFont(font4)
+        self.fechaIdoclineEdit.setFont(font5)
 
         self.formLayout_3.setWidget(3, QFormLayout.FieldRole, self.fechaIdoclineEdit)
 
         self.fechaFLabel_3 = QLabel(self.scrollAreaWidgetContents_3)
         self.fechaFLabel_3.setObjectName(u"fechaFLabel_3")
-        self.fechaFLabel_3.setFont(font4)
+        self.fechaFLabel_3.setFont(font5)
 
         self.formLayout_3.setWidget(4, QFormLayout.LabelRole, self.fechaFLabel_3)
 
@@ -751,13 +742,13 @@ class Ui_MainWindow(object):
         self.fechaFdoclineEdit.setObjectName(u"fechaFdoclineEdit")
         self.fechaFdoclineEdit.setMinimumSize(QSize(500, 34))
         self.fechaFdoclineEdit.setMaximumSize(QSize(500, 34))
-        self.fechaFdoclineEdit.setFont(font4)
+        self.fechaFdoclineEdit.setFont(font5)
 
         self.formLayout_3.setWidget(4, QFormLayout.FieldRole, self.fechaFdoclineEdit)
 
         self.coberturaLabel_3 = QLabel(self.scrollAreaWidgetContents_3)
         self.coberturaLabel_3.setObjectName(u"coberturaLabel_3")
-        self.coberturaLabel_3.setFont(font4)
+        self.coberturaLabel_3.setFont(font5)
 
         self.formLayout_3.setWidget(5, QFormLayout.LabelRole, self.coberturaLabel_3)
 
@@ -765,13 +756,13 @@ class Ui_MainWindow(object):
         self.coberturadoclineEdit.setObjectName(u"coberturadoclineEdit")
         self.coberturadoclineEdit.setMinimumSize(QSize(500, 34))
         self.coberturadoclineEdit.setMaximumSize(QSize(500, 34))
-        self.coberturadoclineEdit.setFont(font4)
+        self.coberturadoclineEdit.setFont(font5)
 
         self.formLayout_3.setWidget(5, QFormLayout.FieldRole, self.coberturadoclineEdit)
 
         self.idiomaLabel_3 = QLabel(self.scrollAreaWidgetContents_3)
         self.idiomaLabel_3.setObjectName(u"idiomaLabel_3")
-        self.idiomaLabel_3.setFont(font4)
+        self.idiomaLabel_3.setFont(font5)
 
         self.formLayout_3.setWidget(6, QFormLayout.LabelRole, self.idiomaLabel_3)
 
@@ -779,13 +770,13 @@ class Ui_MainWindow(object):
         self.idiomadoclineEdit.setObjectName(u"idiomadoclineEdit")
         self.idiomadoclineEdit.setMinimumSize(QSize(500, 34))
         self.idiomadoclineEdit.setMaximumSize(QSize(500, 34))
-        self.idiomadoclineEdit.setFont(font4)
+        self.idiomadoclineEdit.setFont(font5)
 
         self.formLayout_3.setWidget(6, QFormLayout.FieldRole, self.idiomadoclineEdit)
 
         self.numfolLabel_3 = QLabel(self.scrollAreaWidgetContents_3)
         self.numfolLabel_3.setObjectName(u"numfolLabel_3")
-        self.numfolLabel_3.setFont(font4)
+        self.numfolLabel_3.setFont(font5)
 
         self.formLayout_3.setWidget(7, QFormLayout.LabelRole, self.numfolLabel_3)
 
@@ -793,13 +784,13 @@ class Ui_MainWindow(object):
         self.numfoliodoclineEdit.setObjectName(u"numfoliodoclineEdit")
         self.numfoliodoclineEdit.setMinimumSize(QSize(500, 34))
         self.numfoliodoclineEdit.setMaximumSize(QSize(500, 34))
-        self.numfoliodoclineEdit.setFont(font4)
+        self.numfoliodoclineEdit.setFont(font5)
 
         self.formLayout_3.setWidget(7, QFormLayout.FieldRole, self.numfoliodoclineEdit)
 
         self.identificadoresLabel_3 = QLabel(self.scrollAreaWidgetContents_3)
         self.identificadoresLabel_3.setObjectName(u"identificadoresLabel_3")
-        self.identificadoresLabel_3.setFont(font4)
+        self.identificadoresLabel_3.setFont(font5)
 
         self.formLayout_3.setWidget(8, QFormLayout.LabelRole, self.identificadoresLabel_3)
 
@@ -807,7 +798,7 @@ class Ui_MainWindow(object):
         self.identificadoresdoclineEdit.setObjectName(u"identificadoresdoclineEdit")
         self.identificadoresdoclineEdit.setMinimumSize(QSize(500, 34))
         self.identificadoresdoclineEdit.setMaximumSize(QSize(500, 34))
-        self.identificadoresdoclineEdit.setFont(font4)
+        self.identificadoresdoclineEdit.setFont(font5)
 
         self.formLayout_3.setWidget(8, QFormLayout.FieldRole, self.identificadoresdoclineEdit)
 
@@ -837,7 +828,7 @@ class Ui_MainWindow(object):
         self.formLayout_4.setObjectName(u"formLayout_4")
         self.tituloLabel_4 = QLabel(self.scrollAreaWidgetContents_4)
         self.tituloLabel_4.setObjectName(u"tituloLabel_4")
-        self.tituloLabel_4.setFont(font4)
+        self.tituloLabel_4.setFont(font5)
 
         self.formLayout_4.setWidget(0, QFormLayout.LabelRole, self.tituloLabel_4)
 
@@ -845,14 +836,14 @@ class Ui_MainWindow(object):
         self.tituloimagenlineEdit.setObjectName(u"tituloimagenlineEdit")
         self.tituloimagenlineEdit.setMinimumSize(QSize(500, 34))
         self.tituloimagenlineEdit.setMaximumSize(QSize(500, 34))
-        self.tituloimagenlineEdit.setFont(font4)
+        self.tituloimagenlineEdit.setFont(font5)
         self.tituloimagenlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_4.setWidget(0, QFormLayout.FieldRole, self.tituloimagenlineEdit)
 
         self.tituloLabel_5 = QLabel(self.scrollAreaWidgetContents_4)
         self.tituloLabel_5.setObjectName(u"tituloLabel_5")
-        self.tituloLabel_5.setFont(font4)
+        self.tituloLabel_5.setFont(font5)
 
         self.formLayout_4.setWidget(1, QFormLayout.LabelRole, self.tituloLabel_5)
 
@@ -860,14 +851,14 @@ class Ui_MainWindow(object):
         self.creadorimagenlineEdit.setObjectName(u"creadorimagenlineEdit")
         self.creadorimagenlineEdit.setMinimumSize(QSize(500, 34))
         self.creadorimagenlineEdit.setMaximumSize(QSize(500, 34))
-        self.creadorimagenlineEdit.setFont(font4)
+        self.creadorimagenlineEdit.setFont(font5)
         self.creadorimagenlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_4.setWidget(1, QFormLayout.FieldRole, self.creadorimagenlineEdit)
 
         self.tituloLabel_6 = QLabel(self.scrollAreaWidgetContents_4)
         self.tituloLabel_6.setObjectName(u"tituloLabel_6")
-        self.tituloLabel_6.setFont(font4)
+        self.tituloLabel_6.setFont(font5)
 
         self.formLayout_4.setWidget(2, QFormLayout.LabelRole, self.tituloLabel_6)
 
@@ -875,14 +866,14 @@ class Ui_MainWindow(object):
         self.fechaimagenlineEdit.setObjectName(u"fechaimagenlineEdit")
         self.fechaimagenlineEdit.setMinimumSize(QSize(500, 34))
         self.fechaimagenlineEdit.setMaximumSize(QSize(500, 34))
-        self.fechaimagenlineEdit.setFont(font4)
+        self.fechaimagenlineEdit.setFont(font5)
         self.fechaimagenlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_4.setWidget(2, QFormLayout.FieldRole, self.fechaimagenlineEdit)
 
         self.label_6 = QLabel(self.scrollAreaWidgetContents_4)
         self.label_6.setObjectName(u"label_6")
-        self.label_6.setFont(font4)
+        self.label_6.setFont(font5)
 
         self.formLayout_4.setWidget(3, QFormLayout.LabelRole, self.label_6)
 
@@ -890,13 +881,13 @@ class Ui_MainWindow(object):
         self.coberturaespacialimagenlineEdit.setObjectName(u"coberturaespacialimagenlineEdit")
         self.coberturaespacialimagenlineEdit.setMinimumSize(QSize(500, 34))
         self.coberturaespacialimagenlineEdit.setMaximumSize(QSize(500, 34))
-        self.coberturaespacialimagenlineEdit.setFont(font4)
+        self.coberturaespacialimagenlineEdit.setFont(font5)
 
         self.formLayout_4.setWidget(3, QFormLayout.FieldRole, self.coberturaespacialimagenlineEdit)
 
         self.tituloLabel_7 = QLabel(self.scrollAreaWidgetContents_4)
         self.tituloLabel_7.setObjectName(u"tituloLabel_7")
-        self.tituloLabel_7.setFont(font4)
+        self.tituloLabel_7.setFont(font5)
 
         self.formLayout_4.setWidget(4, QFormLayout.LabelRole, self.tituloLabel_7)
 
@@ -904,14 +895,14 @@ class Ui_MainWindow(object):
         self.descripcionfisicaimagenlineEdit.setObjectName(u"descripcionfisicaimagenlineEdit")
         self.descripcionfisicaimagenlineEdit.setMinimumSize(QSize(500, 34))
         self.descripcionfisicaimagenlineEdit.setMaximumSize(QSize(500, 34))
-        self.descripcionfisicaimagenlineEdit.setFont(font4)
+        self.descripcionfisicaimagenlineEdit.setFont(font5)
         self.descripcionfisicaimagenlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_4.setWidget(4, QFormLayout.FieldRole, self.descripcionfisicaimagenlineEdit)
 
         self.numextLabel_4 = QLabel(self.scrollAreaWidgetContents_4)
         self.numextLabel_4.setObjectName(u"numextLabel_4")
-        self.numextLabel_4.setFont(font4)
+        self.numextLabel_4.setFont(font5)
 
         self.formLayout_4.setWidget(5, QFormLayout.LabelRole, self.numextLabel_4)
 
@@ -921,14 +912,14 @@ class Ui_MainWindow(object):
         self.descripcionimagenlineEdit.setSizePolicy(sizePolicy)
         self.descripcionimagenlineEdit.setMinimumSize(QSize(500, 70))
         self.descripcionimagenlineEdit.setMaximumSize(QSize(500, 250))
-        self.descripcionimagenlineEdit.setFont(font4)
+        self.descripcionimagenlineEdit.setFont(font5)
         self.descripcionimagenlineEdit.setStyleSheet(u"Breve resumen del tema del documento")
 
         self.formLayout_4.setWidget(5, QFormLayout.FieldRole, self.descripcionimagenlineEdit)
 
         self.identificadoresLabel_5 = QLabel(self.scrollAreaWidgetContents_4)
         self.identificadoresLabel_5.setObjectName(u"identificadoresLabel_5")
-        self.identificadoresLabel_5.setFont(font4)
+        self.identificadoresLabel_5.setFont(font5)
 
         self.formLayout_4.setWidget(6, QFormLayout.LabelRole, self.identificadoresLabel_5)
 
@@ -936,13 +927,13 @@ class Ui_MainWindow(object):
         self.tipoimagenlineEdit.setObjectName(u"tipoimagenlineEdit")
         self.tipoimagenlineEdit.setMinimumSize(QSize(500, 34))
         self.tipoimagenlineEdit.setMaximumSize(QSize(500, 34))
-        self.tipoimagenlineEdit.setFont(font4)
+        self.tipoimagenlineEdit.setFont(font5)
 
         self.formLayout_4.setWidget(6, QFormLayout.FieldRole, self.tipoimagenlineEdit)
 
         self.identificadoresLabel_4 = QLabel(self.scrollAreaWidgetContents_4)
         self.identificadoresLabel_4.setObjectName(u"identificadoresLabel_4")
-        self.identificadoresLabel_4.setFont(font4)
+        self.identificadoresLabel_4.setFont(font5)
 
         self.formLayout_4.setWidget(7, QFormLayout.LabelRole, self.identificadoresLabel_4)
 
@@ -950,7 +941,7 @@ class Ui_MainWindow(object):
         self.identificadoresimagenlineEdit.setObjectName(u"identificadoresimagenlineEdit")
         self.identificadoresimagenlineEdit.setMinimumSize(QSize(500, 34))
         self.identificadoresimagenlineEdit.setMaximumSize(QSize(500, 34))
-        self.identificadoresimagenlineEdit.setFont(font4)
+        self.identificadoresimagenlineEdit.setFont(font5)
 
         self.formLayout_4.setWidget(7, QFormLayout.FieldRole, self.identificadoresimagenlineEdit)
 
@@ -978,7 +969,7 @@ class Ui_MainWindow(object):
         self.formLayout_2.setObjectName(u"formLayout_2")
         self.tituloLabel_8 = QLabel(self.scrollAreaWidgetContents_5)
         self.tituloLabel_8.setObjectName(u"tituloLabel_8")
-        self.tituloLabel_8.setFont(font4)
+        self.tituloLabel_8.setFont(font5)
 
         self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.tituloLabel_8)
 
@@ -986,14 +977,14 @@ class Ui_MainWindow(object):
         self.nombreserlineEdit.setObjectName(u"nombreserlineEdit")
         self.nombreserlineEdit.setMinimumSize(QSize(500, 34))
         self.nombreserlineEdit.setMaximumSize(QSize(500, 34))
-        self.nombreserlineEdit.setFont(font4)
+        self.nombreserlineEdit.setFont(font5)
         self.nombreserlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.nombreserlineEdit)
 
         self.tituloLabel_9 = QLabel(self.scrollAreaWidgetContents_5)
         self.tituloLabel_9.setObjectName(u"tituloLabel_9")
-        self.tituloLabel_9.setFont(font4)
+        self.tituloLabel_9.setFont(font5)
 
         self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.tituloLabel_9)
 
@@ -1001,14 +992,14 @@ class Ui_MainWindow(object):
         self.volumenserlineEdit.setObjectName(u"volumenserlineEdit")
         self.volumenserlineEdit.setMinimumSize(QSize(500, 34))
         self.volumenserlineEdit.setMaximumSize(QSize(500, 34))
-        self.volumenserlineEdit.setFont(font4)
+        self.volumenserlineEdit.setFont(font5)
         self.volumenserlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.volumenserlineEdit)
 
         self.tituloLabel_10 = QLabel(self.scrollAreaWidgetContents_5)
         self.tituloLabel_10.setObjectName(u"tituloLabel_10")
-        self.tituloLabel_10.setFont(font4)
+        self.tituloLabel_10.setFont(font5)
 
         self.formLayout_2.setWidget(2, QFormLayout.LabelRole, self.tituloLabel_10)
 
@@ -1016,14 +1007,14 @@ class Ui_MainWindow(object):
         self.ejemplarserlineEdit.setObjectName(u"ejemplarserlineEdit")
         self.ejemplarserlineEdit.setMinimumSize(QSize(500, 34))
         self.ejemplarserlineEdit.setMaximumSize(QSize(500, 34))
-        self.ejemplarserlineEdit.setFont(font4)
+        self.ejemplarserlineEdit.setFont(font5)
         self.ejemplarserlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.ejemplarserlineEdit)
 
         self.label_7 = QLabel(self.scrollAreaWidgetContents_5)
         self.label_7.setObjectName(u"label_7")
-        self.label_7.setFont(font4)
+        self.label_7.setFont(font5)
 
         self.formLayout_2.setWidget(3, QFormLayout.LabelRole, self.label_7)
 
@@ -1031,13 +1022,13 @@ class Ui_MainWindow(object):
         self.fechaserlineEdit.setObjectName(u"fechaserlineEdit")
         self.fechaserlineEdit.setMinimumSize(QSize(500, 34))
         self.fechaserlineEdit.setMaximumSize(QSize(500, 34))
-        self.fechaserlineEdit.setFont(font4)
+        self.fechaserlineEdit.setFont(font5)
 
         self.formLayout_2.setWidget(3, QFormLayout.FieldRole, self.fechaserlineEdit)
 
         self.tituloLabel_11 = QLabel(self.scrollAreaWidgetContents_5)
         self.tituloLabel_11.setObjectName(u"tituloLabel_11")
-        self.tituloLabel_11.setFont(font4)
+        self.tituloLabel_11.setFont(font5)
 
         self.formLayout_2.setWidget(4, QFormLayout.LabelRole, self.tituloLabel_11)
 
@@ -1045,14 +1036,14 @@ class Ui_MainWindow(object):
         self.paginaserlineEdit.setObjectName(u"paginaserlineEdit")
         self.paginaserlineEdit.setMinimumSize(QSize(500, 34))
         self.paginaserlineEdit.setMaximumSize(QSize(500, 34))
-        self.paginaserlineEdit.setFont(font4)
+        self.paginaserlineEdit.setFont(font5)
         self.paginaserlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_2.setWidget(4, QFormLayout.FieldRole, self.paginaserlineEdit)
 
         self.numextLabel_5 = QLabel(self.scrollAreaWidgetContents_5)
         self.numextLabel_5.setObjectName(u"numextLabel_5")
-        self.numextLabel_5.setFont(font4)
+        self.numextLabel_5.setFont(font5)
 
         self.formLayout_2.setWidget(5, QFormLayout.LabelRole, self.numextLabel_5)
 
@@ -1062,14 +1053,14 @@ class Ui_MainWindow(object):
         self.descripcionserlineEdit.setSizePolicy(sizePolicy)
         self.descripcionserlineEdit.setMinimumSize(QSize(500, 70))
         self.descripcionserlineEdit.setMaximumSize(QSize(500, 250))
-        self.descripcionserlineEdit.setFont(font4)
+        self.descripcionserlineEdit.setFont(font5)
         self.descripcionserlineEdit.setStyleSheet(u"Breve resumen del tema del documento")
 
         self.formLayout_2.setWidget(5, QFormLayout.FieldRole, self.descripcionserlineEdit)
 
         self.identificadoresLabel_6 = QLabel(self.scrollAreaWidgetContents_5)
         self.identificadoresLabel_6.setObjectName(u"identificadoresLabel_6")
-        self.identificadoresLabel_6.setFont(font4)
+        self.identificadoresLabel_6.setFont(font5)
 
         self.formLayout_2.setWidget(6, QFormLayout.LabelRole, self.identificadoresLabel_6)
 
@@ -1077,13 +1068,13 @@ class Ui_MainWindow(object):
         self.idiomaserlineEdit.setObjectName(u"idiomaserlineEdit")
         self.idiomaserlineEdit.setMinimumSize(QSize(500, 34))
         self.idiomaserlineEdit.setMaximumSize(QSize(500, 34))
-        self.idiomaserlineEdit.setFont(font4)
+        self.idiomaserlineEdit.setFont(font5)
 
         self.formLayout_2.setWidget(6, QFormLayout.FieldRole, self.idiomaserlineEdit)
 
         self.identificadoresLabel_8 = QLabel(self.scrollAreaWidgetContents_5)
         self.identificadoresLabel_8.setObjectName(u"identificadoresLabel_8")
-        self.identificadoresLabel_8.setFont(font4)
+        self.identificadoresLabel_8.setFont(font5)
 
         self.formLayout_2.setWidget(7, QFormLayout.LabelRole, self.identificadoresLabel_8)
 
@@ -1091,13 +1082,13 @@ class Ui_MainWindow(object):
         self.issnserlineEdit.setObjectName(u"issnserlineEdit")
         self.issnserlineEdit.setMinimumSize(QSize(500, 34))
         self.issnserlineEdit.setMaximumSize(QSize(500, 34))
-        self.issnserlineEdit.setFont(font4)
+        self.issnserlineEdit.setFont(font5)
 
         self.formLayout_2.setWidget(7, QFormLayout.FieldRole, self.issnserlineEdit)
 
         self.identificadoresLabel_7 = QLabel(self.scrollAreaWidgetContents_5)
         self.identificadoresLabel_7.setObjectName(u"identificadoresLabel_7")
-        self.identificadoresLabel_7.setFont(font4)
+        self.identificadoresLabel_7.setFont(font5)
 
         self.formLayout_2.setWidget(8, QFormLayout.LabelRole, self.identificadoresLabel_7)
 
@@ -1105,7 +1096,7 @@ class Ui_MainWindow(object):
         self.identificadoreserlineEdit.setObjectName(u"identificadoreserlineEdit")
         self.identificadoreserlineEdit.setMinimumSize(QSize(500, 34))
         self.identificadoreserlineEdit.setMaximumSize(QSize(500, 34))
-        self.identificadoreserlineEdit.setFont(font4)
+        self.identificadoreserlineEdit.setFont(font5)
 
         self.formLayout_2.setWidget(8, QFormLayout.FieldRole, self.identificadoreserlineEdit)
 
@@ -1133,7 +1124,7 @@ class Ui_MainWindow(object):
         self.formLayout_5.setObjectName(u"formLayout_5")
         self.tituloLabel_12 = QLabel(self.scrollAreaWidgetContents_6)
         self.tituloLabel_12.setObjectName(u"tituloLabel_12")
-        self.tituloLabel_12.setFont(font4)
+        self.tituloLabel_12.setFont(font5)
 
         self.formLayout_5.setWidget(0, QFormLayout.LabelRole, self.tituloLabel_12)
 
@@ -1141,14 +1132,14 @@ class Ui_MainWindow(object):
         self.titulolibrolineEdit.setObjectName(u"titulolibrolineEdit")
         self.titulolibrolineEdit.setMinimumSize(QSize(500, 34))
         self.titulolibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.titulolibrolineEdit.setFont(font4)
+        self.titulolibrolineEdit.setFont(font5)
         self.titulolibrolineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_5.setWidget(0, QFormLayout.FieldRole, self.titulolibrolineEdit)
 
         self.tituloLabel_16 = QLabel(self.scrollAreaWidgetContents_6)
         self.tituloLabel_16.setObjectName(u"tituloLabel_16")
-        self.tituloLabel_16.setFont(font4)
+        self.tituloLabel_16.setFont(font5)
 
         self.formLayout_5.setWidget(1, QFormLayout.LabelRole, self.tituloLabel_16)
 
@@ -1156,14 +1147,14 @@ class Ui_MainWindow(object):
         self.autorlibrolineEdit.setObjectName(u"autorlibrolineEdit")
         self.autorlibrolineEdit.setMinimumSize(QSize(500, 34))
         self.autorlibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.autorlibrolineEdit.setFont(font4)
+        self.autorlibrolineEdit.setFont(font5)
         self.autorlibrolineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_5.setWidget(1, QFormLayout.FieldRole, self.autorlibrolineEdit)
 
         self.tituloLabel_13 = QLabel(self.scrollAreaWidgetContents_6)
         self.tituloLabel_13.setObjectName(u"tituloLabel_13")
-        self.tituloLabel_13.setFont(font4)
+        self.tituloLabel_13.setFont(font5)
 
         self.formLayout_5.setWidget(2, QFormLayout.LabelRole, self.tituloLabel_13)
 
@@ -1171,14 +1162,14 @@ class Ui_MainWindow(object):
         self.volumelibrolineEdit.setObjectName(u"volumelibrolineEdit")
         self.volumelibrolineEdit.setMinimumSize(QSize(500, 34))
         self.volumelibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.volumelibrolineEdit.setFont(font4)
+        self.volumelibrolineEdit.setFont(font5)
         self.volumelibrolineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_5.setWidget(2, QFormLayout.FieldRole, self.volumelibrolineEdit)
 
         self.tituloLabel_14 = QLabel(self.scrollAreaWidgetContents_6)
         self.tituloLabel_14.setObjectName(u"tituloLabel_14")
-        self.tituloLabel_14.setFont(font4)
+        self.tituloLabel_14.setFont(font5)
 
         self.formLayout_5.setWidget(3, QFormLayout.LabelRole, self.tituloLabel_14)
 
@@ -1186,14 +1177,14 @@ class Ui_MainWindow(object):
         self.serieLibrolineEdit.setObjectName(u"serieLibrolineEdit")
         self.serieLibrolineEdit.setMinimumSize(QSize(500, 34))
         self.serieLibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.serieLibrolineEdit.setFont(font4)
+        self.serieLibrolineEdit.setFont(font5)
         self.serieLibrolineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_5.setWidget(3, QFormLayout.FieldRole, self.serieLibrolineEdit)
 
         self.label_9 = QLabel(self.scrollAreaWidgetContents_6)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setFont(font4)
+        self.label_9.setFont(font5)
 
         self.formLayout_5.setWidget(4, QFormLayout.LabelRole, self.label_9)
 
@@ -1201,13 +1192,13 @@ class Ui_MainWindow(object):
         self.edicionLibrolineEdit.setObjectName(u"edicionLibrolineEdit")
         self.edicionLibrolineEdit.setMinimumSize(QSize(500, 34))
         self.edicionLibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.edicionLibrolineEdit.setFont(font4)
+        self.edicionLibrolineEdit.setFont(font5)
 
         self.formLayout_5.setWidget(4, QFormLayout.FieldRole, self.edicionLibrolineEdit)
 
         self.label_10 = QLabel(self.scrollAreaWidgetContents_6)
         self.label_10.setObjectName(u"label_10")
-        self.label_10.setFont(font4)
+        self.label_10.setFont(font5)
 
         self.formLayout_5.setWidget(5, QFormLayout.LabelRole, self.label_10)
 
@@ -1215,13 +1206,13 @@ class Ui_MainWindow(object):
         self.lugarLibrolineEdit.setObjectName(u"lugarLibrolineEdit")
         self.lugarLibrolineEdit.setMinimumSize(QSize(500, 34))
         self.lugarLibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.lugarLibrolineEdit.setFont(font4)
+        self.lugarLibrolineEdit.setFont(font5)
 
         self.formLayout_5.setWidget(5, QFormLayout.FieldRole, self.lugarLibrolineEdit)
 
         self.label_11 = QLabel(self.scrollAreaWidgetContents_6)
         self.label_11.setObjectName(u"label_11")
-        self.label_11.setFont(font4)
+        self.label_11.setFont(font5)
 
         self.formLayout_5.setWidget(6, QFormLayout.LabelRole, self.label_11)
 
@@ -1229,13 +1220,13 @@ class Ui_MainWindow(object):
         self.editorialLibrolineEdit.setObjectName(u"editorialLibrolineEdit")
         self.editorialLibrolineEdit.setMinimumSize(QSize(500, 34))
         self.editorialLibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.editorialLibrolineEdit.setFont(font4)
+        self.editorialLibrolineEdit.setFont(font5)
 
         self.formLayout_5.setWidget(6, QFormLayout.FieldRole, self.editorialLibrolineEdit)
 
         self.label_8 = QLabel(self.scrollAreaWidgetContents_6)
         self.label_8.setObjectName(u"label_8")
-        self.label_8.setFont(font4)
+        self.label_8.setFont(font5)
 
         self.formLayout_5.setWidget(7, QFormLayout.LabelRole, self.label_8)
 
@@ -1243,13 +1234,13 @@ class Ui_MainWindow(object):
         self.fechaLibrolineEdit.setObjectName(u"fechaLibrolineEdit")
         self.fechaLibrolineEdit.setMinimumSize(QSize(500, 34))
         self.fechaLibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.fechaLibrolineEdit.setFont(font4)
+        self.fechaLibrolineEdit.setFont(font5)
 
         self.formLayout_5.setWidget(7, QFormLayout.FieldRole, self.fechaLibrolineEdit)
 
         self.tituloLabel_15 = QLabel(self.scrollAreaWidgetContents_6)
         self.tituloLabel_15.setObjectName(u"tituloLabel_15")
-        self.tituloLabel_15.setFont(font4)
+        self.tituloLabel_15.setFont(font5)
 
         self.formLayout_5.setWidget(8, QFormLayout.LabelRole, self.tituloLabel_15)
 
@@ -1257,14 +1248,14 @@ class Ui_MainWindow(object):
         self.paginasLibrolineEdit.setObjectName(u"paginasLibrolineEdit")
         self.paginasLibrolineEdit.setMinimumSize(QSize(500, 34))
         self.paginasLibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.paginasLibrolineEdit.setFont(font4)
+        self.paginasLibrolineEdit.setFont(font5)
         self.paginasLibrolineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.formLayout_5.setWidget(8, QFormLayout.FieldRole, self.paginasLibrolineEdit)
 
         self.numextLabel_6 = QLabel(self.scrollAreaWidgetContents_6)
         self.numextLabel_6.setObjectName(u"numextLabel_6")
-        self.numextLabel_6.setFont(font4)
+        self.numextLabel_6.setFont(font5)
 
         self.formLayout_5.setWidget(9, QFormLayout.LabelRole, self.numextLabel_6)
 
@@ -1274,14 +1265,14 @@ class Ui_MainWindow(object):
         self.descripcionLibrolineEdit.setSizePolicy(sizePolicy)
         self.descripcionLibrolineEdit.setMinimumSize(QSize(500, 70))
         self.descripcionLibrolineEdit.setMaximumSize(QSize(500, 250))
-        self.descripcionLibrolineEdit.setFont(font4)
+        self.descripcionLibrolineEdit.setFont(font5)
         self.descripcionLibrolineEdit.setStyleSheet(u"Breve resumen del tema del documento")
 
         self.formLayout_5.setWidget(9, QFormLayout.FieldRole, self.descripcionLibrolineEdit)
 
         self.identificadoresLabel_9 = QLabel(self.scrollAreaWidgetContents_6)
         self.identificadoresLabel_9.setObjectName(u"identificadoresLabel_9")
-        self.identificadoresLabel_9.setFont(font4)
+        self.identificadoresLabel_9.setFont(font5)
 
         self.formLayout_5.setWidget(10, QFormLayout.LabelRole, self.identificadoresLabel_9)
 
@@ -1289,13 +1280,13 @@ class Ui_MainWindow(object):
         self.idiomaLibrolineEdit.setObjectName(u"idiomaLibrolineEdit")
         self.idiomaLibrolineEdit.setMinimumSize(QSize(500, 34))
         self.idiomaLibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.idiomaLibrolineEdit.setFont(font4)
+        self.idiomaLibrolineEdit.setFont(font5)
 
         self.formLayout_5.setWidget(10, QFormLayout.FieldRole, self.idiomaLibrolineEdit)
 
         self.identificadoresLabel_10 = QLabel(self.scrollAreaWidgetContents_6)
         self.identificadoresLabel_10.setObjectName(u"identificadoresLabel_10")
-        self.identificadoresLabel_10.setFont(font4)
+        self.identificadoresLabel_10.setFont(font5)
 
         self.formLayout_5.setWidget(11, QFormLayout.LabelRole, self.identificadoresLabel_10)
 
@@ -1303,13 +1294,13 @@ class Ui_MainWindow(object):
         self.isbnLibrolineEdit.setObjectName(u"isbnLibrolineEdit")
         self.isbnLibrolineEdit.setMinimumSize(QSize(500, 34))
         self.isbnLibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.isbnLibrolineEdit.setFont(font4)
+        self.isbnLibrolineEdit.setFont(font5)
 
         self.formLayout_5.setWidget(11, QFormLayout.FieldRole, self.isbnLibrolineEdit)
 
         self.identificadoresLabel_11 = QLabel(self.scrollAreaWidgetContents_6)
         self.identificadoresLabel_11.setObjectName(u"identificadoresLabel_11")
-        self.identificadoresLabel_11.setFont(font4)
+        self.identificadoresLabel_11.setFont(font5)
 
         self.formLayout_5.setWidget(12, QFormLayout.LabelRole, self.identificadoresLabel_11)
 
@@ -1317,7 +1308,7 @@ class Ui_MainWindow(object):
         self.identificadoresLibrolineEdit.setObjectName(u"identificadoresLibrolineEdit")
         self.identificadoresLibrolineEdit.setMinimumSize(QSize(500, 34))
         self.identificadoresLibrolineEdit.setMaximumSize(QSize(500, 34))
-        self.identificadoresLibrolineEdit.setFont(font4)
+        self.identificadoresLibrolineEdit.setFont(font5)
 
         self.formLayout_5.setWidget(12, QFormLayout.FieldRole, self.identificadoresLibrolineEdit)
 
@@ -1347,7 +1338,7 @@ class Ui_MainWindow(object):
         self.tituloLabel_18 = QLabel(self.scrollAreaWidgetContents_7)
         self.tituloLabel_18.setObjectName(u"tituloLabel_18")
         self.tituloLabel_18.setMinimumSize(QSize(121, 0))
-        self.tituloLabel_18.setFont(font4)
+        self.tituloLabel_18.setFont(font5)
 
         self.gridLayout.addWidget(self.tituloLabel_18, 1, 0, 1, 1)
 
@@ -1355,7 +1346,7 @@ class Ui_MainWindow(object):
         self.folderlineEdit.setObjectName(u"folderlineEdit")
         self.folderlineEdit.setMinimumSize(QSize(450, 34))
         self.folderlineEdit.setMaximumSize(QSize(450, 34))
-        self.folderlineEdit.setFont(font4)
+        self.folderlineEdit.setFont(font5)
         self.folderlineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.gridLayout.addWidget(self.folderlineEdit, 1, 1, 1, 1)
@@ -1364,7 +1355,7 @@ class Ui_MainWindow(object):
         self.nombrearchivolineEdit.setObjectName(u"nombrearchivolineEdit")
         self.nombrearchivolineEdit.setMinimumSize(QSize(500, 34))
         self.nombrearchivolineEdit.setMaximumSize(QSize(500, 34))
-        self.nombrearchivolineEdit.setFont(font4)
+        self.nombrearchivolineEdit.setFont(font5)
         self.nombrearchivolineEdit.setLayoutDirection(Qt.LeftToRight)
 
         self.gridLayout.addWidget(self.nombrearchivolineEdit, 0, 1, 1, 2)
@@ -1375,16 +1366,16 @@ class Ui_MainWindow(object):
         self.browserDirButton.setMaximumSize(QSize(42, 42))
         self.browserDirButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.browserDirButton.setStyleSheet(u"background-color: rgb(225, 225, 225);")
-        icon14 = QIcon()
-        icon14.addFile(u"imgs/icons/black-folder-shape-for-interface.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.browserDirButton.setIcon(icon14)
+        icon12 = QIcon()
+        icon12.addFile(u"imgs/icons/black-folder-shape-for-interface.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.browserDirButton.setIcon(icon12)
 
         self.gridLayout.addWidget(self.browserDirButton, 1, 2, 1, 1)
 
         self.tituloLabel_17 = QLabel(self.scrollAreaWidgetContents_7)
         self.tituloLabel_17.setObjectName(u"tituloLabel_17")
         self.tituloLabel_17.setMinimumSize(QSize(121, 0))
-        self.tituloLabel_17.setFont(font4)
+        self.tituloLabel_17.setFont(font5)
 
         self.gridLayout.addWidget(self.tituloLabel_17, 0, 0, 1, 1)
 
@@ -1422,11 +1413,11 @@ class Ui_MainWindow(object):
         self.enviarFormButton.setSizePolicy(sizePolicy1)
         self.enviarFormButton.setMinimumSize(QSize(100, 34))
         self.enviarFormButton.setMaximumSize(QSize(100, 34))
-        self.enviarFormButton.setFont(font4)
+        self.enviarFormButton.setFont(font5)
         self.enviarFormButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon15 = QIcon()
-        icon15.addFile(u"imgs/icons/fast-forward-double-right-arrows.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.enviarFormButton.setIcon(icon15)
+        icon13 = QIcon()
+        icon13.addFile(u"imgs/icons/fast-forward-double-right-arrows.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.enviarFormButton.setIcon(icon13)
 
         self.horizontalLayout_13.addWidget(self.enviarFormButton)
 
@@ -1443,9 +1434,9 @@ class Ui_MainWindow(object):
         self.enviarFormEditButton.setSizePolicy(sizePolicy1)
         self.enviarFormEditButton.setMinimumSize(QSize(100, 34))
         self.enviarFormEditButton.setMaximumSize(QSize(100, 34))
-        self.enviarFormEditButton.setFont(font4)
+        self.enviarFormEditButton.setFont(font5)
         self.enviarFormEditButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormEditButton.setIcon(icon15)
+        self.enviarFormEditButton.setIcon(icon13)
 
         self.horizontalLayout_14.addWidget(self.enviarFormEditButton)
 
@@ -1494,11 +1485,11 @@ class Ui_MainWindow(object):
         self.titulelementoIDLabel.setEnabled(True)
         self.titulelementoIDLabel.setMinimumSize(QSize(16, 16))
         self.titulelementoIDLabel.setMaximumSize(QSize(16, 16))
-        font5 = QFont()
-        font5.setPointSize(10)
-        font5.setBold(True)
-        font5.setWeight(75)
-        self.titulelementoIDLabel.setFont(font5)
+        font6 = QFont()
+        font6.setPointSize(10)
+        font6.setBold(True)
+        font6.setWeight(75)
+        self.titulelementoIDLabel.setFont(font6)
         self.titulelementoIDLabel.setCursor(QCursor(Qt.ArrowCursor))
         self.titulelementoIDLabel.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
         self.titulelementoIDLabel.setPixmap(QPixmap(u"imgs/icons/list-interface-symbol.svg"))
@@ -1517,7 +1508,7 @@ class Ui_MainWindow(object):
 
         self.titulelementoTituloLabel_2 = QLabel(self.controlPanel)
         self.titulelementoTituloLabel_2.setObjectName(u"titulelementoTituloLabel_2")
-        self.titulelementoTituloLabel_2.setFont(font5)
+        self.titulelementoTituloLabel_2.setFont(font6)
         self.titulelementoTituloLabel_2.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
 
         self.gridLayout_2.addWidget(self.titulelementoTituloLabel_2, 0, 1, 1, 1)
@@ -1527,7 +1518,7 @@ class Ui_MainWindow(object):
 
         self.titulelementoTituloLabel = QLabel(self.controlPanel)
         self.titulelementoTituloLabel.setObjectName(u"titulelementoTituloLabel")
-        self.titulelementoTituloLabel.setFont(font5)
+        self.titulelementoTituloLabel.setFont(font6)
         self.titulelementoTituloLabel.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
 
         self.verticalLayout_18.addWidget(self.titulelementoTituloLabel)
@@ -1544,7 +1535,7 @@ class Ui_MainWindow(object):
 
         self.titulelementoTituloLabel_5 = QLabel(self.controlPanel)
         self.titulelementoTituloLabel_5.setObjectName(u"titulelementoTituloLabel_5")
-        self.titulelementoTituloLabel_5.setFont(font5)
+        self.titulelementoTituloLabel_5.setFont(font6)
         self.titulelementoTituloLabel_5.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
 
         self.verticalLayout_18.addWidget(self.titulelementoTituloLabel_5)
@@ -1573,9 +1564,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(182, 182, 182);\n"
 "}\n"
 "")
-        icon16 = QIcon()
-        icon16.addFile(u"imgs/icons/open-black-folder-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.openFolderButton.setIcon(icon16)
+        icon14 = QIcon()
+        icon14.addFile(u"imgs/icons/open-black-folder-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.openFolderButton.setIcon(icon14)
         self.openFolderButton.setIconSize(QSize(24, 24))
 
         self.gridLayout_4.addWidget(self.openFolderButton, 0, 1, 1, 1)
@@ -1587,7 +1578,7 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.titulelementoTituloLabel_6 = QLabel(self.controlPanel)
         self.titulelementoTituloLabel_6.setObjectName(u"titulelementoTituloLabel_6")
-        self.titulelementoTituloLabel_6.setFont(font5)
+        self.titulelementoTituloLabel_6.setFont(font6)
         self.titulelementoTituloLabel_6.setStyleSheet(u"background-color: rgba(255, 255, 255, 0);")
 
         self.gridLayout_5.addWidget(self.titulelementoTituloLabel_6, 0, 0, 1, 1)
@@ -1674,10 +1665,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.statusLabel = QLabel(self.statusbar)
         self.statusLabel.setObjectName(u"statusLabel")
-        font6 = QFont()
-        font6.setFamily(u"Consolas")
-        font6.setPointSize(7)
-        self.statusLabel.setFont(font6)
+        font7 = QFont()
+        font7.setFamily(u"Consolas")
+        font7.setPointSize(7)
+        self.statusLabel.setFont(font7)
         self.statusLabel.setStyleSheet(u"color: rgba(0, 0, 0, .8);")
         self.statusLabel.setWordWrap(True)
         self.statusLabel.setMargin(4)
@@ -1715,9 +1706,9 @@ class Ui_MainWindow(object):
         self.finalizarButton = QPushButton(self.captura)
         self.finalizarButton.setObjectName(u"finalizarButton")
         self.finalizarButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon17 = QIcon()
-        icon17.addFile(u"imgs/icons/square-with-verification-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.finalizarButton.setIcon(icon17)
+        icon15 = QIcon()
+        icon15.addFile(u"imgs/icons/square-with-verification-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.finalizarButton.setIcon(icon15)
         self.finalizarButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_10.addWidget(self.finalizarButton)
@@ -1730,13 +1721,13 @@ class Ui_MainWindow(object):
         self.capturaButton.setObjectName(u"capturaButton")
         self.capturaButton.setMinimumSize(QSize(120, 35))
         self.capturaButton.setMaximumSize(QSize(16777215, 35))
-        font7 = QFont()
-        font7.setPointSize(11)
-        self.capturaButton.setFont(font7)
+        font8 = QFont()
+        font8.setPointSize(11)
+        self.capturaButton.setFont(font8)
         self.capturaButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon18 = QIcon()
-        icon18.addFile(u"imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.capturaButton.setIcon(icon18)
+        icon16 = QIcon()
+        icon16.addFile(u"imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.capturaButton.setIcon(icon16)
         self.capturaButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_10.addWidget(self.capturaButton)
@@ -1754,11 +1745,11 @@ class Ui_MainWindow(object):
         self.validateButton.setObjectName(u"validateButton")
         self.validateButton.setMinimumSize(QSize(120, 35))
         self.validateButton.setMaximumSize(QSize(16777215, 35))
-        self.validateButton.setFont(font7)
+        self.validateButton.setFont(font8)
         self.validateButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon19 = QIcon()
-        icon19.addFile(u"imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.validateButton.setIcon(icon19)
+        icon17 = QIcon()
+        icon17.addFile(u"imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.validateButton.setIcon(icon17)
         self.validateButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_11.addWidget(self.validateButton)
@@ -1767,11 +1758,11 @@ class Ui_MainWindow(object):
         self.resetButton.setObjectName(u"resetButton")
         self.resetButton.setMinimumSize(QSize(120, 35))
         self.resetButton.setMaximumSize(QSize(16777215, 35))
-        self.resetButton.setFont(font7)
+        self.resetButton.setFont(font8)
         self.resetButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon20 = QIcon()
-        icon20.addFile(u"imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.resetButton.setIcon(icon20)
+        icon18 = QIcon()
+        icon18.addFile(u"imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.resetButton.setIcon(icon18)
         self.resetButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_11.addWidget(self.resetButton)
@@ -1787,15 +1778,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addWidget(self.layoutEscan)
 
         self.stackedWidget.addWidget(self.escanerPage)
-        self.imgsPage = QWidget()
-        self.imgsPage.setObjectName(u"imgsPage")
-        self.label_4 = QLabel(self.imgsPage)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setGeometry(QRect(118, 50, 81, 20))
-        self.stackedWidget.addWidget(self.imgsPage)
-        self.exportarPage = QWidget()
-        self.exportarPage.setObjectName(u"exportarPage")
-        self.stackedWidget.addWidget(self.exportarPage)
 
         self.horizontalLayout_3.addWidget(self.stackedWidget)
 
@@ -1873,16 +1855,13 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"NeoEscan", None))
         self.neoLabel.setText("")
         self.versionLabel.setText("")
+        self.closeButton.setText(QCoreApplication.translate("MainWindow", u"[salir]", None))
         self.inicioButton.setText("")
         self.inicioLabel.setText(QCoreApplication.translate("MainWindow", u"Inicio", None))
         self.coleccionesButton.setText("")
-        self.metadataLabel.setText(QCoreApplication.translate("MainWindow", u"Metadatos", None))
+        self.metadatosLabel.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.escanerButton.setText("")
-        self.escaneLabel.setText(QCoreApplication.translate("MainWindow", u"Esc\u00e1ner", None))
-        self.imagenesButton.setText("")
-        self.imagenesLabel.setText(QCoreApplication.translate("MainWindow", u"Im\u00e1genes", None))
-        self.exportarButton.setText("")
-        self.exportarLabel.setText(QCoreApplication.translate("MainWindow", u"Exportar", None))
+        self.escanerLabel.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Iniciar nuevo proyecto", None))
         self.nuevoProyectoButton.setText("")
         self.proyectos_actuales_label.setText(QCoreApplication.translate("MainWindow", u"Proyectos actuales", None))
@@ -2028,9 +2007,17 @@ class Ui_MainWindow(object):
         self.statusLabel.setText(QCoreApplication.translate("MainWindow", u"Clic en capturar para iniciar", None))
         self.finalizarButton.setText(QCoreApplication.translate("MainWindow", u"Cerrar proyecto", None))
         self.capturaButton.setText(QCoreApplication.translate("MainWindow", u"capturar", None))
+#if QT_CONFIG(shortcut)
+        self.capturaButton.setShortcut(QCoreApplication.translate("MainWindow", u"Enter", None))
+#endif // QT_CONFIG(shortcut)
         self.validateButton.setText(QCoreApplication.translate("MainWindow", u"validar", None))
+#if QT_CONFIG(shortcut)
+        self.validateButton.setShortcut(QCoreApplication.translate("MainWindow", u"Enter", None))
+#endif // QT_CONFIG(shortcut)
         self.resetButton.setText(QCoreApplication.translate("MainWindow", u"retomar", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"IM\u00c1GENES", None))
+#if QT_CONFIG(shortcut)
+        self.resetButton.setShortcut(QCoreApplication.translate("MainWindow", u"Esc", None))
+#endif // QT_CONFIG(shortcut)
         self.c_neogranadina.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><a href=\"https://neogranadina.org/\" target=\"_blank\"><span style=\" font-size:7pt; text-decoration: underline;color:rgba(251,251,251,.8)\">\u00a9 2021 Fundaci\u00f3n Hist\u00f3rica Neogranadina</span></a></body></html>", None))
         self.down_arrow.setText("")
     # retranslateUi

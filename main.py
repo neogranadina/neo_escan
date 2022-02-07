@@ -21,7 +21,7 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBo
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp, Qt
 
 from ui_main import Ui_MainWindow
-from db_handler import connectToDatabase, createElement, getLastId, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo
+from db_handler import connectToDatabase, createElement, getLastId, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection
 from camcontrol import Cam
 import configparser
 import ctypes
@@ -93,8 +93,10 @@ class MainWindow(QMainWindow):
             raise
 
         # set version
-
         widgets.versionLabel.setText(f'v{version}')
+
+        # close button
+        widgets.closeButton.clicked.connect(self.gentle_close)
 
         # Botones, menú
         widgets.inicioButton.clicked.connect(self.buttonClick)
@@ -284,7 +286,8 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon3)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(lambda: self.delete_element(element_id, image_path))
+            button.clicked.connect(
+                lambda: self.delete_element(element_id, image_path))
             widgets.elementslayout.addWidget(button, id, 4)
 
         widgets.verticalLayout_20.addLayout(widgets.elementslayout)
@@ -324,9 +327,12 @@ class MainWindow(QMainWindow):
         if images:
             self.write_json(EXPORTDIR, images, element_id, "images")
 
-        # copy files from EXPORTDIR to image_path
-        for file in os.listdir(EXPORTDIR):
-            shutil.copy(f"{EXPORTDIR}/{file}", f"{image_path}/{file}")
+        # copy files from image_path to EXPORTDIR
+        if os.path.exists(image_path):
+            try:
+                shutil.copytree(image_path, os.path.join(EXPORTDIR, "images"))
+            except FileNotFoundError:
+                print("error al copiar imágenes")
 
         QMessageBox.information(
             widgets.stackedWidget, "Exportar", "Se ha exportado el elemento correctamente.")
@@ -792,34 +798,15 @@ class MainWindow(QMainWindow):
                     right_img_path = widgets.directorio_elementos.text() + '/JPG/' + right_img_name
 
                     if not os.path.isfile(left_img_path) or not os.path.isfile(right_img_path):
-
-                        # save the images
-                        element_id = widgets.elementoIDLabel.text()
-
-                        # create a thread to save the images
-                        widgets.statusLabel.setText("capturando imágenes...")
-
-                        Cam().captura(cams, element_id, left_img_name.replace(
-                            '.jpg', ''), right_img_name.replace('.jpg', ''))
-
-                        while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
-                            time.sleep(0.1)
-
-                        widgets.statusLabel.setText(
-                            f"imagen capturada de folios {left_img_name.replace('.jpg', '')} y {right_img_name.replace('.jpg', '')}")
-
-                        widgets.imagenizqLabel.setPixmap(
-                            QPixmap(left_img_path))
-                        widgets.imagederLabel.setPixmap(
-                            QPixmap(right_img_path))
-
-                        # display validation buttons
-                        widgets.controlesCamstackedWidget.setCurrentWidget(
-                            widgets.validar)
-
+                        self.capturar(left_img_name, right_img_name,
+                                      left_img_path, right_img_path)
                     else:
-                        QMessageBox().warning(self, "Error",
-                                                    "Las imágenes ya existen", QMessageBox.Ok)
+                        if QMessageBox().question(self, "Advertencia",
+                                                  "Ya existen imágenes con ese nombre. ¿Desea tomarlas nuevamente? \nEsta acción no se puede deshacer.",
+                                                  QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
+                            self.capturar(left_img_name, right_img_name,
+                                          left_img_path, right_img_path)
+
                 else:
                     QMessageBox().warning(self, "Error",
                                                 "Los número de los folios deben ser diferentes", QMessageBox.Ok)
@@ -831,6 +818,31 @@ class MainWindow(QMainWindow):
             msg = QMessageBox().warning(self, "Cámaras no disponibles",
                                         "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
             restart()
+
+    def capturar(self, left_img_name, right_img_name, left_img_path, right_img_path):
+        # save the images
+        element_id = widgets.elementoIDLabel.text()
+
+        # create a thread to save the images
+        widgets.statusLabel.setText("capturando imágenes...")
+
+        Cam().captura(cams, element_id, left_img_name.replace(
+            '.jpg', ''), right_img_name.replace('.jpg', ''))
+
+        while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
+            time.sleep(0.1)
+
+        widgets.statusLabel.setText(
+            f"imagen capturada de folios {left_img_name.replace('.jpg', '')} y {right_img_name.replace('.jpg', '')}")
+
+        widgets.imagenizqLabel.setPixmap(
+            QPixmap(left_img_path))
+        widgets.imagederLabel.setPixmap(
+            QPixmap(right_img_path))
+
+        # display validation buttons
+        widgets.controlesCamstackedWidget.setCurrentWidget(
+            widgets.validar)
 
     def validateCaptura(self):
         widgets.statusLabel.setText(
@@ -884,6 +896,14 @@ class MainWindow(QMainWindow):
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()
 
+
+    def gentle_close():
+        '''
+        close cams session, close db connection and close application
+        '''
+        Cam.close_dev()
+        kill_connection()
+        window.close()
 
 # Fin de las funciones de la aplicación
 

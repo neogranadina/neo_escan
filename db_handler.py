@@ -296,3 +296,11 @@ def getImagesInfo(element_id):
             'img_metadata': query.value(6)
         }
     return data
+
+
+def kill_connection():
+    '''
+    kill connection
+    '''
+    QSqlDatabase.database().close()
+    QSqlDatabase.database().removeDatabase('qt_sql_default_connection')

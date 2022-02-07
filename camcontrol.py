@@ -12,6 +12,7 @@
 # ///////////////////////////////////////////////////////////////
 
 import chdkptp
+from chdkptp.lua import global_lua
 import multiprocessing as mp
 from filecontrol import DescargarIMGS
 #import configparser
@@ -87,3 +88,14 @@ class Cam:
 
         c1.start()
         c2.start()
+
+    def close_dev(self):
+        '''
+        Disconnect devs
+        '''
+        devs = global_lua.execute("""
+            for i, dev in ipairs(chdkptp.list_devices()) do
+                local lcon = chdku.connection(dev)
+                lcon:disconnect()
+            end;
+            """)
