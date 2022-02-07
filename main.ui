@@ -774,8 +774,8 @@ QLabel {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>677</width>
-                   <height>310</height>
+                   <width>65</width>
+                   <height>18</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -1085,7 +1085,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>642</width>
+                          <width>633</width>
                           <height>428</height>
                          </rect>
                         </property>
@@ -1451,7 +1451,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>642</width>
+                          <width>633</width>
                           <height>410</height>
                          </rect>
                         </property>
@@ -1819,8 +1819,8 @@ QPushButton#backtoInicioButton::hover {
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>-168</y>
-                          <width>642</width>
+                          <y>0</y>
+                          <width>633</width>
                           <height>370</height>
                          </rect>
                         </property>
@@ -2162,7 +2162,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>642</width>
+                          <width>638</width>
                           <height>410</height>
                          </rect>
                         </property>
@@ -2543,7 +2543,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>642</width>
+                          <width>610</width>
                           <height>570</height>
                          </rect>
                         </property>
@@ -3074,8 +3074,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>659</width>
-                          <height>202</height>
+                          <width>647</width>
+                          <height>108</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -3959,7 +3959,7 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                            </font>
                           </property>
                           <property name="cursor">
-                           <cursorShape>SplitHCursor</cursorShape>
+                           <cursorShape>PointingHandCursor</cursorShape>
                           </property>
                           <property name="text">
                            <string>capturar</string>

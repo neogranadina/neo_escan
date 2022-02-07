@@ -10,14 +10,37 @@
 #
 # ///////////////////////////////////////////////////////////////
 
+import sys
 import chdkptp.util as util
 from pathlib import Path
 import os
 import datetime
 from db_handler import wrap_imageWithElement
 from PIL import Image, ExifTags
+import logging
+import configparser
 
-DIR = Path("../capturas")
+# logs
+
+logging.basicConfig(filename="neo_escan.log",
+                    level=logging.DEBUG)
+logger = logging.getLogger("logger")
+
+# config
+
+config = configparser.ConfigParser()
+config.read(Path('config.cfg'))
+
+# Check compatibility and return images directory
+
+if sys.platform == 'linux':
+    IMGDIR = config['DEFAULT']['img_dir']
+elif sys.platform == 'win32':
+    IMGDIR = config['DEFAULT']['images_dir_windows']
+else:
+    ctypes.windll.user32.MessageBoxW(
+        0, "Sistema operativo no soportado", "Error", 0)
+    sys.exit(0)
 
 class DescargarIMGS:
 
@@ -37,7 +60,7 @@ class DescargarIMGS:
         crea un nombre único para cada captura
         TODO: comprobar errores de sincronización que lleven a que los dng no coincidan con los jpg
         
-        img_dir = os.path.join(DIR, self.nombre_proyecto,
+        img_dir = os.path.join(IMGDIR, self.nombre_proyecto,
                                f"{tipo_img.upper()}")
         os.makedirs(img_dir, exist_ok=True)
         lista = os.listdir(img_dir)
@@ -56,7 +79,7 @@ class DescargarIMGS:
         return fpath
         '''
 
-        img_dir = os.path.join(DIR, self.nombre_proyecto,
+        img_dir = os.path.join(IMGDIR, self.nombre_proyecto,
                                f"{tipo_img.upper()}")
         os.makedirs(img_dir, exist_ok=True)
         
@@ -156,8 +179,7 @@ class DescargarIMGS:
         path = os.path.dirname(img_path)
         img_timestamp = datetime.datetime.now()
         img_modified_ts = datetime.datetime.now()
-        #img_metadata = self.imageMetadata(img_path)
-        img_metadata = {}
+        img_metadata = self.imageMetadata(img_path)
 
         #debug
         '''
