@@ -64,6 +64,10 @@ class Ui_MainWindow(object):
 
         self.versionLabel = QLabel(self.header)
         self.versionLabel.setObjectName(u"versionLabel")
+        font1 = QFont()
+        font1.setBold(True)
+        font1.setWeight(75)
+        self.versionLabel.setFont(font1)
         self.versionLabel.setStyleSheet(u"padding-right: 10px;\n"
 "background-color: transparent;\n"
 "color: rgba(255,255,255,.7);")
@@ -73,8 +77,9 @@ class Ui_MainWindow(object):
 
         self.closeButton = QPushButton(self.header)
         self.closeButton.setObjectName(u"closeButton")
-        self.closeButton.setMinimumSize(QSize(32, 32))
-        self.closeButton.setMaximumSize(QSize(32, 16777215))
+        self.closeButton.setMinimumSize(QSize(50, 32))
+        self.closeButton.setMaximumSize(QSize(50, 16777215))
+        self.closeButton.setFont(font1)
         self.closeButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.closeButton.setStyleSheet(u"color: rgba(255, 255, 255,.7);\n"
 "background-color:transparent;")
@@ -101,7 +106,7 @@ class Ui_MainWindow(object):
         self.menu_bar.setMinimumSize(QSize(105, 0))
         self.menu_bar.setMaximumSize(QSize(105, 16777215))
         palette = QPalette()
-        brush = QBrush(QColor(0, 0, 0, 178))
+        brush = QBrush(QColor(255, 255, 255, 255))
         brush.setStyle(Qt.SolidPattern)
         palette.setBrush(QPalette.Active, QPalette.Button, brush)
         palette.setBrush(QPalette.Active, QPalette.Base, brush)
@@ -114,9 +119,7 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Disabled, QPalette.Window, brush)
         self.menu_bar.setPalette(palette)
         self.menu_bar.setAutoFillBackground(False)
-        self.menu_bar.setStyleSheet(u"QWidget {background-color: rgba(0, 0, 0,.7);}\n"
-"\n"
-"QFrame {background-color: rgba(0, 0, 0,.7);}\n"
+        self.menu_bar.setStyleSheet(u"QFrame {background-color: rgba(0, 0, 0,.7);}\n"
 "\n"
 "QLabel {\n"
 "	color: rgba(255,255,255,.9);\n"
@@ -167,9 +170,6 @@ class Ui_MainWindow(object):
         self.inicioButton.setObjectName(u"inicioButton")
         self.inicioButton.setMinimumSize(QSize(0, 80))
         self.inicioButton.setMaximumSize(QSize(16777215, 80))
-        font1 = QFont()
-        font1.setBold(True)
-        font1.setWeight(75)
         self.inicioButton.setFont(font1)
         self.inicioButton.setCursor(QCursor(Qt.PointingHandCursor))
 #if QT_CONFIG(whatsthis)
@@ -242,9 +242,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.frame)
 
-        self.verticalSpacer = QSpacerItem(20, 384, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.emptyframe = QFrame(self.menu_bar)
+        self.emptyframe.setObjectName(u"emptyframe")
+        self.emptyframe.setFrameShape(QFrame.StyledPanel)
+        self.emptyframe.setFrameShadow(QFrame.Raised)
 
-        self.verticalLayout_2.addItem(self.verticalSpacer)
+        self.verticalLayout_2.addWidget(self.emptyframe)
 
 
         self.horizontalLayout.addWidget(self.menu_bar)
@@ -1859,9 +1862,9 @@ class Ui_MainWindow(object):
         self.inicioButton.setText("")
         self.inicioLabel.setText(QCoreApplication.translate("MainWindow", u"Inicio", None))
         self.coleccionesButton.setText("")
-        self.metadatosLabel.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.metadatosLabel.setText(QCoreApplication.translate("MainWindow", u"Metadatos", None))
         self.escanerButton.setText("")
-        self.escanerLabel.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.escanerLabel.setText(QCoreApplication.translate("MainWindow", u"Escaner", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Iniciar nuevo proyecto", None))
         self.nuevoProyectoButton.setText("")
         self.proyectos_actuales_label.setText(QCoreApplication.translate("MainWindow", u"Proyectos actuales", None))

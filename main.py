@@ -249,7 +249,7 @@ class MainWindow(QMainWindow):
             button.setMinimumSize(QSize(42, 42))
             button.setMaximumSize(QSize(42, 42))
             icon1 = QIcon()
-            icon1.addFile("imgs/icons/camera-to-take-photos_black.svg",
+            icon1.addFile("imgs/icons/camera-to-take-photos.svg",
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon1)
             button.setIconSize(QSize(20, 20))
