@@ -764,7 +764,7 @@ class MainWindow(QMainWindow):
         self.lenImagenesDir(Path(folder_path, 'JPG'))
 
         try:
-            Cam().cam(cams)
+            Cam().cam()
         except IndexError:
             QMessageBox().warning(self, "Error",
                                         "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
@@ -824,7 +824,7 @@ class MainWindow(QMainWindow):
         # create a thread to save the images
         widgets.statusLabel.setText("capturando imágenes...")
 
-        Cam().captura(cams, element_id, left_img_name.replace(
+        Cam().captura(element_id, left_img_name.replace(
             '.jpg', ''), right_img_name.replace('.jpg', ''))
 
         while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
@@ -899,7 +899,7 @@ class MainWindow(QMainWindow):
         '''
         close cams session, close db connection and close application
         '''
-        Cam().close_dev(cams)
+        Cam().close_dev()
         kill_connection()
         window.close()
 

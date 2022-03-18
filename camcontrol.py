@@ -22,12 +22,11 @@ from filecontrol import DescargarIMGS
 class Cam:
     def __init__(self):
         self.camaras = chdkptp.list_devices()
+        self.devs = self.devs()
 
     def devs(self):
         '''
-        Convierte las dispositivos en ChdkDevices. Regresa dos objetos como lista.
-        Técnicamente, si se reconocen más de dos dispositivos, se crean igual cantidad
-        de ChdkDevices.
+        Convierte las dispositivos en ChdkDevices. Regresa los objetos como lista.
         '''
         try:
             return [chdkptp.ChdkDevice(dev) for dev in self.camaras]
@@ -43,7 +42,7 @@ class Cam:
         if not dev.mode == 'record':
             dev.switch_mode('record')
 
-    def cam(self, devs):
+    def cam(self):
         '''
         Asegura que ambas cámaras estén en modo record.
         devs = recibe un listado con ChdkDevices (usar Cam().devs())
@@ -51,11 +50,11 @@ class Cam:
         los dos primeros en .list_devices()
         '''
 
-        if len(devs) == 1:
-            self.cam_init(devs[0])
-        elif len(devs) == 2:
-            c1_on = mp.Process(target=self.cam_init, args=(devs[0],))
-            c2_on = mp.Process(target=self.cam_init, args=(devs[1],))
+        if len(self.devs) == 1:
+            self.cam_init(self.devs[0])
+        elif len(self.devs) == 2:
+            c1_on = mp.Process(target=self.cam_init, args=(self.devs[0],))
+            c2_on = mp.Process(target=self.cam_init, args=(self.devs[1],))
             c1_on.start()
             c2_on.start()
 
@@ -74,7 +73,7 @@ class Cam:
         imgdata = dev.shoot(wait=True, dng=dng, stream=False,
                             download_after=True, remove_after=True, 
                             shutter_speed = chdkptp.util.shutter_to_tv96(float(Fraction(u"1/25"))),
-                            zoom_level=3)
+                            zoom_level= 3)
 
         obj_descarga = DescargarIMGS(imgdata, element_id, folio, dev)
         # descarga jpg
@@ -83,24 +82,24 @@ class Cam:
             # descarga dng
             obj_descarga.descarga_dng()
 
-    def captura(self, dev_list, element_id, left_folio, right_folio):
+    def captura(self, element_id, left_folio, right_folio):
         '''
         Realiza la captura en ambas cámaras casi simultáneamente.
         '''
 
-        if len(dev_list) == 1:
-            self._shoot(dev_list[0], element_id, left_folio)
-        elif len(dev_list) == 2:
-            c1 = mp.Process(target=self._shoot, args=(dev_list[0], element_id, left_folio))
-            c2 = mp.Process(target=self._shoot, args=(dev_list[1], element_id, right_folio))
+        if len(self.devs) == 1:
+            self._shoot(self.devs[0], element_id, left_folio)
+        elif len(self.devs) == 2:
+            c1 = mp.Process(target=self._shoot, args=(self.devs[0], element_id, left_folio))
+            c2 = mp.Process(target=self._shoot, args=(self.devs[1], element_id, right_folio))
             c1.start()
             c2.start()
 
-    def close_dev(self, dev_list):
+    def close_dev(self):
         '''
         Disconnect devs
         '''
-        [dev.switch_mode('play') for dev in dev_list if dev.mode == 'record']
+        [dev.switch_mode('play') for dev in self.devs if dev.mode == 'record']
 
         for cam in self.camaras:
             info = cam
