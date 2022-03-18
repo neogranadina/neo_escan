@@ -11,6 +11,7 @@
 # Documentación de chdkptp.py en https://chdkptppy.readthedocs.io/en/latest/
 # ///////////////////////////////////////////////////////////////
 
+from fractions import Fraction
 import chdkptp
 from chdkptp.lua import LuaContext
 import multiprocessing as mp
@@ -63,13 +64,15 @@ class Cam:
               Marca error si stream=True.
         '''
 
-        shutter = 1/15.0
+        #shutter = 1/15.0
         #iso = 400
         #distancia = 150
 
         # el binario jpg se guarda en imgdata
         imgdata = dev.shoot(wait=True, dng=dng, stream=False,
-                            download_after=True, remove_after=True, shutter_speed=shutter)
+                            download_after=True, remove_after=True, 
+                            shutter_speed = chdkptp.util.shutter_to_tv96(float(Fraction(u"1/25"))),
+                            zoom_level=3)
 
         obj_descarga = DescargarIMGS(imgdata, element_id, folio, dev)
         # descarga jpg

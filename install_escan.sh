@@ -71,7 +71,7 @@ sudo mv /usr/lib/gvfs/gvfs-gphoto2-volume-monitor /usr/lib/gvfs/disable_gvfs-gph
 echo crear un acceso directo en el escritorio de pi
 touch /home/pi/Desktop/neo_escan.sh
 echo "echo abrir Neo Escan" > /home/pi/Desktop/neo_escan.sh
-echo "cd ../Documents/neo_escan" >> /home/pi/Desktop/neo_escan.sh
+echo "cd ${PWD}" >> /home/pi/Desktop/neo_escan.sh
 echo "python3 main.py" >> /home/pi/Desktop/neo_escan.sh
 chmod +x /home/pi/Desktop/neo_escan.sh
 
