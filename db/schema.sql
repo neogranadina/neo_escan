@@ -1,3 +1,14 @@
+/* ///////////////////////////////////////////////////////////////
+#
+# Hecho por: Jairo Antonio Melo Flórez
+# Realizado con: Qt Designer y PySide6
+# © 2021 Fundación Histórica Neogranadina
+# V: 0.1.0
+# 2021-12-29
+#
+# /////////////////////////////////////////////////////////////// */
+
+
 BEGIN TRANSACTION;
 DROP TABLE IF EXISTS "elements_metadata";
 CREATE TABLE IF NOT EXISTS "elements_metadata" (

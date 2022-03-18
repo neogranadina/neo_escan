@@ -1,3 +1,17 @@
+# ///////////////////////////////////////////////////////////////
+#
+# Hecho por: Jairo Antonio Melo Flórez
+# Realizado con: Qt Designer y PySide6
+# © 2021 Fundación Histórica Neogranadina
+# V: 0.1.0
+# 2021-12-29
+#
+# camcontrol:
+# módulo para facilitar la comunicación con chdkptp.py a través de dos cámaras
+#
+# Documentación de chdkptp.py en https://chdkptppy.readthedocs.io/en/latest/
+# ///////////////////////////////////////////////////////////////
+
 import sqlite3
 from sqlite3 import Error
 import os

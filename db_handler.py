@@ -3,7 +3,8 @@
 # Hecho por: Jairo Antonio Melo Flórez
 # Realizado con: Qt Designer y PySide6
 # © 2021 Fundación Histórica Neogranadina
-# V: 1.0.0
+# V: 1.0.1
+# 2022-03-18
 #
 # db:
 # módulo para comunicar PySide2 con la base de datos sqlite3
@@ -11,7 +12,7 @@
 # ///////////////////////////////////////////////////////////////
 
 import datetime
-import logging
+from main import log
 import os
 from pathlib import Path
 from db.create_db import crear_basededatos
@@ -26,7 +27,7 @@ def connectToDatabase():
     '''
     db = QSqlDatabase.addDatabase('QSQLITE')
     if not db.isValid():
-        logging.error('No es posible conectarse a la base de datos')
+        log(f'ERROR No es posible conectarse a la base de datos: {db.lastError().text()}')
         return False
     write_dir = QDir("db")
 
@@ -34,7 +35,7 @@ def connectToDatabase():
         try:
             write_dir.mkpath(".")
         except Exception as e:
-            logging.error(e)
+            log(f'ERROR No es posible crear la carpeta de escritura: {e}')
             return False
 
     # if not database create it
@@ -44,7 +45,7 @@ def connectToDatabase():
     db.setDatabaseName(str(Path(write_dir.absolutePath(), 'neo_escan.db')))
 
     if not db.open():
-        logging.error('No es posible conectarse a la base de datos')
+        log(f'ERROR No es posible conectarse a la base de datos: {db.lastError().text()}')
         return False
     return db
 
@@ -65,7 +66,7 @@ def createElement(tipo_elemento, usuario, publico):
         ':updated_at', datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     if not query.exec_():
-        logging.error(query.lastError().text())
+        log(f'ERROR No es posible crear el elemento: {query.lastError().text()}')
         return False
 
 
@@ -108,7 +109,7 @@ def insertInfo(id_elemento, info):
         query.bindValue(':key', key)
         query.bindValue(':value', value)
         if not query.exec_():
-            logging.error(query.lastError().text())
+            log(f'ERROR No es posible insertar la información: {query.lastError().text()}')
             return False
     return True
 
@@ -210,7 +211,7 @@ def wrap_imageWithElement(element_id, order, size, mime_type,
     query.bindValue(':metadata', img_metadata)
 
     if not query.exec_():
-        logging.error(query.lastError().text())
+        log(f'ERROR No es posible crear la imagen: {query.lastError().text()}')
         return False
     return True
 
@@ -232,7 +233,7 @@ def editInfo(element_id, data):
         query.bindValue(':key', key)
         query.bindValue(':value', value)
         if not query.exec_():
-            logging.error(query.lastError().text())
+            log(f'ERROR No es posible actualizar la información: {query.lastError().text()}')
             return False
     # update element updated_at
     query.prepare(
@@ -245,7 +246,7 @@ def editInfo(element_id, data):
     query.bindValue(
         ':updated_at', datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     if not query.exec_():
-        logging.error(query.lastError().text())
+        log(f'ERROR No es posible actualizar la información: {query.lastError().text()}')
         return False
     return True
 
@@ -266,7 +267,7 @@ def erase_element(element_id):
     )
     query.bindValue(':element_id', element_id)
     if not query.exec_():
-        logging.error(query.lastError().text())
+        log(f'ERROR No es posible eliminar el elemento: {query.lastError().text()}')
         return False
     return True
 

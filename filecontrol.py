@@ -4,9 +4,10 @@
 # Realizado con: Qt Designer y PySide6
 # © 2021 Fundación Histórica Neogranadina
 # V: 0.1.0-alpha
+# 2022-02-07
 #
 # filecontrol:
-# módulo para leer y guardar las capturas de la cámara 
+# módulo para leer y guardar las capturas de la cámara
 #
 # ///////////////////////////////////////////////////////////////
 
@@ -42,6 +43,7 @@ else:
         0, "Sistema operativo no soportado", "Error", 0)
     sys.exit(0)
 
+
 class DescargarIMGS:
 
     def __init__(self, imgdata, nombre_proyecto, folio, dev) -> None:
@@ -59,7 +61,7 @@ class DescargarIMGS:
         '''
         crea un nombre único para cada captura
         TODO: comprobar errores de sincronización que lleven a que los dng no coincidan con los jpg
-        
+
         img_dir = os.path.join(IMGDIR, self.nombre_proyecto,
                                f"{tipo_img.upper()}")
         os.makedirs(img_dir, exist_ok=True)
@@ -82,9 +84,8 @@ class DescargarIMGS:
         img_dir = os.path.join(IMGDIR, self.nombre_proyecto,
                                f"{tipo_img.upper()}")
         os.makedirs(img_dir, exist_ok=True)
-        
-        return img_dir
 
+        return img_dir
 
     def descarga_jpg(self):
         '''
@@ -94,7 +95,8 @@ class DescargarIMGS:
 
         with open(jpg_path, 'wb') as fp:
             fp.write(self.imgdata)
-            self.associateImageWithElement(self.nombre_proyecto, jpg_path, 'jpg')
+            self.associateImageWithElement(
+                self.nombre_proyecto, jpg_path, 'jpg')
             print(f"descargada img {jpg_path}")
 
     def descarga_dng(self):
@@ -110,7 +112,8 @@ class DescargarIMGS:
         if not os.path.exists(dng_path):
             with open(dng_path, "wb") as fp:
                 fp.write(raw_img)
-                self.associateImageWithElement(self.nombre_proyecto, dng_path, 'dng')
+                self.associateImageWithElement(
+                    self.nombre_proyecto, dng_path, 'dng')
                 print(f"descargada img {dng_path}")
 
         self.dev.delete_files(img_path)
@@ -140,7 +143,6 @@ class DescargarIMGS:
 
         return listac[-1]
 
-
     def imageMetadata(self, image_path):
         '''
         obtiene los metadatos de una imagen
@@ -154,7 +156,8 @@ class DescargarIMGS:
             img_exif = None
 
         if img_exif is not None:
-            exif = {ExifTags.TAGS.get(k, "etiqueta desconocida"): v for k, v in img_exif.items()}
+            exif = {ExifTags.TAGS.get(
+                k, "etiqueta desconocida"): v for k, v in img_exif.items()}
             return exif
         else:
             return {'No metadata': 'No metadata'}
@@ -183,7 +186,7 @@ class DescargarIMGS:
         img_modified_ts = datetime.datetime.now()
         img_metadata = self.imageMetadata(img_path)
 
-        #debug
+        # debug
         '''
         print(f"element_id: {element_id}")
         print(f"order: {order}")
@@ -199,6 +202,5 @@ class DescargarIMGS:
         '''
 
         wrap_imageWithElement(element_id, order, size, mime_type, filename,
-                                path, img_timestamp, img_modified_ts,
-                                img_metadata)
-        
+                              path, img_timestamp, img_modified_ts,
+                              img_metadata)

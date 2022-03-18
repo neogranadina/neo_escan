@@ -3,12 +3,12 @@
 # Hecho por: Jairo Antonio Melo Flórez
 # Realizado con: Qt Designer y PySide6
 # © 2021 Fundación Histórica Neogranadina
-# V: 0.1.0-alpha
+# V: 0.1.4
+# 2022-03-18
 #
 # ///////////////////////////////////////////////////////////////
 
 import sys
-import logging
 import os
 from pathlib import Path
 import json
@@ -53,15 +53,18 @@ try:
 except OSError:
     raise
 
-logging.basicConfig(filename="logs/neo_escan_error.log",
-                    level=logging.DEBUG)
-logger = logging.getLogger("logger")
+
+def log(msg):
+    ts = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+    error = open("logs/neoscan_log.log", "a")
+    error.write(ts + ": " + msg + "\n")
+    error.close()
 
 
 def restart():
     QtCore.QCoreApplication.quit()
     status = QtCore.QProcess.startDetached(sys.executable, sys.argv)
-    # print(status)
+    log(f"Reinicio de la aplicación. Status: {status}")
 
 
 def inicio_proyecto():
@@ -92,8 +95,9 @@ class MainWindow(QMainWindow):
         # Conectar a la base de datos
         try:
             connectToDatabase()
-        except:
+        except Exception as e:
             print("Error en la conexión con la base de datos")
+            log(f"ERROR Falló conexión con la base de datos {e}")
             raise
 
         # set version
@@ -315,6 +319,7 @@ class MainWindow(QMainWindow):
             self.write_json(EXPORTDIR, element_info, element_id, "info")
         else:
             print("error al obtener datos del elemento")
+            log(f"ERROR al obtener datos del elemento {element_info}")
 
         metadata_info = getElementMetadatabyID(element_id)
         if metadata_info:
@@ -331,6 +336,7 @@ class MainWindow(QMainWindow):
                 shutil.copytree(image_path, os.path.join(EXPORTDIR, "images"))
             except FileNotFoundError:
                 print("error al copiar imágenes")
+                log(f"ERROR al copiar imágenes {image_path}")
 
         QMessageBox.information(
             widgets.stackedWidget, "Exportar", "Se ha exportado el elemento correctamente.")
@@ -723,6 +729,8 @@ class MainWindow(QMainWindow):
             os.startfile(ruta)
         else:
             print('No se puede abrir la carpeta')
+            log(f'ERROR: No se puede abrir la carpeta {ruta}')
+            log(f'ERROR: {sys.platform}')
 
     def lenImagenesDir(self, folder_path):
         '''
@@ -756,6 +764,7 @@ class MainWindow(QMainWindow):
             os.makedirs(folder_path, exist_ok=True)
         except OSError as e:
             print(e)
+            log(f'ERROR: Al crear {folder_path} se encontró un OSError {e}')
             raise
 
         # set folder_path to label
@@ -824,8 +833,12 @@ class MainWindow(QMainWindow):
         # create a thread to save the images
         widgets.statusLabel.setText("capturando imágenes...")
 
-        Cam().captura(element_id, left_img_name.replace(
-            '.jpg', ''), right_img_name.replace('.jpg', ''))
+        try:
+            Cam().captura(element_id, left_img_name.replace(
+                '.jpg', ''), right_img_name.replace('.jpg', ''))
+        except TypeError:
+            QMessageBox().warning(self, "Error",
+                                        "No se encontraron cámaras", QMessageBox.Ok)
 
         while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
             time.sleep(0.1)
@@ -893,7 +906,6 @@ class MainWindow(QMainWindow):
             # back to home
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()
-
 
     def gentle_close(self):
         '''
