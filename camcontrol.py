@@ -51,11 +51,13 @@ class Cam:
         los dos primeros en .list_devices()
         '''
 
-        c1_on = mp.Process(target=self.cam_init, args=(devs[0],))
-        c2_on = mp.Process(target=self.cam_init, args=(devs[1],))
-
-        c1_on.start()
-        c2_on.start()
+        if len(devs) == 1:
+            self.cam_init(devs[0])
+        elif len(devs) == 2:
+            c1_on = mp.Process(target=self.cam_init, args=(devs[0],))
+            c2_on = mp.Process(target=self.cam_init, args=(devs[1],))
+            c1_on.start()
+            c2_on.start()
 
     def _shoot(self, dev, element_id, folio, dng=True):
         '''
@@ -86,11 +88,13 @@ class Cam:
         Realiza la captura en ambas cámaras casi simultáneamente.
         '''
 
-        c1 = mp.Process(target=self._shoot, args=(dev_list[0], element_id, left_folio))
-        c2 = mp.Process(target=self._shoot, args=(dev_list[1], element_id, right_folio))
-
-        c1.start()
-        c2.start()
+        if len(dev_list) == 1:
+            self._shoot(dev_list[0], element_id, left_folio)
+        elif len(dev_list) == 2:
+            c1 = mp.Process(target=self._shoot, args=(dev_list[0], element_id, left_folio))
+            c2 = mp.Process(target=self._shoot, args=(dev_list[1], element_id, right_folio))
+            c1.start()
+            c2.start()
 
     def close_dev(self, dev_list):
         '''

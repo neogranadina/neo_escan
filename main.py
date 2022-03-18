@@ -27,12 +27,6 @@ import configparser
 import ctypes
 import time
 
-# logs
-
-logging.basicConfig(filename="neo_escan.log",
-                    level=logging.DEBUG)
-logger = logging.getLogger("logger")
-
 # config
 
 config = configparser.ConfigParser()
@@ -52,6 +46,16 @@ else:
     sys.exit(0)
 
 # Entorno de la aplicación
+
+# logs
+try:
+    os.makedirs("logs", exist_ok=True)
+except OSError:
+    raise
+
+logging.basicConfig(filename="logs/neo_escan_error.log",
+                    level=logging.DEBUG)
+logger = logging.getLogger("logger")
 
 
 def restart():
@@ -81,10 +85,10 @@ class MainWindow(QMainWindow):
         # crea las cámaras
         global cams
         cams = inicio_proyecto()
-        if len(cams) <= 1:
+        """if len(cams) <= 1:
             QMessageBox().warning(self, "Error",
                                   "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
-
+        """
         # Conectar a la base de datos
         try:
             connectToDatabase()
