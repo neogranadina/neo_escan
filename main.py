@@ -65,7 +65,7 @@ def restart():
 
 
 def inicio_proyecto():
-    devs = Cam().devs()
+    devs = Cam().devs
     return devs
 
 
