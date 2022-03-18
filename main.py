@@ -27,12 +27,6 @@ import configparser
 import ctypes
 import time
 
-# logs
-
-logging.basicConfig(filename="neo_escan.log",
-                    level=logging.DEBUG)
-logger = logging.getLogger("logger")
-
 # config
 
 config = configparser.ConfigParser()
@@ -53,6 +47,16 @@ else:
 
 # Entorno de la aplicación
 
+# logs
+try:
+    os.makedirs("logs", exist_ok=True)
+except OSError:
+    raise
+
+logging.basicConfig(filename="logs/neo_escan_error.log",
+                    level=logging.DEBUG)
+logger = logging.getLogger("logger")
+
 
 def restart():
     QtCore.QCoreApplication.quit()
@@ -61,7 +65,7 @@ def restart():
 
 
 def inicio_proyecto():
-    devs = Cam().devs()
+    devs = Cam().devs
     return devs
 
 
@@ -81,10 +85,10 @@ class MainWindow(QMainWindow):
         # crea las cámaras
         global cams
         cams = inicio_proyecto()
-        if len(cams) <= 1:
+        """if len(cams) <= 1:
             QMessageBox().warning(self, "Error",
                                   "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
-
+        """
         # Conectar a la base de datos
         try:
             connectToDatabase()
@@ -760,7 +764,7 @@ class MainWindow(QMainWindow):
         self.lenImagenesDir(Path(folder_path, 'JPG'))
 
         try:
-            Cam().cam(cams)
+            Cam().cam()
         except IndexError:
             QMessageBox().warning(self, "Error",
                                         "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
@@ -820,7 +824,7 @@ class MainWindow(QMainWindow):
         # create a thread to save the images
         widgets.statusLabel.setText("capturando imágenes...")
 
-        Cam().captura(cams, element_id, left_img_name.replace(
+        Cam().captura(element_id, left_img_name.replace(
             '.jpg', ''), right_img_name.replace('.jpg', ''))
 
         while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
@@ -895,7 +899,7 @@ class MainWindow(QMainWindow):
         '''
         close cams session, close db connection and close application
         '''
-        Cam().close_dev(cams)
+        Cam().close_dev()
         kill_connection()
         window.close()
 
