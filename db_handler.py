@@ -12,7 +12,7 @@
 # ///////////////////////////////////////////////////////////////
 
 import datetime
-from main import log
+#from main import log
 import os
 from pathlib import Path
 from db.create_db import crear_basededatos
@@ -20,6 +20,8 @@ from db.create_db import crear_basededatos
 from PySide2.QtCore import QDir
 from PySide2.QtSql import QSqlDatabase, QSqlQuery
 
+def log(msg):
+    pass
 
 def connectToDatabase():
     '''
@@ -297,6 +299,33 @@ def getImagesInfo(element_id):
             'img_metadata': query.value(6)
         }
     return data
+
+def getLastImgs(element_id):
+    """
+    SELECT the last two images from images where element_id
+    """
+    query = QSqlQuery()
+    query.prepare(
+        """
+        SELECT filename
+        FROM images
+        WHERE element_id = :element_id
+        ORDER BY filename DESC
+        LIMIT 4
+        """
+    )
+    query.bindValue(':element_id', element_id)
+    query.exec_()
+    data = []
+    while query.next():
+        data.append(query.value(0))
+    
+    numbers = [li.replace('.jpg', '').replace('.dng', '') for li in data]
+    numbers = list(dict.fromkeys(numbers))
+    impar = [int(i) for i in numbers if int(i) % 2 != 0]
+    par = [int(i) for i in numbers if int(i) % 2 == 0]
+    return impar, par
+
 
 
 def kill_connection():

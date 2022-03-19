@@ -13,4 +13,5 @@ db/neoscan_db - copia.db
 db/neo_escan_test.db
 tempCodeRunnerFile.py
 db/neo_escan.db
+db/neoscan_db.db
 *.log

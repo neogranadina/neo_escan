@@ -21,7 +21,7 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBo
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp, Qt
 
 from ui_main import Ui_MainWindow
-from db_handler import connectToDatabase, createElement, getLastId, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection
+from db_handler import connectToDatabase, createElement, getLastId, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection, getLastImgs
 from camcontrol import Cam
 import configparser
 import ctypes
@@ -132,7 +132,7 @@ class MainWindow(QMainWindow):
         widgets.openFolderButton.clicked.connect(self.openimagesDir)
 
         # tomar fotografía
-        widgets.capturaButton.clicked.connect(self.getCaptura)
+        widgets.capturaButton.clicked.connect(self.capturar)
         # validar fotografía
         widgets.validateButton.clicked.connect(self.validateCaptura)
         widgets.resetButton.clicked.connect(self.resetCaptura)
@@ -781,61 +781,23 @@ class MainWindow(QMainWindow):
 
     # Funciones de control de la cámara
 
-    def getCaptura(self):
-        try:
-            self.lenImagenesDir(widgets.directorio_elementos.text())
-
-            # get the last images from the directory
-            # and show it in the label
-
-            # set validator for the lineEdit
-            rx = QRegExp("^[a-zA-Z0-9-_]+$")
-            validator = QRegExpValidator(rx, self)
-
-            widgets.folioizqLineEdit.setValidator(validator)
-            widgets.folioderLineEdit.setValidator(validator)
-
-            # validate if text in folioizqLineEdit match regular expression
-            if widgets.folioizqLineEdit.hasAcceptableInput() and widgets.folioderLineEdit.hasAcceptableInput():
-                if widgets.folioizqLineEdit.text() != widgets.folioderLineEdit.text():
-                    left_img_name = widgets.folioizqLineEdit.text() + '.jpg'
-                    right_img_name = widgets.folioderLineEdit.text() + '.jpg'
-
-                    left_img_path = widgets.directorio_elementos.text() + '/JPG/' + left_img_name
-                    right_img_path = widgets.directorio_elementos.text() + '/JPG/' + right_img_name
-
-                    if not os.path.isfile(left_img_path) or not os.path.isfile(right_img_path):
-                        self.capturar(left_img_name, right_img_name,
-                                      left_img_path, right_img_path)
-                    else:
-                        if QMessageBox().question(self, "Advertencia",
-                                                  "Ya existen imágenes con ese nombre. ¿Desea tomarlas nuevamente? \nEsta acción no se puede deshacer.",
-                                                  QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
-                            self.capturar(left_img_name, right_img_name,
-                                          left_img_path, right_img_path)
-
-                else:
-                    QMessageBox().warning(self, "Error",
-                                                "Los número de los folios deben ser diferentes", QMessageBox.Ok)
-            else:
-                QMessageBox().warning(self, "Error",
-                                            "El número de los folios solamente puede contener letras, números y guiones", QMessageBox.Ok)
-
-        except:
-            msg = QMessageBox().warning(self, "Cámaras no disponibles",
-                                        "Una o ambas cámaras están apagadas. Encienda las cámaras y se reiniciará la aplicación.", QMessageBox.Reset)
-            restart()
-
-    def capturar(self, left_img_name, right_img_name, left_img_path, right_img_path):
+    def capturar(self):
         # save the images
         element_id = widgets.elementoIDLabel.text()
 
-        # create a thread to save the images
+        # get last image number pair
+        last_img_pair = getLastImgs(element_id)
+        last_img_left = f'{last_img_pair[0]:04d}'
+        last_img_right = f'{last_img_pair[1]:04d}'
+
         widgets.statusLabel.setText("capturando imágenes...")
 
+        left_img_path = Path(widgets.directorio_elementos.text(), 'JPG', f'{last_img_left}.jpg')
+        right_img_path = Path(widgets.directorio_elementos.text(), 'JPG', f'{last_img_right}.jpg')
+
+
         try:
-            Cam().captura(element_id, left_img_name.replace(
-                '.jpg', ''), right_img_name.replace('.jpg', ''))
+            Cam().captura(element_id, last_img_left, last_img_right)
         except TypeError:
             QMessageBox().warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
@@ -844,7 +806,7 @@ class MainWindow(QMainWindow):
             time.sleep(0.1)
 
         widgets.statusLabel.setText(
-            f"imagen capturada de folios {left_img_name.replace('.jpg', '')} y {right_img_name.replace('.jpg', '')}")
+            f"Capturadas {last_img_left} y {last_img_right}")
 
         widgets.imagenizqLabel.setPixmap(
             QPixmap(left_img_path))
@@ -931,6 +893,6 @@ if __name__ == '__main__':
 
     # Crear y mostrar la ventana principal
     window = MainWindow()
-    window.show()
+    window.showMaximized()
     # correr el loop principal Qt
     sys.exit(app.exec_())

@@ -13,31 +13,69 @@
 # ///////////////////////////////////////////////////////////////
 
 from fractions import Fraction
+from pathlib import Path
 import chdkptp
 from chdkptp.lua import LuaContext
 import multiprocessing as mp
 from filecontrol import DescargarIMGS
 import time
-#import configparser
+import configparser
 from main import log
 
+
+config = configparser.ConfigParser()
+config.read(Path('config.cfg'))
 
 class Cam:
     def __init__(self):
         self.camaras = chdkptp.list_devices()
         self.devs = self.devs()
 
-    def devs(self):
+    def reini_dev(self, dev):
+        '''
+        reinicia la conexión cuando se suspende una cámara
+        '''
+        pass
+
+
+    def cam_order(self):
         '''
         Convierte las dispositivos en ChdkDevices. Regresa los objetos como lista.
         Se llama como Cam().devs (not callable)
         '''
+
+        seriales = [camara.serial_num for camara in self.camaras]
+        cam1 = seriales[0]
+        cam2 = seriales[1]
+
+        cam_izq = config['camaras']['serial_izq']
+        cam_der = config['camaras']['serial_der']
+
+        if cam1 == cam_izq and cam2 == cam_der:
+            return {'cam_izq': cam1, 'cam_der': cam2}
+        elif cam1 == cam_der and cam2 == cam_izq:
+            return {'cam_izq': cam2, 'cam_der': cam1}
+        else:
+            # write serials in config file
+            config['camaras']['serial_izq'] = cam1
+            config['camaras']['serial_der'] = cam2
+            with open('config.cfg', 'w') as configfile:
+                config.write(configfile)
+            return {'cam_izq': cam1, 'cam_der': cam2}
+
+
+    def devs(self):
+        
+        cams = self.cam_order()
         try:
-            return [chdkptp.ChdkDevice(dev) for dev in self.camaras]
+            dev_left = [chdkptp.ChdkDevice(d[0]) for d in self.camaras if d.serial_num == cams.cam_izq]
+            dev_right = [chdkptp.ChdkDevice(d[0]) for d in self.camaras if d.serial_num == cams.cam_der]
+            return dev_left[0], dev_right[0]
         except Exception as e:
             # write error in log file
             log(f"ERROR: {str(e)}")
             raise
+
 
     def cam_init(self, dev):
         '''

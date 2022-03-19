@@ -87,6 +87,14 @@ class DescargarIMGS:
 
         return img_dir
 
+
+    def image_name(self, img_path):
+        '''
+        nombre de la imagen
+        '''
+        return img_path.split("/")[-1]
+
+
     def descarga_jpg(self):
         '''
         crea imagen jpg a partir del binario (imgdata)
