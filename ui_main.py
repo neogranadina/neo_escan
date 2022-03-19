@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 480)
+        MainWindow.resize(867, 480)
         MainWindow.setMinimumSize(QSize(800, 480))
         font = QFont()
         font.setStyleStrategy(QFont.NoAntialias)
@@ -236,6 +236,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_21.addWidget(self.escanerLabel)
 
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_21.addItem(self.verticalSpacer_3)
+
 
         self.verticalLayout_22.addLayout(self.verticalLayout_21)
 
@@ -348,7 +352,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 677, 310))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 65, 18))
         self.verticalLayout_20 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
         self.scrollArea_7.setWidget(self.scrollAreaWidgetContents_2)
@@ -513,7 +517,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 642, 428))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 633, 428))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.formLayout = QFormLayout()
@@ -1598,41 +1602,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_18.addLayout(self.gridLayout_5)
 
-        self.formLayout_7 = QFormLayout()
-        self.formLayout_7.setObjectName(u"formLayout_7")
-        self.folioIzqLabel = QLabel(self.controlPanel)
-        self.folioIzqLabel.setObjectName(u"folioIzqLabel")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.formLayout_7.setWidget(0, QFormLayout.LabelRole, self.folioIzqLabel)
-
-        self.folioizqLineEdit = QLineEdit(self.controlPanel)
-        self.folioizqLineEdit.setObjectName(u"folioizqLineEdit")
-        self.folioizqLineEdit.setMinimumSize(QSize(0, 25))
-        self.folioizqLineEdit.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius: 5px;")
-
-        self.formLayout_7.setWidget(0, QFormLayout.FieldRole, self.folioizqLineEdit)
-
-
-        self.verticalLayout_18.addLayout(self.formLayout_7)
-
-        self.formLayout_8 = QFormLayout()
-        self.formLayout_8.setObjectName(u"formLayout_8")
-        self.folioderLabel = QLabel(self.controlPanel)
-        self.folioderLabel.setObjectName(u"folioderLabel")
-
-        self.formLayout_8.setWidget(0, QFormLayout.LabelRole, self.folioderLabel)
-
-        self.folioderLineEdit = QLineEdit(self.controlPanel)
-        self.folioderLineEdit.setObjectName(u"folioderLineEdit")
-        self.folioderLineEdit.setMinimumSize(QSize(0, 25))
-        self.folioderLineEdit.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"border-radius: 5px;")
-
-        self.formLayout_8.setWidget(0, QFormLayout.FieldRole, self.folioderLineEdit)
-
-
-        self.verticalLayout_18.addLayout(self.formLayout_8)
+        self.verticalLayout_18.addItem(self.verticalSpacer)
 
 
         self.horizontalLayout_6.addWidget(self.controlPanel)
@@ -2001,21 +1973,17 @@ class Ui_MainWindow(object):
         self.openFolderButton.setText("")
         self.titulelementoTituloLabel_6.setText(QCoreApplication.translate("MainWindow", u"N\u00famero de imgs", None))
         self.cantidadimgsLabel.setText("")
-        self.folioIzqLabel.setText(QCoreApplication.translate("MainWindow", u"folio izq.", None))
-        self.folioizqLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"# folio recto", None))
-        self.folioderLabel.setText(QCoreApplication.translate("MainWindow", u"folio der.", None))
-        self.folioderLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"# folio verso", None))
         self.imagenizqLabel.setText("")
         self.imagederLabel.setText("")
         self.statusLabel.setText(QCoreApplication.translate("MainWindow", u"Clic en capturar para iniciar", None))
         self.finalizarButton.setText(QCoreApplication.translate("MainWindow", u"Cerrar proyecto", None))
         self.capturaButton.setText(QCoreApplication.translate("MainWindow", u"capturar", None))
 #if QT_CONFIG(shortcut)
-        self.capturaButton.setShortcut(QCoreApplication.translate("MainWindow", u"Enter", None))
+        self.capturaButton.setShortcut(QCoreApplication.translate("MainWindow", u"Space", None))
 #endif // QT_CONFIG(shortcut)
         self.validateButton.setText(QCoreApplication.translate("MainWindow", u"validar", None))
 #if QT_CONFIG(shortcut)
-        self.validateButton.setShortcut(QCoreApplication.translate("MainWindow", u"Enter", None))
+        self.validateButton.setShortcut(QCoreApplication.translate("MainWindow", u"Space", None))
 #endif // QT_CONFIG(shortcut)
         self.resetButton.setText(QCoreApplication.translate("MainWindow", u"retomar", None))
 #if QT_CONFIG(shortcut)

@@ -13,31 +13,108 @@
 # ///////////////////////////////////////////////////////////////
 
 from fractions import Fraction
+import inspect
+import os
+from pathlib import Path
 import chdkptp
 from chdkptp.lua import LuaContext
 import multiprocessing as mp
 from filecontrol import DescargarIMGS
 import time
-#import configparser
-from main import log
+import configparser
 
+
+config = configparser.ConfigParser()
+config.read(Path('config.cfg'))
+
+# logs
+try:
+    os.makedirs("logs", exist_ok=True)
+except OSError:
+    raise
+
+
+def log(msg):
+    ts = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+    error = open("logs/neoscan_log.log", "a")
+    error.write(ts + ": " + msg + "\n")
+    error.close()
 
 class Cam:
     def __init__(self):
         self.camaras = chdkptp.list_devices()
         self.devs = self.devs()
 
-    def devs(self):
+    def reini_dev(self, dev):
+        '''
+        reinicia la conexión cuando se suspende una cámara
+        '''
+        pass
+
+
+    def cam_order(self):
         '''
         Convierte las dispositivos en ChdkDevices. Regresa los objetos como lista.
         Se llama como Cam().devs (not callable)
         '''
-        try:
-            return [chdkptp.ChdkDevice(dev) for dev in self.camaras]
-        except Exception as e:
-            # write error in log file
-            log(f"ERROR: {str(e)}")
-            raise
+
+        seriales = [camara.serial_num for camara in self.camaras]
+        cam1 = seriales[0]
+        cam2 = seriales[1]
+
+        cam_izq = config['camaras']['serial_izq']
+        cam_der = config['camaras']['serial_der']
+
+        if cam1 == cam_izq and cam2 == cam_der:
+            return {'cam_izq': cam1, 'cam_der': cam2}
+        elif cam1 == cam_der and cam2 == cam_izq:
+            return {'cam_izq': cam2, 'cam_der': cam1}
+        else:
+            # write serials in config file
+            config['camaras']['serial_izq'] = cam1
+            config['camaras']['serial_der'] = cam2
+            with open('config.cfg', 'w') as configfile:
+                config.write(configfile)
+            return {'cam_izq': cam1, 'cam_der': cam2}
+
+
+    def single_cam(self):
+        '''
+        regresa la cámara activa, indica si es izquierda o derecha
+        '''
+        cam_izq = config['camaras']['serial_izq']
+        cam_der = config['camaras']['serial_der']
+        cams = self.camaras
+        if cam_izq == cams[0].serial_num:
+            return {'cam_izq': cams[0]}
+        elif cam_der == cams[0].serial_num:
+            return {'cam_der': cams[0]}
+
+    def devs(self):
+        
+        if len(self.camaras) == 0:
+            log("No hay dispositivos conectados")
+            return None
+        elif len(self.camaras) == 1:
+            log("Solo hay un dispositivo conectado")
+            camid = self.single_cam()
+            if camid.keys == 'cam_izq':
+                dev_left = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == camid['cam_izq']]
+                return dev_left[0], None
+            elif camid.keys == 'cam_der':
+                dev_right = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == camid['cam_der']]
+                return None, dev_right[0]
+        elif len(self.camaras) == 2:
+            cams = self.cam_order()
+            try:
+                dev_left = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == cams['cam_izq']]
+                dev_right = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == cams['cam_der']]
+                return dev_left[0], dev_right[0]
+            except Exception as e:
+                # write error in log file
+                log(f"ERROR: {str(e)}")
+                raise
+
 
     def cam_init(self, dev):
         '''
@@ -60,13 +137,19 @@ class Cam:
         log(f"Conexión en {self.devs}")
 
         try:
-            if len(self.devs) == 1:
-                self.cam_init(self.devs[0])
-            elif len(self.devs) == 2:
+            if len(self.devs) == 2:
                 c1_on = mp.Process(target=self.cam_init, args=(self.devs[0],))
                 c2_on = mp.Process(target=self.cam_init, args=(self.devs[1],))
                 c1_on.start()
                 c2_on.start()
+            elif len(self.devs) == 1:
+                if self.devs[0] is None:
+                    self.cam_init(self.devs[1])
+                else:
+                    self.cam_init(self.devs[0])
+            elif len(self.devs) == 0:
+                log(f"WARNING: No hay dispositivos conectados. En {__file__} line {inspect.currentframe().f_lineno}")
+                return None
         except Exception as e:
             # write error in log file
             log(f"ERROR: {str(e)}")
@@ -93,6 +176,7 @@ class Cam:
             # descarga dng
             obj_descarga.descarga_dng()
 
+
     def captura(self, element_id, left_folio, right_folio):
         '''
         Realiza la captura en ambas cámaras casi simultáneamente.
@@ -101,13 +185,20 @@ class Cam:
         right_folio int con la serie de la derecha
         '''
 
+        left_camera = self.devs[0] if not self.devs[0] is None else None
+        right_camera = self.devs[1] if not self.devs[1] is None else None
+
+
         if len(self.devs) == 1:
-            self._shoot(self.devs[0], element_id, left_folio)
+            if self.devs[0] is None:
+                self._shoot(right_camera, element_id, right_folio)
+            else:
+                self._shoot(left_camera, element_id, left_folio)
         elif len(self.devs) == 2:
             c1 = mp.Process(target=self._shoot, args=(
-                self.devs[0], element_id, left_folio))
+                left_camera, element_id, left_folio))
             c2 = mp.Process(target=self._shoot, args=(
-                self.devs[1], element_id, right_folio))
+                right_camera, element_id, right_folio))
             c1.start()
             c2.start()
         elif len(self.devs) < 1:
