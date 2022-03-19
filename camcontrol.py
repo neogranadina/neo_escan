@@ -13,6 +13,7 @@
 # ///////////////////////////////////////////////////////////////
 
 from fractions import Fraction
+import os
 from pathlib import Path
 import chdkptp
 from chdkptp.lua import LuaContext
@@ -20,11 +21,23 @@ import multiprocessing as mp
 from filecontrol import DescargarIMGS
 import time
 import configparser
-from main import log
 
 
 config = configparser.ConfigParser()
 config.read(Path('config.cfg'))
+
+# logs
+try:
+    os.makedirs("logs", exist_ok=True)
+except OSError:
+    raise
+
+
+def log(msg):
+    ts = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+    error = open("logs/neoscan_log.log", "a")
+    error.write(ts + ": " + msg + "\n")
+    error.close()
 
 class Cam:
     def __init__(self):
