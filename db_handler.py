@@ -324,7 +324,7 @@ def getLastImgs(element_id):
     numbers = list(dict.fromkeys(numbers))
     impar = [int(i) for i in numbers if int(i) % 2 != 0]
     par = [int(i) for i in numbers if int(i) % 2 == 0]
-    return impar, par
+    return impar[0], par[0]
 
 
 
