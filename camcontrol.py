@@ -88,8 +88,8 @@ class Cam:
         elif len(self.camaras) == 2:
             cams = self.cam_order()
             try:
-                dev_left = [chdkptp.ChdkDevice(d[0]) for d in self.camaras if d.serial_num == cams['cam_izq']]
-                dev_right = [chdkptp.ChdkDevice(d[0]) for d in self.camaras if d.serial_num == cams['cam_der']]
+                dev_left = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == cams['cam_izq']]
+                dev_right = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == cams['cam_der']]
                 return dev_left[0], dev_right[0]
             except Exception as e:
                 # write error in log file
