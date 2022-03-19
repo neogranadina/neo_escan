@@ -97,7 +97,8 @@ class MainWindow(QMainWindow):
             connectToDatabase()
         except Exception as e:
             print("Error en la conexión con la base de datos")
-            log(f"ERROR Falló conexión con la base de datos {e}")
+            log(
+                f"ERROR Falló conexión con la base de datos. Error {e} en {__file__} linea {e.__traceback__.tb_lineno}")
             raise
 
         # set version
@@ -743,6 +744,61 @@ class MainWindow(QMainWindow):
             num_imagenes = 0
         widgets.cantidadimgsLabel.setText(str(num_imagenes))
 
+    def open_cameras(self):
+        '''
+        Intenta saber si hay cámaras conectadas y establece
+        una conexión con una o dos cámaras
+        return: single or dual camera mode
+        '''
+
+        try:
+            # avoid error if no cameras are connected
+            cam_response = Cam().cam()
+            intentos = 0
+            while cam_response is None:
+                respuesta = QMessageBox.question(self, 'Error', 'No es posible iniciar \
+                 porque no se encontró ninguna cámara conectada.\n \
+                     Por favor, conecte al menos una cámara y vuelva a intentarlo.',
+                                                 QMessageBox.Ok | QMessageBox.Discard)
+                if respuesta == QMessageBox.Ok:
+                    time.sleep(2)
+                    cam_response = Cam().cam()
+                    intentos += 1
+                    if intentos == 3:
+                        QMessageBox.critical(
+                            self, 'Error', 'No fue posible iniciar la cámara.')
+                        log(f'ERROR: No fue posible iniciar la cámara después de tres intentos. \n \
+                            cam_response = {cam_response}')
+                        return None
+                else:
+                    cam_response = True
+                    # back to home
+                    widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+                    self.display_elements()
+            return "dual_camera_mode"
+
+        except IndexError as e:
+            log(f"ERROR: {e} en {__file__} linea {e.__traceback__.tb_lineno}")
+            # single camera QMessageBox, accept retry cancel
+            respuesta = QMessageBox().question(self, "Una cámara conectada",
+                                               "Solamente una cámara está conectada.\n \
+                                        ¿Desea intentar escanear con ella?",
+                                               QMessageBox.Ok | QMessageBox.Retry | QMessageBox.Cancel)
+
+            if respuesta == QMessageBox.Ok:
+                return "single_camera_mode"
+            elif respuesta == QMessageBox.Retry:
+                respuesta = QMessageBox().question(self, "Reintentar",
+                                                   "Asegúrese de que la cámara esté conectada y vuelva a intentarlo.",
+                                                   QMessageBox.Ok | QMessageBox.Cancel)
+                if respuesta == QMessageBox.Ok:
+                    cam_response = Cam().cam()
+                    return "dual_camera_mode"
+                else:
+                    # back to home
+                    widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+                    self.display_elements()
+
     def set_scanner_page(self, id_element=None):
         # set current page to escanerPage
         widgets.stackedWidget.setCurrentWidget(widgets.escanerPage)
@@ -764,7 +820,7 @@ class MainWindow(QMainWindow):
             os.makedirs(folder_path, exist_ok=True)
         except OSError as e:
             print(e)
-            log(f'ERROR: Al crear {folder_path} se encontró un OSError {e}')
+            log(f'ERROR: Al crear {folder_path} se encontró un OSError {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             raise
 
         # set folder_path to label
@@ -772,12 +828,7 @@ class MainWindow(QMainWindow):
 
         self.lenImagenesDir(Path(folder_path, 'JPG'))
 
-        try:
-            Cam().cam()
-        except IndexError:
-            QMessageBox().warning(self, "Error",
-                                        "Compruebe que ambas cámaras estén encendidas. Se reiniciará la aplicación", QMessageBox.Reset)
-            restart()
+        return self.open_cameras()
 
     # Funciones de control de la cámara
 
@@ -792,9 +843,10 @@ class MainWindow(QMainWindow):
 
         widgets.statusLabel.setText("capturando imágenes...")
 
-        left_img_path = Path(widgets.directorio_elementos.text(), 'JPG', f'{last_img_left}.jpg')
-        right_img_path = Path(widgets.directorio_elementos.text(), 'JPG', f'{last_img_right}.jpg')
-
+        left_img_path = Path(
+            widgets.directorio_elementos.text(), 'JPG', f'{last_img_left}.jpg')
+        right_img_path = Path(
+            widgets.directorio_elementos.text(), 'JPG', f'{last_img_right}.jpg')
 
         try:
             Cam().captura(element_id, last_img_left, last_img_right)

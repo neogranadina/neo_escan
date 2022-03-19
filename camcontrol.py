@@ -13,6 +13,7 @@
 # ///////////////////////////////////////////////////////////////
 
 from fractions import Fraction
+import inspect
 import os
 from pathlib import Path
 import chdkptp
@@ -77,6 +78,18 @@ class Cam:
             return {'cam_izq': cam1, 'cam_der': cam2}
 
 
+    def single_cam(self):
+        '''
+        regresa la cámara activa, indica si es izquierda o derecha
+        '''
+        cam_izq = config['camaras']['serial_izq']
+        cam_der = config['camaras']['serial_der']
+        cams = self.camaras
+        if cam_izq == cams[0].serial_num:
+            return {'cam_izq': cams[0]}
+        elif cam_der == cams[0].serial_num:
+            return {'cam_der': cams[0]}
+
     def devs(self):
         
         if len(self.camaras) == 0:
@@ -84,7 +97,13 @@ class Cam:
             return None
         elif len(self.camaras) == 1:
             log("Solo hay un dispositivo conectado")
-            return self.cam_order()
+            camid = self.single_cam()
+            if camid.keys == 'cam_izq':
+                dev_left = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == camid['cam_izq']]
+                return dev_left[0], None
+            elif camid.keys == 'cam_der':
+                dev_right = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == camid['cam_der']]
+                return None, dev_right[0]
         elif len(self.camaras) == 2:
             cams = self.cam_order()
             try:
@@ -118,8 +137,14 @@ class Cam:
         log(f"Conexión en {self.devs}")
 
         try:
-            if len(self.devs) == 1:
-                self.cam_init(self.devs[0])
+            if len(self.devs) == 0:
+                log(f"WARNING: No hay dispositivos conectados. En {__file__} line {inspect.currentframe().f_lineno}")
+                return None
+            elif len(self.devs) == 1:
+                if self.devs[0] is None:
+                    self.cam_init(self.devs[1])
+                else:
+                    self.cam_init(self.devs[0])
             elif len(self.devs) == 2:
                 c1_on = mp.Process(target=self.cam_init, args=(self.devs[0],))
                 c2_on = mp.Process(target=self.cam_init, args=(self.devs[1],))
@@ -151,6 +176,7 @@ class Cam:
             # descarga dng
             obj_descarga.descarga_dng()
 
+
     def captura(self, element_id, left_folio, right_folio):
         '''
         Realiza la captura en ambas cámaras casi simultáneamente.
@@ -159,13 +185,20 @@ class Cam:
         right_folio int con la serie de la derecha
         '''
 
+        left_camera = self.devs[0] if not self.devs[0] is None else None
+        right_camera = self.devs[1] if not self.devs[1] is None else None
+
+
         if len(self.devs) == 1:
-            self._shoot(self.devs[0], element_id, left_folio)
+            if self.devs[0] is None:
+                self._shoot(right_camera, element_id, right_folio)
+            else:
+                self._shoot(left_camera, element_id, left_folio)
         elif len(self.devs) == 2:
             c1 = mp.Process(target=self._shoot, args=(
-                self.devs[0], element_id, left_folio))
+                left_camera, element_id, left_folio))
             c2 = mp.Process(target=self._shoot, args=(
-                self.devs[1], element_id, right_folio))
+                right_camera, element_id, right_folio))
             c1.start()
             c2.start()
         elif len(self.devs) < 1:
