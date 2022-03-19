@@ -137,19 +137,19 @@ class Cam:
         log(f"Conexión en {self.devs}")
 
         try:
-            if len(self.devs) == 0:
-                log(f"WARNING: No hay dispositivos conectados. En {__file__} line {inspect.currentframe().f_lineno}")
-                return None
+            if len(self.devs) == 2:
+                c1_on = mp.Process(target=self.cam_init, args=(self.devs[0],))
+                c2_on = mp.Process(target=self.cam_init, args=(self.devs[1],))
+                c1_on.start()
+                c2_on.start()
             elif len(self.devs) == 1:
                 if self.devs[0] is None:
                     self.cam_init(self.devs[1])
                 else:
                     self.cam_init(self.devs[0])
-            elif len(self.devs) == 2:
-                c1_on = mp.Process(target=self.cam_init, args=(self.devs[0],))
-                c2_on = mp.Process(target=self.cam_init, args=(self.devs[1],))
-                c1_on.start()
-                c2_on.start()
+            elif len(self.devs) == 0:
+                log(f"WARNING: No hay dispositivos conectados. En {__file__} line {inspect.currentframe().f_lineno}")
+                return None
         except Exception as e:
             # write error in log file
             log(f"ERROR: {str(e)}")

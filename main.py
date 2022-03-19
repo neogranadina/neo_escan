@@ -15,10 +15,10 @@ import json
 import shutil
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QIcon, QPixmap, QRegExpValidator
+from PySide2.QtGui import QIcon, QPixmap
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGridLayout, QPushButton
-from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, QRegExp, Qt
+from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, Qt
 
 from ui_main import Ui_MainWindow
 from db_handler import connectToDatabase, createElement, getLastId, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection, getLastImgs
@@ -67,11 +67,6 @@ def restart():
     log(f"Reinicio de la aplicación. Status: {status}")
 
 
-def inicio_proyecto():
-    devs = Cam().devs
-    return devs
-
-
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -86,12 +81,8 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         # crea las cámaras
-        global cams
-        cams = inicio_proyecto()
-        """if len(cams) <= 1:
-            QMessageBox().warning(self, "Error",
-                                  "No se encontró ninguna cámara.\nEncienda las cámaras para evitar errores al escanear.", QMessageBox.Discard)
-        """
+        # global cams
+        self.Cams = Cam()
         # Conectar a la base de datos
         try:
             connectToDatabase()
@@ -753,7 +744,7 @@ class MainWindow(QMainWindow):
 
         try:
             # avoid error if no cameras are connected
-            cam_response = Cam().cam()
+            cam_response = self.Cams.cam()
             intentos = 0
             while cam_response is None:
                 respuesta = QMessageBox.question(self, 'Error', 'No es posible iniciar \
@@ -762,7 +753,7 @@ class MainWindow(QMainWindow):
                                                  QMessageBox.Ok | QMessageBox.Discard)
                 if respuesta == QMessageBox.Ok:
                     time.sleep(2)
-                    cam_response = Cam().cam()
+                    cam_response = self.Cams.cam()
                     intentos += 1
                     if intentos == 3:
                         QMessageBox.critical(
@@ -792,7 +783,7 @@ class MainWindow(QMainWindow):
                                                    "Asegúrese de que la cámara esté conectada y vuelva a intentarlo.",
                                                    QMessageBox.Ok | QMessageBox.Cancel)
                 if respuesta == QMessageBox.Ok:
-                    cam_response = Cam().cam()
+                    cam_response = self.Cams.cam()
                     return "dual_camera_mode"
                 else:
                     # back to home
@@ -849,7 +840,7 @@ class MainWindow(QMainWindow):
             widgets.directorio_elementos.text(), 'JPG', f'{last_img_right}.jpg')
 
         try:
-            Cam().captura(element_id, last_img_left, last_img_right)
+            self.Cams.captura(element_id, last_img_left, last_img_right)
         except TypeError:
             QMessageBox().warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
@@ -925,7 +916,7 @@ class MainWindow(QMainWindow):
         '''
         close cams session, close db connection and close application
         '''
-        Cam().close_dev()
+        self.Cams.close_dev()
         kill_connection()
         window.close()
 
