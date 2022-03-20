@@ -830,8 +830,10 @@ class MainWindow(QMainWindow):
 
         # get last image number pair
         last_img_pair = getLastImgs(element_id)
-        last_img_left = f'{last_img_pair[0]:04d}'
-        last_img_right = f'{last_img_pair[1]:04d}'
+        last_img_left = last_img_pair[0] + 1
+        last_img_left = f'{last_img_left:04d}'
+        last_img_right = last_img_pair[1] + 2
+        last_img_right = f'{last_img_right:04d}'
 
         widgets.statusLabel.setText("capturando imágenes...")
 
@@ -913,8 +915,6 @@ class MainWindow(QMainWindow):
             widgets.elementoTituloLabel.setText('')
             widgets.directorio_elementos.setText('')
             widgets.cantidadimgsLabel.setText('')
-            widgets.folioizqLineEdit.setText('')
-            widgets.folioderLineEdit.setText('')
             # back to home
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()

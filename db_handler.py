@@ -328,7 +328,7 @@ def getLastImgs(element_id):
         return impar[0], par[0]
     except IndexError as e:
         log(f'INFO: número inicial de imagenes: {e}')
-        return 1, 2
+        return 0, 0
 
 
 
