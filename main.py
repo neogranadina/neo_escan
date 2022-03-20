@@ -829,11 +829,19 @@ class MainWindow(QMainWindow):
         element_id = widgets.elementoIDLabel.text()
 
         # get last image number pair
-        last_img_pair = getLastImgs(element_id)
-        last_img_left = last_img_pair[0] + 1
-        last_img_left = f'{last_img_left:04d}'
-        last_img_right = last_img_pair[1] + 2
-        last_img_right = f'{last_img_right:04d}'
+        last_img_group = getLastImgs(element_id)
+        try:
+            numbers = [li.replace('.jpg', '').replace('.dng', '') for li in last_img_group]
+            numbers = list(dict.fromkeys(numbers))
+            last_img_left = [int(i) for i in numbers if int(i) % 2 != 0][0]
+            last_img_right = [int(i) for i in numbers if int(i) % 2 == 0][0]
+            last_img_left = [last_img_left + 2 if last_img_left is not 0 else 1][0]
+            last_img_left = f'{last_img_left:04d}'
+            last_img_right = last_img_right + 2
+            last_img_right = f'{last_img_right:04d}'
+        except AttributeError:
+            last_img_left = '0001'
+            last_img_right = '0002'
 
         widgets.statusLabel.setText("capturando imágenes...")
 

@@ -61,11 +61,22 @@ class DescargarIMGS:
 
     def img_dir(self, tipo_img):
         '''
-        crea un nombre único para cada captura
+        tipo_img(str) = tipo de imagen (jpg, dng)
+        Crea directorio si no existe y lo configura como BagIt
+        return dirección del subdirectorio para la subida de imagen por tipo
         '''
 
-        img_dir = os.path.join(IMGDIR, self.nombre_proyecto,
-                               f"{tipo_img.upper()}")
+        img_dir = os.path.join(IMGDIR, self.nombre_proyecto)
+        os.makedirs(img_dir, exist_ok=True)
+
+        # if img_dir is empty create bag:
+        if not os.path.exists(f'{img_dir}/bagit.txt'):
+            bag = bagit.make_bag(img_dir, {
+                'Contact-Name': 'Fundación histórica Neogranadina',
+                'Contact-Email': 'coordinacion@neogranadina.org',
+                'Website': 'neogranadina.org'})
+
+        img_dir = os.path.join(IMGDIR, self.nombre_proyecto, 'data', f"{tipo_img.upper()}")
         os.makedirs(img_dir, exist_ok=True)
 
         return img_dir
@@ -90,6 +101,10 @@ class DescargarIMGS:
                 self.nombre_proyecto, jpg_path, 'jpg')
             print(f"descargada img {jpg_path}")
 
+        # update bag
+        bag = bagit.Bag(os.path.join(IMGDIR, self.nombre_proyecto))
+        bag.save(manifests=True)
+
     def descarga_dng(self):
         '''
         copia la imagen dng desde la memoria de la cámara
@@ -106,6 +121,10 @@ class DescargarIMGS:
                 self.associateImageWithElement(
                     self.nombre_proyecto, dng_path, 'dng')
                 print(f"descargada img {dng_path}")
+
+        # update bag
+        bag = bagit.Bag(os.path.join(IMGDIR, self.nombre_proyecto))
+        bag.save(manifests=True)
 
         self.dev.delete_files(img_path)
 
