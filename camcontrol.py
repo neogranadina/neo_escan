@@ -149,7 +149,7 @@ class Cam:
                     self.cam_init(self.devs[0])
             elif len(self.devs) == 0:
                 log(f"WARNING: No hay dispositivos conectados. En {__file__} line {inspect.currentframe().f_lineno}")
-                return None
+                return False
         except Exception as e:
             # write error in log file
             log(f"ERROR: {str(e)}")

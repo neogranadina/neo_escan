@@ -324,7 +324,11 @@ def getLastImgs(element_id):
     numbers = list(dict.fromkeys(numbers))
     impar = [int(i) for i in numbers if int(i) % 2 != 0]
     par = [int(i) for i in numbers if int(i) % 2 == 0]
-    return impar[0], par[0]
+    try:
+        return impar[0], par[0]
+    except IndexError as e:
+        log(f'INFO: número inicial de imagenes: {e}')
+        return 1, 2
 
 
 

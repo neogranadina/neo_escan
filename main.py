@@ -746,7 +746,7 @@ class MainWindow(QMainWindow):
             # avoid error if no cameras are connected
             cam_response = self.Cams.cam()
             intentos = 0
-            while cam_response is None:
+            while cam_response is False:
                 respuesta = QMessageBox.question(self, 'Error', 'No es posible iniciar \
                  porque no se encontró ninguna cámara conectada.\n \
                      Por favor, conecte al menos una cámara y vuelva a intentarlo.',
@@ -760,7 +760,7 @@ class MainWindow(QMainWindow):
                             self, 'Error', 'No fue posible iniciar la cámara.')
                         log(f'ERROR: No fue posible iniciar la cámara después de tres intentos. \n \
                             cam_response = {cam_response}')
-                        return None
+                        return False
                 else:
                     cam_response = True
                     # back to home
