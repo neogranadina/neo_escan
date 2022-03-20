@@ -10,6 +10,7 @@
 
 import sys
 import os
+import glob
 from pathlib import Path
 import json
 import shutil
@@ -850,6 +851,12 @@ class MainWindow(QMainWindow):
 
         widgets.statusLabel.setText(
             f"Capturadas {last_img_left} y {last_img_right}")
+        log(f'INFO: Imágenes {last_img_left} y {last_img_right} capturadas')
+
+        # for some reason QPixmap is not working with PosixPath 
+        # raise TypeError. As a temporary solution transform PosixPath to str
+        left_img_path = left_img_path.absolute().as_posix()
+        right_img_path = right_img_path.absolute().as_posix()
 
         widgets.imagenizqLabel.setPixmap(
             QPixmap(left_img_path))
@@ -861,11 +868,6 @@ class MainWindow(QMainWindow):
             widgets.validar)
 
     def validateCaptura(self):
-        widgets.statusLabel.setText(
-            f"últimos folios capturados {widgets.folioizqLineEdit.text()} y {widgets.folioderLineEdit.text()}")
-        # erase the folio labels
-        widgets.folioizqLineEdit.setText('')
-        widgets.folioderLineEdit.setText('')
         # erase the images
         widgets.imagenizqLabel.setPixmap(QPixmap())
         widgets.imagederLabel.setPixmap(QPixmap())
@@ -876,15 +878,20 @@ class MainWindow(QMainWindow):
         widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
 
     def resetCaptura(self):
-        # delete images from directory
+        # delete most recent images from directory
         folder_path = widgets.directorio_elementos.text()
-        leftimage = folder_path + '/' + widgets.folioizqLineEdit.text() + '.png'
-        rightimage = folder_path + '/' + widgets.folioderLineEdit.text() + '.png'
-        try:
-            os.remove(leftimage)
-            os.remove(rightimage)
-        except:
-            pass
+        
+        tipos = ['JPG', 'DNG']
+        for t in tipos:
+            last_imagenes = glob.glob(f'{folder_path}/{t}/*.{t.lower()}')
+            last_imagenes.sort(key=os.path.getctime, reverse=True)
+            last_imagenes = last_imagenes[:2]
+            for f in last_imagenes:
+                try:
+                    os.remove(f)
+                except OSError as e:
+                    log(f'ERROR: Al eliminar {f} se encontró un OSError {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+                    raise
 
         # erase image labels
         widgets.imagenizqLabel.setPixmap(QPixmap())

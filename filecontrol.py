@@ -20,6 +20,8 @@ from db_handler import wrap_imageWithElement
 from PIL import Image, ExifTags
 import logging
 import configparser
+import bagit
+
 
 # logs
 
@@ -60,25 +62,6 @@ class DescargarIMGS:
     def img_dir(self, tipo_img):
         '''
         crea un nombre único para cada captura
-        TODO: comprobar errores de sincronización que lleven a que los dng no coincidan con los jpg
-
-        img_dir = os.path.join(IMGDIR, self.nombre_proyecto,
-                               f"{tipo_img.upper()}")
-        os.makedirs(img_dir, exist_ok=True)
-        lista = os.listdir(img_dir)
-        # print(lista)
-        number_files = len(lista)
-        # print(number_files)
-        fpath = os.path.join(img_dir, f"IMG_{number_files + 1}.{tipo_img}")
-
-        if os.path.exists(fpath):
-            dup_name = fpath.split("/")[-1]
-            nombre_file = dup_name.split(".")[0]
-            serie = nombre_file.split("_")[1]
-            # ¿Podría ser R - V?
-            fpath = os.path.join(img_dir, f"IMG_{int(serie) + 1}.{tipo_img}")
-
-        return fpath
         '''
 
         img_dir = os.path.join(IMGDIR, self.nombre_proyecto,
