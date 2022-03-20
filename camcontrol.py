@@ -165,7 +165,7 @@ class Cam:
             log(f"ERROR: {str(e)}")
             raise
 
-    def _shoot(self, dev, element_id, folio, dng_captura):
+    def _shoot(self, dev, element_id, folio, dng_captura=False):
         '''
         dev = el dispositivo conectado y en modo rec() [usar camcontrol.Cam().cam()]
         dng = True. En modo False no guarda imágenes dng en la memoria de la cámara. 
