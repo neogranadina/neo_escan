@@ -891,7 +891,7 @@ class MainWindow(QMainWindow):
 
 
         # Este loop permite
-        if Cams.len_devs() != 1:
+        if Cams.len_devs() > 1:
             tolerancia = 0
             while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
                 time.sleep(2)
