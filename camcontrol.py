@@ -45,12 +45,18 @@ class Cam:
         self.camaras = chdkptp.list_devices()
         self.devs = self.devs()
 
+    def len_devs(self):
+        '''
+        regresa la cantidad de dispositivos conectados
+        '''
+        return len(self.devs)
+
     def test(self):
         '''
         función para probar la conexión de la cámara
         '''
         try:
-            len(self.devs)
+            self.len_devs()
         except TypeError:
             return False
 
@@ -159,29 +165,49 @@ class Cam:
             log(f"ERROR: {str(e)}")
             raise
 
-    def _shoot(self, dev, element_id, folio, dng=True):
+    def _shoot(self, dev, element_id, folio, dng_captura):
         '''
         dev = el dispositivo conectado y en modo rec() [usar camcontrol.Cam().cam()]
         dng = True. En modo False no guarda imágenes dng en la memoria de la cámara. 
               Marca error si stream=True.
         '''
-
         # el binario jpg se guarda en imgdata
-        imgdata = dev.shoot(wait=True, dng=dng, stream=False,
-                            download_after=True, remove_after=True,
-                            shutter_speed=chdkptp.util.shutter_to_tv96(
-                                float(Fraction(u"1/25"))),
-                            zoom_level=3)
-
+        ini = time.time()
+        try:
+            imgdata = dev.shoot(wait=True, dng=dng_captura, stream=False,
+                                download_after=True, remove_after=True,
+                                shutter_speed=chdkptp.util.shutter_to_tv96(
+                                    float(Fraction(u"1/25"))),
+                                zoom_level=3)
+        except TypeError as e:
+            log(f"ERROR: {str(e)} en {__file__} line {inspect.currentframe().f_lineno}")
+            dev.reconnect()
+            log(f'Reintento de conexión de: {dev}')
+            print(dev)
+            try:
+                imgdata = dev.shoot(wait=True, dng=dng_captura, stream=False,
+                                download_after=True, remove_after=True,
+                                shutter_speed=chdkptp.util.shutter_to_tv96(
+                                    float(Fraction(u"1/25"))),
+                                zoom_level=3)
+            except Exception as e:
+                log(f"ERROR: {str(e)} en {__file__} line {inspect.currentframe().f_lineno}")
+                raise
+        capt = time.time()
+        log(f'Tiempo de captura: {capt - ini}')
         obj_descarga = DescargarIMGS(imgdata, element_id, folio, dev)
         # descarga jpg
         obj_descarga.descarga_jpg()
-        if not dng == False:
+        descjpg = time.time()
+        log(f'Tiempo de descarga: {descjpg - capt}')
+        if dng_captura == True:
             # descarga dng
             obj_descarga.descarga_dng()
+            log(f'Tiempo de descarga dng: {time.time() - descjpg}')
 
+        log(f'Tiempo total proceso descarga {folio} / id: {element_id}: {time.time() - ini}')
 
-    def captura(self, element_id, left_folio, right_folio):
+    def captura(self, element_id, left_folio, right_folio, dng_captura):
         '''
         Realiza la captura en ambas cámaras casi simultáneamente.
         element_id string con el id del elemento
@@ -195,9 +221,9 @@ class Cam:
 
         if len(self.devs) == 1:
             if self.devs[0] is None:
-                self._shoot(right_camera, element_id, right_folio)
+                self._shoot(right_camera, element_id, right_folio, dng_captura=dng_captura)
             else:
-                self._shoot(left_camera, element_id, left_folio)
+                self._shoot(left_camera, element_id, left_folio, dng_captura=dng_captura)
         elif len(self.devs) == 2:
             c1 = mp.Process(target=self._shoot, args=(
                 left_camera, element_id, left_folio))
@@ -208,11 +234,18 @@ class Cam:
         elif len(self.devs) < 1:
             return False
 
+
+    def pause_devs(self):
+        [dev.switch_mode('play') for dev in self.devs if dev.mode == 'record']
+        [dev.kill_scripts() for dev in self.devs]
+
+
     def close_dev(self):
         '''
         Desconecta los devs
         '''
         [dev.switch_mode('play') for dev in self.devs if dev.mode == 'record']
+        [dev.kill_scripts() for dev in self.devs]
 
         for cam in self.camaras:
             info = cam

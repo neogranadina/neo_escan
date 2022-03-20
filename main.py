@@ -834,11 +834,38 @@ class MainWindow(QMainWindow):
         try:
             numbers = [li.replace('.jpg', '').replace('.dng', '') for li in last_img_group]
             numbers = list(dict.fromkeys(numbers))
-            last_img_left = [int(i) for i in numbers if int(i) % 2 != 0][0]
-            last_img_right = [int(i) for i in numbers if int(i) % 2 == 0][0]
-            last_img_left = [last_img_left + 2 if last_img_left is not 0 else 1][0]
+            # esto evita que se presenten errores si se desconecta una cámara y se sigue capturando
+            # con una de ellas. 
+            # TODO: Con una sola cámara ¿cómo evitar que se creen ids para pares o impares?
+            numbers = numbers[:2]
+            last_img_left = [int(i) for i in numbers if int(i) % 2 != 0]
+            last_img_right = [int(i) for i in numbers if int(i) % 2 == 0]
+            # En caso de haberse tomado repetidas fotografías con una sola cámara, este método
+            # retoma la serie par e impar.
+            # TODO: corrección hecha con premura por deadline. Requiere una solución más elegante.
+            if len(last_img_left) == 0:
+                try:
+                    last_img_left = last_img_right - 1
+                except TypeError:
+                    last_img_left = last_img_right[0] - 1
+            elif len(last_img_right) == 0:
+                try:
+                    last_img_right = last_img_left -1
+                except TypeError:
+                    last_img_right = last_img_left[0] - 1
+            else:
+                # cachar algún error desconocido
+                log(f'ERROR: No se pudo obtener el último número de imagen para {element_id}')
+                pass
+            try:
+                last_img_left = [last_img_left[0] + 2 if last_img_left is not 0 else 1][0]
+            except TypeError:
+                last_img_left = [last_img_left + 2 if last_img_left is not 0 else 1][0]
             last_img_left = f'{last_img_left:04d}'
-            last_img_right = last_img_right + 2
+            try:
+                last_img_right = last_img_right[0] + 2
+            except TypeError:
+                last_img_right = last_img_right +2
             last_img_right = f'{last_img_right:04d}'
         except AttributeError:
             last_img_left = '0001'
@@ -852,13 +879,27 @@ class MainWindow(QMainWindow):
             widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_right}.jpg')
 
         try:
-            Cams.captura(element_id, last_img_left, last_img_right)
+            # verify if checkboox is true
+            if widgets.dngCheck.isChecked():
+                dng_status = True
+            else:
+                dng_status = False
+            Cams.captura(element_id, last_img_left, last_img_right, dng_status)
         except TypeError:
             QMessageBox().warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
 
-        #while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
-        time.sleep(2)
+
+        # Este loop permite
+        if Cams.len_devs() != 1:
+            tolerancia = 0
+            while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
+                time.sleep(2)
+                tolerancia += 1
+                if tolerancia > 5:
+                    break
+        else:
+            time.sleep(5)
 
         widgets.statusLabel.setText(
             f"Capturadas {last_img_left} y {last_img_right}")
@@ -926,6 +967,7 @@ class MainWindow(QMainWindow):
             widgets.cantidadimgsLabel.setText('')
             # back to home
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+            Cams.pause_devs()
             self.display_elements()
 
     def gentle_close(self):

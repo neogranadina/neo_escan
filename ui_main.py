@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(867, 480)
+        MainWindow.resize(800, 480)
         MainWindow.setMinimumSize(QSize(800, 480))
         font = QFont()
         font.setStyleStrategy(QFont.NoAntialias)
@@ -1602,6 +1602,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_18.addLayout(self.gridLayout_5)
 
+        self.dngCheck = QCheckBox(self.controlPanel)
+        self.dngCheck.setObjectName(u"dngCheck")
+        self.dngCheck.setFont(font6)
+        self.dngCheck.setCursor(QCursor(Qt.PointingHandCursor))
+        self.dngCheck.setTabletTracking(True)
+        self.dngCheck.setIconSize(QSize(20, 20))
+
+        self.verticalLayout_18.addWidget(self.dngCheck)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_18.addItem(self.verticalSpacer)
@@ -1973,6 +1982,10 @@ class Ui_MainWindow(object):
         self.openFolderButton.setText("")
         self.titulelementoTituloLabel_6.setText(QCoreApplication.translate("MainWindow", u"N\u00famero de imgs", None))
         self.cantidadimgsLabel.setText("")
+#if QT_CONFIG(tooltip)
+        self.dngCheck.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Esta opci\u00f3n incrementa el tiempo de captura</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.dngCheck.setText(QCoreApplication.translate("MainWindow", u"Guardar en DNG", None))
         self.imagenizqLabel.setText("")
         self.imagederLabel.setText("")
         self.statusLabel.setText(QCoreApplication.translate("MainWindow", u"Clic en capturar para iniciar", None))
