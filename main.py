@@ -10,6 +10,7 @@
 
 import sys
 import os
+import glob
 from pathlib import Path
 import json
 import shutil
@@ -81,8 +82,8 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         # crea las cámaras
-        # global cams
-        self.Cams = Cam()
+        global Cams
+        Cams = Cam()
         # Conectar a la base de datos
         try:
             connectToDatabase()
@@ -161,6 +162,7 @@ class MainWindow(QMainWindow):
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
             widgets.botones_metadata.setCurrentWidget(widgets.enviar)
         elif btnName == "escanerButton":
+            
             self.set_scanner_page()
             widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
 
@@ -744,23 +746,23 @@ class MainWindow(QMainWindow):
 
         try:
             # avoid error if no cameras are connected
-            cam_response = self.Cams.cam()
+            cam_response = Cams.cam()
             intentos = 0
-            while cam_response is None:
+            while cam_response is False:
                 respuesta = QMessageBox.question(self, 'Error', 'No es posible iniciar \
                  porque no se encontró ninguna cámara conectada.\n \
                      Por favor, conecte al menos una cámara y vuelva a intentarlo.',
                                                  QMessageBox.Ok | QMessageBox.Discard)
                 if respuesta == QMessageBox.Ok:
                     time.sleep(2)
-                    cam_response = self.Cams.cam()
+                    cam_response = Cams.cam()
                     intentos += 1
                     if intentos == 3:
                         QMessageBox.critical(
                             self, 'Error', 'No fue posible iniciar la cámara.')
                         log(f'ERROR: No fue posible iniciar la cámara después de tres intentos. \n \
                             cam_response = {cam_response}')
-                        return None
+                        return False
                 else:
                     cam_response = True
                     # back to home
@@ -783,7 +785,7 @@ class MainWindow(QMainWindow):
                                                    "Asegúrese de que la cámara esté conectada y vuelva a intentarlo.",
                                                    QMessageBox.Ok | QMessageBox.Cancel)
                 if respuesta == QMessageBox.Ok:
-                    cam_response = self.Cams.cam()
+                    cam_response = Cams.cam()
                     return "dual_camera_mode"
                 else:
                     # back to home
@@ -828,28 +830,44 @@ class MainWindow(QMainWindow):
         element_id = widgets.elementoIDLabel.text()
 
         # get last image number pair
-        last_img_pair = getLastImgs(element_id)
-        last_img_left = f'{last_img_pair[0]:04d}'
-        last_img_right = f'{last_img_pair[1]:04d}'
+        last_img_group = getLastImgs(element_id)
+        try:
+            numbers = [li.replace('.jpg', '').replace('.dng', '') for li in last_img_group]
+            numbers = list(dict.fromkeys(numbers))
+            last_img_left = [int(i) for i in numbers if int(i) % 2 != 0][0]
+            last_img_right = [int(i) for i in numbers if int(i) % 2 == 0][0]
+            last_img_left = [last_img_left + 2 if last_img_left is not 0 else 1][0]
+            last_img_left = f'{last_img_left:04d}'
+            last_img_right = last_img_right + 2
+            last_img_right = f'{last_img_right:04d}'
+        except AttributeError:
+            last_img_left = '0001'
+            last_img_right = '0002'
 
         widgets.statusLabel.setText("capturando imágenes...")
 
         left_img_path = Path(
-            widgets.directorio_elementos.text(), 'JPG', f'{last_img_left}.jpg')
+            widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_left}.jpg')
         right_img_path = Path(
-            widgets.directorio_elementos.text(), 'JPG', f'{last_img_right}.jpg')
+            widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_right}.jpg')
 
         try:
-            self.Cams.captura(element_id, last_img_left, last_img_right)
+            Cams.captura(element_id, last_img_left, last_img_right)
         except TypeError:
             QMessageBox().warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
 
-        while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
-            time.sleep(0.1)
+        #while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
+        time.sleep(2)
 
         widgets.statusLabel.setText(
             f"Capturadas {last_img_left} y {last_img_right}")
+        log(f'INFO: Imágenes {last_img_left} y {last_img_right} capturadas')
+
+        # for some reason QPixmap is not working with PosixPath 
+        # raise TypeError. As a temporary solution transform PosixPath to str
+        left_img_path = left_img_path.absolute().as_posix()
+        right_img_path = right_img_path.absolute().as_posix()
 
         widgets.imagenizqLabel.setPixmap(
             QPixmap(left_img_path))
@@ -861,11 +879,6 @@ class MainWindow(QMainWindow):
             widgets.validar)
 
     def validateCaptura(self):
-        widgets.statusLabel.setText(
-            f"últimos folios capturados {widgets.folioizqLineEdit.text()} y {widgets.folioderLineEdit.text()}")
-        # erase the folio labels
-        widgets.folioizqLineEdit.setText('')
-        widgets.folioderLineEdit.setText('')
         # erase the images
         widgets.imagenizqLabel.setPixmap(QPixmap())
         widgets.imagederLabel.setPixmap(QPixmap())
@@ -876,15 +889,20 @@ class MainWindow(QMainWindow):
         widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
 
     def resetCaptura(self):
-        # delete images from directory
+        # delete most recent images from directory
         folder_path = widgets.directorio_elementos.text()
-        leftimage = folder_path + '/' + widgets.folioizqLineEdit.text() + '.png'
-        rightimage = folder_path + '/' + widgets.folioderLineEdit.text() + '.png'
-        try:
-            os.remove(leftimage)
-            os.remove(rightimage)
-        except:
-            pass
+        
+        tipos = ['JPG', 'DNG']
+        for t in tipos:
+            last_imagenes = glob.glob(f'{folder_path}/{t}/*.{t.lower()}')
+            last_imagenes.sort(key=os.path.getctime, reverse=True)
+            last_imagenes = last_imagenes[:2]
+            for f in last_imagenes:
+                try:
+                    os.remove(f)
+                except OSError as e:
+                    log(f'ERROR: Al eliminar {f} se encontró un OSError {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+                    raise
 
         # erase image labels
         widgets.imagenizqLabel.setPixmap(QPixmap())
@@ -906,8 +924,6 @@ class MainWindow(QMainWindow):
             widgets.elementoTituloLabel.setText('')
             widgets.directorio_elementos.setText('')
             widgets.cantidadimgsLabel.setText('')
-            widgets.folioizqLineEdit.setText('')
-            widgets.folioderLineEdit.setText('')
             # back to home
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()
@@ -916,7 +932,7 @@ class MainWindow(QMainWindow):
         '''
         close cams session, close db connection and close application
         '''
-        self.Cams.close_dev()
+        Cams.close_dev()
         kill_connection()
         window.close()
 

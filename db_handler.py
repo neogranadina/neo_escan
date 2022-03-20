@@ -319,14 +319,11 @@ def getLastImgs(element_id):
     data = []
     while query.next():
         data.append(query.value(0))
+    if len(data) == 0:
+        return 0, 0
+    else:
+        return data
     
-    numbers = [li.replace('.jpg', '').replace('.dng', '') for li in data]
-    numbers = list(dict.fromkeys(numbers))
-    impar = [int(i) for i in numbers if int(i) % 2 != 0]
-    par = [int(i) for i in numbers if int(i) % 2 == 0]
-    return impar[0], par[0]
-
-
 
 def kill_connection():
     '''

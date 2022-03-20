@@ -45,12 +45,14 @@ class Cam:
         self.camaras = chdkptp.list_devices()
         self.devs = self.devs()
 
-    def reini_dev(self, dev):
+    def test(self):
         '''
-        reinicia la conexión cuando se suspende una cámara
+        función para probar la conexión de la cámara
         '''
-        pass
-
+        try:
+            len(self.devs)
+        except TypeError:
+            return False
 
     def cam_order(self):
         '''
@@ -149,7 +151,9 @@ class Cam:
                     self.cam_init(self.devs[0])
             elif len(self.devs) == 0:
                 log(f"WARNING: No hay dispositivos conectados. En {__file__} line {inspect.currentframe().f_lineno}")
-                return None
+                return False
+        except TypeError as e:
+            log(f"ERROR: {str(e)}")
         except Exception as e:
             # write error in log file
             log(f"ERROR: {str(e)}")
