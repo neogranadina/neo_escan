@@ -852,7 +852,12 @@ class MainWindow(QMainWindow):
             widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_right}.jpg')
 
         try:
-            Cams.captura(element_id, last_img_left, last_img_right)
+            # verify if checkboox is true
+            if widgets.dngCheck.isChecked():
+                dng_status = True
+            else:
+                dng_status = False
+            Cams.captura(element_id, last_img_left, last_img_right, dng_status)
         except TypeError:
             QMessageBox().warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)

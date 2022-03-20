@@ -159,7 +159,7 @@ class Cam:
             log(f"ERROR: {str(e)}")
             raise
 
-    def _shoot(self, dev, element_id, folio, dng=True):
+    def _shoot(self, dev, element_id, folio, dng_captura=False):
         '''
         dev = el dispositivo conectado y en modo rec() [usar camcontrol.Cam().cam()]
         dng = True. En modo False no guarda imágenes dng en la memoria de la cámara. 
@@ -167,7 +167,7 @@ class Cam:
         '''
 
         # el binario jpg se guarda en imgdata
-        imgdata = dev.shoot(wait=True, dng=dng, stream=False,
+        imgdata = dev.shoot(wait=True, dng=True, stream=False,
                             download_after=True, remove_after=True,
                             shutter_speed=chdkptp.util.shutter_to_tv96(
                                 float(Fraction(u"1/25"))),
@@ -176,12 +176,12 @@ class Cam:
         obj_descarga = DescargarIMGS(imgdata, element_id, folio, dev)
         # descarga jpg
         obj_descarga.descarga_jpg()
-        if not dng == False:
+        if not dng_captura == False:
             # descarga dng
             obj_descarga.descarga_dng()
 
 
-    def captura(self, element_id, left_folio, right_folio):
+    def captura(self, element_id, left_folio, right_folio, dng_captura=False):
         '''
         Realiza la captura en ambas cámaras casi simultáneamente.
         element_id string con el id del elemento
@@ -195,9 +195,9 @@ class Cam:
 
         if len(self.devs) == 1:
             if self.devs[0] is None:
-                self._shoot(right_camera, element_id, right_folio)
+                self._shoot(right_camera, element_id, right_folio, dng_captura)
             else:
-                self._shoot(left_camera, element_id, left_folio)
+                self._shoot(left_camera, element_id, left_folio, dng_captura)
         elif len(self.devs) == 2:
             c1 = mp.Process(target=self._shoot, args=(
                 left_camera, element_id, left_folio))
