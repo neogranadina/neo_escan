@@ -162,9 +162,7 @@ class MainWindow(QMainWindow):
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
             widgets.botones_metadata.setCurrentWidget(widgets.enviar)
         elif btnName == "escanerButton":
-            if Cams.test() == False:
-                global Cams
-                Cams = Cam()
+            
             self.set_scanner_page()
             widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
 
