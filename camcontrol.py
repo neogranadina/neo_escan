@@ -45,12 +45,18 @@ class Cam:
         self.camaras = chdkptp.list_devices()
         self.devs = self.devs()
 
+    def len_devs(self):
+        '''
+        regresa la cantidad de dispositivos conectados
+        '''
+        return len(self.devs)
+
     def test(self):
         '''
         función para probar la conexión de la cámara
         '''
         try:
-            len(self.devs)
+            self.len_devs()
         except TypeError:
             return False
 
