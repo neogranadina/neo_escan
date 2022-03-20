@@ -82,8 +82,8 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         # crea las cámaras
-        # global cams
-        self.Cams = Cam()
+        global Cams
+        Cams = Cam()
         # Conectar a la base de datos
         try:
             connectToDatabase()
@@ -162,6 +162,9 @@ class MainWindow(QMainWindow):
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
             widgets.botones_metadata.setCurrentWidget(widgets.enviar)
         elif btnName == "escanerButton":
+            if Cams.test() == False:
+                global Cams
+                Cams = Cam()
             self.set_scanner_page()
             widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
 
@@ -745,7 +748,7 @@ class MainWindow(QMainWindow):
 
         try:
             # avoid error if no cameras are connected
-            cam_response = self.Cams.cam()
+            cam_response = Cams.cam()
             intentos = 0
             while cam_response is False:
                 respuesta = QMessageBox.question(self, 'Error', 'No es posible iniciar \
@@ -754,7 +757,7 @@ class MainWindow(QMainWindow):
                                                  QMessageBox.Ok | QMessageBox.Discard)
                 if respuesta == QMessageBox.Ok:
                     time.sleep(2)
-                    cam_response = self.Cams.cam()
+                    cam_response = Cams.cam()
                     intentos += 1
                     if intentos == 3:
                         QMessageBox.critical(
@@ -784,7 +787,7 @@ class MainWindow(QMainWindow):
                                                    "Asegúrese de que la cámara esté conectada y vuelva a intentarlo.",
                                                    QMessageBox.Ok | QMessageBox.Cancel)
                 if respuesta == QMessageBox.Ok:
-                    cam_response = self.Cams.cam()
+                    cam_response = Cams.cam()
                     return "dual_camera_mode"
                 else:
                     # back to home
@@ -846,18 +849,18 @@ class MainWindow(QMainWindow):
         widgets.statusLabel.setText("capturando imágenes...")
 
         left_img_path = Path(
-            widgets.directorio_elementos.text(), 'JPG', f'{last_img_left}.jpg')
+            widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_left}.jpg')
         right_img_path = Path(
-            widgets.directorio_elementos.text(), 'JPG', f'{last_img_right}.jpg')
+            widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_right}.jpg')
 
         try:
-            self.Cams.captura(element_id, last_img_left, last_img_right)
+            Cams.captura(element_id, last_img_left, last_img_right)
         except TypeError:
             QMessageBox().warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
 
-        while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
-            time.sleep(0.1)
+        #while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
+        time.sleep(2)
 
         widgets.statusLabel.setText(
             f"Capturadas {last_img_left} y {last_img_right}")
@@ -931,7 +934,7 @@ class MainWindow(QMainWindow):
         '''
         close cams session, close db connection and close application
         '''
-        self.Cams.close_dev()
+        Cams.close_dev()
         kill_connection()
         window.close()
 
