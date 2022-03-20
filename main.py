@@ -857,7 +857,10 @@ class MainWindow(QMainWindow):
                 # cachar algún error desconocido
                 log(f'ERROR: No se pudo obtener el último número de imagen para {element_id}')
                 pass
-            last_img_left = [last_img_left[0] + 2 if last_img_left is not 0 else 1][0]
+            try:
+                last_img_left = [last_img_left[0] + 2 if last_img_left is not 0 else 1][0]
+            except TypeError:
+                last_img_left = [last_img_left + 2 if last_img_left is not 0 else 1][0]
             last_img_left = f'{last_img_left:04d}'
             try:
                 last_img_right = last_img_right[0] + 2
@@ -890,9 +893,11 @@ class MainWindow(QMainWindow):
         # Este loop permite
         if Cams.len_devs() != 1:
             tolerancia = 0
-            while not os.path.exists(left_img_path) or not os.path.exists(right_img_path) or tolerancia < 5:
+            while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
                 time.sleep(2)
                 tolerancia += 1
+                if tolerancia > 5:
+                    break
         else:
             time.sleep(5)
 

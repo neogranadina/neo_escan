@@ -181,9 +181,9 @@ class Cam:
                                 zoom_level=3)
         except TypeError as e:
             log(f"ERROR: {str(e)} en {__file__} line {inspect.currentframe().f_lineno}")
-            reintento = dev.reconnect()
-            log(f'Reintento: {reintento}')
-            print(reintento)
+            dev.reconnect()
+            log(f'Reintento de conexión de: {dev}')
+            print(dev)
             try:
                 imgdata = dev.shoot(wait=True, dng=dng_captura, stream=False,
                                 download_after=True, remove_after=True,
@@ -221,9 +221,9 @@ class Cam:
 
         if len(self.devs) == 1:
             if self.devs[0] is None:
-                self._shoot(right_camera, element_id, right_folio, dng_captura)
+                self._shoot(right_camera, element_id, right_folio, dng_captura=dng_captura)
             else:
-                self._shoot(left_camera, element_id, left_folio, dng_captura)
+                self._shoot(left_camera, element_id, left_folio, dng_captura=dng_captura)
         elif len(self.devs) == 2:
             c1 = mp.Process(target=self._shoot, args=(
                 left_camera, element_id, left_folio))
