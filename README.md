@@ -34,10 +34,18 @@ chmod +x install_escan.sh
 
 > :warning: Se reiniciará el sistema después de ejecutar el script.
 
-Lanzar la aplicación con
+## Uso
+
+> :warning: Antes de iniciar la aplicación, encienda ambas cámaras.
+
+En el escritorio de Raspberry pi OS se crea el archivo `neo_escan.sh` que puede ser ejecutado directamente
+o en una terminal.
+
+También puede iniciarse la aplicación desde una terminal, desde el directorio de la aplicación:
 
 ```shell
-python main.py
+cd ~/Public/neo_escan
+python3 main.py
 ```
 
 ## Contribuir al proyecto
@@ -56,8 +64,6 @@ pyside2-uic main.ui > ui_main.py
 
 > :warning: En Windows es posible que lance un error "ValueError: source code string cannot contain null bytes". Puede consultar una posible solución al error en <https://es.stackoverflow.com/a/322753>
 
-Imágenes e íconos se vinculan desde el objeto `resources_rc.py`. Para proponer cambios añadirlos al archivo `resources.qrc` y realizar la conversión a binarios con `pyside2-rcc resources.qrc -o resources_rc.py`.
-
 ### Proponer cambios a la funcionalidad de la aplicación
 
 Mejoras al comportamiento de la aplicación deberán proponerse para el archivo `main.py`. Propuestas para mejorar la interconectividad con la base de datos, pueden hacerse al archivo `db.py`.
@@ -75,6 +81,10 @@ Algunos problemas identificados pueden consultarse en la [Wiki](https://github.c
 ## Control de cambios
 
 Desde la versión 0.1.429 del proyecto se ha documentado el control de cambios. Está disponible en [changelog.md](changelog.md)
+
+## Logs
+
+El archivo de logs se encuentra en `logs/neoscan_log.log` del directorio de la aplicación.
 
 ## Atribución
 
