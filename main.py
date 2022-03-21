@@ -162,12 +162,18 @@ class MainWindow(QMainWindow):
         # navega por cada una de las páginas
         if btnName == "inicioButton":
             # assert cams to play mode
-            Cams.pause_devs()
+            try:
+                Cams.pause_devs()
+            except Exception as e:
+                log(f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()
         elif btnName == "backtoInicioButton":
             # assert cams to play mode
-            Cams.pause_devs()
+            try:
+                Cams.pause_devs()
+            except Exception as e:
+                log(f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Warning)
             msgBox.setText("¿Está seguro que desea salir del formulario?")
@@ -181,7 +187,10 @@ class MainWindow(QMainWindow):
                 pass
         elif btnName == "coleccionesButton" or btnName == "nuevoProyectoButton":
             # assert cams to play mode
-            Cams.pause_devs()
+            try:
+                Cams.pause_devs()
+            except Exception as e:
+                log(f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
             widgets.botones_metadata.setCurrentWidget(widgets.enviar)
@@ -278,7 +287,7 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon1)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(lambda: self.set_scanner_page(element_id))
+            button.clicked[bool].connect(lambda _, element_id=element_id: self.set_scanner_page(element_id))
             widgets.elementslayout.addWidget(button, id, 2)
 
             button = QPushButton()
@@ -291,8 +300,7 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon2)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(
-                lambda: self.export_element(element_id, image_path))
+            button.clicked[bool].connect(lambda _, element_id=element_id, image_path=image_path: self.export_element(element_id))
             widgets.elementslayout.addWidget(button, id, 3)
 
             button = QPushButton()
@@ -305,8 +313,7 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon3)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(
-                lambda: self.delete_element(element_id, image_path))
+            button.clicked[bool].connect(lambda _, element_id=element_id, image_path=image_path: self.delete_element(element_id, image_path))
             widgets.elementslayout.addWidget(button, id, 4)
 
         widgets.verticalLayout_20.addLayout(widgets.elementslayout)
@@ -995,8 +1002,11 @@ class MainWindow(QMainWindow):
             widgets.cantidadimgsLabel.setText('')
             # back to home
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
-            Cams.pause_devs()
             self.display_elements()
+            try:
+                Cams.pause_devs()
+            except Exception as e:
+                log(f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
 
     def gentle_close(self):
         '''
