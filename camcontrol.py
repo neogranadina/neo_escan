@@ -60,6 +60,7 @@ class Cam:
         except TypeError:
             return False
 
+
     def cam_order(self):
         '''
         Convierte las dispositivos en ChdkDevices. Regresa los objetos como lista.
@@ -98,8 +99,11 @@ class Cam:
         elif cam_der == cams[0].serial_num:
             return {'cam_der': cams[0]}
 
-    def devs(self):
+    def devs(self, reconnect=False):
         
+        if reconnect:
+            self.camaras = chdkptp.list_devices()
+
         if len(self.camaras) == 0:
             log("No hay dispositivos conectados")
             return None
@@ -181,9 +185,9 @@ class Cam:
                                 zoom_level=3)
         except TypeError as e:
             log(f"ERROR: {str(e)} en {__file__} line {inspect.currentframe().f_lineno}")
-            dev.reconnect()
-            log(f'Reintento de conexión de: {dev}')
-            print(dev)
+            log(f'Reintento de conexión de: {dev} (folio {folio})')
+            self.devs(reconnect=True)
+            log(f"Reintento de captura de img {folio}")
             try:
                 imgdata = dev.shoot(wait=True, dng=dng_captura, stream=False,
                                 download_after=True, remove_after=True,

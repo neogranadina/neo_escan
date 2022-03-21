@@ -32,3 +32,7 @@ el uso de la aplicación sin las cámaras conectadas.
 ### Removed
 
 - Requisito de captura manual de folios en la pantalla de escáner.
+
+### Deprecated
+
+- Botón validación.
