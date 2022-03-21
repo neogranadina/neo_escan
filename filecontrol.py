@@ -11,12 +11,13 @@
 #
 # ///////////////////////////////////////////////////////////////
 
+import shutil
 import sys
 import chdkptp.util as util
 from pathlib import Path
 import os
 import datetime
-from db_handler import wrap_imageWithElement
+from db_handler import getLastElementID, wrap_imageWithElement
 from PIL import Image, ExifTags
 import logging
 import configparser
@@ -58,6 +59,23 @@ class DescargarIMGS:
         self.imgdata = imgdata
         self.nombre_proyecto = nombre_proyecto
         self.folio = folio
+
+
+    def check_dir(self):
+        '''
+        En caso de que la base de datos esté vacía pero existan capturas en el directorio
+        se hace un backup de las capturas y se prepara la carpeta para reiniciar las capturas
+        '''
+        r = getLastElementID()
+        if r is '':
+            dir = os.listdir(IMGDIR)
+            if len(dir) != 0:
+                for files in dir:
+                    if files != 'old_backup':
+                        shutil.move(os.path.join(IMGDIR, files), os.path.join(IMGDIR, 'old_backup', files))
+        else:
+            print(r)
+        
 
     def img_dir(self, tipo_img):
         '''

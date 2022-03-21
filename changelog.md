@@ -10,6 +10,7 @@ el uso de la aplicación sin las cámaras conectadas.
 
 ### Added
 
+- En caso de que se reestablezca la base de datos, se hace un backup de las imágenes en el directorio IMGDIR/old_backup
 - Checkbox con opción para guardar en DNG en pantalla de escáner
 - Barra de espacio realiza captura y valida la imagen
 - Archivos de imagen se guardan en el estandar BagIt <https://datatracker.ietf.org/doc/html/rfc8493>

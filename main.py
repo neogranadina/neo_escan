@@ -22,7 +22,7 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBo
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, Qt
 
 from ui_main import Ui_MainWindow
-from db_handler import connectToDatabase, createElement, getLastId, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection, getLastImgs
+from db_handler import connectToDatabase, createElement, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection, getLastImgs
 from camcontrol import Cam
 import configparser
 import ctypes
@@ -197,7 +197,7 @@ class MainWindow(QMainWindow):
             element_name = elemento[1]
             element_description = elemento[2]
 
-            image_path = Path(IMGDIR + f'/{element_id}/' + 'JPG')
+            image_path = Path(IMGDIR, f'{element_id}','data', 'JPG')
             image_not_found = "imgs/No-Photo-Available.png"
 
             # Display image in the grid
@@ -674,7 +674,7 @@ class MainWindow(QMainWindow):
                 createElement(tipo_de_documento, 0, 1)
 
                 # get the id of last element created
-                id_element = getLastId()
+                id_element = getLastElementID()
 
                 # get the info for the form fields
                 info = self.get_fields_info(tipo_de_documento)

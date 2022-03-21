@@ -72,6 +72,10 @@ La conexión con las cámaras se realiza mediante la librería `chdkptp.py`. La 
 
 Algunos problemas identificados pueden consultarse en la [Wiki](https://github.com/neogranadina/neo_escan/wiki/Error-track) del proyecto.
 
+## Control de cambios
+
+Desde la versión 0.1.429 del proyecto se ha documentado el control de cambios. Está disponible en [changelog.md](changelog.md)
+
 ## Atribución
 
 Icons made by [Freepik](https://www.freepik.com) and [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect) from [www.flaticon.com](https://www.flaticon.com/)
