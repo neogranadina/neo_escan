@@ -90,8 +90,11 @@ class MainWindow(QMainWindow):
         except Exception as e:
             print("Error en la conexión con la base de datos")
             log(
-                f"ERROR Falló conexión con la base de datos. Error {e} en {__file__} linea {e.__traceback__.tb_lineno}")
+                f"ERROR FATAL: Falló conexión con la base de datos. Error {e} en {__file__} linea {e.__traceback__.tb_lineno}")
             raise
+
+        # Comprobación inicial
+        self.check_dir()
 
         # set version
         widgets.versionLabel.setText(f'v{version}')
@@ -132,6 +135,21 @@ class MainWindow(QMainWindow):
         # cerrar escaner
         widgets.finalizarButton.clicked.connect(self.finalizarCaptura)
 
+    # comprobación inicial
+    def check_dir(self):
+        '''
+        En caso de que la base de datos esté vacía pero existan capturas en el directorio
+        se hace un backup de las capturas y se prepara la carpeta para reiniciar las capturas
+        '''
+        r = getLastElementID()
+        if r is '':
+            dir = os.listdir(IMGDIR)
+            if len(dir) != 0:
+                for files in dir:
+                    if files != 'old_backup':
+                        shutil.move(os.path.join(IMGDIR, files), os.path.join(IMGDIR, 'old_backup', files))
+                log(f"Se hizo un backup de las capturas")
+
     # navigation functions
 
     # Navegar por las páginas desde el menú principal
@@ -143,9 +161,13 @@ class MainWindow(QMainWindow):
 
         # navega por cada una de las páginas
         if btnName == "inicioButton":
+            # assert cams to play mode
+            Cams.pause_devs()
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()
         elif btnName == "backtoInicioButton":
+            # assert cams to play mode
+            Cams.pause_devs()
             msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Warning)
             msgBox.setText("¿Está seguro que desea salir del formulario?")
@@ -158,11 +180,12 @@ class MainWindow(QMainWindow):
             else:
                 pass
         elif btnName == "coleccionesButton" or btnName == "nuevoProyectoButton":
+            # assert cams to play mode
+            Cams.pause_devs()
             widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
             widgets.botones_metadata.setCurrentWidget(widgets.enviar)
         elif btnName == "escanerButton":
-            
             self.set_scanner_page()
             widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
 
@@ -807,7 +830,7 @@ class MainWindow(QMainWindow):
         widgets.elementoTituloLabel.setText(datos_elemento[1])
 
         # create directory to save images
-        folder_path = Path(IMGDIR, str(id_element))
+        folder_path = os.path.join(IMGDIR, str(id_element))
 
         try:
             os.makedirs(folder_path, exist_ok=True)
@@ -848,14 +871,18 @@ class MainWindow(QMainWindow):
                     last_img_left = last_img_right - 1
                 except TypeError:
                     last_img_left = last_img_right[0] - 1
+                log(f'WARNING: Se ha restablecido la secuencia en la cámara izquierda. \
+                    last_img_left = {last_img_left}')
             elif len(last_img_right) == 0:
                 try:
                     last_img_right = last_img_left -1
                 except TypeError:
                     last_img_right = last_img_left[0] - 1
+                log(f'WARNING: Se ha restablecido la secuencia en la cámara derecha. \
+                    last_img_right = {last_img_right}')
             else:
                 # cachar algún error desconocido
-                log(f'ERROR: No se pudo obtener el último número de imagen para {element_id}')
+                log(f'INFO: secuencia de imágenes sin issues. last_img_left = {last_img_left} y last_img_right = {last_img_right}')
                 pass
             try:
                 last_img_left = [last_img_left[0] + 2 if last_img_left is not 0 else 1][0]
@@ -877,8 +904,9 @@ class MainWindow(QMainWindow):
             widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_left}.jpg')
         right_img_path = Path(
             widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_right}.jpg')
-
+        
         try:
+            # TODO: ¡Hacer que esto funcione!
             # verify if checkboox is true
             if widgets.dngCheck.isChecked():
                 dng_status = True

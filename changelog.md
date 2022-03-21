@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [0.1.429] - 2022-03-20
+## [0.1.430] - 2022-03-20
 
 Esta versión pretende darle estabilidad al escáner, manejar con mejor gentileza la conexión a las cámaras
 para evitar que se rompa y se pierda la conexión. Asimismo, reducir las advertencias que restringían
