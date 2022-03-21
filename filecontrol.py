@@ -11,12 +11,13 @@
 #
 # ///////////////////////////////////////////////////////////////
 
+import shutil
 import sys
 import chdkptp.util as util
 from pathlib import Path
 import os
 import datetime
-from db_handler import wrap_imageWithElement
+from db_handler import getLastElementID, wrap_imageWithElement
 from PIL import Image, ExifTags
 import logging
 import configparser
@@ -58,6 +59,7 @@ class DescargarIMGS:
         self.imgdata = imgdata
         self.nombre_proyecto = nombre_proyecto
         self.folio = folio
+        
 
     def img_dir(self, tipo_img):
         '''

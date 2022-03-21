@@ -72,17 +72,6 @@ def createElement(tipo_elemento, usuario, publico):
         return False
 
 
-def getLastId():
-    '''
-    Get last id from elements table
-    '''
-    query = QSqlQuery()
-    query.prepare("SELECT last_insert_rowid()")
-    query.exec_()
-    query.first()
-    return query.value(0)
-
-
 def metadata_id(key):
     '''
     Get metadata id from metadata table

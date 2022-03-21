@@ -196,6 +196,7 @@ class Cam:
         capt = time.time()
         log(f'Tiempo de captura: {capt - ini}')
         obj_descarga = DescargarIMGS(imgdata, element_id, folio, dev)
+
         # descarga jpg
         obj_descarga.descarga_jpg()
         descjpg = time.time()

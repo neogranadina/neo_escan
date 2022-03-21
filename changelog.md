@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [0.1.429] - 2022-03-20
+## [0.1.430] - 2022-03-20
 
 Esta versión pretende darle estabilidad al escáner, manejar con mejor gentileza la conexión a las cámaras
 para evitar que se rompa y se pierda la conexión. Asimismo, reducir las advertencias que restringían
@@ -10,6 +10,7 @@ el uso de la aplicación sin las cámaras conectadas.
 
 ### Added
 
+- En caso de que se reestablezca la base de datos, se hace un backup de las imágenes en el directorio IMGDIR/old_backup
 - Checkbox con opción para guardar en DNG en pantalla de escáner
 - Barra de espacio realiza captura y valida la imagen
 - Archivos de imagen se guardan en el estandar BagIt <https://datatracker.ietf.org/doc/html/rfc8493>
