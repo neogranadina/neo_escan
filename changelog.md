@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [0.1.500] - 2022-03-21
+
+Esta versión corrige un error mayor que hacía de los botones del inicio enviaran al id equivocado.
+
+### Fixed
+
+- Corregido el error de los botones de inicio enviando al id equivocado.
+
+
 ## [0.1.430] - 2022-03-20
 
 Esta versión pretende darle estabilidad al escáner, manejar con mejor gentileza la conexión a las cámaras
@@ -32,3 +41,7 @@ el uso de la aplicación sin las cámaras conectadas.
 ### Removed
 
 - Requisito de captura manual de folios en la pantalla de escáner.
+
+### Deprecated
+
+- Botón validación.
