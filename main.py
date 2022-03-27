@@ -123,6 +123,8 @@ class MainWindow(QMainWindow):
         widgets.enviarFormEditButton.clicked.connect(
             self.editarForm)
         widgets.browserDirButton.clicked.connect(self.getDirName)
+        widgets.zoom_dial.valueChanged.connect(lambda: self.zoom_dial())
+
 
         # abrir directorio
         widgets.openFolderButton.clicked.connect(self.openimagesDir)
@@ -691,11 +693,19 @@ class MainWindow(QMainWindow):
         else:
             return None
 
+    def zoom_dial(self):
+        value = widgets.zoom_dial.value()
+        widgets.zoom_value.setText(str(value))
+
     def enviarForm(self):
         '''
         envia el formulario a la base de datos
         '''
         tipo_de_documento = widgets.tipodocComboBox.currentIndex() + 1
+
+        zoom_value = widgets.zoom_dial.value()
+        # TODO: solución muy temporal para lograr el deadline.
+        config['camaras']['zoom_predeterminado'] = str(zoom_value)
 
         # validate required items
         if self.requiredFields(tipo_de_documento):
@@ -912,6 +922,12 @@ class MainWindow(QMainWindow):
         right_img_path = Path(
             widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_right}.jpg')
         
+
+        try:
+            zoom = int(config['camaras']['zoom_predeterminado'])
+        except:
+            zoom = 27
+
         try:
             # TODO: ¡Hacer que esto funcione!
             # verify if checkboox is true
@@ -919,7 +935,7 @@ class MainWindow(QMainWindow):
                 dng_status = True
             else:
                 dng_status = False
-            Cams.captura(element_id, last_img_left, last_img_right, dng_status)
+            Cams.captura(element_id, last_img_left, last_img_right, zoom, dng_status)
         except TypeError:
             QMessageBox().warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
