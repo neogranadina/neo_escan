@@ -169,7 +169,7 @@ class Cam:
             log(f"ERROR: {str(e)}")
             raise
 
-    def _shoot(self, dev, element_id, folio, dng_captura=False):
+    def _shoot(self, dev, element_id, folio, z, dng_captura=False):
         '''
         dev = el dispositivo conectado y en modo rec() [usar camcontrol.Cam().cam()]
         dng = True. En modo False no guarda imágenes dng en la memoria de la cámara. 
@@ -177,6 +177,7 @@ class Cam:
         '''
         # el binario jpg se guarda en imgdata
         ini = time.time()
+        dev.lua_execute(f"set_zoom({z}")
         try:
             imgdata = dev.shoot(wait=True, dng=dng_captura, stream=False,
                                 download_after=True, remove_after=True,
@@ -212,7 +213,7 @@ class Cam:
 
         log(f'Tiempo total proceso descarga {folio} / id: {element_id}: {time.time() - ini}')
 
-    def captura(self, element_id, left_folio, right_folio, dng_captura):
+    def captura(self, element_id, left_folio, right_folio, zoom, dng_captura):
         '''
         Realiza la captura en ambas cámaras casi simultáneamente.
         element_id string con el id del elemento
@@ -226,9 +227,9 @@ class Cam:
 
         if len(self.devs) == 1:
             if self.devs[0] is None:
-                self._shoot(right_camera, element_id, right_folio, dng_captura=dng_captura)
+                self._shoot(right_camera, element_id, right_folio, zoom, dng_captura=dng_captura)
             else:
-                self._shoot(left_camera, element_id, left_folio, dng_captura=dng_captura)
+                self._shoot(left_camera, element_id, left_folio, zoom, dng_captura=dng_captura)
         elif len(self.devs) == 2:
             c1 = mp.Process(target=self._shoot, args=(
                 left_camera, element_id, left_folio))

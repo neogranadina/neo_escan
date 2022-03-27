@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>480</height>
+    <width>1000</width>
+    <height>562</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
+    <width>1000</width>
     <height>480</height>
    </size>
   </property>
@@ -665,7 +665,7 @@ background-color: rgba(255, 255, 255,.5);
              <string notr="true"/>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="inicioPage">
              <property name="styleSheet">
@@ -791,8 +791,8 @@ QLabel {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>65</width>
-                   <height>18</height>
+                   <width>877</width>
+                   <height>310</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -1088,9 +1088,21 @@ QPushButton#backtoInicioButton::hover {
                     <number>0</number>
                    </property>
                    <widget class="QWidget" name="formLegajo">
-                    <layout class="QVBoxLayout" name="verticalLayout_6">
+                    <layout class="QHBoxLayout" name="horizontalLayout_15">
                      <item>
                       <widget class="QScrollArea" name="scrollArea">
+                       <property name="minimumSize">
+                        <size>
+                         <width>650</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>650</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
                        <property name="styleSheet">
                         <string notr="true"/>
                        </property>
@@ -1101,7 +1113,7 @@ QPushButton#backtoInicioButton::hover {
                         <property name="geometry">
                          <rect>
                           <x>0</x>
-                          <y>0</y>
+                          <y>-226</y>
                           <width>633</width>
                           <height>428</height>
                          </rect>
@@ -1468,7 +1480,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>633</width>
+                          <width>842</width>
                           <height>410</height>
                          </rect>
                         </property>
@@ -3246,6 +3258,70 @@ QPushButton#backtoInicioButton::hover {
                       </widget>
                      </item>
                     </layout>
+                   </widget>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="widget_3" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <widget class="QDial" name="zoom_dial">
+                    <property name="geometry">
+                     <rect>
+                      <x>10</x>
+                      <y>10</y>
+                      <width>71</width>
+                      <height>81</height>
+                     </rect>
+                    </property>
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>50</number>
+                    </property>
+                    <property name="sliderPosition">
+                     <number>27</number>
+                    </property>
+                    <property name="wrapping">
+                     <bool>true</bool>
+                    </property>
+                    <property name="notchTarget">
+                     <double>10.000000000000000</double>
+                    </property>
+                    <property name="notchesVisible">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="zoomLabel">
+                    <property name="geometry">
+                     <rect>
+                      <x>100</x>
+                      <y>40</y>
+                      <width>81</width>
+                      <height>16</height>
+                     </rect>
+                    </property>
+                    <property name="text">
+                     <string>Nivel de zoom</string>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="zoom_value">
+                    <property name="geometry">
+                     <rect>
+                      <x>100</x>
+                      <y>60</y>
+                      <width>47</width>
+                      <height>13</height>
+                     </rect>
+                    </property>
+                    <property name="text">
+                     <string>27</string>
+                    </property>
                    </widget>
                   </widget>
                  </item>
