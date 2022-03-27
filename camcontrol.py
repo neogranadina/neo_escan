@@ -177,7 +177,8 @@ class Cam:
         '''
         # el binario jpg se guarda en imgdata
         ini = time.time()
-        dev.lua_execute(f"set_zoom({z}")
+        z = int(z)
+        dev.lua_execute(f"set_zoom({z})")
         try:
             imgdata = dev.shoot(wait=True, dng=dng_captura, stream=False,
                                 download_after=True, remove_after=True,
@@ -232,9 +233,9 @@ class Cam:
                 self._shoot(left_camera, element_id, left_folio, zoom, dng_captura=dng_captura)
         elif len(self.devs) == 2:
             c1 = mp.Process(target=self._shoot, args=(
-                left_camera, element_id, left_folio))
+                left_camera, element_id, left_folio, zoom))
             c2 = mp.Process(target=self._shoot, args=(
-                right_camera, element_id, right_folio))
+                right_camera, element_id, right_folio, zoom))
             c1.start()
             c2.start()
         elif len(self.devs) < 1:

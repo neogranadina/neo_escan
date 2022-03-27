@@ -705,7 +705,7 @@ class MainWindow(QMainWindow):
 
         zoom_value = widgets.zoom_dial.value()
         # TODO: solución muy temporal para lograr el deadline.
-        config['camaras']['zoom_predeterminado'] = zoom_value
+        config['camaras']['zoom_predeterminado'] = str(zoom_value)
 
         # validate required items
         if self.requiredFields(tipo_de_documento):
