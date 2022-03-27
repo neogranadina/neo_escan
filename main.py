@@ -696,6 +696,7 @@ class MainWindow(QMainWindow):
     def zoom_dial(self):
         value = widgets.zoom_dial.value()
         widgets.zoom_value.setText(str(value))
+        widgets.zoom_valuedit.setText(str(value))
 
     def enviarForm(self):
         '''
@@ -703,7 +704,8 @@ class MainWindow(QMainWindow):
         '''
         tipo_de_documento = widgets.tipodocComboBox.currentIndex() + 1
 
-        zoom_value = widgets.zoom_dial.value()
+        #zoom_value = widgets.zoom_dial.value()
+        zoom_value =  widgets.zoom_valuedit.text()
         # TODO: solución muy temporal para lograr el deadline.
         config['camaras']['zoom_predeterminado'] = str(zoom_value)
 
