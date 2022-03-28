@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+## [0.1.5011] - 2022-03-27
+
+Esta versión corrige el zoom de la cámara que no respondía en las versiones anteriores.
+
+### Added
+
+- Dial button y text box para la configuración del zoom en la pantalla de formularios.
+
+### Changed
+
+- El checkbox para selecionar si se quería guardar en dng se cambió a la pantalla de formularios (metadata)
+- Las fotografías no se borran al validar la fotografía.
+- Se cambió el botón "validar" por "continuar" en la pantalla de escáner.
+
 ## [0.1.500] - 2022-03-21
 
 Esta versión corrige un error mayor que hacía de los botones del inicio enviaran al id equivocado.
@@ -9,7 +23,6 @@ Esta versión corrige un error mayor que hacía de los botones del inicio enviar
 ### Fixed
 
 - Corregido el error de los botones de inicio enviando al id equivocado.
-
 
 ## [0.1.430] - 2022-03-20
 
@@ -41,7 +54,3 @@ el uso de la aplicación sin las cámaras conectadas.
 ### Removed
 
 - Requisito de captura manual de folios en la pantalla de escáner.
-
-### Deprecated
-
-- Botón validación.

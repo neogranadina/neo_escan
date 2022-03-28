@@ -695,7 +695,7 @@ class MainWindow(QMainWindow):
 
     def zoom_dial(self):
         value = widgets.zoom_dial.value()
-        widgets.zoom_value.setText(str(value))
+        widgets.zoom_valuedit.setText(str(value))
 
     def enviarForm(self):
         '''
@@ -703,7 +703,15 @@ class MainWindow(QMainWindow):
         '''
         tipo_de_documento = widgets.tipodocComboBox.currentIndex() + 1
 
-        zoom_value = widgets.zoom_dial.value()
+        #zoom_value = widgets.zoom_dial.value()
+        zoom_value =  widgets.zoom_valuedit.text()
+
+        # dng_checkbox value
+        if widgets.dng_checkbox.isChecked():
+            config['DEFAULT']['dng'] = 'True'
+        else:
+            config['DEFAULT']['dng'] = 'False'
+
         # TODO: solución muy temporal para lograr el deadline.
         config['camaras']['zoom_predeterminado'] = str(zoom_value)
 
@@ -930,11 +938,7 @@ class MainWindow(QMainWindow):
 
         try:
             # TODO: ¡Hacer que esto funcione!
-            # verify if checkboox is true
-            if widgets.dngCheck.isChecked():
-                dng_status = True
-            else:
-                dng_status = False
+            dng_status = config['DEFAULT']['dng']
             Cams.captura(element_id, last_img_left, last_img_right, zoom, dng_status)
         except TypeError:
             QMessageBox().warning(self, "Error",
@@ -952,10 +956,6 @@ class MainWindow(QMainWindow):
         else:
             time.sleep(5)
 
-        widgets.statusLabel.setText(
-            f"Capturadas {last_img_left} y {last_img_right}")
-        log(f'INFO: Imágenes {last_img_left} y {last_img_right} capturadas')
-
         # for some reason QPixmap is not working with PosixPath 
         # raise TypeError. As a temporary solution transform PosixPath to str
         left_img_path = left_img_path.absolute().as_posix()
@@ -966,17 +966,18 @@ class MainWindow(QMainWindow):
         widgets.imagederLabel.setPixmap(
             QPixmap(right_img_path))
 
+        widgets.statusLabel.setText(
+            f"Capturadas {last_img_left} y {last_img_right}")
+        log(f'INFO: Imágenes {last_img_left} y {last_img_right} capturadas')
+
         # display validation buttons
         widgets.controlesCamstackedWidget.setCurrentWidget(
             widgets.validar)
 
     def validateCaptura(self):
-        # erase the images
-        widgets.imagenizqLabel.setPixmap(QPixmap())
-        widgets.imagederLabel.setPixmap(QPixmap())
         # actualiza la cantidad de imagenes en la carpeta
         self.lenImagenesDir(Path(widgets.directorio_elementos.text(), 'JPG'))
-
+        widgets.statusLabel.setText("Iniciar nueva captura")
         # back to captura widget
         widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
 
