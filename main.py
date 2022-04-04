@@ -22,11 +22,12 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBo
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, Qt
 
 from ui_main import Ui_MainWindow
-from db_handler import connectToDatabase, createElement, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection, getLastImgs
+from db_handler import connectToDatabase, createElement, getElementIdByMetadata, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection, getLastImgs, getDocumentTypeByID
 from camcontrol import Cam
 import configparser
 import ctypes
 import time
+from logcontrol import LogControl as log
 
 # config
 
@@ -39,8 +40,10 @@ version = config['DEFAULT']['version']
 
 if sys.platform == 'linux':
     IMGDIR = config['DEFAULT']['img_dir']
+    os.makedirs(IMGDIR, exist_ok=True)
 elif sys.platform == 'win32':
     IMGDIR = config['DEFAULT']['images_dir_windows']
+    os.makedirs(IMGDIR, exist_ok=True)
 else:
     ctypes.windll.user32.MessageBoxW(
         0, "Sistema operativo no soportado", "Error", 0)
@@ -48,24 +51,11 @@ else:
 
 # Entorno de la aplicación
 
-# logs
-try:
-    os.makedirs("logs", exist_ok=True)
-except OSError:
-    raise
-
-
-def log(msg):
-    ts = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
-    error = open("logs/neoscan_log.log", "a")
-    error.write(ts + ": " + msg + "\n")
-    error.close()
-
 
 def restart():
     QtCore.QCoreApplication.quit()
     status = QtCore.QProcess.startDetached(sys.executable, sys.argv)
-    log(f"Reinicio de la aplicación. Status: {status}")
+    log.log(f"Reinicio de la aplicación. Status: {status}")
 
 
 class MainWindow(QMainWindow):
@@ -89,7 +79,7 @@ class MainWindow(QMainWindow):
             connectToDatabase()
         except Exception as e:
             print("Error en la conexión con la base de datos")
-            log(
+            log.log(
                 f"ERROR FATAL: Falló conexión con la base de datos. Error {e} en {__file__} linea {e.__traceback__.tb_lineno}")
             raise
 
@@ -120,11 +110,8 @@ class MainWindow(QMainWindow):
         # Página de metadatos
         widgets.tipodocComboBox.currentIndexChanged.connect(self.indexChange)
         widgets.enviarFormButton.clicked.connect(self.enviarForm)
-        widgets.enviarFormEditButton.clicked.connect(
-            self.editarForm)
         widgets.browserDirButton.clicked.connect(self.getDirName)
         widgets.zoom_dial.valueChanged.connect(lambda: self.zoom_dial())
-
 
         # abrir directorio
         widgets.openFolderButton.clicked.connect(self.openimagesDir)
@@ -149,8 +136,9 @@ class MainWindow(QMainWindow):
             if len(dir) != 0:
                 for files in dir:
                     if files != 'old_backup':
-                        shutil.move(os.path.join(IMGDIR, files), os.path.join(IMGDIR, 'old_backup', files))
-                log(f"Se hizo un backup de las capturas")
+                        shutil.move(os.path.join(IMGDIR, files),
+                                    os.path.join(IMGDIR, 'old_backup', files))
+                log.log(f"Se hizo un backup de las capturas")
 
     # navigation functions
 
@@ -167,7 +155,8 @@ class MainWindow(QMainWindow):
             try:
                 Cams.pause_devs()
             except Exception as e:
-                log(f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+                log.log(
+                    f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()
         elif btnName == "backtoInicioButton":
@@ -175,7 +164,8 @@ class MainWindow(QMainWindow):
             try:
                 Cams.pause_devs()
             except Exception as e:
-                log(f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+                log.log(
+                    f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Warning)
             msgBox.setText("¿Está seguro que desea salir del formulario?")
@@ -192,7 +182,8 @@ class MainWindow(QMainWindow):
             try:
                 Cams.pause_devs()
             except Exception as e:
-                log(f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+                log.log(
+                    f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
             widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
             widgets.botones_metadata.setCurrentWidget(widgets.enviar)
@@ -231,7 +222,7 @@ class MainWindow(QMainWindow):
             element_name = elemento[1]
             element_description = elemento[2]
 
-            image_path = Path(IMGDIR, f'{element_id}','data', 'JPG')
+            image_path = Path(IMGDIR, f'{element_id}', 'data', 'JPG')
             image_not_found = "imgs/No-Photo-Available.png"
 
             # Display image in the grid
@@ -276,12 +267,13 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon1)
             button.setIconSize(QSize(20, 20))
-            button.clicked.connect(self.edit_element)
-            widgets.elementslayout.addWidget(button, id, 2)
+            button.clicked[bool].connect(
+                lambda _, element_id=element_id: self.edit_element(element_id))
+            widgets.elementslayout.addWidget(button, id, 3)
 
             button = QPushButton()
             # button.setText("Añadir imágenes")
-            button.setObjectName(f"edit_element_{element_id}")
+            button.setObjectName(f"add_more_{element_id}")
             button.setMinimumSize(QSize(42, 42))
             button.setMaximumSize(QSize(42, 42))
             icon1 = QIcon()
@@ -289,7 +281,8 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon1)
             button.setIconSize(QSize(20, 20))
-            button.clicked[bool].connect(lambda _, element_id=element_id: self.set_scanner_page(element_id))
+            button.clicked[bool].connect(
+                lambda _, element_id=element_id: self.set_scanner_page(element_id))
             widgets.elementslayout.addWidget(button, id, 2)
 
             button = QPushButton()
@@ -302,8 +295,9 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon2)
             button.setIconSize(QSize(20, 20))
-            button.clicked[bool].connect(lambda _, element_id=element_id, image_path=image_path: self.export_element(element_id))
-            widgets.elementslayout.addWidget(button, id, 3)
+            button.clicked[bool].connect(
+                lambda _, element_id=element_id, image_path=image_path: self.export_element(element_id))
+            widgets.elementslayout.addWidget(button, id, 4)
 
             button = QPushButton()
             # button.setText("Eliminar")
@@ -315,8 +309,9 @@ class MainWindow(QMainWindow):
                           QSize(), QIcon.Normal, QIcon.Off)
             button.setIcon(icon3)
             button.setIconSize(QSize(20, 20))
-            button.clicked[bool].connect(lambda _, element_id=element_id, image_path=image_path: self.delete_element(element_id, image_path))
-            widgets.elementslayout.addWidget(button, id, 4)
+            button.clicked[bool].connect(
+                lambda _, element_id=element_id, image_path=image_path: self.delete_element(element_id, image_path))
+            widgets.elementslayout.addWidget(button, id, 5)
 
         widgets.verticalLayout_20.addLayout(widgets.elementslayout)
 
@@ -326,7 +321,9 @@ class MainWindow(QMainWindow):
         '''
         # go to metadata page
         widgets.stackedWidget.setCurrentWidget(widgets.metadataPage)
-        widgets.botones_metadata.setCurrentWidget(widgets.editar)
+        dtype = getDocumentTypeByID(element_id)
+
+        widgets.tipodocComboBox.setCurrentIndex(dtype)
 
         # write element_id in the form
         self.write_fields_info(element_id)
@@ -345,7 +342,7 @@ class MainWindow(QMainWindow):
             self.write_json(EXPORTDIR, element_info, element_id, "info")
         else:
             print("error al obtener datos del elemento")
-            log(f"ERROR al obtener datos del elemento {element_info}")
+            log.log(f"ERROR al obtener datos del elemento {element_info}")
 
         metadata_info = getElementMetadatabyID(element_id)
         if metadata_info:
@@ -362,7 +359,7 @@ class MainWindow(QMainWindow):
                 shutil.copytree(image_path, os.path.join(EXPORTDIR, "images"))
             except FileNotFoundError:
                 print("error al copiar imágenes")
-                log(f"ERROR al copiar imágenes {image_path}")
+                log.log(f"ERROR al copiar imágenes {image_path}")
 
         QMessageBox.information(
             widgets.stackedWidget, "Exportar", "Se ha exportado el elemento correctamente.")
@@ -430,7 +427,7 @@ class MainWindow(QMainWindow):
         check if fields are empty and return error
         '''
         if tipo_documento == 1:
-            if widgets.titulolineEdit.text() == "":
+            if widgets.titulolineEdit.text() == "" and widgets.identificadoreslineEdit.text() == "":
                 QMessageBox().warning(self, "Error",
                                       "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
@@ -438,7 +435,7 @@ class MainWindow(QMainWindow):
             else:
                 return True
         elif tipo_documento == 2:
-            if widgets.titulodoclineEdit.text() == "":
+            if widgets.titulodoclineEdit.text() == "" and widgets.identificadoresdoclineEdit.text() == "":
                 QMessageBox().warning(self, "Error",
                                       "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formDocumento)
@@ -446,7 +443,7 @@ class MainWindow(QMainWindow):
             else:
                 return True
         elif tipo_documento == 3:
-            if widgets.tituloimagenlineEdit.text() == "":
+            if widgets.tituloimagenlineEdit.text() == "" and widgets.identificadoresimagenlineEdit.text() == "":
                 QMessageBox().warning(self, "Error",
                                       "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formImagen)
@@ -454,7 +451,7 @@ class MainWindow(QMainWindow):
             else:
                 return True
         elif tipo_documento == 4:
-            if widgets.nombreserlineEdit.text() == "":
+            if widgets.nombreserlineEdit.text() == "" and widgets.identificadoreserlineEdit.text() == "":
                 QMessageBox().warning(self, "Error",
                                       "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSeriada)
@@ -462,7 +459,7 @@ class MainWindow(QMainWindow):
             else:
                 return True
         elif tipo_documento == 5:
-            if widgets.titulolibrolineEdit.text() == "":
+            if widgets.titulolibrolineEdit.text() == "" and widgets.identificadoresLibrolineEdit.text() == "":
                 QMessageBox().warning(self, "Error",
                                       "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formLibro)
@@ -565,7 +562,7 @@ class MainWindow(QMainWindow):
         and write in its fields the information retrieved from the db
         '''
 
-        tipo_documento = getElementInfo(element_id)['tipo_documento']
+        tipo_documento = getElementInfo(element_id)['document_type']
         data = getElementMetadatabyID(element_id)
 
         if tipo_documento == 1:
@@ -629,6 +626,11 @@ class MainWindow(QMainWindow):
         elif tipo_documento == 6:
             QMessageBox.information(
                 self, 'Error', 'No se puede editar un escaneo sencillo')
+
+        # assesst editar button
+        # get current widget
+        widgets.botones_metadata.setCurrentWidget(widgets.editar)
+        widgets.enviarFormEditButton.clicked[bool].connect(lambda _, element_id=element_id: self.editarForm(element_id))
 
     def cleanForm(self, tipo_de_documento):
         '''
@@ -704,10 +706,10 @@ class MainWindow(QMainWindow):
         tipo_de_documento = widgets.tipodocComboBox.currentIndex() + 1
 
         #zoom_value = widgets.zoom_dial.value()
-        zoom_value =  widgets.zoom_valuedit.text()
+        zoom_value = widgets.zoom_valuedit.text()
 
         # dng_checkbox value
-        if widgets.dng_checkbox.isChecked():
+        if widgets.dng_check.isChecked():
             config['DEFAULT']['dng'] = 'True'
         else:
             config['DEFAULT']['dng'] = 'False'
@@ -721,7 +723,7 @@ class MainWindow(QMainWindow):
             if not tipo_de_documento == 6:
                 createElement(tipo_de_documento, 0, 1)
 
-                # get the id of last element created
+                # get the identifier of last element created
                 id_element = getLastElementID()
 
                 # get the info for the form fields
@@ -771,8 +773,8 @@ class MainWindow(QMainWindow):
             os.startfile(ruta)
         else:
             print('No se puede abrir la carpeta')
-            log(f'ERROR: No se puede abrir la carpeta {ruta}')
-            log(f'ERROR: {sys.platform}')
+            log.log(f'ERROR: No se puede abrir la carpeta {ruta}')
+            log.log(f'ERROR: {sys.platform}')
 
     def lenImagenesDir(self, folder_path):
         '''
@@ -808,7 +810,7 @@ class MainWindow(QMainWindow):
                     if intentos == 3:
                         QMessageBox.critical(
                             self, 'Error', 'No fue posible iniciar la cámara.')
-                        log(f'ERROR: No fue posible iniciar la cámara después de tres intentos. \n \
+                        log.log(f'ERROR: No fue posible iniciar la cámara después de tres intentos. \n \
                             cam_response = {cam_response}')
                         return False
                 else:
@@ -819,7 +821,8 @@ class MainWindow(QMainWindow):
             return "dual_camera_mode"
 
         except IndexError as e:
-            log(f"ERROR: {e} en {__file__} linea {e.__traceback__.tb_lineno}")
+            log.log(
+                f"ERROR: {e} en {__file__} linea {e.__traceback__.tb_lineno}")
             # single camera QMessageBox, accept retry cancel
             respuesta = QMessageBox().question(self, "Una cámara conectada",
                                                "Solamente una cámara está conectada.\n \
@@ -851,17 +854,18 @@ class MainWindow(QMainWindow):
         datos_elemento = getElementMetadatabyID(id_element)
 
         # show data in labels
-        widgets.elementoIDLabel.setText(str(id_element))
+        widgets.elementoIDLabel.setText(datos_elemento[9])
         widgets.elementoTituloLabel.setText(datos_elemento[1])
 
         # create directory to save images
-        folder_path = os.path.join(IMGDIR, str(id_element))
+        folder_path = os.path.join(IMGDIR, str(datos_elemento[9]))
 
         try:
             os.makedirs(folder_path, exist_ok=True)
         except OSError as e:
             print(e)
-            log(f'ERROR: Al crear {folder_path} se encontró un OSError {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+            log.log(
+                f'ERROR: Al crear {folder_path} se encontró un OSError {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             raise
 
         # set folder_path to label
@@ -875,15 +879,17 @@ class MainWindow(QMainWindow):
 
     def capturar(self):
         # save the images
-        element_id = widgets.elementoIDLabel.text()
+        element_ident = widgets.elementoIDLabel.text()
+        element_id = getElementIdByMetadata(element_ident)
 
         # get last image number pair
         last_img_group = getLastImgs(element_id)
         try:
-            numbers = [li.replace('.jpg', '').replace('.dng', '') for li in last_img_group]
+            numbers = [li.replace('.jpg', '').replace('.dng', '')
+                       for li in last_img_group]
             numbers = list(dict.fromkeys(numbers))
             # esto evita que se presenten errores si se desconecta una cámara y se sigue capturando
-            # con una de ellas. 
+            # con una de ellas.
             # TODO: Con una sola cámara ¿cómo evitar que se creen ids para pares o impares?
             numbers = numbers[:2]
             last_img_left = [int(i) for i in numbers if int(i) % 2 != 0]
@@ -896,28 +902,31 @@ class MainWindow(QMainWindow):
                     last_img_left = last_img_right - 1
                 except TypeError:
                     last_img_left = last_img_right[0] - 1
-                log(f'WARNING: Se ha restablecido la secuencia en la cámara izquierda. \
+                log.log(f'WARNING: Se ha restablecido la secuencia en la cámara izquierda. \
                     last_img_left = {last_img_left}')
             elif len(last_img_right) == 0:
                 try:
-                    last_img_right = last_img_left -1
+                    last_img_right = last_img_left - 1
                 except TypeError:
                     last_img_right = last_img_left[0] - 1
-                log(f'WARNING: Se ha restablecido la secuencia en la cámara derecha. \
+                log.log(f'WARNING: Se ha restablecido la secuencia en la cámara derecha. \
                     last_img_right = {last_img_right}')
             else:
                 # cachar algún error desconocido
-                log(f'INFO: secuencia de imágenes sin issues. last_img_left = {last_img_left} y last_img_right = {last_img_right}')
+                log.log(
+                    f'INFO: secuencia de imágenes sin issues. last_img_left = {last_img_left} y last_img_right = {last_img_right}')
                 pass
             try:
-                last_img_left = [last_img_left[0] + 2 if last_img_left is not 0 else 1][0]
+                last_img_left = [last_img_left[0] +
+                                 2 if last_img_left is not 0 else 1][0]
             except TypeError:
-                last_img_left = [last_img_left + 2 if last_img_left is not 0 else 1][0]
+                last_img_left = [last_img_left +
+                                 2 if last_img_left is not 0 else 1][0]
             last_img_left = f'{last_img_left:04d}'
             try:
                 last_img_right = last_img_right[0] + 2
             except TypeError:
-                last_img_right = last_img_right +2
+                last_img_right = last_img_right + 2
             last_img_right = f'{last_img_right:04d}'
         except AttributeError:
             last_img_left = '0001'
@@ -929,7 +938,6 @@ class MainWindow(QMainWindow):
             widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_left}.jpg')
         right_img_path = Path(
             widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_right}.jpg')
-        
 
         try:
             zoom = int(config['camaras']['zoom_predeterminado'])
@@ -939,11 +947,11 @@ class MainWindow(QMainWindow):
         try:
             # TODO: ¡Hacer que esto funcione!
             dng_status = config['DEFAULT']['dng']
-            Cams.captura(element_id, last_img_left, last_img_right, zoom, dng_status)
+            Cams.captura(element_ident, last_img_left,
+                         last_img_right, zoom, dng_status)
         except TypeError:
             QMessageBox().warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
-
 
         # Este loop permite
         if Cams.len_devs() > 1:
@@ -956,7 +964,7 @@ class MainWindow(QMainWindow):
         else:
             time.sleep(5)
 
-        # for some reason QPixmap is not working with PosixPath 
+        # for some reason QPixmap is not working with PosixPath
         # raise TypeError. As a temporary solution transform PosixPath to str
         left_img_path = left_img_path.absolute().as_posix()
         right_img_path = right_img_path.absolute().as_posix()
@@ -968,7 +976,8 @@ class MainWindow(QMainWindow):
 
         widgets.statusLabel.setText(
             f"Capturadas {last_img_left} y {last_img_right}")
-        log(f'INFO: Imágenes {last_img_left} y {last_img_right} capturadas')
+        log.log(
+            f'INFO: Imágenes {last_img_left} y {last_img_right} capturadas')
 
         # display validation buttons
         widgets.controlesCamstackedWidget.setCurrentWidget(
@@ -984,7 +993,7 @@ class MainWindow(QMainWindow):
     def resetCaptura(self):
         # delete most recent images from directory
         folder_path = widgets.directorio_elementos.text()
-        
+
         tipos = ['JPG', 'DNG']
         for t in tipos:
             last_imagenes = glob.glob(f'{folder_path}/{t}/*.{t.lower()}')
@@ -994,7 +1003,8 @@ class MainWindow(QMainWindow):
                 try:
                     os.remove(f)
                 except OSError as e:
-                    log(f'ERROR: Al eliminar {f} se encontró un OSError {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+                    log.log(
+                        f'ERROR: Al eliminar {f} se encontró un OSError {e} en {__file__} linea {e.__traceback__.tb_lineno}')
                     raise
 
         # erase image labels
@@ -1023,7 +1033,8 @@ class MainWindow(QMainWindow):
             try:
                 Cams.pause_devs()
             except Exception as e:
-                log(f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+                log.log(
+                    f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
 
     def gentle_close(self):
         '''

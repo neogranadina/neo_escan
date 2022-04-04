@@ -11,24 +11,19 @@
 #
 # ///////////////////////////////////////////////////////////////
 
+import json
 import shutil
 import sys
 import chdkptp.util as util
 from pathlib import Path
 import os
 import datetime
-from db_handler import getLastElementID, wrap_imageWithElement
+from db_handler import getElementIdByMetadata, wrap_imageWithElement
 from PIL import Image, ExifTags
 import logging
 import configparser
 import bagit
-
-
-# logs
-
-logging.basicConfig(filename="neo_escan.log",
-                    level=logging.DEBUG)
-logger = logging.getLogger("logger")
+from logcontrol import LogControl as log
 
 # config
 
@@ -76,7 +71,15 @@ class DescargarIMGS:
             bag = bagit.make_bag(img_dir, {
                 'Contact-Name': 'Fundación histórica Neogranadina',
                 'Contact-Email': 'coordinacion@neogranadina.org',
-                'Website': 'neogranadina.org'})
+                'Website': 'neogranadina.org',
+                'Nombre proyecto': self.nombre_proyecto})
+            
+            # aditional files
+            # create metadata.json if not exists
+            if not os.path.exists(f'{img_dir}/metadata.json'):
+                with open(f'{img_dir}/metadata.json', 'w', encoding='utf-8') as fp:
+                    json.dump({}, fp)
+
 
         img_dir = os.path.join(IMGDIR, self.nombre_proyecto, 'data', f"{tipo_img.upper()}")
         os.makedirs(img_dir, exist_ok=True)
@@ -174,12 +177,30 @@ class DescargarIMGS:
         else:
             return {'No metadata': 'No metadata'}
 
-    def associateImageWithElement(self, element_id, img_path, tipo_img):
+
+    def write_metadata_json(self, img_path, metadata):
+        '''
+        escribe los metadatos en un archivo json
+        '''
+        metadata_path = os.path.join(img_path[:-18], "metadata.json")
+
+        if not os.path.exists(metadata_path):
+            with open(metadata_path, 'w', encoding='utf-8') as fp:
+                json.dump({}, fp)
+
+        with open(metadata_path, 'r+', encoding='utf-8') as fp:
+            data = json.load(fp)
+            data[self.image_name(img_path)] = metadata
+            fp.seek(0)
+            json.dump(data, fp, indent=4, ensure_ascii=False)
+
+
+    def associateImageWithElement(self, metadata_text, img_path, tipo_img):
         '''
         get the metadata of each image and associate it with the element
         and write it in database
         '''
-        element_id = int(element_id)
+        element_id = getElementIdByMetadata(metadata_text)
 
         if tipo_img == 'jpg':
             lista = os.listdir(self.img_dir('jpg'))
@@ -198,20 +219,50 @@ class DescargarIMGS:
         img_modified_ts = datetime.datetime.now()
         img_metadata = self.imageMetadata(img_path)
 
-        # debug
-        '''
-        print(f"element_id: {element_id}")
-        print(f"order: {order}")
-        print(f"img_path: {img_path}")
-        print(f"tipo_img: {tipo_img}")
-        print(f"size: {size}")
-        print(f"mime_type: {mime_type}")
-        print(f"filename: {filename}")
-        print(f"path: {path}")
-        print(f"img_timestamp: {img_timestamp}")
-        print(f"img_modified_ts: {img_modified_ts}")
-        print(f"img_metadata: {img_metadata}")
-        '''
+        # metadatos de la imagen
+        
+        dcmetadata = {
+        'element_id': element_id,
+        'order': order,
+        'img_path': img_path,
+        'tipo_img': tipo_img,
+        'size': size,
+        'mime_type': mime_type,
+        'filename': filename,
+        'path': path,
+        'img_timestamp': img_timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+        'img_modified_ts': img_modified_ts.strftime("%Y-%m-%d %H:%M:%S"),
+        'ResolutionUnit': img_metadata['ResolutionUnit'],
+        'ExifOffset': img_metadata['ExifOffset'],
+        'Make': img_metadata['Make'],
+        'Model': img_metadata['Model'],
+        'Orientation': img_metadata['Orientation'],
+        'YCbCrPositioning': img_metadata['YCbCrPositioning'],
+        'XResolution': img_metadata['XResolution'],
+        'YResolution': img_metadata['YResolution'],
+        'CompressedBitsPerPixel': img_metadata['CompressedBitsPerPixel'],
+        'ShutterSpeedValue': img_metadata['ShutterSpeedValue'],
+        'ApertureValue': img_metadata['ApertureValue'],
+        'ExposureBiasValue': img_metadata['ExposureBiasValue'],
+        'MaxApertureValue': img_metadata['MaxApertureValue'],
+        'MeteringMode': img_metadata['MeteringMode'],
+        'Flash': img_metadata['Flash'],
+        'FocalLength': img_metadata['FocalLength'],
+        'ExifImageWidth': img_metadata['ExifImageWidth'],
+        'FocalPlaneXResolution': img_metadata['FocalPlaneXResolution'],
+        'ExifImageHeight': img_metadata['ExifImageHeight'],
+        'FocalPlaneYResolution': img_metadata['FocalPlaneYResolution'],
+        'FocalPlaneResolutionUnit': img_metadata['FocalPlaneResolutionUnit'],
+        'SensingMethod': img_metadata['SensingMethod'],
+        'ExposureTime': img_metadata['ExposureTime'],
+        'ExifInteroperabilityOffset': img_metadata['ExifInteroperabilityOffset'],
+        'FNumber': img_metadata['FNumber'],
+        'ISOSpeedRatings': img_metadata['ISOSpeedRatings'],
+        'WhiteBalance': img_metadata['WhiteBalance'],
+        'DigitalZoomRatio': img_metadata['DigitalZoomRatio']
+        }
+        
+        self.write_metadata_json(img_path, dcmetadata)
 
         wrap_imageWithElement(element_id, order, size, mime_type, filename,
                               path, img_timestamp, img_modified_ts,

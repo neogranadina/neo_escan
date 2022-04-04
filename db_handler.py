@@ -20,8 +20,8 @@ from db.create_db import crear_basededatos
 from PySide2.QtCore import QDir
 from PySide2.QtSql import QSqlDatabase, QSqlQuery
 
-def log(msg):
-    pass
+from logcontrol import LogControl as log
+
 
 def connectToDatabase():
     '''
@@ -29,7 +29,7 @@ def connectToDatabase():
     '''
     db = QSqlDatabase.addDatabase('QSQLITE')
     if not db.isValid():
-        log(f'ERROR No es posible conectarse a la base de datos: {db.lastError().text()}')
+        log.log(f'ERROR No es posible conectarse a la base de datos: {db.lastError().text()}')
         return False
     write_dir = QDir("db")
 
@@ -37,7 +37,7 @@ def connectToDatabase():
         try:
             write_dir.mkpath(".")
         except Exception as e:
-            log(f'ERROR No es posible crear la carpeta de escritura: {e}')
+            log.log(f'ERROR No es posible crear la carpeta de escritura: {e}')
             return False
 
     # if not database create it
@@ -47,7 +47,7 @@ def connectToDatabase():
     db.setDatabaseName(str(Path(write_dir.absolutePath(), 'neo_escan.db')))
 
     if not db.open():
-        log(f'ERROR No es posible conectarse a la base de datos: {db.lastError().text()}')
+        log.log(f'ERROR No es posible conectarse a la base de datos: {db.lastError().text()}')
         return False
     return db
 
@@ -68,7 +68,7 @@ def createElement(tipo_elemento, usuario, publico):
         ':updated_at', datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     if not query.exec_():
-        log(f'ERROR No es posible crear el elemento: {query.lastError().text()}')
+        log.log(f'ERROR No es posible crear el elemento: {query.lastError().text()}')
         return False
 
 
@@ -100,7 +100,7 @@ def insertInfo(id_elemento, info):
         query.bindValue(':key', key)
         query.bindValue(':value', value)
         if not query.exec_():
-            log(f'ERROR No es posible insertar la información: {query.lastError().text()}')
+            log.log(f'ERROR No es posible insertar la información: {query.lastError().text()}')
             return False
     return True
 
@@ -177,6 +177,19 @@ def getElementMetadatabyID(id_elemento):
     return info
 
 
+def getElementIdByMetadata(metadata):
+    '''
+    get element id from metadata
+    '''
+    query = QSqlQuery()
+    query.prepare(
+        "SELECT element_id FROM elements_metadata_text WHERE text = :text")
+    query.bindValue(':text', metadata)
+    query.exec_()
+    query.first()
+    return query.value(0)
+
+
 def wrap_imageWithElement(element_id, order, size, mime_type,
                           filename, path, img_timestamp,
                           img_modified_ts, img_metadata):
@@ -202,10 +215,22 @@ def wrap_imageWithElement(element_id, order, size, mime_type,
     query.bindValue(':metadata', img_metadata)
 
     if not query.exec_():
-        log(f'ERROR No es posible crear la imagen: {query.lastError().text()}')
+        log.log(f'ERROR No es posible crear la imagen: {query.lastError().text()}')
         return False
     return True
 
+
+def getDocumentTypeByID(id_elemento):
+    '''
+    get document type from id
+    '''
+    query = QSqlQuery()
+    query.prepare(
+        "SELECT document_type FROM elements WHERE element_id = :element_id")
+    query.bindValue(':element_id', id_elemento)
+    query.exec_()
+    query.first()
+    return query.value(0)
 
 def editInfo(element_id, data):
     '''
@@ -224,7 +249,7 @@ def editInfo(element_id, data):
         query.bindValue(':key', key)
         query.bindValue(':value', value)
         if not query.exec_():
-            log(f'ERROR No es posible actualizar la información: {query.lastError().text()}')
+            log.log(f'ERROR No es posible actualizar la información: {query.lastError().text()}')
             return False
     # update element updated_at
     query.prepare(
@@ -237,7 +262,7 @@ def editInfo(element_id, data):
     query.bindValue(
         ':updated_at', datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     if not query.exec_():
-        log(f'ERROR No es posible actualizar la información: {query.lastError().text()}')
+        log.log(f'ERROR No es posible actualizar la información: {query.lastError().text()}')
         return False
     return True
 
@@ -258,7 +283,7 @@ def erase_element(element_id):
     )
     query.bindValue(':element_id', element_id)
     if not query.exec_():
-        log(f'ERROR No es posible eliminar el elemento: {query.lastError().text()}')
+        log.log(f'ERROR No es posible eliminar el elemento: {query.lastError().text()}')
         return False
     return True
 
@@ -320,3 +345,4 @@ def kill_connection():
     '''
     QSqlDatabase.database().close()
     QSqlDatabase.database().removeDatabase('qt_sql_default_connection')
+
