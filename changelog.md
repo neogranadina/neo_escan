@@ -6,10 +6,16 @@
 
 Esta versión atiende algunos cambios indicados en <https://github.com/neogranadina/neo_escan/issues/8>
 
+### Fixed
+
+- Ajuste del color del botón enviar.
+
 ### Changed
 
 - El nombre de los directorios de los archivos corresponden al identificador (antes id).
 - El título y el identificador de los metadatos se convierten en los valores requeridos de cada formulario.
+
+
 
 ## [0.1.5011] - 2022-03-27
 

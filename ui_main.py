@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1000, 562)
+        MainWindow.resize(1000, 564)
         MainWindow.setMinimumSize(QSize(1000, 480))
         font = QFont()
         font.setStyleStrategy(QFont.NoAntialias)
@@ -1338,7 +1338,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 859, 203))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 859, 204))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.gridLayout = QGridLayout()
@@ -1498,6 +1498,16 @@ class Ui_MainWindow(object):
         self.botones_metadata.setObjectName(u"botones_metadata")
         self.botones_metadata.setMinimumSize(QSize(0, 34))
         self.botones_metadata.setMaximumSize(QSize(16777215, 34))
+        self.botones_metadata.setStyleSheet(u"QPushButton#enviarFormButton {\n"
+"color: rgb(247,247,247);\n"
+"border: 2px solid;\n"
+"border-radius: 5px;\n"
+"background-color: rgb(0,0,0);\n"
+"}\n"
+"\n"
+"QPushButton#enviarFormButton::hover {\n"
+"	background-color: rgba(0, 0, 0, .7);\n"
+"}")
         self.enviar = QWidget()
         self.enviar.setObjectName(u"enviar")
         self.horizontalLayout_13 = QHBoxLayout(self.enviar)
@@ -1536,7 +1546,9 @@ class Ui_MainWindow(object):
         self.enviarFormEditButton.setMaximumSize(QSize(100, 34))
         self.enviarFormEditButton.setFont(font5)
         self.enviarFormEditButton.setCursor(QCursor(Qt.PointingHandCursor))
-        self.enviarFormEditButton.setIcon(icon13)
+        icon14 = QIcon()
+        icon14.addFile(u"imgs/icons/pencil-on-a-square-outline.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.enviarFormEditButton.setIcon(icon14)
 
         self.horizontalLayout_14.addWidget(self.enviarFormEditButton)
 
@@ -1660,9 +1672,9 @@ class Ui_MainWindow(object):
 "	background-color: rgb(182, 182, 182);\n"
 "}\n"
 "")
-        icon14 = QIcon()
-        icon14.addFile(u"imgs/icons/open-black-folder-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.openFolderButton.setIcon(icon14)
+        icon15 = QIcon()
+        icon15.addFile(u"imgs/icons/open-black-folder-interface-symbol.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.openFolderButton.setIcon(icon15)
         self.openFolderButton.setIconSize(QSize(24, 24))
 
         self.gridLayout_4.addWidget(self.openFolderButton, 0, 1, 1, 1)
@@ -1770,9 +1782,9 @@ class Ui_MainWindow(object):
         self.finalizarButton = QPushButton(self.captura)
         self.finalizarButton.setObjectName(u"finalizarButton")
         self.finalizarButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon15 = QIcon()
-        icon15.addFile(u"imgs/icons/square-with-verification-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.finalizarButton.setIcon(icon15)
+        icon16 = QIcon()
+        icon16.addFile(u"imgs/icons/square-with-verification-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.finalizarButton.setIcon(icon16)
         self.finalizarButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_10.addWidget(self.finalizarButton)
@@ -1789,9 +1801,9 @@ class Ui_MainWindow(object):
         font8.setPointSize(11)
         self.capturaButton.setFont(font8)
         self.capturaButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon16 = QIcon()
-        icon16.addFile(u"imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.capturaButton.setIcon(icon16)
+        icon17 = QIcon()
+        icon17.addFile(u"imgs/icons/camera-to-take-photos_black.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.capturaButton.setIcon(icon17)
         self.capturaButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_10.addWidget(self.capturaButton)
@@ -1811,9 +1823,9 @@ class Ui_MainWindow(object):
         self.validateButton.setMaximumSize(QSize(16777215, 35))
         self.validateButton.setFont(font8)
         self.validateButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon17 = QIcon()
-        icon17.addFile(u"imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.validateButton.setIcon(icon17)
+        icon18 = QIcon()
+        icon18.addFile(u"imgs/icons/check-sign.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.validateButton.setIcon(icon18)
         self.validateButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_11.addWidget(self.validateButton)
@@ -1824,9 +1836,9 @@ class Ui_MainWindow(object):
         self.resetButton.setMaximumSize(QSize(16777215, 35))
         self.resetButton.setFont(font8)
         self.resetButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon18 = QIcon()
-        icon18.addFile(u"imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.resetButton.setIcon(icon18)
+        icon19 = QIcon()
+        icon19.addFile(u"imgs/icons/undo-circular-arrow.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.resetButton.setIcon(icon19)
         self.resetButton.setIconSize(QSize(32, 32))
 
         self.horizontalLayout_11.addWidget(self.resetButton)
@@ -1907,7 +1919,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(1)
-        self.tipoColeccion.setCurrentIndex(5)
+        self.tipoColeccion.setCurrentIndex(0)
         self.botones_metadata.setCurrentIndex(0)
         self.controlesCamstackedWidget.setCurrentIndex(0)
 

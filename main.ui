@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1000</width>
-    <height>562</height>
+    <height>564</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1085,7 +1085,7 @@ QPushButton#backtoInicioButton::hover {
                     <string notr="true"/>
                    </property>
                    <property name="currentIndex">
-                    <number>5</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="formLegajo">
                     <layout class="QHBoxLayout" name="horizontalLayout_15">
@@ -3104,7 +3104,7 @@ QPushButton#backtoInicioButton::hover {
                           <x>0</x>
                           <y>0</y>
                           <width>859</width>
-                          <height>203</height>
+                          <height>204</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -3476,6 +3476,18 @@ QPushButton#backtoInicioButton::hover {
                      <height>34</height>
                     </size>
                    </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton#enviarFormButton {
+color: rgb(247,247,247);
+border: 2px solid;
+border-radius: 5px;
+background-color: rgb(0,0,0);
+}
+
+QPushButton#enviarFormButton::hover {
+	background-color: rgba(0, 0, 0, .7);
+}</string>
+                   </property>
                    <property name="currentIndex">
                     <number>0</number>
                    </property>
@@ -3585,7 +3597,7 @@ QPushButton#backtoInicioButton::hover {
                        </property>
                        <property name="icon">
                         <iconset>
-                         <normaloff>imgs/icons/fast-forward-double-right-arrows.svg</normaloff>imgs/icons/fast-forward-double-right-arrows.svg</iconset>
+                         <normaloff>imgs/icons/pencil-on-a-square-outline.svg</normaloff>imgs/icons/pencil-on-a-square-outline.svg</iconset>
                        </property>
                       </widget>
                      </item>

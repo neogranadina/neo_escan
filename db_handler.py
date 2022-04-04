@@ -220,6 +220,18 @@ def wrap_imageWithElement(element_id, order, size, mime_type,
     return True
 
 
+def getDocumentTypeByID(id_elemento):
+    '''
+    get document type from id
+    '''
+    query = QSqlQuery()
+    query.prepare(
+        "SELECT document_type FROM elements WHERE element_id = :element_id")
+    query.bindValue(':element_id', id_elemento)
+    query.exec_()
+    query.first()
+    return query.value(0)
+
 def editInfo(element_id, data):
     '''
     update rows by values in dict in element_metadata_text table
@@ -333,3 +345,4 @@ def kill_connection():
     '''
     QSqlDatabase.database().close()
     QSqlDatabase.database().removeDatabase('qt_sql_default_connection')
+
