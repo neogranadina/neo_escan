@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [0.1.502] - 2022-04-03
+
+Esta versión atiende algunos cambios indicados en <https://github.com/neogranadina/neo_escan/issues/8>
+
+### Changed
+
+- El nombre de los directorios de los archivos corresponden al identificador (antes id).
+- El título y el identificador de los metadatos se convierten en los valores requeridos de cada formulario.
+
 ## [0.1.5011] - 2022-03-27
 
 Esta versión corrige el zoom de la cámara que no respondía en las versiones anteriores.
@@ -15,6 +24,7 @@ Esta versión corrige el zoom de la cámara que no respondía en las versiones a
 - El checkbox para selecionar si se quería guardar en dng se cambió a la pantalla de formularios (metadata)
 - Las fotografías no se borran al validar la fotografía.
 - Se cambió el botón "validar" por "continuar" en la pantalla de escáner.
+- Captura de la imagen con pedal o `B`.
 
 ## [0.1.500] - 2022-03-21
 

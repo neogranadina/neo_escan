@@ -22,23 +22,11 @@ import multiprocessing as mp
 from filecontrol import DescargarIMGS
 import time
 import configparser
-
+from logcontrol import LogControl as log
 
 config = configparser.ConfigParser()
 config.read(Path('config.cfg'))
 
-# logs
-try:
-    os.makedirs("logs", exist_ok=True)
-except OSError:
-    raise
-
-
-def log(msg):
-    ts = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
-    error = open("logs/neoscan_log.log", "a")
-    error.write(ts + ": " + msg + "\n")
-    error.close()
 
 class Cam:
     def __init__(self):
@@ -105,15 +93,15 @@ class Cam:
             self.camaras = chdkptp.list_devices()
 
         if len(self.camaras) == 0:
-            log("No hay dispositivos conectados")
+            log.log("No hay dispositivos conectados")
             return None
         elif len(self.camaras) == 1:
-            log("Solo hay un dispositivo conectado")
+            log.log("Solo hay un dispositivo conectado")
             camid = self.single_cam()
-            if camid.keys == 'cam_izq':
+            if camid.keys == 'cam_izq' and camid.keys != None:
                 dev_left = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == camid['cam_izq']]
                 return dev_left[0], None
-            elif camid.keys == 'cam_der':
+            elif camid.keys == 'cam_der' and camid.keys != None:
                 dev_right = [chdkptp.ChdkDevice(d) for d in self.camaras if d.serial_num == camid['cam_der']]
                 return None, dev_right[0]
         elif len(self.camaras) == 2:
@@ -124,7 +112,7 @@ class Cam:
                 return dev_left[0], dev_right[0]
             except Exception as e:
                 # write error in log file
-                log(f"ERROR: {str(e)}")
+                log.log(f"ERROR: {str(e)}")
                 raise
 
 
@@ -146,7 +134,7 @@ class Cam:
         los dos primeros en .list_devices()
         '''
 
-        log(f"Conexión en {self.devs}")
+        log.log(f"Conexión en {self.devs}")
 
         try:
             if len(self.devs) == 2:
@@ -160,13 +148,13 @@ class Cam:
                 else:
                     self.cam_init(self.devs[0])
             elif len(self.devs) == 0:
-                log(f"WARNING: No hay dispositivos conectados. En {__file__} line {inspect.currentframe().f_lineno}")
+                log.log(f"WARNING: No hay dispositivos conectados. En {__file__} line {inspect.currentframe().f_lineno}")
                 return False
         except TypeError as e:
-            log(f"ERROR: {str(e)}")
+            log.log(f"ERROR: {str(e)}")
         except Exception as e:
             # write error in log file
-            log(f"ERROR: {str(e)}")
+            log.log(f"ERROR: {str(e)}")
             raise
 
     def _shoot(self, dev, element_id, folio, z, dng_captura=False):
@@ -186,10 +174,10 @@ class Cam:
                                     float(Fraction(u"1/25"))),
                                 zoom_level=3)
         except TypeError as e:
-            log(f"ERROR: {str(e)} en {__file__} line {inspect.currentframe().f_lineno}")
-            log(f'Reintento de conexión de: {dev} (folio {folio})')
+            log.log(f"ERROR: {str(e)} en {__file__} line {inspect.currentframe().f_lineno}")
+            log.log(f'Reintento de conexión de: {dev} (folio {folio})')
             self.devs(reconnect=True)
-            log(f"Reintento de captura de img {folio}")
+            log.log(f"Reintento de captura de img {folio}")
             try:
                 imgdata = dev.shoot(wait=True, dng=dng_captura, stream=False,
                                 download_after=True, remove_after=True,
@@ -197,22 +185,22 @@ class Cam:
                                     float(Fraction(u"1/25"))),
                                 zoom_level=3)
             except Exception as e:
-                log(f"ERROR: {str(e)} en {__file__} line {inspect.currentframe().f_lineno}")
+                log.log(f"ERROR: {str(e)} en {__file__} line {inspect.currentframe().f_lineno}")
                 raise
         capt = time.time()
-        log(f'Tiempo de captura: {capt - ini}')
+        log.log(f'Tiempo de captura: {capt - ini}')
         obj_descarga = DescargarIMGS(imgdata, element_id, folio, dev)
 
         # descarga jpg
         obj_descarga.descarga_jpg()
         descjpg = time.time()
-        log(f'Tiempo de descarga: {descjpg - capt}')
+        log.log(f'Tiempo de descarga: {descjpg - capt}')
         if dng_captura == True:
             # descarga dng
             obj_descarga.descarga_dng()
-            log(f'Tiempo de descarga dng: {time.time() - descjpg}')
+            log.log(f'Tiempo de descarga dng: {time.time() - descjpg}')
 
-        log(f'Tiempo total proceso descarga {folio} / id: {element_id}: {time.time() - ini}')
+        log.log(f'Tiempo total proceso descarga {folio} / id: {element_id}: {time.time() - ini}')
 
     def captura(self, element_id, left_folio, right_folio, zoom, dng_captura):
         '''

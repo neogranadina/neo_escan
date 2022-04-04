@@ -17,18 +17,12 @@ import chdkptp.util as util
 from pathlib import Path
 import os
 import datetime
-from db_handler import getLastElementID, wrap_imageWithElement
+from db_handler import getElementIdByMetadata, wrap_imageWithElement
 from PIL import Image, ExifTags
 import logging
 import configparser
 import bagit
-
-
-# logs
-
-logging.basicConfig(filename="neo_escan.log",
-                    level=logging.DEBUG)
-logger = logging.getLogger("logger")
+from logcontrol import LogControl as log
 
 # config
 
@@ -76,7 +70,8 @@ class DescargarIMGS:
             bag = bagit.make_bag(img_dir, {
                 'Contact-Name': 'Fundación histórica Neogranadina',
                 'Contact-Email': 'coordinacion@neogranadina.org',
-                'Website': 'neogranadina.org'})
+                'Website': 'neogranadina.org',
+                'Nombre proyecto': self.nombre_proyecto})
 
         img_dir = os.path.join(IMGDIR, self.nombre_proyecto, 'data', f"{tipo_img.upper()}")
         os.makedirs(img_dir, exist_ok=True)
@@ -174,12 +169,12 @@ class DescargarIMGS:
         else:
             return {'No metadata': 'No metadata'}
 
-    def associateImageWithElement(self, element_id, img_path, tipo_img):
+    def associateImageWithElement(self, metadata_text, img_path, tipo_img):
         '''
         get the metadata of each image and associate it with the element
         and write it in database
         '''
-        element_id = int(element_id)
+        element_id = getElementIdByMetadata(metadata_text)
 
         if tipo_img == 'jpg':
             lista = os.listdir(self.img_dir('jpg'))
@@ -199,19 +194,20 @@ class DescargarIMGS:
         img_metadata = self.imageMetadata(img_path)
 
         # debug
-        '''
-        print(f"element_id: {element_id}")
-        print(f"order: {order}")
-        print(f"img_path: {img_path}")
-        print(f"tipo_img: {tipo_img}")
-        print(f"size: {size}")
-        print(f"mime_type: {mime_type}")
-        print(f"filename: {filename}")
-        print(f"path: {path}")
-        print(f"img_timestamp: {img_timestamp}")
-        print(f"img_modified_ts: {img_modified_ts}")
-        print(f"img_metadata: {img_metadata}")
-        '''
+        """log.log(
+        f'''
+        element_id: {element_id},
+        order: {order},
+        img_path: {img_path},
+        tipo_img: {tipo_img},
+        size: {size},
+        mime_type: {mime_type},
+        filename: {filename},
+        path: {path},
+        img_timestamp: {img_timestamp},
+        img_modified_ts: {img_modified_ts}, 
+        img_metadata: {img_metadata}")
+        ''')"""
 
         wrap_imageWithElement(element_id, order, size, mime_type, filename,
                               path, img_timestamp, img_modified_ts,
