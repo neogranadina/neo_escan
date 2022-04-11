@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+## [0.1.5024] - 2022-04-11
+
+Esta versión permite ajustar la velocidad de obturación para controlar la exposición de las fotos.
+
+### Added
+
+- Botón para ajustar la velocidad de obturación.
+
+### Changed
+
+- Configuración de zoom, dng y shutter en la carpeta de cada proyecto (`config_project.json`).
+- Cambia el archivo config.cfg en consecuencia.
+- Las previsualizaciones de las imágenes tomadas se escalan y mantienen la relación de aspecto.
+
 ## [0.1.502] - 2022-04-03
 
 Esta versión atiende algunos cambios indicados en <https://github.com/neogranadina/neo_escan/issues/8>
@@ -14,8 +28,6 @@ Esta versión atiende algunos cambios indicados en <https://github.com/neogranad
 
 - El nombre de los directorios de los archivos corresponden al identificador (antes id).
 - El título y el identificador de los metadatos se convierten en los valores requeridos de cada formulario.
-
-
 
 ## [0.1.5011] - 2022-03-27
 

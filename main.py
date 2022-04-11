@@ -4,7 +4,7 @@
 # Realizado con: Qt Designer y PySide6
 # © 2021 Fundación Histórica Neogranadina
 # V: 0.1.4
-# 2022-03-18
+# 2022-04-11
 #
 # ///////////////////////////////////////////////////////////////
 
@@ -112,6 +112,7 @@ class MainWindow(QMainWindow):
         widgets.enviarFormButton.clicked.connect(self.enviarForm)
         widgets.browserDirButton.clicked.connect(self.getDirName)
         widgets.zoom_dial.valueChanged.connect(lambda: self.zoom_dial())
+        widgets.exposicionDial.valueChanged.connect(lambda: self.exposicion())
 
         # abrir directorio
         widgets.openFolderButton.clicked.connect(self.openimagesDir)
@@ -222,6 +223,7 @@ class MainWindow(QMainWindow):
             element_name = elemento[1]
             element_description = elemento[2]
 
+            # TODO: arreglar la ruta a la imagen para thumbnail
             image_path = Path(IMGDIR, f'{element_id}', 'data', 'JPG')
             image_not_found = "imgs/No-Photo-Available.png"
 
@@ -630,7 +632,8 @@ class MainWindow(QMainWindow):
         # assesst editar button
         # get current widget
         widgets.botones_metadata.setCurrentWidget(widgets.editar)
-        widgets.enviarFormEditButton.clicked[bool].connect(lambda _, element_id=element_id: self.editarForm(element_id))
+        widgets.enviarFormEditButton.clicked[bool].connect(
+            lambda _, element_id=element_id: self.editarForm(element_id))
 
     def cleanForm(self, tipo_de_documento):
         '''
@@ -699,6 +702,25 @@ class MainWindow(QMainWindow):
         value = widgets.zoom_dial.value()
         widgets.zoom_valuedit.setText(str(value))
 
+    def exposicion(self):
+        value = widgets.exposicionDial.value()
+        widgets.exposicionValue.setText(str(value))
+
+    def save_config(self, path, zoom, shutter, dng, info):
+        '''
+        save config
+        '''
+        config = {
+            'zoom': zoom,
+            'shutter': shutter,
+            'dng': dng,
+        }
+        # merge config dict with info dict
+        config.update(info)
+        # save config
+        with open(os.path.join(path, "config_project.json"), 'w', encoding='utf-8') as f:
+            json.dump(config, f, ensure_ascii=False, indent=4)
+
     def enviarForm(self):
         '''
         envia el formulario a la base de datos
@@ -707,15 +729,13 @@ class MainWindow(QMainWindow):
 
         #zoom_value = widgets.zoom_dial.value()
         zoom_value = widgets.zoom_valuedit.text()
+        shutter_value = widgets.exposicionValue.text()
 
         # dng_checkbox value
         if widgets.dng_check.isChecked():
-            config['DEFAULT']['dng'] = 'True'
+            dng = 'True'
         else:
-            config['DEFAULT']['dng'] = 'False'
-
-        # TODO: solución muy temporal para lograr el deadline.
-        config['camaras']['zoom_predeterminado'] = str(zoom_value)
+            dng = 'False'
 
         # validate required items
         if self.requiredFields(tipo_de_documento):
@@ -731,6 +751,22 @@ class MainWindow(QMainWindow):
 
                 # insert the info into the database
                 insertInfo(id_element, info)
+
+                datos_elemento = getElementMetadatabyID(id_element)
+
+                # create project directory
+                folder_path = os.path.join(IMGDIR, str(datos_elemento[9]))
+                try:
+                    os.makedirs(folder_path, exist_ok=True)
+                except OSError as e:
+                    print(e)
+                    log.log(
+                        f'ERROR: Al crear {folder_path} se encontró un OSError {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+                    raise
+
+                # save project_config.json file
+                self.save_config(folder_path, zoom_value,
+                                 shutter_value, dng, info)
 
                 # clean form fields
                 self.cleanForm(tipo_de_documento)
@@ -860,14 +896,6 @@ class MainWindow(QMainWindow):
         # create directory to save images
         folder_path = os.path.join(IMGDIR, str(datos_elemento[9]))
 
-        try:
-            os.makedirs(folder_path, exist_ok=True)
-        except OSError as e:
-            print(e)
-            log.log(
-                f'ERROR: Al crear {folder_path} se encontró un OSError {e} en {__file__} linea {e.__traceback__.tb_lineno}')
-            raise
-
         # set folder_path to label
         widgets.directorio_elementos.setText(os.path.abspath(folder_path))
 
@@ -939,19 +967,30 @@ class MainWindow(QMainWindow):
         right_img_path = Path(
             widgets.directorio_elementos.text(), 'data', 'JPG', f'{last_img_right}.jpg')
 
+        config_project = open(os.path.join(IMGDIR, widgets.directorio_elementos.text(
+        ), 'config_project.json'), 'r', encoding='utf-8')
+        config_project = json.load(config_project)
+
         try:
-            zoom = int(config['camaras']['zoom_predeterminado'])
+            zoom = int(config_project['zoom'])
         except:
             zoom = 27
 
         try:
+            shutter = config_project['shutter']
+        except:
+            shutter = '25'
+
+        try:
             # TODO: ¡Hacer que esto funcione!
-            dng_status = config['DEFAULT']['dng']
+            dng_status = config_project['dng']
             Cams.captura(element_ident, last_img_left,
-                         last_img_right, zoom, dng_status)
-        except TypeError:
+                         last_img_right, zoom, shutter, dng_status)
+        except TypeError as e:
             QMessageBox().warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
+            log.log(
+                f'ERROR: No se encontraron cámaras en {__file__} linea {e.__traceback__.tb_lineno}')
 
         # Este loop permite
         if Cams.len_devs() > 1:
@@ -969,10 +1008,16 @@ class MainWindow(QMainWindow):
         left_img_path = left_img_path.absolute().as_posix()
         right_img_path = right_img_path.absolute().as_posix()
 
-        widgets.imagenizqLabel.setPixmap(
-            QPixmap(left_img_path))
-        widgets.imagederLabel.setPixmap(
-            QPixmap(right_img_path))
+        left_img = QPixmap(left_img_path)
+        right_img = QPixmap(right_img_path)
+
+        left_img = left_img.scaled(
+            widgets.imagenizqLabel.size(), Qt.KeepAspectRatio)
+        right_img = right_img.scaled(
+            widgets.imagederLabel.size(), Qt.KeepAspectRatio)
+
+        widgets.imagenizqLabel.setPixmap(left_img)
+        widgets.imagederLabel.setPixmap(right_img)
 
         widgets.statusLabel.setText(
             f"Capturadas {last_img_left} y {last_img_right}")

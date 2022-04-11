@@ -3,11 +3,13 @@ import os
 
 
 class LogControl:
-    # logs
-    try:
-        os.makedirs("logs", exist_ok=True)
-    except OSError:
-        raise
+
+    def __init__(self):
+        # logs
+        try:
+            os.makedirs("logs", exist_ok=True)
+        except OSError:
+            raise
 
     def log(msg):
         ts = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
