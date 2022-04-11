@@ -270,20 +270,36 @@ def editInfo(element_id, data):
 def erase_element(element_id):
     '''
     delete element info, metadata and images info from element
+    Nota: No es la solución más elegante, pero los errores de sqlite son muy difíciles de detectar.
+    El orden de las consultas es importante para evitar errores por llaves foráneas.
     '''
     query = QSqlQuery()
     query.prepare(
         """
-        begin;
-        DELETE FROM elements_metadata_text WHERE element_id = :element_id;
-        DELETE FROM images WHERE element_id = :element_id;
-        DELETE FROM elements WHERE element_id = :element_id;
-        commit;
+        DELETE FROM images WHERE element_id = (:element_id);
         """
     )
     query.bindValue(':element_id', element_id)
     if not query.exec_():
-        log.log(f'ERROR No es posible eliminar el elemento: {query.lastError().text()}')
+        log.log(f'ERROR No es posible borrar el elemento {element_id} de la tabla `images`: {query.lastError().text()}')
+        return False
+    query.prepare(
+        """
+        DELETE FROM elements_metadata_text WHERE element_id = (:element_id);
+        """
+    )
+    query.bindValue(':element_id', element_id)
+    if not query.exec_():
+        log.log(f'ERROR No es posible borrar el elemento {element_id} de la tabla `elements_metadata_text`: {query.lastError().text()}')
+        return False
+    query.prepare(
+        """
+        DELETE FROM elements WHERE element_id = (:element_id);
+        """
+    )
+    query.bindValue(':element_id', element_id)
+    if not query.exec_():
+        log.log(f'ERROR No es posible borrar el elemento {element_id} de la tabla `elements`: {query.lastError().text()}')
         return False
     return True
 
