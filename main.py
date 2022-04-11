@@ -167,7 +167,7 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 log.log(
                     f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
-            msgBox = QMessageBox()
+            msgBox = QMessageBox
             msgBox.setIcon(QMessageBox.Warning)
             msgBox.setText("¿Está seguro que desea salir del formulario?")
             msgBox.setWindowTitle("Volver al inicio")
@@ -438,7 +438,7 @@ class MainWindow(QMainWindow):
         '''
         if tipo_documento == 1:
             if widgets.titulolineEdit.text() == "" and widgets.identificadoreslineEdit.text() == "":
-                QMessageBox().warning(self, "Error",
+                QMessageBox.warning(self, "Error",
                                       "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
                 return False
@@ -446,7 +446,7 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 2:
             if widgets.titulodoclineEdit.text() == "" and widgets.identificadoresdoclineEdit.text() == "":
-                QMessageBox().warning(self, "Error",
+                QMessageBox.warning(self, "Error",
                                       "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formDocumento)
                 return False
@@ -454,7 +454,7 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 3:
             if widgets.tituloimagenlineEdit.text() == "" and widgets.identificadoresimagenlineEdit.text() == "":
-                QMessageBox().warning(self, "Error",
+                QMessageBox.warning(self, "Error",
                                       "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formImagen)
                 return False
@@ -462,7 +462,7 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 4:
             if widgets.nombreserlineEdit.text() == "" and widgets.identificadoreserlineEdit.text() == "":
-                QMessageBox().warning(self, "Error",
+                QMessageBox.warning(self, "Error",
                                       "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSeriada)
                 return False
@@ -470,7 +470,7 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 5:
             if widgets.titulolibrolineEdit.text() == "" and widgets.identificadoresLibrolineEdit.text() == "":
-                QMessageBox().warning(self, "Error",
+                QMessageBox.warning(self, "Error",
                                       "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formLibro)
                 return False
@@ -478,12 +478,12 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 6:
             if widgets.nombrearchivolineEdit.text() == "":
-                QMessageBox().warning(self, "Error",
+                QMessageBox.warning(self, "Error",
                                       "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
                 return False
             elif widgets.folderlineEdit.text() == "":
-                QMessageBox().warning(self, "Error",
+                QMessageBox.warning(self, "Error",
                                       "El campo Directorio no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
                 return False
@@ -532,7 +532,7 @@ class MainWindow(QMainWindow):
             }
         elif tipo_de_documento == 4:
             return {
-                'nombre': widgets.nombreserlineEdit.text(),
+                'título': widgets.nombreserlineEdit.text(),
                 'volumen': widgets.volumenserlineEdit.text(),
                 'ejemplar': widgets.ejemplarserlineEdit.text(),
                 'fecha': widgets.fechaserlineEdit.text(),
@@ -544,19 +544,19 @@ class MainWindow(QMainWindow):
             }
         elif tipo_de_documento == 5:
             return {
+                'identificadores': widgets.identificadoresLibrolineEdit.text(),
                 'título': widgets.titulolibrolineEdit.text(),
+                'descripción': widgets.descripcionLibrolineEdit.toPlainText(),
                 'creador': widgets.autorlibrolineEdit.text(),
                 'volumen': widgets.volumelibrolineEdit.text(),
                 'serie': widgets.serieLibrolineEdit.text(),
                 'edición': widgets.edicionLibrolineEdit.text(),
-                'lugar': widgets.lugarLibrolineEdit.text(),
+                'espacio': widgets.lugarLibrolineEdit.text(),
                 'editorial': widgets.editorialLibrolineEdit.text(),
                 'fecha': widgets.fechaLibrolineEdit.text(),
                 'páginas': widgets.paginasLibrolineEdit.text(),
-                'descripción': widgets.descripcionLibrolineEdit.toPlainText(),
                 'idioma': widgets.idiomaLibrolineEdit.text(),
                 'isbn': widgets.isbnLibrolineEdit.text(),
-                'identificadores': widgets.identificadoresLibrolineEdit.text(),
             }
         elif tipo_de_documento == 6:
             return {
@@ -763,6 +763,7 @@ class MainWindow(QMainWindow):
 
                 # get the info for the form fields
                 info = self.get_fields_info(tipo_de_documento)
+                print(info)
 
                 # insert the info into the database
                 insertInfo(id_element, info)
@@ -894,7 +895,7 @@ class MainWindow(QMainWindow):
             log.log(
                 f"ERROR: {e} en {__file__} linea {e.__traceback__.tb_lineno}")
             # single camera QMessageBox, accept retry cancel
-            respuesta = QMessageBox().question(self, "Una cámara conectada",
+            respuesta = QMessageBox.question(self, "Una cámara conectada",
                                                "Solamente una cámara está conectada.\n \
                                         ¿Desea intentar escanear con ella?",
                                                QMessageBox.Ok | QMessageBox.Retry | QMessageBox.Cancel)
@@ -902,7 +903,7 @@ class MainWindow(QMainWindow):
             if respuesta == QMessageBox.Ok:
                 return "single_camera_mode"
             elif respuesta == QMessageBox.Retry:
-                respuesta = QMessageBox().question(self, "Reintentar",
+                respuesta = QMessageBox.question(self, "Reintentar",
                                                    "Asegúrese de que la cámara esté conectada y vuelva a intentarlo.",
                                                    QMessageBox.Ok | QMessageBox.Cancel)
                 if respuesta == QMessageBox.Ok:
@@ -1021,7 +1022,7 @@ class MainWindow(QMainWindow):
             Cams.captura(element_ident, last_img_left,
                          last_img_right, zoom, shutter, dng_status)
         except TypeError as e:
-            QMessageBox().warning(self, "Error",
+            QMessageBox.warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
             log.log(
                 f'ERROR: No se encontraron cámaras en {__file__} linea {e.__traceback__.tb_lineno}')
@@ -1098,7 +1099,7 @@ class MainWindow(QMainWindow):
         '''
         gentle close escanerPage and back to home
         '''
-        if QMessageBox().question(self, "Cerrar el proyecto",
+        if QMessageBox.question(self, "Cerrar el proyecto",
                                   "¿Está seguro que desea cerrar el proyecto?", QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
             widgets.imagederLabel.setPixmap(QPixmap())
             widgets.imagenizqLabel.setPixmap(QPixmap())

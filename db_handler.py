@@ -96,6 +96,7 @@ def insertInfo(id_elemento, info):
     query.bindValue(':element_id', id_elemento)
 
     for key, value in info.items():
+        print(key, value)
         key = metadata_id(key)
         query.bindValue(':key', key)
         query.bindValue(':value', value)
