@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [0.1.503] - 2020-04-11
+
+Esta versión hace ajustes para responder a los issues indicados en <https://github.com/neogranadina/neo_escan/issues/8>
+
+### Fixed
+
+- El botón borrar funciona correctamente.
+- Los thumbnails y la cantidad de imágenes se muestran correctamente.
+- En la página de captura se muestran correctamente la cantidad de imágenes capturadas.
+
 ## [0.1.5024] - 2022-04-11
 
 Esta versión permite ajustar la velocidad de obturación para controlar la exposición de las fotos.

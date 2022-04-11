@@ -225,7 +225,7 @@ class MainWindow(QMainWindow):
             element_identifier = elemento[9]
 
             # TODO: arreglar la ruta a la imagen para thumbnail
-            image_path = Path(IMGDIR, f'{element_id}', 'data', 'JPG')
+            image_path = Path(IMGDIR, f'{element_identifier}', 'data', 'JPG')
             image_not_found = "imgs/No-Photo-Available.png"
 
             # Display image in the grid
@@ -933,7 +933,7 @@ class MainWindow(QMainWindow):
         # set folder_path to label
         widgets.directorio_elementos.setText(os.path.abspath(folder_path))
 
-        self.lenImagenesDir(Path(folder_path, 'JPG'))
+        self.lenImagenesDir(Path(folder_path, 'data', 'JPG'))
 
         return self.open_cameras()
 
@@ -1064,7 +1064,7 @@ class MainWindow(QMainWindow):
 
     def validateCaptura(self):
         # actualiza la cantidad de imagenes en la carpeta
-        self.lenImagenesDir(Path(widgets.directorio_elementos.text(), 'JPG'))
+        self.lenImagenesDir(Path(widgets.directorio_elementos.text(), 'data', 'JPG'))
         widgets.statusLabel.setText("Iniciar nueva captura")
         # back to captura widget
         widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
@@ -1092,7 +1092,7 @@ class MainWindow(QMainWindow):
 
         # back to capture widget
         widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
-        self.lenImagenesDir(folder_path)
+        self.lenImagenesDir(Path(folder_path, 'data', 'JPG'))
 
     def finalizarCaptura(self):
         '''
