@@ -665,7 +665,7 @@ background-color: rgba(255, 255, 255,.5);
              <string notr="true"/>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="inicioPage">
              <property name="styleSheet">
@@ -792,7 +792,7 @@ QLabel {
                    <x>0</x>
                    <y>0</y>
                    <width>877</width>
-                   <height>392</height>
+                   <height>394</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -1480,7 +1480,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>842</width>
+                          <width>633</width>
                           <height>440</height>
                          </rect>
                         </property>
@@ -1849,7 +1849,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>842</width>
+                          <width>633</width>
                           <height>400</height>
                          </rect>
                         </property>
@@ -2191,7 +2191,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>842</width>
+                          <width>646</width>
                           <height>446</height>
                          </rect>
                         </property>
@@ -2572,7 +2572,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>842</width>
+                          <width>605</width>
                           <height>612</height>
                          </rect>
                         </property>
@@ -3103,8 +3103,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>859</width>
-                          <height>204</height>
+                          <width>647</width>
+                          <height>108</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -3279,9 +3279,6 @@ QPushButton#backtoInicioButton::hover {
                     <string notr="true"/>
                    </property>
                    <layout class="QHBoxLayout" name="horizontalLayout_16">
-                    <property name="spacing">
-                     <number>12</number>
-                    </property>
                     <item>
                      <widget class="Line" name="line_3">
                       <property name="styleSheet">
@@ -3303,7 +3300,7 @@ QPushButton#backtoInicioButton::hover {
                       <property name="maximumSize">
                        <size>
                         <width>60</width>
-                        <height>34</height>
+                        <height>60</height>
                        </size>
                       </property>
                       <property name="minimum">
@@ -3371,6 +3368,98 @@ QPushButton#backtoInicioButton::hover {
                         </property>
                         <property name="placeholderText">
                          <string># entre 0 y 50</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <widget class="Line" name="line_4">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QDial" name="exposicionDial">
+                      <property name="minimumSize">
+                       <size>
+                        <width>60</width>
+                        <height>60</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>60</width>
+                        <height>60</height>
+                       </size>
+                      </property>
+                      <property name="minimum">
+                       <number>1</number>
+                      </property>
+                      <property name="maximum">
+                       <number>125</number>
+                      </property>
+                      <property name="value">
+                       <number>25</number>
+                      </property>
+                      <property name="wrapping">
+                       <bool>true</bool>
+                      </property>
+                      <property name="notchTarget">
+                       <double>10.000000000000000</double>
+                      </property>
+                      <property name="notchesVisible">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_23">
+                      <item>
+                       <widget class="QLabel" name="exposicionLabel">
+                        <property name="minimumSize">
+                         <size>
+                          <width>95</width>
+                          <height>10</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>95</width>
+                          <height>10</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>Nivel de exposición</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="exposicionValue">
+                        <property name="minimumSize">
+                         <size>
+                          <width>95</width>
+                          <height>34</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>95</width>
+                          <height>34</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>25</string>
                         </property>
                        </widget>
                       </item>

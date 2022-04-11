@@ -80,6 +80,9 @@ class DescargarIMGS:
                 with open(f'{img_dir}/metadata.json', 'w', encoding='utf-8') as fp:
                     json.dump({}, fp)
 
+            # move metadata.json to bagit root
+            shutil.move(f'{img_dir}/data/config_project.json', f'{img_dir}/config_project.json')
+
 
         img_dir = os.path.join(IMGDIR, self.nombre_proyecto, 'data', f"{tipo_img.upper()}")
         os.makedirs(img_dir, exist_ok=True)
