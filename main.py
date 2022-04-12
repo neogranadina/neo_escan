@@ -1134,6 +1134,10 @@ class MainWindow(QMainWindow):
                 log.log(
                     f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
 
+    # Configuration page
+    
+
+
     def gentle_close(self):
         '''
         close cams session, close db connection and close application
