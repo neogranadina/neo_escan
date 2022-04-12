@@ -3488,6 +3488,65 @@ QPushButton#backtoInicioButton::hover {
                      </widget>
                     </item>
                     <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_24">
+                      <item>
+                       <widget class="QLabel" name="orientacionLabel">
+                        <property name="minimumSize">
+                         <size>
+                          <width>61</width>
+                          <height>0</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>61</width>
+                          <height>16777215</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>Orientación</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="orientacionValue">
+                        <property name="minimumSize">
+                         <size>
+                          <width>120</width>
+                          <height>34</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>120</width>
+                          <height>34</height>
+                         </size>
+                        </property>
+                        <item>
+                         <property name="text">
+                          <string>vertical (portrait)</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>horizontal (landscape)</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <widget class="Line" name="line_5">
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
                      <widget class="QCheckBox" name="dng_check">
                       <property name="minimumSize">
                        <size>

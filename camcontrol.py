@@ -159,7 +159,7 @@ class Cam:
             log.log(f"ERROR: {str(e)}")
             raise
 
-    def _shoot(self, dev, element_id, folio, z, shutter, dng_captura=False):
+    def _shoot(self, dev, element_id, folio, z, shutter, orientacion, dng_captura=False):
         '''
         dev = el dispositivo conectado y en modo rec() [usar camcontrol.Cam().cam()]
         dng = True. En modo False no guarda imágenes dng en la memoria de la cámara. 
@@ -194,7 +194,7 @@ class Cam:
         obj_descarga = DescargarIMGS(imgdata, element_id, folio, dev)
 
         # descarga jpg
-        obj_descarga.descarga_jpg()
+        obj_descarga.descarga_jpg(orientacion)
         descjpg = time.time()
         log.log(f'Tiempo de descarga: {descjpg - capt}')
         if dng_captura == True:
@@ -205,7 +205,7 @@ class Cam:
         log.log(
             f'Tiempo total proceso descarga {folio} / id: {element_id}: {time.time() - ini}')
 
-    def captura(self, element_id, left_folio, right_folio, zoom, shutter, dng_captura):
+    def captura(self, element_id, left_folio, right_folio, zoom, shutter, orientacion, dng_captura):
         '''
         Realiza la captura en ambas cámaras casi simultáneamente.
         element_id string con el id del elemento
@@ -219,15 +219,15 @@ class Cam:
         if len(self.devs) == 1:
             if self.devs[0] is None:
                 self._shoot(right_camera, element_id, right_folio,
-                            zoom, shutter, dng_captura=dng_captura)
+                            zoom, shutter, orientacion, dng_captura=dng_captura)
             else:
                 self._shoot(left_camera, element_id, left_folio,
-                            zoom, shutter, dng_captura=dng_captura)
+                            zoom, shutter, orientacion, dng_captura=dng_captura)
         elif len(self.devs) == 2:
             c1 = mp.Process(target=self._shoot, args=(
-                left_camera, element_id, left_folio, zoom, shutter))
+                left_camera, element_id, left_folio, zoom, shutter, orientacion))
             c2 = mp.Process(target=self._shoot, args=(
-                right_camera, element_id, right_folio, zoom, shutter))
+                right_camera, element_id, right_folio, zoom, shutter, orientacion))
             c1.start()
             c2.start()
         elif len(self.devs) < 1:
