@@ -930,7 +930,19 @@ class MainWindow(QMainWindow):
         widgets.elementoIDLabel.setText(datos_elemento[9])
         widgets.elementoTituloLabel.setText(datos_elemento[1])
 
-        # create directory to save images
+        # get config file
+        config_file = os.path.join(IMGDIR, str(datos_elemento[9]), 'config_project.json')
+
+        cfg_text = open(config_file, 'r')
+        cfg_data = json.load(cfg_text)
+        widgets.configLabel.setText(f"""
+        <b>Zoom:</b> {cfg_data['zoom']}. <br \>
+        <b>Velocidad obturación:</b> {cfg_data['shutter']}. <br \>
+        <b>Orientación:</b> {cfg_data['orientacion']}. <br \>
+        <b>DNG:</b> {str(cfg_data['dng'])}.
+        """)
+
+        # path to images directory
         folder_path = os.path.join(IMGDIR, str(datos_elemento[9]))
 
         # set folder_path to label
@@ -1112,6 +1124,7 @@ class MainWindow(QMainWindow):
             widgets.elementoTituloLabel.setText('')
             widgets.directorio_elementos.setText('')
             widgets.cantidadimgsLabel.setText('')
+            widgets.configLabel.setText('')
             # back to home
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()

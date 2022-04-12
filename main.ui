@@ -4097,6 +4097,46 @@ border-radius: 5px;</string>
                         </layout>
                        </item>
                        <item>
+                        <widget class="QLabel" name="configtitle">
+                         <property name="font">
+                          <font>
+                           <pointsize>10</pointsize>
+                           <weight>75</weight>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Configuración del proyecto</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="configLabel">
+                         <property name="minimumSize">
+                          <size>
+                           <width>190</width>
+                           <height>90</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>190</width>
+                           <height>90</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;</string>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
                         <spacer name="verticalSpacer">
                          <property name="orientation">
                           <enum>Qt::Vertical</enum>

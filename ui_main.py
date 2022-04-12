@@ -1772,6 +1772,22 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_18.addLayout(self.gridLayout_5)
 
+        self.configtitle = QLabel(self.controlPanel)
+        self.configtitle.setObjectName(u"configtitle")
+        self.configtitle.setFont(font6)
+
+        self.verticalLayout_18.addWidget(self.configtitle)
+
+        self.configLabel = QLabel(self.controlPanel)
+        self.configLabel.setObjectName(u"configLabel")
+        self.configLabel.setMinimumSize(QSize(190, 90))
+        self.configLabel.setMaximumSize(QSize(190, 90))
+        self.configLabel.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"border-radius: 5px;")
+        self.configLabel.setWordWrap(True)
+
+        self.verticalLayout_18.addWidget(self.configLabel)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_18.addItem(self.verticalSpacer)
@@ -2153,6 +2169,8 @@ class Ui_MainWindow(object):
         self.openFolderButton.setText("")
         self.titulelementoTituloLabel_6.setText(QCoreApplication.translate("MainWindow", u"N\u00famero de imgs", None))
         self.cantidadimgsLabel.setText("")
+        self.configtitle.setText(QCoreApplication.translate("MainWindow", u"Configuraci\u00f3n del proyecto", None))
+        self.configLabel.setText("")
         self.imagenizqLabel.setText("")
         self.imagederLabel.setText("")
         self.statusLabel.setText(QCoreApplication.translate("MainWindow", u"Clic en capturar para iniciar", None))
