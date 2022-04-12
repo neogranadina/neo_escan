@@ -97,7 +97,7 @@ class DescargarIMGS:
         return img_path.split("/")[-1]
 
 
-    def descarga_jpg(self):
+    def descarga_jpg(self, orientacion):
         '''
         crea imagen jpg a partir del binario (imgdata)
         '''
@@ -107,7 +107,19 @@ class DescargarIMGS:
             fp.write(self.imgdata)
             self.associateImageWithElement(
                 self.nombre_proyecto, jpg_path, 'jpg')
-            print(f"descargada img {jpg_path}")
+        if orientacion == "vertical":
+            img_num = int(jpg_path.split("/")[-1].split(".")[0])
+            orient = [8 if img_num % 2 == 0 else 6][0]
+        elif orientacion == "horizontal":
+            orient = 1
+
+        # asegurar orientación correcta
+        img = Image(jpg_path)
+        img.orientation = orient
+        with open(jpg_path, 'wb') as fp:
+            fp.write(img.get_file())
+
+        print(f"descargada img {jpg_path}")
 
         # update bag
         bag = bagit.Bag(os.path.join(IMGDIR, self.nombre_proyecto))
@@ -178,7 +190,8 @@ class DescargarIMGS:
         'Model': img.get('model'),
         'Orientation': img.get('orientation'),
         'ShutterSpeedValue': img.get('shutter_speed_value'),
-        'Flash': img.get('flash'),
+        'FlashFired': f"{img.get('flash.flash_fired')}",
+        'RedEyeReduction': f"{img.get('flash.red_eye_reduction_supported')}",
         'WhiteBalance': img.get('white_balance'),
         'ExposureMode': img.get('exposure_mode'),
         'FocalLength': img.get('focal_length'),

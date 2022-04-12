@@ -1503,6 +1503,35 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_16.addWidget(self.line)
 
+        self.verticalLayout_24 = QVBoxLayout()
+        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
+        self.orientacionLabel = QLabel(self.widget_3)
+        self.orientacionLabel.setObjectName(u"orientacionLabel")
+        self.orientacionLabel.setMinimumSize(QSize(61, 0))
+        self.orientacionLabel.setMaximumSize(QSize(61, 16777215))
+
+        self.verticalLayout_24.addWidget(self.orientacionLabel)
+
+        self.orientacionValue = QComboBox(self.widget_3)
+        self.orientacionValue.addItem("")
+        self.orientacionValue.addItem("")
+        self.orientacionValue.setObjectName(u"orientacionValue")
+        self.orientacionValue.setMinimumSize(QSize(120, 34))
+        self.orientacionValue.setMaximumSize(QSize(120, 34))
+
+        self.verticalLayout_24.addWidget(self.orientacionValue)
+
+
+        self.horizontalLayout_16.addLayout(self.verticalLayout_24)
+
+        self.line_5 = QFrame(self.widget_3)
+        self.line_5.setObjectName(u"line_5")
+        self.line_5.setStyleSheet(u"background-color: rgb(0, 0, 0);")
+        self.line_5.setFrameShape(QFrame.VLine)
+        self.line_5.setFrameShadow(QFrame.Sunken)
+
+        self.horizontalLayout_16.addWidget(self.line_5)
+
         self.dng_check = QCheckBox(self.widget_3)
         self.dng_check.setObjectName(u"dng_check")
         self.dng_check.setMinimumSize(QSize(122, 32))
@@ -2107,6 +2136,10 @@ class Ui_MainWindow(object):
         self.zoom_valuedit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"# entre 0 y 50", None))
         self.exposicionLabel.setText(QCoreApplication.translate("MainWindow", u"Nivel de exposici\u00f3n", None))
         self.exposicionValue.setText(QCoreApplication.translate("MainWindow", u"25", None))
+        self.orientacionLabel.setText(QCoreApplication.translate("MainWindow", u"Orientaci\u00f3n", None))
+        self.orientacionValue.setItemText(0, QCoreApplication.translate("MainWindow", u"vertical (portrait)", None))
+        self.orientacionValue.setItemText(1, QCoreApplication.translate("MainWindow", u"horizontal (landscape)", None))
+
         self.dng_check.setText(QCoreApplication.translate("MainWindow", u"Guardar en DNG", None))
         self.enviarFormButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))
         self.enviarFormEditButton.setText(QCoreApplication.translate("MainWindow", u"enviar", None))

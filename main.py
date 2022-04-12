@@ -721,13 +721,14 @@ class MainWindow(QMainWindow):
         value = widgets.exposicionDial.value()
         widgets.exposicionValue.setText(str(value))
 
-    def save_config(self, path, zoom, shutter, dng, info):
+    def save_config(self, path, zoom, shutter, orientacion, dng, info):
         '''
         save config
         '''
         config = {
             'zoom': zoom,
             'shutter': shutter,
+            'orientacion': orientacion,
             'dng': dng,
         }
         # merge config dict with info dict
@@ -745,6 +746,7 @@ class MainWindow(QMainWindow):
         #zoom_value = widgets.zoom_dial.value()
         zoom_value = widgets.zoom_valuedit.text()
         shutter_value = widgets.exposicionValue.text()
+        orientacion_value = ["vertical" if widgets.orientacionValue.currentIndex() == 0 else "horizontal"][0]
 
         # dng_checkbox value
         if widgets.dng_check.isChecked():
@@ -763,7 +765,6 @@ class MainWindow(QMainWindow):
 
                 # get the info for the form fields
                 info = self.get_fields_info(tipo_de_documento)
-                print(info)
 
                 # insert the info into the database
                 insertInfo(id_element, info)
@@ -782,7 +783,7 @@ class MainWindow(QMainWindow):
 
                 # save project_config.json file
                 self.save_config(folder_path, zoom_value,
-                                 shutter_value, dng, info)
+                                 shutter_value, orientacion_value, dng, info)
 
                 # clean form fields
                 self.cleanForm(tipo_de_documento)
@@ -799,6 +800,7 @@ class MainWindow(QMainWindow):
         #zoom_value = widgets.zoom_dial.value()
         zoom_value = widgets.zoom_valuedit.text()
         shutter_value = widgets.exposicionValue.text()
+        orientacion_value = ["vertical" if widgets.orientacionValue.currentIndex() == 0 else "horizontal"][0]
 
         # dng_checkbox value
         if widgets.dng_check.isChecked():
@@ -822,7 +824,7 @@ class MainWindow(QMainWindow):
 
             # save project_config.json file
             self.save_config(folder_path, zoom_value,
-                             shutter_value, dng, info)
+                             shutter_value, orientacion_value, dng, info)
 
             # clean form fields
             self.cleanForm(tipo_de_documento)
@@ -1017,10 +1019,15 @@ class MainWindow(QMainWindow):
             shutter = '25'
 
         try:
+            orientacion = config_project['orientacion']
+        except:
+            orientacion = 'vertical'
+
+        try:
             # TODO: ¡Hacer que esto funcione!
             dng_status = config_project['dng']
             Cams.captura(element_ident, last_img_left,
-                         last_img_right, zoom, shutter, dng_status)
+                         last_img_right, zoom, shutter, orientacion, dng_status)
         except TypeError as e:
             QMessageBox.warning(self, "Error",
                                         "No se encontraron cámaras", QMessageBox.Ok)
