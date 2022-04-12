@@ -26,7 +26,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>C:/Users/jairo/.designer/backup/imgs/logo.png</normaloff>C:/Users/jairo/.designer/backup/imgs/logo.png</iconset>
+    <normaloff>imgs/logo.png</normaloff>imgs/logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: transparent;</string>
@@ -665,7 +665,7 @@ background-color: rgba(255, 255, 255,.5);
              <string notr="true"/>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="inicioPage">
              <property name="styleSheet">
@@ -1480,7 +1480,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>633</width>
+                          <width>842</width>
                           <height>440</height>
                          </rect>
                         </property>
@@ -1849,7 +1849,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>633</width>
+                          <width>842</width>
                           <height>400</height>
                          </rect>
                         </property>
@@ -2191,7 +2191,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>646</width>
+                          <width>842</width>
                           <height>446</height>
                          </rect>
                         </property>
@@ -2572,7 +2572,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>605</width>
+                          <width>842</width>
                           <height>612</height>
                          </rect>
                         </property>
@@ -3103,8 +3103,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>647</width>
-                          <height>108</height>
+                          <width>859</width>
+                          <height>205</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17">

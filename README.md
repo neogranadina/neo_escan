@@ -4,6 +4,16 @@
 
 [Descargar la imagen de Raspberry desde este enlace](https://downloads.raspberrypi.org/raspios_full_armhf/images/raspios_full_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-full.zip)
 
+Es importante también que se trabaje con un sistema de archivos expandido para permitir que el programa pueda modificar archivos de imagen.
+
+Para ello, ejecutar el siguiente comando:
+
+```shell
+sudo raspi-config
+```
+
+Seleccionar "7 opciones avanzadas" y posteriormente “A1 Expand filesystem”.
+
 ## Instalación
 
 En entornos de desarrollo es recomendado crear previamente un entorno virtual (opcional):

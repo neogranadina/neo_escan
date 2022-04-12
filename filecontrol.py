@@ -19,7 +19,7 @@ from pathlib import Path
 import os
 import datetime
 from db_handler import getElementIdByMetadata, wrap_imageWithElement
-from PIL import Image, ExifTags
+from exif import Image
 import logging
 import configparser
 import bagit
@@ -165,21 +165,29 @@ class DescargarIMGS:
         '''
         obtiene los metadatos de una imagen
         '''
-        image = Image.open(image_path)
-        if image.format == "JPEG":
-            img_exif = image._getexif()
-        elif image.format == "DNG":
-            img_exif = image.getexif()
-        else:
-            img_exif = None
+        with open(image_path, 'rb') as fp:
+            img = Image(fp)
 
-        if img_exif is not None:
-            exif = {ExifTags.TAGS.get(
-                k, "etiqueta desconocida"): v for k, v in img_exif.items()}
-            return exif
-        else:
-            return {'No metadata': 'No metadata'}
 
+        # Agregar exif labels de acuerdo con img.list_all()
+        imgmetadata = {
+        'image_description': img.get('image_description'),
+        'datetime_original': img.get('datetime_original'),
+        'ResolutionUnit': img.get('resolution_unit'),
+        'Make': img.get('make'),
+        'Model': img.get('model'),
+        'Orientation': img.get('orientation'),
+        'ShutterSpeedValue': img.get('shutter_speed_value'),
+        'Flash': img.get('flash'),
+        'WhiteBalance': img.get('white_balance'),
+        'ExposureMode': img.get('exposure_mode'),
+        'FocalLength': img.get('focal_length'),
+        'ExposureTime': img.get('exposure_time'),
+        'ExifVersion': img.get('exif_version'),
+        'ApertureValue': img.get('aperture_value'),
+        }
+
+        return imgmetadata
 
     def write_metadata_json(self, img_path, metadata):
         '''
@@ -233,37 +241,10 @@ class DescargarIMGS:
         'mime_type': mime_type,
         'filename': filename,
         'path': path,
-        'img_timestamp': img_timestamp.strftime("%Y-%m-%d %H:%M:%S"),
-        'img_modified_ts': img_modified_ts.strftime("%Y-%m-%d %H:%M:%S"),
-        'ResolutionUnit': img_metadata['ResolutionUnit'],
-        'ExifOffset': img_metadata['ExifOffset'],
-        'Make': img_metadata['Make'],
-        'Model': img_metadata['Model'],
-        'Orientation': img_metadata['Orientation'],
-        'YCbCrPositioning': img_metadata['YCbCrPositioning'],
-        'XResolution': img_metadata['XResolution'],
-        'YResolution': img_metadata['YResolution'],
-        'CompressedBitsPerPixel': img_metadata['CompressedBitsPerPixel'],
-        'ShutterSpeedValue': img_metadata['ShutterSpeedValue'],
-        'ApertureValue': img_metadata['ApertureValue'],
-        'ExposureBiasValue': img_metadata['ExposureBiasValue'],
-        'MaxApertureValue': img_metadata['MaxApertureValue'],
-        'MeteringMode': img_metadata['MeteringMode'],
-        'Flash': img_metadata['Flash'],
-        'FocalLength': img_metadata['FocalLength'],
-        'ExifImageWidth': img_metadata['ExifImageWidth'],
-        'FocalPlaneXResolution': img_metadata['FocalPlaneXResolution'],
-        'ExifImageHeight': img_metadata['ExifImageHeight'],
-        'FocalPlaneYResolution': img_metadata['FocalPlaneYResolution'],
-        'FocalPlaneResolutionUnit': img_metadata['FocalPlaneResolutionUnit'],
-        'SensingMethod': img_metadata['SensingMethod'],
-        'ExposureTime': img_metadata['ExposureTime'],
-        'ExifInteroperabilityOffset': img_metadata['ExifInteroperabilityOffset'],
-        'FNumber': img_metadata['FNumber'],
-        'ISOSpeedRatings': img_metadata['ISOSpeedRatings'],
-        'WhiteBalance': img_metadata['WhiteBalance'],
-        'DigitalZoomRatio': img_metadata['DigitalZoomRatio']
         }
+
+        # metadatos de la imagen
+        dcmetadata.update(img_metadata)
         
         self.write_metadata_json(img_path, dcmetadata)
 
