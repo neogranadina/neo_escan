@@ -16,7 +16,7 @@ import json
 import shutil
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QIcon, QPixmap
+from PySide2.QtGui import QIcon, QPixmap, QImage
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGridLayout, QPushButton
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, Qt
@@ -1050,16 +1050,14 @@ class MainWindow(QMainWindow):
         left_img_path = left_img_path.absolute().as_posix()
         right_img_path = right_img_path.absolute().as_posix()
 
-        left_img = QPixmap(left_img_path)
-        right_img = QPixmap(right_img_path)
+        left_img = QImage(left_img_path)
+        right_img = QImage(right_img_path)
 
-        left_img = left_img.scaled(
-            widgets.imagenizqLabel.size(), Qt.KeepAspectRatio)
-        right_img = right_img.scaled(
-            widgets.imagederLabel.size(), Qt.KeepAspectRatio)
+        left_img = left_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
+        right_img = right_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
 
-        widgets.imagenizqLabel.setPixmap(left_img)
-        widgets.imagederLabel.setPixmap(right_img)
+        widgets.imagenizqLabel.setPixmap(QPixmap.fromImage(left_img))
+        widgets.imagederLabel.setPixmap(QPixmap.fromImage(right_img))
 
         widgets.statusLabel.setText(
             f"Capturadas {last_img_left} y {last_img_right}")
@@ -1083,7 +1081,7 @@ class MainWindow(QMainWindow):
 
         tipos = ['JPG', 'DNG']
         for t in tipos:
-            last_imagenes = glob.glob(f'{folder_path}/{t}/*.{t.lower()}')
+            last_imagenes = glob.glob(f'{folder_path}/data/{t}/*.{t.lower()}')
             last_imagenes.sort(key=os.path.getctime, reverse=True)
             last_imagenes = last_imagenes[:2]
             for f in last_imagenes:

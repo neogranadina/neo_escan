@@ -12,6 +12,7 @@ Esta versión hace ajustes para responder a los issues indicados en <https://git
 - Los thumbnails y la cantidad de imágenes se muestran correctamente.
 - En la página de captura se muestran correctamente la cantidad de imágenes capturadas.
 - Corregidos dos errores de claves que impedían crear libros y seriadas.
+- El botón de retomar funciona correctamente.
 
 ## [0.1.5024] - 2022-04-11
 

@@ -1987,7 +1987,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(2)
         self.tipoColeccion.setCurrentIndex(0)
         self.botones_metadata.setCurrentIndex(0)
         self.controlesCamstackedWidget.setCurrentIndex(0)
