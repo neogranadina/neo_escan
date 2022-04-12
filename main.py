@@ -763,7 +763,6 @@ class MainWindow(QMainWindow):
 
                 # get the info for the form fields
                 info = self.get_fields_info(tipo_de_documento)
-                print(info)
 
                 # insert the info into the database
                 insertInfo(id_element, info)
