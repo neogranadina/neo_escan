@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
-## [0.1.503] - 2020-04-11
+## [0.1.600] - 2020-04-13
 
-Esta versión hace ajustes para responder a los issues indicados en <https://github.com/neogranadina/neo_escan/issues/8> y otros que surgieron de las pruebas.
+Esta versión incluye una pantalla de configuración general para los escáners.
+
+Además, hace ajustes para responder a los issues indicados en <https://github.com/neogranadina/neo_escan/issues/8> y otros que surgieron de las pruebas.
+
+### Added
+
+- Se creó una pantalla de configuración general para los escáners, de tal manera que se pueda probar la configuración más adecuada relacionada con el zoom, la velocidad de obturación y la orientación de las cámaras.
 
 ### Fixed
 
@@ -12,6 +18,7 @@ Esta versión hace ajustes para responder a los issues indicados en <https://git
 - Los thumbnails y la cantidad de imágenes se muestran correctamente.
 - En la página de captura se muestran correctamente la cantidad de imágenes capturadas.
 - Corregidos dos errores de claves que impedían crear libros y seriadas.
+- El botón de retomar funciona correctamente.
 
 ## [0.1.5024] - 2022-04-11
 

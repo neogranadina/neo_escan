@@ -216,6 +216,7 @@ class Cam:
         left_camera = self.devs[0] if not self.devs[0] is None else None
         right_camera = self.devs[1] if not self.devs[1] is None else None
 
+
         if len(self.devs) == 1:
             if self.devs[0] is None:
                 self._shoot(right_camera, element_id, right_folio,

@@ -16,7 +16,7 @@ import json
 import shutil
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QIcon, QPixmap
+from PySide2.QtGui import QIcon, QPixmap, QImage
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGridLayout, QPushButton
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, Qt
@@ -96,9 +96,14 @@ class MainWindow(QMainWindow):
         widgets.inicioButton.clicked.connect(self.buttonClick)
         widgets.coleccionesButton.clicked.connect(self.buttonClick)
         widgets.escanerButton.clicked.connect(self.buttonClick)
+        widgets.configButton.clicked.connect(self.buttonClick)
 
         # Seleccionar página de inicio
-        widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+        if not config['camaras']['exposicion_predeterminada'] == '' or not config['camaras']['zoom_predeterminado'] == '':
+            widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+        else:
+            widgets.stackedWidget.setCurrentWidget(widgets.configurationPage)
+            self.set_config_page()
 
         # set home page
         widgets.nuevoProyectoButton.clicked.connect(self.buttonClick)
@@ -124,6 +129,15 @@ class MainWindow(QMainWindow):
         widgets.resetButton.clicked.connect(self.resetCaptura)
         # cerrar escaner
         widgets.finalizarButton.clicked.connect(self.finalizarCaptura)
+
+        # config page
+        widgets.zoom_dial_2.valueChanged.connect(lambda: self.zoom_dial_2())
+        widgets.exposicionDial_2.valueChanged.connect(lambda: self.exposicion_2())
+        widgets.selectCamIzq.currentIndexChanged.connect(lambda: self.selectCam(widgets.selectCamIzq.currentIndex()))
+        widgets.selectCamDer.currentIndexChanged.connect(lambda: self.selectCam(widgets.selectCamDer.currentIndex()))
+        # botones config
+        widgets.testconfig.clicked.connect(self.test_config)
+        widgets.saveconfig.clicked.connect(self.save_config)
 
     # comprobación inicial
     def check_dir(self):
@@ -191,6 +205,9 @@ class MainWindow(QMainWindow):
         elif btnName == "escanerButton":
             self.set_scanner_page()
             widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
+        elif btnName == "configurationPage":
+            widgets.stackedWidget.setCurrentWidget(widgets.configurationPage)
+            self.set_config_page()
 
     # Funciones para la página de elementos
 
@@ -721,7 +738,20 @@ class MainWindow(QMainWindow):
         value = widgets.exposicionDial.value()
         widgets.exposicionValue.setText(str(value))
 
-    def save_config(self, path, zoom, shutter, orientacion, dng, info):
+    def zoom_dial_2(self):
+        value = widgets.zoom_dial_2.value()
+        widgets.zoom_valuedit_2.setText(str(value))
+    
+    def exposicion_2(self):
+        value = widgets.exposicionDial_2.value()
+        widgets.exposicionValue_2.setText(str(value))
+
+    def selectCam(self, index_value):
+        widgets.selectCamIzq.setCurrentIndex(index_value)
+        widgets.selectCamDer.setCurrentIndex(index_value)
+
+
+    def save_project_config(self, path, zoom, shutter, orientacion, dng, info):
         '''
         save config
         '''
@@ -782,7 +812,7 @@ class MainWindow(QMainWindow):
                     raise
 
                 # save project_config.json file
-                self.save_config(folder_path, zoom_value,
+                self.save_project_config(folder_path, zoom_value,
                                  shutter_value, orientacion_value, dng, info)
 
                 # clean form fields
@@ -823,7 +853,7 @@ class MainWindow(QMainWindow):
             folder_path = os.path.join(IMGDIR, str(datos_elemento[9]))
 
             # save project_config.json file
-            self.save_config(folder_path, zoom_value,
+            self.save_project_config(folder_path, zoom_value,
                              shutter_value, orientacion_value, dng, info)
 
             # clean form fields
@@ -930,7 +960,19 @@ class MainWindow(QMainWindow):
         widgets.elementoIDLabel.setText(datos_elemento[9])
         widgets.elementoTituloLabel.setText(datos_elemento[1])
 
-        # create directory to save images
+        # get config file
+        config_file = os.path.join(IMGDIR, str(datos_elemento[9]), 'config_project.json')
+
+        cfg_text = open(config_file, 'r')
+        cfg_data = json.load(cfg_text)
+        widgets.configLabel.setText(f"""
+        <b>Zoom:</b> {cfg_data['zoom']}. <br \>
+        <b>Velocidad obturación:</b> {cfg_data['shutter']}. <br \>
+        <b>Orientación:</b> {cfg_data['orientacion']}. <br \>
+        <b>DNG:</b> {str(cfg_data['dng'])}.
+        """)
+
+        # path to images directory
         folder_path = os.path.join(IMGDIR, str(datos_elemento[9]))
 
         # set folder_path to label
@@ -1050,16 +1092,14 @@ class MainWindow(QMainWindow):
         left_img_path = left_img_path.absolute().as_posix()
         right_img_path = right_img_path.absolute().as_posix()
 
-        left_img = QPixmap(left_img_path)
-        right_img = QPixmap(right_img_path)
+        left_img = QImage(left_img_path)
+        right_img = QImage(right_img_path)
 
-        left_img = left_img.scaled(
-            widgets.imagenizqLabel.size(), Qt.KeepAspectRatio)
-        right_img = right_img.scaled(
-            widgets.imagederLabel.size(), Qt.KeepAspectRatio)
+        left_img = left_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
+        right_img = right_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
 
-        widgets.imagenizqLabel.setPixmap(left_img)
-        widgets.imagederLabel.setPixmap(right_img)
+        widgets.imagenizqLabel.setPixmap(QPixmap.fromImage(left_img))
+        widgets.imagederLabel.setPixmap(QPixmap.fromImage(right_img))
 
         widgets.statusLabel.setText(
             f"Capturadas {last_img_left} y {last_img_right}")
@@ -1083,7 +1123,7 @@ class MainWindow(QMainWindow):
 
         tipos = ['JPG', 'DNG']
         for t in tipos:
-            last_imagenes = glob.glob(f'{folder_path}/{t}/*.{t.lower()}')
+            last_imagenes = glob.glob(f'{folder_path}/data/{t}/*.{t.lower()}')
             last_imagenes.sort(key=os.path.getctime, reverse=True)
             last_imagenes = last_imagenes[:2]
             for f in last_imagenes:
@@ -1114,6 +1154,7 @@ class MainWindow(QMainWindow):
             widgets.elementoTituloLabel.setText('')
             widgets.directorio_elementos.setText('')
             widgets.cantidadimgsLabel.setText('')
+            widgets.configLabel.setText('')
             # back to home
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()
@@ -1122,6 +1163,111 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 log.log(
                     f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+
+    # Configuration page
+    def set_config_page(self):
+        '''
+        set config page
+        '''
+        expo_pred =  config['camaras']['exposicion_predeterminada']
+        zoom_pred = config['camaras']['zoom_predeterminado']
+
+        valor_dial_expo = [int(expo_pred) if expo_pred != '' else 25][0]
+        valor_dial_zoom = [int(zoom_pred) if zoom_pred != '' else 27][0]
+        # set dial value
+        widgets.exposicionDial_2.setValue(valor_dial_expo)
+        widgets.zoom_dial_2.setValue(valor_dial_zoom)
+        # set label value
+        widgets.exposicionValue_2.setText(str(valor_dial_expo))
+        widgets.zoom_valuedit_2.setText(str(valor_dial_zoom))
+
+        return self.open_cameras()
+
+
+    def test_config(self):
+        '''
+        replica el comportamiento de la funcion capturar() de manera más sintética.
+        Las imágenes en el test siempre se sobreescriben.
+        '''
+        # delete test_config folder
+        try:
+            shutil.rmtree(Path(IMGDIR, 'test_config', 'data', 'JPG'))
+        except Exception as e:
+            log.log(f'No se elimina la carpeta test_config porque no se ha creado. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+            pass
+
+        # get values from selectores
+        expo = widgets.exposicionValue_2.text()
+        zoom = widgets.zoom_valuedit_2.text()
+        dng = False
+        
+        # test captura
+        Cams.captura("test_config", "0000", "0001", zoom, expo, "vertical", dng)
+
+        left_image_path = Path(IMGDIR, 'test_config', 'data', 'JPG', '0000.jpg')
+        right_image_path = Path(IMGDIR, 'test_config', 'data', 'JPG', '0001.jpg')
+
+        tolerancia = 0
+        while not os.path.exists(left_image_path) or not os.path.exists(right_image_path):
+            time.sleep(2)
+            tolerancia += 1
+            if tolerancia > 5:
+                break
+        
+        # set Pixmap to empty
+        widgets.imagenizqLabel_2.setPixmap(QPixmap())
+        widgets.imagederLabel_2.setPixmap(QPixmap())
+
+        left_image_path = left_image_path.absolute().as_posix()
+        right_image_path = right_image_path.absolute().as_posix()
+
+        left_img = QImage(left_image_path)
+        right_img = QImage(right_image_path)
+
+        left_img = left_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
+        right_img = right_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
+
+        widgets.imagenizqLabel_2.setPixmap(QPixmap.fromImage(left_img))
+        widgets.imagederLabel_2.setPixmap(QPixmap.fromImage(right_img))
+
+
+    def save_config(self):
+        '''
+        Guardar la configuración deseada en el archivo config.cfg
+        '''
+        # reload config.cfg
+        config.read('config.cfg')
+        # get values from selectores
+        expo = widgets.exposicionValue_2.text()
+        zoom = widgets.zoom_valuedit_2.text()
+        dng = "False"
+        if not widgets.selectCamIzq.currentIndex != 0:
+            cam_izq = config['camaras']['serial_der']
+            cam_der = config['camaras']['serial_izq']
+        else:
+            cam_izq = config['camaras']['serial_izq']
+            cam_der = config['camaras']['serial_der']
+
+        print(f'Exposicion: {expo} Zoom: {zoom} DNG: {dng} Cam Izq: {cam_izq} Cam Der: {cam_der}')
+
+        # save config
+        config['camaras']['serial_izq'] = cam_izq
+        config['camaras']['serial_der'] = cam_der
+        config['camaras']['exposicion_predeterminada'] = expo
+        config['camaras']['zoom_predeterminado'] = zoom
+        config['camaras']['dng'] = dng
+        with open('config.cfg', 'w') as configfile:
+            config.write(configfile)
+
+        # delete test_config folder
+        try:
+            shutil.rmtree(Path(IMGDIR, 'test_config'))
+        except Exception as e:
+            log.log(f'WARNING: No se pudo borrar la carpeta test_config. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+        
+        # back to inicio
+        widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+        Cams.close_dev()
 
     def gentle_close(self):
         '''
