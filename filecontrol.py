@@ -81,7 +81,8 @@ class DescargarIMGS:
                     json.dump({}, fp)
 
             # move metadata.json to bagit root
-            shutil.move(f'{img_dir}/data/config_project.json', f'{img_dir}/config_project.json')
+            if not img_dir.endswith('test_config'):
+                shutil.move(f'{img_dir}/data/config_project.json', f'{img_dir}/config_project.json')
 
 
         img_dir = os.path.join(IMGDIR, self.nombre_proyecto, 'data', f"{tipo_img.upper()}")
@@ -206,6 +207,7 @@ class DescargarIMGS:
         '''
         escribe los metadatos en un archivo json
         '''
+        print(img_path)
         metadata_path = os.path.join(img_path[:-18], "metadata.json")
 
         if not os.path.exists(metadata_path):

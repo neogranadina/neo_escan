@@ -236,17 +236,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_21.addWidget(self.escanerLabel)
 
-        self.pushButton = QPushButton(self.frame)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setMinimumSize(QSize(0, 80))
-        self.pushButton.setMaximumSize(QSize(16777215, 80))
-        self.pushButton.setCursor(QCursor(Qt.PointingHandCursor))
+        self.configButton = QPushButton(self.frame)
+        self.configButton.setObjectName(u"configButton")
+        self.configButton.setMinimumSize(QSize(0, 80))
+        self.configButton.setMaximumSize(QSize(16777215, 80))
+        self.configButton.setCursor(QCursor(Qt.PointingHandCursor))
         icon4 = QIcon()
         icon4.addFile(u"imgs/icons/cogwheel.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton.setIcon(icon4)
-        self.pushButton.setIconSize(QSize(40, 40))
+        self.configButton.setIcon(icon4)
+        self.configButton.setIconSize(QSize(40, 40))
 
-        self.verticalLayout_21.addWidget(self.pushButton)
+        self.verticalLayout_21.addWidget(self.configButton)
 
         self.label = QLabel(self.frame)
         self.label.setObjectName(u"label")
@@ -373,7 +373,7 @@ class Ui_MainWindow(object):
         self.scrollArea_7.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 877, 499))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 65, 18))
         self.verticalLayout_20 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
         self.scrollArea_7.setWidget(self.scrollAreaWidgetContents_2)
@@ -540,7 +540,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 842, 452))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 633, 452))
         self.verticalLayout_7 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.formLayout = QFormLayout()
@@ -696,7 +696,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 842, 440))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 633, 440))
         self.scrollAreaWidgetContents_3.setStyleSheet(u"")
         self.verticalLayout_9 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
@@ -850,7 +850,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_4 = QWidget()
         self.scrollAreaWidgetContents_4.setObjectName(u"scrollAreaWidgetContents_4")
-        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 842, 400))
+        self.scrollAreaWidgetContents_4.setGeometry(QRect(0, 0, 633, 400))
         self.scrollAreaWidgetContents_4.setStyleSheet(u"")
         self.verticalLayout_11 = QVBoxLayout(self.scrollAreaWidgetContents_4)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
@@ -992,7 +992,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_5 = QWidget()
         self.scrollAreaWidgetContents_5.setObjectName(u"scrollAreaWidgetContents_5")
-        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 842, 446))
+        self.scrollAreaWidgetContents_5.setGeometry(QRect(0, 0, 646, 446))
         self.verticalLayout_15 = QVBoxLayout(self.scrollAreaWidgetContents_5)
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.formLayout_2 = QFormLayout()
@@ -1147,7 +1147,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents_6 = QWidget()
         self.scrollAreaWidgetContents_6.setObjectName(u"scrollAreaWidgetContents_6")
-        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 842, 612))
+        self.scrollAreaWidgetContents_6.setGeometry(QRect(0, 0, 605, 612))
         self.verticalLayout_16 = QVBoxLayout(self.scrollAreaWidgetContents_6)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.formLayout_5 = QFormLayout()
@@ -1359,7 +1359,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setWidgetResizable(True)
         self.scrollAreaWidgetContents_7 = QWidget()
         self.scrollAreaWidgetContents_7.setObjectName(u"scrollAreaWidgetContents_7")
-        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 859, 205))
+        self.scrollAreaWidgetContents_7.setGeometry(QRect(0, 0, 647, 108))
         self.verticalLayout_17 = QVBoxLayout(self.scrollAreaWidgetContents_7)
         self.verticalLayout_17.setObjectName(u"verticalLayout_17")
         self.gridLayout = QGridLayout()
@@ -1962,9 +1962,48 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.escanerPage)
         self.configurationPage = QWidget()
         self.configurationPage.setObjectName(u"configurationPage")
+        self.configurationPage.setStyleSheet(u"QLabel {\n"
+"background-color: transparent;\n"
+"}\n"
+"\n"
+"QComboBox {\n"
+"border-color: rgba(0,0,0,.7);\n"
+"border-style: solid;\n"
+"border-width: 2px;\n"
+"border-radius: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"border-color: rgba(0,0,0,.7);\n"
+"border-style: solid;\n"
+"border-width: 2px;\n"
+"border-radius:4px;\n"
+"}\n"
+"\n"
+"QPlainTextEdit {\n"
+"border-color: rgba(0,0,0,.7);\n"
+"border-style: solid;\n"
+"border-width: 2px;\n"
+"border-radius:4px;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"color: rgba(251,251,251,.7);\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"background-color: rgba(242,120,75,1);\n"
+"color: rgba(0,0,0,.5);\n"
+"border: none;\n"
+"}\n"
+"\n"
+"QPushButton::focus {\n"
+"background-color: rgba(242,120,75,1);\n"
+"border: none;\n"
+"}")
         self.configtemplate = QWidget(self.configurationPage)
         self.configtemplate.setObjectName(u"configtemplate")
-        self.configtemplate.setGeometry(QRect(9, 0, 880, 552))
+        self.configtemplate.setGeometry(QRect(9, 0, 880, 582))
         self.verticalLayout_33 = QVBoxLayout(self.configtemplate)
         self.verticalLayout_33.setObjectName(u"verticalLayout_33")
         self.configheader = QWidget(self.configtemplate)
@@ -2022,6 +2061,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_18.addWidget(self.imagenizqLabel_2)
 
+        self.line_6 = QFrame(self.widget_5)
+        self.line_6.setObjectName(u"line_6")
+        self.line_6.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.line_6.setLineWidth(6)
+        self.line_6.setFrameShape(QFrame.VLine)
+        self.line_6.setFrameShadow(QFrame.Sunken)
+
+        self.horizontalLayout_18.addWidget(self.line_6)
+
         self.imagederLabel_2 = QLabel(self.widget_5)
         self.imagederLabel_2.setObjectName(u"imagederLabel_2")
         self.imagederLabel_2.setMinimumSize(QSize(320, 366))
@@ -2056,17 +2104,21 @@ class Ui_MainWindow(object):
         self.widget_7.setStyleSheet(u"")
         self.horizontalLayout_19 = QHBoxLayout(self.widget_7)
         self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
-        self.comboBox = QComboBox(self.widget_7)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
-        self.comboBox.setMinimumSize(QSize(100, 20))
-        self.comboBox.setMaximumSize(QSize(100, 20))
-        self.comboBox.setFont(font6)
-        self.comboBox.setCursor(QCursor(Qt.PointingHandCursor))
-        self.comboBox.setStyleSheet(u"")
+        self.selectCamIzq = QComboBox(self.widget_7)
+        self.selectCamIzq.addItem("")
+        self.selectCamIzq.addItem("")
+        self.selectCamIzq.setObjectName(u"selectCamIzq")
+        self.selectCamIzq.setMinimumSize(QSize(100, 20))
+        self.selectCamIzq.setMaximumSize(QSize(100, 20))
+        font11 = QFont()
+        font11.setPointSize(10)
+        font11.setBold(False)
+        font11.setWeight(50)
+        self.selectCamIzq.setFont(font11)
+        self.selectCamIzq.setCursor(QCursor(Qt.PointingHandCursor))
+        self.selectCamIzq.setStyleSheet(u"")
 
-        self.horizontalLayout_19.addWidget(self.comboBox)
+        self.horizontalLayout_19.addWidget(self.selectCamIzq)
 
 
         self.horizontalLayout_21.addWidget(self.widget_7)
@@ -2076,15 +2128,15 @@ class Ui_MainWindow(object):
         self.widget_8.setStyleSheet(u"")
         self.horizontalLayout_20 = QHBoxLayout(self.widget_8)
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
-        self.comboBox_2 = QComboBox(self.widget_8)
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.setObjectName(u"comboBox_2")
-        self.comboBox_2.setMinimumSize(QSize(100, 20))
-        self.comboBox_2.setMaximumSize(QSize(100, 20))
-        self.comboBox_2.setFont(font6)
+        self.selectCamDer = QComboBox(self.widget_8)
+        self.selectCamDer.addItem("")
+        self.selectCamDer.addItem("")
+        self.selectCamDer.setObjectName(u"selectCamDer")
+        self.selectCamDer.setMinimumSize(QSize(100, 20))
+        self.selectCamDer.setMaximumSize(QSize(100, 20))
+        self.selectCamDer.setFont(font11)
 
-        self.horizontalLayout_20.addWidget(self.comboBox_2)
+        self.horizontalLayout_20.addWidget(self.selectCamDer)
 
 
         self.horizontalLayout_21.addWidget(self.widget_8)
@@ -2103,10 +2155,10 @@ class Ui_MainWindow(object):
         self.widget_9.setObjectName(u"widget_9")
         self.widget_9.setMinimumSize(QSize(120, 0))
         self.widget_9.setMaximumSize(QSize(120, 16777215))
-        self.verticalLayout_29 = QVBoxLayout(self.widget_9)
-        self.verticalLayout_29.setSpacing(0)
+        self.verticalLayout_35 = QVBoxLayout(self.widget_9)
+        self.verticalLayout_35.setObjectName(u"verticalLayout_35")
+        self.verticalLayout_29 = QVBoxLayout()
         self.verticalLayout_29.setObjectName(u"verticalLayout_29")
-        self.verticalLayout_29.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_27 = QVBoxLayout()
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.exposicionLabel_2 = QLabel(self.widget_9)
@@ -2132,13 +2184,19 @@ class Ui_MainWindow(object):
         self.exposicionDial_2.setMaximumSize(QSize(60, 60))
         self.exposicionDial_2.setMinimum(1)
         self.exposicionDial_2.setMaximum(125)
-        self.exposicionDial_2.setValue(25)
+        self.exposicionDial_2.setValue(124)
+        self.exposicionDial_2.setSliderPosition(124)
         self.exposicionDial_2.setWrapping(True)
         self.exposicionDial_2.setNotchTarget(10.000000000000000)
         self.exposicionDial_2.setNotchesVisible(True)
 
         self.verticalLayout_29.addWidget(self.exposicionDial_2)
 
+
+        self.verticalLayout_35.addLayout(self.verticalLayout_29)
+
+        self.verticalLayout_34 = QVBoxLayout()
+        self.verticalLayout_34.setObjectName(u"verticalLayout_34")
         self.verticalLayout_28 = QVBoxLayout()
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.zoomLabel_2 = QLabel(self.widget_9)
@@ -2157,7 +2215,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_28.addWidget(self.zoom_valuedit_2)
 
 
-        self.verticalLayout_29.addLayout(self.verticalLayout_28)
+        self.verticalLayout_34.addLayout(self.verticalLayout_28)
 
         self.zoom_dial_2 = QDial(self.widget_9)
         self.zoom_dial_2.setObjectName(u"zoom_dial_2")
@@ -2165,19 +2223,20 @@ class Ui_MainWindow(object):
         self.zoom_dial_2.setMaximumSize(QSize(60, 60))
         self.zoom_dial_2.setMinimum(1)
         self.zoom_dial_2.setMaximum(50)
-        self.zoom_dial_2.setSliderPosition(27)
+        self.zoom_dial_2.setSliderPosition(49)
         self.zoom_dial_2.setWrapping(True)
         self.zoom_dial_2.setNotchTarget(5.000000000000000)
         self.zoom_dial_2.setNotchesVisible(True)
 
-        self.verticalLayout_29.addWidget(self.zoom_dial_2)
+        self.verticalLayout_34.addWidget(self.zoom_dial_2)
 
-        self.zoom_dial_2.raise_()
-        self.exposicionDial_2.raise_()
+
+        self.verticalLayout_35.addLayout(self.verticalLayout_34)
+
 
         self.verticalLayout_32.addWidget(self.widget_9)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 107, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_4 = QSpacerItem(20, 97, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_32.addItem(self.verticalSpacer_4)
 
@@ -2324,7 +2383,7 @@ class Ui_MainWindow(object):
         self.metadatosLabel.setText(QCoreApplication.translate("MainWindow", u"Metadatos", None))
         self.escanerButton.setText("")
         self.escanerLabel.setText(QCoreApplication.translate("MainWindow", u"Escaner", None))
-        self.pushButton.setText("")
+        self.configButton.setText("")
         self.label.setText(QCoreApplication.translate("MainWindow", u"Configuraci\u00f3n", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Iniciar nuevo proyecto", None))
         self.nuevoProyectoButton.setText("")
@@ -2491,20 +2550,20 @@ class Ui_MainWindow(object):
         self.resetButton.setShortcut(QCoreApplication.translate("MainWindow", u"Backspace", None))
 #endif // QT_CONFIG(shortcut)
         self.H1metadatosLabel_2.setText(QCoreApplication.translate("MainWindow", u"Configuraci\u00f3n", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Desde aqu\u00ed configure las caracter\u00edsticas predeterminadas de la aplicaci\u00f3n.", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Desde aqu\u00ed configure las caracter\u00edsticas predeterminadas de la aplicaci\u00f3n. Para iniciar, de clic en \"probar configuraci\u00f3n\".", None))
         self.imagenizqLabel_2.setText("")
         self.imagederLabel_2.setText("")
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"posici\u00f3n de las c\u00e1maras", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("MainWindow", u"izquierda", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("MainWindow", u"derecha", None))
+        self.selectCamIzq.setItemText(0, QCoreApplication.translate("MainWindow", u"izquierda", None))
+        self.selectCamIzq.setItemText(1, QCoreApplication.translate("MainWindow", u"derecha", None))
 
-        self.comboBox_2.setItemText(0, QCoreApplication.translate("MainWindow", u"derecha", None))
-        self.comboBox_2.setItemText(1, QCoreApplication.translate("MainWindow", u"izquierda", None))
+        self.selectCamDer.setItemText(0, QCoreApplication.translate("MainWindow", u"derecha", None))
+        self.selectCamDer.setItemText(1, QCoreApplication.translate("MainWindow", u"izquierda", None))
 
         self.exposicionLabel_2.setText(QCoreApplication.translate("MainWindow", u"Nivel de exposici\u00f3n", None))
-        self.exposicionValue_2.setText(QCoreApplication.translate("MainWindow", u"25", None))
+        self.exposicionValue_2.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.zoomLabel_2.setText(QCoreApplication.translate("MainWindow", u"Nivel de zoom", None))
-        self.zoom_valuedit_2.setText(QCoreApplication.translate("MainWindow", u"27", None))
+        self.zoom_valuedit_2.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.zoom_valuedit_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"# entre 0 y 50", None))
         self.testconfig.setText("")
         self.testconfigLabel.setText(QCoreApplication.translate("MainWindow", u"probar\n"
@@ -2516,7 +2575,3 @@ class Ui_MainWindow(object):
         self.down_arrow.setText("")
     # retranslateUi
 
-Error: main.ui: Warning: Z-order assignment: 'layoutWidget' is not a valid widget.
-main.ui: Warning: Z-order assignment: 'layoutWidget_2' is not a valid widget.
-
-while executing 'e:\proyectos\neogranadina\neo_escan\escan_env\lib\site-packages\PySide2\uic -g python main.ui'

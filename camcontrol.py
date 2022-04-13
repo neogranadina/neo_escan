@@ -37,7 +37,7 @@ class Cam:
         '''
         regresa la cantidad de dispositivos conectados
         '''
-        return len(self.devs)
+        return len(self.devs())
 
     def test(self):
         '''
@@ -215,6 +215,7 @@ class Cam:
 
         left_camera = self.devs[0] if not self.devs[0] is None else None
         right_camera = self.devs[1] if not self.devs[1] is None else None
+
 
         if len(self.devs) == 1:
             if self.devs[0] is None:

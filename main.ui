@@ -608,7 +608,7 @@ background-color: rgba(255, 255, 255,.5);
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton">
+                <widget class="QPushButton" name="configButton">
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
@@ -851,8 +851,8 @@ QLabel {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>877</width>
-                   <height>499</height>
+                   <width>65</width>
+                   <height>18</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -1174,7 +1174,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>842</width>
+                          <width>633</width>
                           <height>452</height>
                          </rect>
                         </property>
@@ -1540,7 +1540,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>842</width>
+                          <width>633</width>
                           <height>440</height>
                          </rect>
                         </property>
@@ -1909,7 +1909,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>842</width>
+                          <width>633</width>
                           <height>400</height>
                          </rect>
                         </property>
@@ -2251,7 +2251,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>842</width>
+                          <width>646</width>
                           <height>446</height>
                          </rect>
                         </property>
@@ -2632,7 +2632,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>842</width>
+                          <width>605</width>
                           <height>612</height>
                          </rect>
                         </property>
@@ -3163,8 +3163,8 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>859</width>
-                          <height>205</height>
+                          <width>647</width>
+                          <height>108</height>
                          </rect>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_17">
@@ -4536,13 +4536,54 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
              </layout>
             </widget>
             <widget class="QWidget" name="configurationPage">
+             <property name="styleSheet">
+              <string notr="true">QLabel {
+background-color: transparent;
+}
+
+QComboBox {
+border-color: rgba(0,0,0,.7);
+border-style: solid;
+border-width: 2px;
+border-radius: 4px;
+}
+
+QLineEdit {
+border-color: rgba(0,0,0,.7);
+border-style: solid;
+border-width: 2px;
+border-radius:4px;
+}
+
+QPlainTextEdit {
+border-color: rgba(0,0,0,.7);
+border-style: solid;
+border-width: 2px;
+border-radius:4px;
+}
+
+QPushButton {
+color: rgba(251,251,251,.7);
+}
+
+QPushButton::hover {
+background-color: rgba(242,120,75,1);
+color: rgba(0,0,0,.5);
+border: none;
+}
+
+QPushButton::focus {
+background-color: rgba(242,120,75,1);
+border: none;
+}</string>
+             </property>
              <widget class="QWidget" name="configtemplate" native="true">
               <property name="geometry">
                <rect>
                 <x>9</x>
                 <y>0</y>
                 <width>880</width>
-                <height>552</height>
+                <height>582</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -4576,7 +4617,7 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                        </font>
                       </property>
                       <property name="text">
-                       <string>Desde aquí configure las características predeterminadas de la aplicación.</string>
+                       <string>Desde aquí configure las características predeterminadas de la aplicación. Para iniciar, de clic en &quot;probar configuración&quot;.</string>
                       </property>
                      </widget>
                     </item>
@@ -4653,6 +4694,19 @@ color: rgb(255, 255, 255);</string>
                          </widget>
                         </item>
                         <item>
+                         <widget class="Line" name="line_6">
+                          <property name="styleSheet">
+                           <string notr="true">background-color: rgb(255, 255, 255);</string>
+                          </property>
+                          <property name="lineWidth">
+                           <number>6</number>
+                          </property>
+                          <property name="orientation">
+                           <enum>Qt::Vertical</enum>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
                          <widget class="QLabel" name="imagederLabel_2">
                           <property name="minimumSize">
                            <size>
@@ -4711,7 +4765,7 @@ color: rgb(255, 255, 255);</string>
                           </property>
                           <layout class="QHBoxLayout" name="horizontalLayout_19">
                            <item>
-                            <widget class="QComboBox" name="comboBox">
+                            <widget class="QComboBox" name="selectCamIzq">
                              <property name="minimumSize">
                               <size>
                                <width>100</width>
@@ -4727,8 +4781,8 @@ color: rgb(255, 255, 255);</string>
                              <property name="font">
                               <font>
                                <pointsize>10</pointsize>
-                               <weight>75</weight>
-                               <bold>true</bold>
+                               <weight>50</weight>
+                               <bold>false</bold>
                               </font>
                              </property>
                              <property name="cursor">
@@ -4759,7 +4813,7 @@ color: rgb(255, 255, 255);</string>
                           </property>
                           <layout class="QHBoxLayout" name="horizontalLayout_20">
                            <item>
-                            <widget class="QComboBox" name="comboBox_2">
+                            <widget class="QComboBox" name="selectCamDer">
                              <property name="minimumSize">
                               <size>
                                <width>100</width>
@@ -4775,8 +4829,8 @@ color: rgb(255, 255, 255);</string>
                              <property name="font">
                               <font>
                                <pointsize>10</pointsize>
-                               <weight>75</weight>
-                               <bold>true</bold>
+                               <weight>50</weight>
+                               <bold>false</bold>
                               </font>
                              </property>
                              <item>
@@ -4817,187 +4871,179 @@ color: rgb(255, 255, 255);</string>
                          <height>16777215</height>
                         </size>
                        </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_29">
-                        <property name="spacing">
-                         <number>0</number>
-                        </property>
-                        <property name="leftMargin">
-                         <number>0</number>
-                        </property>
-                        <property name="topMargin">
-                         <number>0</number>
-                        </property>
-                        <property name="rightMargin">
-                         <number>0</number>
-                        </property>
-                        <property name="bottomMargin">
-                         <number>0</number>
-                        </property>
+                       <layout class="QVBoxLayout" name="verticalLayout_35">
                         <item>
-                         <layout class="QVBoxLayout" name="verticalLayout_27">
+                         <layout class="QVBoxLayout" name="verticalLayout_29">
                           <item>
-                           <widget class="QLabel" name="exposicionLabel_2">
-                            <property name="minimumSize">
-                             <size>
-                              <width>95</width>
-                              <height>10</height>
-                             </size>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>95</width>
-                              <height>10</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>Nivel de exposición</string>
-                            </property>
-                           </widget>
+                           <layout class="QVBoxLayout" name="verticalLayout_27">
+                            <item>
+                             <widget class="QLabel" name="exposicionLabel_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>95</width>
+                                <height>10</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>95</width>
+                                <height>10</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>Nivel de exposición</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLineEdit" name="exposicionValue_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>95</width>
+                                <height>34</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>95</width>
+                                <height>34</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
                           </item>
                           <item>
-                           <widget class="QLineEdit" name="exposicionValue_2">
+                           <widget class="QDial" name="exposicionDial_2">
                             <property name="minimumSize">
                              <size>
-                              <width>95</width>
-                              <height>34</height>
+                              <width>60</width>
+                              <height>60</height>
                              </size>
                             </property>
                             <property name="maximumSize">
                              <size>
-                              <width>95</width>
-                              <height>34</height>
+                              <width>60</width>
+                              <height>60</height>
                              </size>
                             </property>
-                            <property name="text">
-                             <string>25</string>
+                            <property name="minimum">
+                             <number>1</number>
                             </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <widget class="QDial" name="exposicionDial_2">
-                          <property name="minimumSize">
-                           <size>
-                            <width>60</width>
-                            <height>60</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>60</width>
-                            <height>60</height>
-                           </size>
-                          </property>
-                          <property name="minimum">
-                           <number>1</number>
-                          </property>
-                          <property name="maximum">
-                           <number>125</number>
-                          </property>
-                          <property name="value">
-                           <number>25</number>
-                          </property>
-                          <property name="wrapping">
-                           <bool>true</bool>
-                          </property>
-                          <property name="notchTarget">
-                           <double>10.000000000000000</double>
-                          </property>
-                          <property name="notchesVisible">
-                           <bool>true</bool>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <layout class="QVBoxLayout" name="verticalLayout_28">
-                          <item>
-                           <widget class="QLabel" name="zoomLabel_2">
-                            <property name="minimumSize">
-                             <size>
-                              <width>81</width>
-                              <height>10</height>
-                             </size>
+                            <property name="maximum">
+                             <number>125</number>
                             </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>81</width>
-                              <height>10</height>
-                             </size>
+                            <property name="value">
+                             <number>124</number>
                             </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>10</pointsize>
-                             </font>
+                            <property name="sliderPosition">
+                             <number>124</number>
                             </property>
-                            <property name="text">
-                             <string>Nivel de zoom</string>
+                            <property name="wrapping">
+                             <bool>true</bool>
                             </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLineEdit" name="zoom_valuedit_2">
-                            <property name="minimumSize">
-                             <size>
-                              <width>81</width>
-                              <height>34</height>
-                             </size>
+                            <property name="notchTarget">
+                             <double>10.000000000000000</double>
                             </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>81</width>
-                              <height>34</height>
-                             </size>
-                            </property>
-                            <property name="text">
-                             <string>27</string>
-                            </property>
-                            <property name="placeholderText">
-                             <string># entre 0 y 50</string>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
                             </property>
                            </widget>
                           </item>
                          </layout>
                         </item>
                         <item>
-                         <widget class="QDial" name="zoom_dial_2">
-                          <property name="minimumSize">
-                           <size>
-                            <width>60</width>
-                            <height>60</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>60</width>
-                            <height>60</height>
-                           </size>
-                          </property>
-                          <property name="minimum">
-                           <number>1</number>
-                          </property>
-                          <property name="maximum">
-                           <number>50</number>
-                          </property>
-                          <property name="sliderPosition">
-                           <number>27</number>
-                          </property>
-                          <property name="wrapping">
-                           <bool>true</bool>
-                          </property>
-                          <property name="notchTarget">
-                           <double>5.000000000000000</double>
-                          </property>
-                          <property name="notchesVisible">
-                           <bool>true</bool>
-                          </property>
-                         </widget>
+                         <layout class="QVBoxLayout" name="verticalLayout_34">
+                          <item>
+                           <layout class="QVBoxLayout" name="verticalLayout_28">
+                            <item>
+                             <widget class="QLabel" name="zoomLabel_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>81</width>
+                                <height>10</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>81</width>
+                                <height>10</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <pointsize>10</pointsize>
+                               </font>
+                              </property>
+                              <property name="text">
+                               <string>Nivel de zoom</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLineEdit" name="zoom_valuedit_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>81</width>
+                                <height>34</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>81</width>
+                                <height>34</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>0</string>
+                              </property>
+                              <property name="placeholderText">
+                               <string># entre 0 y 50</string>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </item>
+                          <item>
+                           <widget class="QDial" name="zoom_dial_2">
+                            <property name="minimumSize">
+                             <size>
+                              <width>60</width>
+                              <height>60</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>60</width>
+                              <height>60</height>
+                             </size>
+                            </property>
+                            <property name="minimum">
+                             <number>1</number>
+                            </property>
+                            <property name="maximum">
+                             <number>50</number>
+                            </property>
+                            <property name="sliderPosition">
+                             <number>49</number>
+                            </property>
+                            <property name="wrapping">
+                             <bool>true</bool>
+                            </property>
+                            <property name="notchTarget">
+                             <double>5.000000000000000</double>
+                            </property>
+                            <property name="notchesVisible">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </item>
                        </layout>
-                       <zorder>layoutWidget</zorder>
-                       <zorder>zoom_dial_2</zorder>
-                       <zorder>layoutWidget_2</zorder>
-                       <zorder>exposicionDial_2</zorder>
                       </widget>
                      </item>
                      <item>
@@ -5008,7 +5054,7 @@ color: rgb(255, 255, 255);</string>
                        <property name="sizeHint" stdset="0">
                         <size>
                          <width>20</width>
-                         <height>107</height>
+                         <height>97</height>
                         </size>
                        </property>
                       </spacer>
