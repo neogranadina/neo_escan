@@ -59,20 +59,6 @@ sudo apt install qtdeclarative5-dev
 echo instalar PySide2 en Raspberry Os:
 sudo apt-get install python3-pyside2.qt3dcore python3-pyside2.qt3dinput python3-pyside2.qt3dlogic python3-pyside2.qt3drender python3-pyside2.qtcharts python3-pyside2.qtconcurrent python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qthelp python3-pyside2.qtlocation python3-pyside2.qtmultimedia python3-pyside2.qtmultimediawidgets python3-pyside2.qtnetwork python3-pyside2.qtopengl python3-pyside2.qtpositioning python3-pyside2.qtprintsupport python3-pyside2.qtqml python3-pyside2.qtquick python3-pyside2.qtquickwidgets python3-pyside2.qtscript python3-pyside2.qtscripttools python3-pyside2.qtsensors python3-pyside2.qtsql python3-pyside2.qtsvg python3-pyside2.qttest python3-pyside2.qttexttospeech python3-pyside2.qtuitools python3-pyside2.qtwebchannel python3-pyside2.qtwebsockets python3-pyside2.qtwidgets python3-pyside2.qtx11extras python3-pyside2.qtxml python3-pyside2.qtxmlpatterns python3-pyside2uic shiboken2 shiboken2-doc libqt5svg5-dev python3-all-dev
 
-echo instalar OpenCv en Raspberry Os \(este proceso llevará un tiempo...\):
-sudo apt-get purge wolfram-engine
-sudo apt-get purge libreoffice*
-sudo apt-get clean
-sudo apt-get autoremove
-sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng-dev
-sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
-sudo apt-get install libxvidcore-dev libx264-dev
-sudo apt-get install libfontconfig1-dev libcairo2-dev
-sudo apt-get install libgdk-pixbuf2.0-dev libpango1.0-dev
-sudo apt-get install libgtk2.0-dev libgtk-3-dev libatlas-base-dev gfortran libhdf5-dev libhdf5-serial-dev libhdf5-103 libqtgui4 libqtwebkit4 libqt4-test python3-pyqt5
-sudo apt-get install python3-dev
-python3 pip install opencv-contrib-python==4.1.0.25
-
 echo deshabilitar gphoto2 para evitar conflictos con chdkptp
 echo intentar desinstalarlo
 sudo apt remove gphoto2
