@@ -205,7 +205,7 @@ class MainWindow(QMainWindow):
         elif btnName == "escanerButton":
             self.set_scanner_page()
             widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
-        elif btnName == "configurationPage":
+        elif btnName == "configButton":
             widgets.stackedWidget.setCurrentWidget(widgets.configurationPage)
             self.set_config_page()
 

@@ -35,7 +35,7 @@ class Cam:
 
     def len_devs(self):
         '''
-        regresa la cantidad de dispositivos conectados
+        regresa la cantidad de dispositivos conectados (int)
         '''
         return len(self.devs)
 
