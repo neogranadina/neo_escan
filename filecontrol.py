@@ -27,8 +27,9 @@ from logcontrol import LogControl as log
 
 # config
 
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'setup/config.cfg')
 config = configparser.ConfigParser()
-config.read(Path('config.cfg'))
+config.read(CONFIG_PATH)
 
 # Check compatibility and return images directory
 

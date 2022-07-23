@@ -24,8 +24,9 @@ import time
 import configparser
 from logcontrol import LogControl as log
 
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'setup/config.cfg')
 config = configparser.ConfigParser()
-config.read(Path('config.cfg'))
+config.read(CONFIG_PATH)
 
 
 class Cam:
@@ -69,7 +70,7 @@ class Cam:
             # write serials in config file
             config['camaras']['serial_izq'] = cam1
             config['camaras']['serial_der'] = cam2
-            with open('config.cfg', 'w') as configfile:
+            with open(CONFIG_PATH, 'w') as configfile:
                 config.write(configfile)
             return {'cam_izq': cam1, 'cam_der': cam2}
 

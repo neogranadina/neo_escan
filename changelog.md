@@ -2,7 +2,22 @@
 
 ## [Unreleased]
 
-## [0.1.600] - 2020-04-13
+## [0.1.700] - 2022-07-22
+
+Esta versión se dedica a la creación de un sistema para el envío de archivos desde el equipo local hacia un bucket en B2.
+
+### Added
+
+- Se incluyó la capacidad para enviar las imágenes desde el archivo local a B2.
+- Agregado un formulario para configurar la aplicación remota de B2.
+- Se creó una página para el envío de las imágenes con un solo botón.
+
+### Changed
+
+- Se elimina el archivo .sh para iniciar la aplicación y se creó un archivo .desktop para que se pueda iniciar la aplicación desde el menú de inicio.
+- Modificaciones en la ubicación de los archivos de configuración.
+
+## [0.1.600] - 2022-04-13
 
 Esta versión incluye una pantalla de configuración general para los escáners.
 

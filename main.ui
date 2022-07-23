@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>669</height>
+    <width>1230</width>
+    <height>717</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>1000</width>
-    <height>480</height>
+    <height>659</height>
    </size>
   </property>
   <property name="font">
@@ -668,6 +668,64 @@ background-color: rgba(255, 255, 255,.5);
                 </widget>
                </item>
                <item>
+                <widget class="QPushButton" name="b2Send">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>80</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>80</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset>
+                   <normaloff>imgs/icons/cloud-computing.svg</normaloff>imgs/icons/cloud-computing.svg</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>40</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>8</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Enviar</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <spacer name="verticalSpacer_3">
                  <property name="orientation">
                   <enum>Qt::Vertical</enum>
@@ -851,8 +909,8 @@ QLabel {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>65</width>
-                   <height>18</height>
+                   <width>1107</width>
+                   <height>547</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -1174,7 +1232,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>633</width>
+                          <width>1072</width>
                           <height>452</height>
                          </rect>
                         </property>
@@ -4217,7 +4275,13 @@ border-radius: 5px;</string>
                       <property name="minimumSize">
                        <size>
                         <width>200</width>
-                        <height>0</height>
+                        <height>266</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>600</width>
+                        <height>800</height>
                        </size>
                       </property>
                       <property name="styleSheet">
@@ -4236,7 +4300,13 @@ border-radius: 5px;</string>
                       <property name="minimumSize">
                        <size>
                         <width>200</width>
-                        <height>0</height>
+                        <height>266</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>600</width>
+                        <height>800</height>
                        </size>
                       </property>
                       <property name="styleSheet">
@@ -4426,63 +4496,6 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                           </property>
                          </widget>
                         </item>
-                       </layout>
-                      </widget>
-                      <widget class="QWidget" name="validar">
-                       <layout class="QHBoxLayout" name="horizontalLayout_11">
-                        <item>
-                         <spacer name="horizontalSpacer_2">
-                          <property name="orientation">
-                           <enum>Qt::Horizontal</enum>
-                          </property>
-                          <property name="sizeHint" stdset="0">
-                           <size>
-                            <width>40</width>
-                            <height>20</height>
-                           </size>
-                          </property>
-                         </spacer>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="validateButton">
-                          <property name="minimumSize">
-                           <size>
-                            <width>120</width>
-                            <height>35</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>16777215</width>
-                            <height>35</height>
-                           </size>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <pointsize>11</pointsize>
-                           </font>
-                          </property>
-                          <property name="cursor">
-                           <cursorShape>PointingHandCursor</cursorShape>
-                          </property>
-                          <property name="text">
-                           <string>continuar</string>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>imgs/icons/check-sign.svg</normaloff>imgs/icons/check-sign.svg</iconset>
-                          </property>
-                          <property name="iconSize">
-                           <size>
-                            <width>32</width>
-                            <height>32</height>
-                           </size>
-                          </property>
-                          <property name="shortcut">
-                           <string>B</string>
-                          </property>
-                         </widget>
-                        </item>
                         <item>
                          <widget class="QPushButton" name="resetButton">
                           <property name="minimumSize">
@@ -4520,6 +4533,42 @@ QPushButton::pressed {background-color: rgba(242, 120, 75, 1);}</string>
                           </property>
                           <property name="shortcut">
                            <string>Backspace</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                      <widget class="QWidget" name="validar">
+                       <layout class="QHBoxLayout" name="horizontalLayout_11">
+                        <item>
+                         <spacer name="horizontalSpacer_2">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="capturando">
+                          <property name="minimumSize">
+                           <size>
+                            <width>64</width>
+                            <height>34</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>64</width>
+                            <height>34</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Capturando</string>
                           </property>
                          </widget>
                         </item>
@@ -4563,7 +4612,8 @@ border-radius:4px;
 }
 
 QPushButton {
-color: rgba(251,251,251,.7);
+color: rgba(0,0,0,.9);
+background-color: transparent;
 }
 
 QPushButton::hover {
@@ -4575,600 +4625,1133 @@ border: none;
 QPushButton::focus {
 background-color: rgba(242,120,75,1);
 border: none;
+}
+
+QPushButton#b2config {
+color: rgba(0,0,0,.9);
+border: 2px solid;
+border-radius: 5px;
+background-color: rgb(0,0,0);
+}
+
+QPushButton#b2config::hover {
+background-color: rgba(242,120,75,1);
+color: rgba(0,0,0,.5);
+border: none;
+}
+
+QWidget#panelconfig {
+border: 2px solid;
+border-radius: 5px;
+background-color: rgba(0,0,0,.2)
+}
+
+QWidget#expoandzoom {
+background-color: transparent;
+}
+
+QWidget#testingbuttons {
+background-color: transparent;
 }</string>
              </property>
-             <widget class="QWidget" name="configtemplate" native="true">
-              <property name="geometry">
-               <rect>
-                <x>9</x>
-                <y>0</y>
-                <width>880</width>
-                <height>582</height>
-               </rect>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_33">
-               <item>
-                <widget class="QWidget" name="configheader" native="true">
-                 <layout class="QHBoxLayout" name="horizontalLayout_17">
-                  <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_25">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_24">
+              <item>
+               <widget class="QWidget" name="configtemplate" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_33">
+                 <item>
+                  <widget class="QWidget" name="configheader" native="true">
+                   <layout class="QHBoxLayout" name="horizontalLayout_17">
                     <item>
-                     <widget class="QLabel" name="H1metadatosLabel_2">
-                      <property name="font">
-                       <font>
-                        <pointsize>11</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
+                     <layout class="QVBoxLayout" name="verticalLayout_25">
+                      <property name="spacing">
+                       <number>0</number>
                       </property>
-                      <property name="text">
-                       <string>Configuración</string>
-                      </property>
+                      <item>
+                       <widget class="QLabel" name="H1metadatosLabel_2">
+                        <property name="font">
+                         <font>
+                          <pointsize>11</pointsize>
+                          <weight>75</weight>
+                          <bold>true</bold>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Configuración de las cámaras</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_3">
+                        <property name="font">
+                         <font>
+                          <pointsize>10</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>Desde aquí configure las características predeterminadas para la captura de imágenes. Para iniciar, de clic en
+&quot;probar configuración&quot;.</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="configwidget" native="true">
+                   <layout class="QHBoxLayout" name="horizontalLayout_23">
+                    <item>
+                     <widget class="QWidget" name="configbaseCams" native="true">
+                      <layout class="QVBoxLayout" name="verticalLayout_26">
+                       <property name="spacing">
+                        <number>0</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QWidget" name="widget_5" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_18">
+                          <item>
+                           <widget class="QLabel" name="imagenizqLabel_2">
+                            <property name="minimumSize">
+                             <size>
+                              <width>320</width>
+                              <height>366</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>320</width>
+                              <height>366</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>23</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);</string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="scaledContents">
+                             <bool>true</bool>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="Line" name="line_6">
+                            <property name="styleSheet">
+                             <string notr="true">background-color: rgb(255, 255, 255);</string>
+                            </property>
+                            <property name="lineWidth">
+                             <number>6</number>
+                            </property>
+                            <property name="orientation">
+                             <enum>Qt::Vertical</enum>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="imagederLabel_2">
+                            <property name="minimumSize">
+                             <size>
+                              <width>320</width>
+                              <height>366</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>320</width>
+                              <height>366</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: rgb(0, 0, 0);</string>
+                            </property>
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="scaledContents">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="label_4">
+                         <property name="font">
+                          <font>
+                           <pointsize>10</pointsize>
+                           <weight>75</weight>
+                           <italic>false</italic>
+                           <bold>true</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>posición de las cámaras</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QWidget" name="widget_6" native="true">
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_21">
+                          <item>
+                           <widget class="QWidget" name="widget_7" native="true">
+                            <property name="styleSheet">
+                             <string notr="true"/>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_19">
+                             <item>
+                              <widget class="QComboBox" name="selectCamIzq">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>100</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>100</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>10</pointsize>
+                                 <weight>50</weight>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="cursor">
+                                <cursorShape>PointingHandCursor</cursorShape>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true"/>
+                               </property>
+                               <item>
+                                <property name="text">
+                                 <string>izquierda</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>derecha</string>
+                                </property>
+                               </item>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QWidget" name="widget_8" native="true">
+                            <property name="styleSheet">
+                             <string notr="true"/>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_20">
+                             <item>
+                              <widget class="QComboBox" name="selectCamDer">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>100</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>100</width>
+                                 <height>20</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>10</pointsize>
+                                 <weight>50</weight>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <item>
+                                <property name="text">
+                                 <string>derecha</string>
+                                </property>
+                               </item>
+                               <item>
+                                <property name="text">
+                                 <string>izquierda</string>
+                                </property>
+                               </item>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLabel" name="label_3">
-                      <property name="font">
-                       <font>
-                        <pointsize>10</pointsize>
-                       </font>
-                      </property>
-                      <property name="text">
-                       <string>Desde aquí configure las características predeterminadas de la aplicación. Para iniciar, de clic en &quot;probar configuración&quot;.</string>
-                      </property>
+                     <widget class="QWidget" name="panelconfig" native="true">
+                      <layout class="QVBoxLayout" name="verticalLayout_32">
+                       <item>
+                        <widget class="QWidget" name="expoandzoom" native="true">
+                         <property name="minimumSize">
+                          <size>
+                           <width>150</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>150</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_35">
+                          <item>
+                           <layout class="QVBoxLayout" name="verticalLayout_29">
+                            <item>
+                             <layout class="QVBoxLayout" name="verticalLayout_27">
+                              <item>
+                               <widget class="QLabel" name="exposicionLabel_2">
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>95</width>
+                                  <height>10</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>95</width>
+                                  <height>10</height>
+                                 </size>
+                                </property>
+                                <property name="text">
+                                 <string>Nivel de exposición</string>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QLineEdit" name="exposicionValue_2">
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>95</width>
+                                  <height>34</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>95</width>
+                                  <height>34</height>
+                                 </size>
+                                </property>
+                                <property name="text">
+                                 <string>0</string>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </item>
+                            <item>
+                             <widget class="QDial" name="exposicionDial_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>60</width>
+                                <height>60</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>60</width>
+                                <height>60</height>
+                               </size>
+                              </property>
+                              <property name="minimum">
+                               <number>1</number>
+                              </property>
+                              <property name="maximum">
+                               <number>125</number>
+                              </property>
+                              <property name="value">
+                               <number>124</number>
+                              </property>
+                              <property name="sliderPosition">
+                               <number>124</number>
+                              </property>
+                              <property name="wrapping">
+                               <bool>true</bool>
+                              </property>
+                              <property name="notchTarget">
+                               <double>10.000000000000000</double>
+                              </property>
+                              <property name="notchesVisible">
+                               <bool>true</bool>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </item>
+                          <item>
+                           <layout class="QVBoxLayout" name="verticalLayout_34">
+                            <item>
+                             <layout class="QVBoxLayout" name="verticalLayout_28">
+                              <item>
+                               <widget class="QLabel" name="zoomLabel_2">
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>81</width>
+                                  <height>10</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>81</width>
+                                  <height>10</height>
+                                 </size>
+                                </property>
+                                <property name="font">
+                                 <font>
+                                  <pointsize>10</pointsize>
+                                 </font>
+                                </property>
+                                <property name="text">
+                                 <string>Nivel de zoom</string>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QLineEdit" name="zoom_valuedit_2">
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>95</width>
+                                  <height>34</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>95</width>
+                                  <height>34</height>
+                                 </size>
+                                </property>
+                                <property name="text">
+                                 <string>0</string>
+                                </property>
+                                <property name="placeholderText">
+                                 <string># entre 0 y 50</string>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </item>
+                            <item>
+                             <widget class="QDial" name="zoom_dial_2">
+                              <property name="minimumSize">
+                               <size>
+                                <width>60</width>
+                                <height>60</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>60</width>
+                                <height>60</height>
+                               </size>
+                              </property>
+                              <property name="minimum">
+                               <number>1</number>
+                              </property>
+                              <property name="maximum">
+                               <number>50</number>
+                              </property>
+                              <property name="sliderPosition">
+                               <number>49</number>
+                              </property>
+                              <property name="wrapping">
+                               <bool>true</bool>
+                              </property>
+                              <property name="notchTarget">
+                               <double>5.000000000000000</double>
+                              </property>
+                              <property name="notchesVisible">
+                               <bool>true</bool>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="verticalSpacer_4">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>97</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QWidget" name="testingbuttons" native="true">
+                         <layout class="QHBoxLayout" name="horizontalLayout_22">
+                          <item>
+                           <layout class="QVBoxLayout" name="verticalLayout_31">
+                            <item>
+                             <widget class="QPushButton" name="testconfig">
+                              <property name="minimumSize">
+                               <size>
+                                <width>64</width>
+                                <height>40</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>64</width>
+                                <height>40</height>
+                               </size>
+                              </property>
+                              <property name="cursor">
+                               <cursorShape>PointingHandCursor</cursorShape>
+                              </property>
+                              <property name="text">
+                               <string/>
+                              </property>
+                              <property name="icon">
+                               <iconset>
+                                <normaloff>imgs/icons/circle-of-arrows-couple.svg</normaloff>imgs/icons/circle-of-arrows-couple.svg</iconset>
+                              </property>
+                              <property name="iconSize">
+                               <size>
+                                <width>32</width>
+                                <height>32</height>
+                               </size>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLabel" name="testconfigLabel">
+                              <property name="text">
+                               <string>probar
+configuración</string>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignCenter</set>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </item>
+                          <item>
+                           <layout class="QVBoxLayout" name="verticalLayout_30">
+                            <item>
+                             <widget class="QPushButton" name="saveconfig">
+                              <property name="minimumSize">
+                               <size>
+                                <width>64</width>
+                                <height>40</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>64</width>
+                                <height>40</height>
+                               </size>
+                              </property>
+                              <property name="cursor">
+                               <cursorShape>PointingHandCursor</cursorShape>
+                              </property>
+                              <property name="text">
+                               <string/>
+                              </property>
+                              <property name="icon">
+                               <iconset>
+                                <normaloff>imgs/icons/square-with-verification-sign.svg</normaloff>imgs/icons/square-with-verification-sign.svg</iconset>
+                              </property>
+                              <property name="iconSize">
+                               <size>
+                                <width>32</width>
+                                <height>32</height>
+                               </size>
+                              </property>
+                              <property name="flat">
+                               <bool>false</bool>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLabel" name="saveconfigLabel">
+                              <property name="text">
+                               <string>guardar
+configuración</string>
+                              </property>
+                              <property name="alignment">
+                               <set>Qt::AlignCenter</set>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
                      </widget>
                     </item>
                    </layout>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item>
-                <widget class="QWidget" name="configwidget" native="true">
-                 <layout class="QHBoxLayout" name="horizontalLayout_23">
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QStackedWidget" name="b2conf">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <widget class="QWidget" name="b2ini">
+                 <layout class="QVBoxLayout" name="verticalLayout_36">
                   <item>
-                   <widget class="QWidget" name="configbaseCams" native="true">
-                    <layout class="QVBoxLayout" name="verticalLayout_26">
-                     <property name="spacing">
-                      <number>0</number>
-                     </property>
-                     <property name="leftMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="topMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="rightMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="bottomMargin">
-                      <number>0</number>
-                     </property>
-                     <item>
-                      <widget class="QWidget" name="widget_5" native="true">
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>0</height>
-                        </size>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true"/>
-                       </property>
-                       <layout class="QHBoxLayout" name="horizontalLayout_18">
-                        <item>
-                         <widget class="QLabel" name="imagenizqLabel_2">
-                          <property name="minimumSize">
-                           <size>
-                            <width>320</width>
-                            <height>366</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>320</width>
-                            <height>366</height>
-                           </size>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <pointsize>23</pointsize>
-                           </font>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: rgb(0, 0, 0);
-color: rgb(255, 255, 255);</string>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="scaledContents">
-                           <bool>true</bool>
-                          </property>
-                          <property name="alignment">
-                           <set>Qt::AlignCenter</set>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="Line" name="line_6">
-                          <property name="styleSheet">
-                           <string notr="true">background-color: rgb(255, 255, 255);</string>
-                          </property>
-                          <property name="lineWidth">
-                           <number>6</number>
-                          </property>
-                          <property name="orientation">
-                           <enum>Qt::Vertical</enum>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="imagederLabel_2">
-                          <property name="minimumSize">
-                           <size>
-                            <width>320</width>
-                            <height>366</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>320</width>
-                            <height>366</height>
-                           </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: rgb(0, 0, 0);</string>
-                          </property>
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="scaledContents">
-                           <bool>true</bool>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="label_4">
-                       <property name="font">
-                        <font>
-                         <pointsize>10</pointsize>
-                         <weight>75</weight>
-                         <italic>false</italic>
-                         <bold>true</bold>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>posición de las cámaras</string>
-                       </property>
-                       <property name="alignment">
-                        <set>Qt::AlignCenter</set>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QWidget" name="widget_6" native="true">
-                       <property name="styleSheet">
-                        <string notr="true"/>
-                       </property>
-                       <layout class="QHBoxLayout" name="horizontalLayout_21">
-                        <item>
-                         <widget class="QWidget" name="widget_7" native="true">
-                          <property name="styleSheet">
-                           <string notr="true"/>
-                          </property>
-                          <layout class="QHBoxLayout" name="horizontalLayout_19">
-                           <item>
-                            <widget class="QComboBox" name="selectCamIzq">
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>20</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>100</width>
-                               <height>20</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                               <weight>50</weight>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true"/>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>izquierda</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>derecha</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QWidget" name="widget_8" native="true">
-                          <property name="styleSheet">
-                           <string notr="true"/>
-                          </property>
-                          <layout class="QHBoxLayout" name="horizontalLayout_20">
-                           <item>
-                            <widget class="QComboBox" name="selectCamDer">
-                             <property name="minimumSize">
-                              <size>
-                               <width>100</width>
-                               <height>20</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>100</width>
-                               <height>20</height>
-                              </size>
-                             </property>
-                             <property name="font">
-                              <font>
-                               <pointsize>10</pointsize>
-                               <weight>50</weight>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>derecha</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>izquierda</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </item>
-                       </layout>
-                      </widget>
-                     </item>
-                    </layout>
+                   <widget class="QLabel" name="label_12">
+                    <property name="font">
+                     <font>
+                      <pointsize>11</pointsize>
+                      <weight>75</weight>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>Configurar transferencia a B2</string>
+                    </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QWidget" name="widget_10" native="true">
-                    <layout class="QVBoxLayout" name="verticalLayout_32">
+                   <widget class="QWidget" name="widget_4" native="true">
+                    <property name="minimumSize">
+                     <size>
+                      <width>321</width>
+                      <height>130</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>321</width>
+                      <height>130</height>
+                     </size>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">border: 2px solid;
+border-radius: 5px;</string>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_25">
                      <item>
-                      <widget class="QWidget" name="widget_9" native="true">
+                      <widget class="QPushButton" name="b2config">
                        <property name="minimumSize">
                         <size>
-                         <width>120</width>
-                         <height>0</height>
+                         <width>80</width>
+                         <height>30</height>
                         </size>
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>120</width>
-                         <height>16777215</height>
+                         <width>80</width>
+                         <height>30</height>
                         </size>
                        </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_35">
-                        <item>
-                         <layout class="QVBoxLayout" name="verticalLayout_29">
-                          <item>
-                           <layout class="QVBoxLayout" name="verticalLayout_27">
-                            <item>
-                             <widget class="QLabel" name="exposicionLabel_2">
-                              <property name="minimumSize">
-                               <size>
-                                <width>95</width>
-                                <height>10</height>
-                               </size>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>95</width>
-                                <height>10</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>Nivel de exposición</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLineEdit" name="exposicionValue_2">
-                              <property name="minimumSize">
-                               <size>
-                                <width>95</width>
-                                <height>34</height>
-                               </size>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>95</width>
-                                <height>34</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>0</string>
-                              </property>
-                             </widget>
-                            </item>
-                           </layout>
-                          </item>
-                          <item>
-                           <widget class="QDial" name="exposicionDial_2">
-                            <property name="minimumSize">
-                             <size>
-                              <width>60</width>
-                              <height>60</height>
-                             </size>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>60</width>
-                              <height>60</height>
-                             </size>
-                            </property>
-                            <property name="minimum">
-                             <number>1</number>
-                            </property>
-                            <property name="maximum">
-                             <number>125</number>
-                            </property>
-                            <property name="value">
-                             <number>124</number>
-                            </property>
-                            <property name="sliderPosition">
-                             <number>124</number>
-                            </property>
-                            <property name="wrapping">
-                             <bool>true</bool>
-                            </property>
-                            <property name="notchTarget">
-                             <double>10.000000000000000</double>
-                            </property>
-                            <property name="notchesVisible">
-                             <bool>true</bool>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QVBoxLayout" name="verticalLayout_34">
-                          <item>
-                           <layout class="QVBoxLayout" name="verticalLayout_28">
-                            <item>
-                             <widget class="QLabel" name="zoomLabel_2">
-                              <property name="minimumSize">
-                               <size>
-                                <width>81</width>
-                                <height>10</height>
-                               </size>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>81</width>
-                                <height>10</height>
-                               </size>
-                              </property>
-                              <property name="font">
-                               <font>
-                                <pointsize>10</pointsize>
-                               </font>
-                              </property>
-                              <property name="text">
-                               <string>Nivel de zoom</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QLineEdit" name="zoom_valuedit_2">
-                              <property name="minimumSize">
-                               <size>
-                                <width>81</width>
-                                <height>34</height>
-                               </size>
-                              </property>
-                              <property name="maximumSize">
-                               <size>
-                                <width>81</width>
-                                <height>34</height>
-                               </size>
-                              </property>
-                              <property name="text">
-                               <string>0</string>
-                              </property>
-                              <property name="placeholderText">
-                               <string># entre 0 y 50</string>
-                              </property>
-                             </widget>
-                            </item>
-                           </layout>
-                          </item>
-                          <item>
-                           <widget class="QDial" name="zoom_dial_2">
-                            <property name="minimumSize">
-                             <size>
-                              <width>60</width>
-                              <height>60</height>
-                             </size>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>60</width>
-                              <height>60</height>
-                             </size>
-                            </property>
-                            <property name="minimum">
-                             <number>1</number>
-                            </property>
-                            <property name="maximum">
-                             <number>50</number>
-                            </property>
-                            <property name="sliderPosition">
-                             <number>49</number>
-                            </property>
-                            <property name="wrapping">
-                             <bool>true</bool>
-                            </property>
-                            <property name="notchTarget">
-                             <double>5.000000000000000</double>
-                            </property>
-                            <property name="notchesVisible">
-                             <bool>true</bool>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                       </layout>
-                      </widget>
-                     </item>
-                     <item>
-                      <spacer name="verticalSpacer_4">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
                        </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>97</height>
-                        </size>
+                       <property name="mouseTracking">
+                        <bool>true</bool>
                        </property>
-                      </spacer>
-                     </item>
-                     <item>
-                      <widget class="QWidget" name="testingbuttons" native="true">
-                       <layout class="QHBoxLayout" name="horizontalLayout_22">
-                        <item>
-                         <layout class="QVBoxLayout" name="verticalLayout_31">
-                          <item>
-                           <widget class="QPushButton" name="testconfig">
-                            <property name="minimumSize">
-                             <size>
-                              <width>64</width>
-                              <height>40</height>
-                             </size>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>64</width>
-                              <height>40</height>
-                             </size>
-                            </property>
-                            <property name="cursor">
-                             <cursorShape>PointingHandCursor</cursorShape>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                            <property name="icon">
-                             <iconset>
-                              <normaloff>imgs/icons/circle-of-arrows-couple.svg</normaloff>imgs/icons/circle-of-arrows-couple.svg</iconset>
-                            </property>
-                            <property name="iconSize">
-                             <size>
-                              <width>32</width>
-                              <height>32</height>
-                             </size>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="testconfigLabel">
-                            <property name="text">
-                             <string>probar
-configuración</string>
-                            </property>
-                            <property name="alignment">
-                             <set>Qt::AlignCenter</set>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QVBoxLayout" name="verticalLayout_30">
-                          <item>
-                           <widget class="QPushButton" name="saveconfig">
-                            <property name="minimumSize">
-                             <size>
-                              <width>64</width>
-                              <height>40</height>
-                             </size>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>64</width>
-                              <height>40</height>
-                             </size>
-                            </property>
-                            <property name="cursor">
-                             <cursorShape>PointingHandCursor</cursorShape>
-                            </property>
-                            <property name="text">
-                             <string/>
-                            </property>
-                            <property name="icon">
-                             <iconset>
-                              <normaloff>imgs/icons/square-with-verification-sign.svg</normaloff>imgs/icons/square-with-verification-sign.svg</iconset>
-                            </property>
-                            <property name="iconSize">
-                             <size>
-                              <width>32</width>
-                              <height>32</height>
-                             </size>
-                            </property>
-                            <property name="flat">
-                             <bool>false</bool>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLabel" name="saveconfigLabel">
-                            <property name="text">
-                             <string>guardar
-configuración</string>
-                            </property>
-                            <property name="alignment">
-                             <set>Qt::AlignCenter</set>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                       </layout>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="text">
+                        <string>Configurar B2</string>
+                       </property>
                       </widget>
                      </item>
                     </layout>
                    </widget>
                   </item>
+                  <item>
+                   <spacer name="verticalSpacer_5">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
                  </layout>
                 </widget>
-               </item>
-              </layout>
+                <widget class="QWidget" name="b2confForm">
+                 <widget class="QWidget" name="widget_11" native="true">
+                  <property name="geometry">
+                   <rect>
+                    <x>10</x>
+                    <y>10</y>
+                    <width>317</width>
+                    <height>371</height>
+                   </rect>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>300</height>
+                   </size>
+                  </property>
+                  <widget class="QLabel" name="endpointLabel">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>10</y>
+                     <width>110</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>110</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>endpoint</string>
+                   </property>
+                  </widget>
+                  <widget class="QLineEdit" name="endpointInput">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>34</y>
+                     <width>271</width>
+                     <height>30</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>271</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="inputMask">
+                    <string/>
+                   </property>
+                   <property name="placeholderText">
+                    <string>Ej: https://s3.us-west-004.backblazeb2.com</string>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="endpointInfo">
+                   <property name="geometry">
+                    <rect>
+                     <x>287</x>
+                     <y>34</y>
+                     <width>20</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
+                   </property>
+                  </widget>
+                  <widget class="QLineEdit" name="keyIDInput">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>94</y>
+                     <width>271</width>
+                     <height>30</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>271</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="inputMask">
+                    <string/>
+                   </property>
+                   <property name="placeholderText">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="keyIDLabel">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>70</y>
+                     <width>110</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>110</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>keyID</string>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="keyIDInfo">
+                   <property name="geometry">
+                    <rect>
+                     <x>287</x>
+                     <y>94</y>
+                     <width>20</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="keyNameInfo">
+                   <property name="geometry">
+                    <rect>
+                     <x>287</x>
+                     <y>154</y>
+                     <width>20</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
+                   </property>
+                  </widget>
+                  <widget class="QLineEdit" name="keyNameInput">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>154</y>
+                     <width>271</width>
+                     <height>30</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>271</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="inputMask">
+                    <string/>
+                   </property>
+                   <property name="placeholderText">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="keyNameLabel">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>130</y>
+                     <width>110</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>110</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>bucket name</string>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="appKeyInfo">
+                   <property name="geometry">
+                    <rect>
+                     <x>287</x>
+                     <y>214</y>
+                     <width>20</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
+                   </property>
+                  </widget>
+                  <widget class="QLineEdit" name="appKeyInput">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>214</y>
+                     <width>271</width>
+                     <height>30</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>271</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="inputMask">
+                    <string/>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="placeholderText">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="appKeyLabel">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>190</y>
+                     <width>94</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>application key</string>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="b2configSet">
+                   <property name="geometry">
+                    <rect>
+                     <x>9</x>
+                     <y>330</y>
+                     <width>134</width>
+                     <height>32</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>32</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="text">
+                    <string>aplicar configuración</string>
+                   </property>
+                  </widget>
+                 </widget>
+                </widget>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="b2SendPage">
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+border-radius: 5px;
+border: 2px solid;
+}
+
+QPushButton::hover {
+color: rgb(255,255,255);
+background-color: rgb(0, 0, 0);
+}</string>
+             </property>
+             <widget class="QLabel" name="enviar_label">
+              <property name="geometry">
+               <rect>
+                <x>11</x>
+                <y>21</y>
+                <width>325</width>
+                <height>18</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Enviar imágenes a la nube de Neogranadina</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_13">
+              <property name="geometry">
+               <rect>
+                <x>11</x>
+                <y>45</y>
+                <width>808</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Haga clic en &quot;enviar imágenes&quot; para sincronizar las capturas de su escáner local con los archivos en la nube de su proyecto en Neogranadina</string>
+              </property>
+             </widget>
+             <widget class="QScrollArea" name="syncresullt">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>120</y>
+                <width>18</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="widgetResizable">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="promtUpload">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>18</width>
+                 <height>31</height>
+                </rect>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_37">
+                <item>
+                 <widget class="QLabel" name="promtText">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+             <widget class="QPushButton" name="send2B2">
+              <property name="geometry">
+               <rect>
+                <x>11</x>
+                <y>67</y>
+                <width>122</width>
+                <height>24</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string>enviar imágenes</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>imgs/icons/send.svg</normaloff>imgs/icons/send.svg</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
              </widget>
             </widget>
            </widget>
