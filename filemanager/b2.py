@@ -7,7 +7,8 @@ import configparser
 from logcontrol import LogControl as log
 
 
-CONFIG_PATH = os.path.join(os.getcwd(), 'setup/config.cfg')
+CONFIG_PATH = os.path.join(os.path.dirname(__file__).replace("/filemanager", ""), 'setup/config.cfg')
+print(f"B2 config path: {CONFIG_PATH}")
 config = configparser.ConfigParser()
 config.read(CONFIG_PATH)
 
@@ -17,12 +18,12 @@ LOCAL_DIR = config['DEFAULT']['img_dir'] # debe dirigir a /home/pi/Documents/cap
 
 class Sync:
     def __init__(self):
-        load_dotenv(os.path.join(os.getcwd(), 'setup/.env'))
+        load_dotenv(os.path.join(os.path.dirname(__file__).replace("/filemanager", ""), 'setup/.env'))
         self.endpoint = os.getenv('ENDPOINT')
         self.key_id = os.getenv('KEY_ID')
         self.app_key = os.getenv('APPLICATION_KEY')
 
-        self.b2 = self.get_b2_resource(self, self.endpoint, self.key_id, self.app_key)
+        self.b2 = self.get_b2_resource(self.endpoint, self.key_id, self.app_key)
 
 
     def get_b2_resource(self, endpoint, key_id, app_key):
@@ -81,4 +82,4 @@ class Sync:
                 print(f'{remote_path} already exists in the bucket')
 
         keys = [obj.key for obj in bucket.objects.all()]
-        print(f'Files in the bucket: {keys[1]}')
+        print(f'Files in the bucket: {len(keys)}')

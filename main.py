@@ -61,12 +61,6 @@ def restart():
     log.log(f"Reinicio de la aplicación. Status: {status}")
 
 
-class Stream(QtCore.QObject):
-    new_text = QtCore.Signal(str)
-
-    def write(self, text):
-        self.new_text.emit(str(text))
-
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -95,9 +89,6 @@ class MainWindow(QMainWindow):
         # Comprobación inicial
         self.check_dir()
 
-        # mensajes desde la consola
-        sys.stdout = Stream(new_text=self.print_text)
-
         # set version
         widgets.versionLabel.setText(f'v{version}')
 
@@ -109,6 +100,7 @@ class MainWindow(QMainWindow):
         widgets.coleccionesButton.clicked.connect(self.buttonClick)
         widgets.escanerButton.clicked.connect(self.buttonClick)
         widgets.configButton.clicked.connect(self.buttonClick)
+        widgets.b2Send.clicked.connect(self.buttonClick)
 
         # Seleccionar página de inicio
         if not config['camaras']['exposicion_predeterminada'] == '' or not config['camaras']['zoom_predeterminado'] == '':
@@ -229,6 +221,7 @@ class MainWindow(QMainWindow):
             widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
         elif btnName == "configButton":
             widgets.stackedWidget.setCurrentWidget(widgets.configurationPage)
+            widgets.b2conf.setCurrentWidget(widgets.b2ini)
             self.set_config_page()
         elif btnName == "b2Send":
             widgets.stackedWidget.setCurrentWidget(widgets.b2SendPage)
@@ -1322,15 +1315,19 @@ class MainWindow(QMainWindow):
         # get values from selectores
         endpoint = widgets.endpointInput.text()
         keyID = widgets.keyIDInput.text()
-        keyName = widgets.keyNameInput.text()
+        keyName = widgets.keyNameInput.text() # nombre del bucket
         appKey = widgets.appKeyInput.text()
+
+        config['PROJECT']['project_name'] = keyName
+        with open(CONFIG_PATH, 'w') as configfile:
+            config.write(configfile)
 
         # save config
         with open("setup/.env", "w") as f:
             f.write(f"ENDPOINT={endpoint}\n")
             f.write(f"KEY_ID={keyID}\n")
             f.write(f"KEY_NAME={keyName}\n")
-            f.write(f"APP_KEY={appKey}\n")
+            f.write(f"APPLICATION_KEY={appKey}\n")
 
         widgets.b2conf.setCurrentWidget(widgets.b2ini)
 
@@ -1347,9 +1344,6 @@ class MainWindow(QMainWindow):
         B2.sync_dir()
         widgets.promtText.setText("Sincronización finalizada.")
         
-
-        
-      
 
     def gentle_close(self):
         '''

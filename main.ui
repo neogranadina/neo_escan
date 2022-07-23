@@ -698,6 +698,18 @@ background-color: rgba(255, 255, 255,.5);
                </item>
                <item>
                 <widget class="QLabel" name="label_5">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>18</height>
+                  </size>
+                 </property>
                  <property name="font">
                   <font>
                    <pointsize>8</pointsize>
@@ -771,7 +783,7 @@ background-color: rgba(255, 255, 255,.5);
              <string notr="true"/>
             </property>
             <property name="currentIndex">
-             <number>4</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="inicioPage">
              <property name="styleSheet">
@@ -5237,7 +5249,7 @@ configuración</string>
                  <string notr="true">background-color: rgb(255, 255, 255);</string>
                 </property>
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="b2ini">
                  <layout class="QVBoxLayout" name="verticalLayout_36">
@@ -5327,7 +5339,7 @@ border-radius: 5px;</string>
                     <x>10</x>
                     <y>10</y>
                     <width>317</width>
-                    <height>301</height>
+                    <height>371</height>
                    </rect>
                   </property>
                   <property name="minimumSize">
@@ -5336,218 +5348,284 @@ border-radius: 5px;</string>
                     <height>300</height>
                    </size>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_37">
-                   <item>
-                    <layout class="QFormLayout" name="formLayout_7">
-                     <property name="labelAlignment">
-                      <set>Qt::AlignCenter</set>
-                     </property>
-                     <property name="formAlignment">
-                      <set>Qt::AlignCenter</set>
-                     </property>
-                     <item row="0" column="0">
-                      <widget class="QLabel" name="endpointLabel">
-                       <property name="minimumSize">
-                        <size>
-                         <width>110</width>
-                         <height>16</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <pointsize>11</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>endpoint</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="0">
-                      <widget class="QLineEdit" name="endpointInput">
-                       <property name="minimumSize">
-                        <size>
-                         <width>271</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                       <property name="inputMask">
-                        <string/>
-                       </property>
-                       <property name="placeholderText">
-                        <string>Ej: https://s3.us-west-004.backblazeb2.com</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="1">
-                      <widget class="QPushButton" name="endpointInfo">
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset>
-                         <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="2" column="0">
-                      <widget class="QLabel" name="keyIDLabel">
-                       <property name="minimumSize">
-                        <size>
-                         <width>110</width>
-                         <height>16</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <pointsize>11</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>keyID</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="3" column="0">
-                      <widget class="QLineEdit" name="keyIDInput">
-                       <property name="minimumSize">
-                        <size>
-                         <width>271</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                       <property name="inputMask">
-                        <string/>
-                       </property>
-                       <property name="placeholderText">
-                        <string/>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="3" column="1">
-                      <widget class="QPushButton" name="keyIDInfo">
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset>
-                         <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="4" column="0">
-                      <widget class="QLabel" name="keyNameLabel">
-                       <property name="minimumSize">
-                        <size>
-                         <width>110</width>
-                         <height>16</height>
-                        </size>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <pointsize>11</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>keyName</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="5" column="0">
-                      <widget class="QLineEdit" name="keyNameInput">
-                       <property name="minimumSize">
-                        <size>
-                         <width>271</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                       <property name="inputMask">
-                        <string/>
-                       </property>
-                       <property name="placeholderText">
-                        <string/>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="5" column="1">
-                      <widget class="QPushButton" name="keyNameInfo">
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset>
-                         <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="6" column="0">
-                      <widget class="QLabel" name="appKeyLabel">
-                       <property name="font">
-                        <font>
-                         <pointsize>11</pointsize>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>application key</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="7" column="0">
-                      <widget class="QLineEdit" name="appKeyInput">
-                       <property name="minimumSize">
-                        <size>
-                         <width>271</width>
-                         <height>30</height>
-                        </size>
-                       </property>
-                       <property name="inputMask">
-                        <string/>
-                       </property>
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="placeholderText">
-                        <string/>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="7" column="1">
-                      <widget class="QPushButton" name="appKeyInfo">
-                       <property name="text">
-                        <string/>
-                       </property>
-                       <property name="icon">
-                        <iconset>
-                         <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="b2configSet">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>32</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <pointsize>10</pointsize>
-                       <weight>75</weight>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="cursor">
-                      <cursorShape>PointingHandCursor</cursorShape>
-                     </property>
-                     <property name="text">
-                      <string>aplicar configuración</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                  <widget class="QLabel" name="endpointLabel">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>10</y>
+                     <width>110</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>110</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>endpoint</string>
+                   </property>
+                  </widget>
+                  <widget class="QLineEdit" name="endpointInput">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>34</y>
+                     <width>271</width>
+                     <height>30</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>271</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="inputMask">
+                    <string/>
+                   </property>
+                   <property name="placeholderText">
+                    <string>Ej: https://s3.us-west-004.backblazeb2.com</string>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="endpointInfo">
+                   <property name="geometry">
+                    <rect>
+                     <x>287</x>
+                     <y>34</y>
+                     <width>20</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
+                   </property>
+                  </widget>
+                  <widget class="QLineEdit" name="keyIDInput">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>94</y>
+                     <width>271</width>
+                     <height>30</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>271</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="inputMask">
+                    <string/>
+                   </property>
+                   <property name="placeholderText">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="keyIDLabel">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>70</y>
+                     <width>110</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>110</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>keyID</string>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="keyIDInfo">
+                   <property name="geometry">
+                    <rect>
+                     <x>287</x>
+                     <y>94</y>
+                     <width>20</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="keyNameInfo">
+                   <property name="geometry">
+                    <rect>
+                     <x>287</x>
+                     <y>154</y>
+                     <width>20</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
+                   </property>
+                  </widget>
+                  <widget class="QLineEdit" name="keyNameInput">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>154</y>
+                     <width>271</width>
+                     <height>30</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>271</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="inputMask">
+                    <string/>
+                   </property>
+                   <property name="placeholderText">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="keyNameLabel">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>130</y>
+                     <width>110</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>110</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>bucket name</string>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="appKeyInfo">
+                   <property name="geometry">
+                    <rect>
+                     <x>287</x>
+                     <y>214</y>
+                     <width>20</width>
+                     <height>16</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>imgs/icons/information-button.svg</normaloff>imgs/icons/information-button.svg</iconset>
+                   </property>
+                  </widget>
+                  <widget class="QLineEdit" name="appKeyInput">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>214</y>
+                     <width>271</width>
+                     <height>30</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>271</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="inputMask">
+                    <string/>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="placeholderText">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="appKeyLabel">
+                   <property name="geometry">
+                    <rect>
+                     <x>10</x>
+                     <y>190</y>
+                     <width>94</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>application key</string>
+                   </property>
+                  </widget>
+                  <widget class="QPushButton" name="b2configSet">
+                   <property name="geometry">
+                    <rect>
+                     <x>9</x>
+                     <y>330</y>
+                     <width>134</width>
+                     <height>32</height>
+                    </rect>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>32</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="text">
+                    <string>aplicar configuración</string>
+                   </property>
+                  </widget>
                  </widget>
                 </widget>
                </widget>
@@ -5569,9 +5647,9 @@ background-color: rgb(0, 0, 0);
              <widget class="QLabel" name="enviar_label">
               <property name="geometry">
                <rect>
-                <x>20</x>
-                <y>20</y>
-                <width>1107</width>
+                <x>11</x>
+                <y>21</y>
+                <width>325</width>
                 <height>18</height>
                </rect>
               </property>
@@ -5589,10 +5667,10 @@ background-color: rgb(0, 0, 0);
              <widget class="QLabel" name="label_13">
               <property name="geometry">
                <rect>
-                <x>20</x>
-                <y>40</y>
-                <width>1071</width>
-                <height>41</height>
+                <x>11</x>
+                <y>45</y>
+                <width>808</width>
+                <height>16</height>
                </rect>
               </property>
               <property name="font">
@@ -5609,8 +5687,8 @@ background-color: rgb(0, 0, 0);
                <rect>
                 <x>20</x>
                 <y>120</y>
-                <width>1061</width>
-                <height>491</height>
+                <width>18</width>
+                <height>31</height>
                </rect>
               </property>
               <property name="widgetResizable">
@@ -5621,19 +5699,34 @@ background-color: rgb(0, 0, 0);
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>1061</width>
-                 <height>491</height>
+                 <width>18</width>
+                 <height>31</height>
                 </rect>
                </property>
+               <layout class="QVBoxLayout" name="verticalLayout_37">
+                <item>
+                 <widget class="QLabel" name="promtText">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </widget>
              <widget class="QPushButton" name="send2B2">
               <property name="geometry">
                <rect>
-                <x>10</x>
-                <y>90</y>
-                <width>161</width>
-                <height>23</height>
+                <x>11</x>
+                <y>67</y>
+                <width>122</width>
+                <height>24</height>
                </rect>
               </property>
               <property name="font">
