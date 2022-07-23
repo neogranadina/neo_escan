@@ -68,12 +68,32 @@ sudo mv /usr/share/gvfs/mounts/gphoto2.mount /usr/share/gvfs/mounts/disable_gpho
 sudo mv /usr/share/gvfs/remote-volume-monitors/gphoto2.monitor /usr/share/gvfs/remote-volume-monitors/disable_gphoto2.monitor
 sudo mv /usr/lib/gvfs/gvfs-gphoto2-volume-monitor /usr/lib/gvfs/disable_gvfs-gphoto2-volume-monitor
 
-echo crear un acceso directo en el escritorio de pi
+echo crear un ejecutable para el escáner
 touch /home/pi/Desktop/neo_escan.sh
+echo "#!/usr/bin/env bash" >> /home/pi/Desktop/neo_escan.sh
 echo "echo abrir Neo Escan" >/home/pi/Desktop/neo_escan.sh
-echo "cd ${PWD}" >>/home/pi/Desktop/neo_escan.sh
+echo "cd /home/pi/Public/neo_escan" >>/home/pi/Desktop/neo_escan.sh
 echo "python3 main.py" >>/home/pi/Desktop/neo_escan.sh
 chmod +x /home/pi/Desktop/neo_escan.sh
+sudo mkdir /usr/share/neo-escan
+sudo mv /home/pi/Desktop/neo_escan.sh /usr/share/neo-escan/neo_escan.sh
+
+echo crear un archivo desktop para la aplicación
+touch /home/pi/Desktop/neo_escan.desktop
+echo "[Desktop Entry]" >> /home/pi/Desktop/neo_escan.desktop
+echo "Encoding=UTF-8" >> /home/pi/Desktop/neo_escan.desktop
+echo "Version=1.0" >> /home/pi/Desktop/neo_escan.desktop
+echo "Type=Application" >> /home/pi/Desktop/neo_escan.desktop
+echo "Terminal=false" >> /home/pi/Desktop/neo_escan.desktop
+echo "Name[en]=NeoEscan" >> /home/pi/Desktop/neo_escan.desktop
+echo "Comment[en]=Primary Sources Scanner" >> /home/pi/Desktop/neo_escan.desktop
+echo "Name[es]=NeoEscan" >> /home/pi/Desktop/neo_escan.desktop
+echo "Comment[es]=Escáner para fuentes primarias" >> /home/pi/Desktop/neo_escan.desktop
+echo "Exec=/usr/share/neo-escan/neo_escan.sh" >> /home/pi/Desktop/neo_escan.desktop
+echo "Icon=/home/pi/Public/neo_escan/imgs/logo.png" >> /home/pi/Desktop/neo_escan.desktop
+echo "Category=Cameras;Image Capture;Production;" >> /home/pi/Desktop/neo_escan.desktop
+
+sudo mv /home/pi/Desktop/neo_escan.desktop /usr/share/applications/neo_escan.desktop
 
 echo limpiar archivos de la instalación
 rm -rf lua

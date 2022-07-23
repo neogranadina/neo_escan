@@ -16,7 +16,7 @@ import json
 import shutil
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QIcon, QPixmap, QImage
+from PySide2.QtGui import QIcon, QPixmap, QImage, QMovie
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGridLayout, QPushButton
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, Qt
@@ -28,11 +28,14 @@ import configparser
 import ctypes
 import time
 from logcontrol import LogControl as log
+import filemanager.b2 as b2
+
 
 # config
 
+CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'setup/config.cfg')
 config = configparser.ConfigParser()
-config.read(Path('config.cfg'))
+config.read(CONFIG_PATH)
 
 version = config['DEFAULT']['version']
 
@@ -57,6 +60,12 @@ def restart():
     status = QtCore.QProcess.startDetached(sys.executable, sys.argv)
     log.log(f"Reinicio de la aplicación. Status: {status}")
 
+
+class Stream(QtCore.QObject):
+    new_text = QtCore.Signal(str)
+
+    def write(self, text):
+        self.new_text.emit(str(text))
 
 class MainWindow(QMainWindow):
 
@@ -85,6 +94,9 @@ class MainWindow(QMainWindow):
 
         # Comprobación inicial
         self.check_dir()
+
+        # mensajes desde la consola
+        sys.stdout = Stream(new_text=self.print_text)
 
         # set version
         widgets.versionLabel.setText(f'v{version}')
@@ -125,19 +137,29 @@ class MainWindow(QMainWindow):
         # tomar fotografía
         widgets.capturaButton.clicked.connect(self.capturar)
         # validar fotografía
-        widgets.validateButton.clicked.connect(self.validateCaptura)
+        # TODO: depurar función validateCaptura
+        # widgets.validateButton.clicked.connect(self.validateCaptura)
         widgets.resetButton.clicked.connect(self.resetCaptura)
         # cerrar escaner
         widgets.finalizarButton.clicked.connect(self.finalizarCaptura)
 
         # config page
         widgets.zoom_dial_2.valueChanged.connect(lambda: self.zoom_dial_2())
-        widgets.exposicionDial_2.valueChanged.connect(lambda: self.exposicion_2())
-        widgets.selectCamIzq.currentIndexChanged.connect(lambda: self.selectCam(widgets.selectCamIzq.currentIndex()))
-        widgets.selectCamDer.currentIndexChanged.connect(lambda: self.selectCam(widgets.selectCamDer.currentIndex()))
+        widgets.exposicionDial_2.valueChanged.connect(
+            lambda: self.exposicion_2())
+        widgets.selectCamIzq.currentIndexChanged.connect(
+            lambda: self.selectCam(widgets.selectCamIzq.currentIndex()))
+        widgets.selectCamDer.currentIndexChanged.connect(
+            lambda: self.selectCam(widgets.selectCamDer.currentIndex()))
         # botones config
         widgets.testconfig.clicked.connect(self.test_config)
         widgets.saveconfig.clicked.connect(self.save_config)
+        # b2 config
+        widgets.b2config.clicked.connect(self.b2_config)
+        widgets.b2configSet.clicked.connect(self.b2_config_set)
+
+        # sincronización con B2
+        widgets.send2B2.clicked.connect(self.send2B2)
 
     # comprobación inicial
     def check_dir(self):
@@ -208,6 +230,8 @@ class MainWindow(QMainWindow):
         elif btnName == "configButton":
             widgets.stackedWidget.setCurrentWidget(widgets.configurationPage)
             self.set_config_page()
+        elif btnName == "b2Send":
+            widgets.stackedWidget.setCurrentWidget(widgets.b2SendPage)
 
     # Funciones para la página de elementos
 
@@ -265,7 +289,6 @@ class MainWindow(QMainWindow):
             label.setMaximumSize(100, 100)
             label.setAlignment(Qt.AlignLeft)
             widgets.elementslayout.addWidget(label, id, 0)
-            
 
             # Display element name in the grid
             label1 = QLabel()
@@ -395,13 +418,14 @@ class MainWindow(QMainWindow):
         if QMessageBox.question(
                 widgets.stackedWidget, "Eliminar", "¿Está seguro de eliminar el elemento?") == QMessageBox.Yes:
             # delete files from image_path
-            #for file in os.listdir(folder_path):
+            # for file in os.listdir(folder_path):
             #    os.remove(f"{folder_path}/{file}")
             try:
                 shutil.rmtree(folder_path)
             except FileNotFoundError as e:
                 print("error al borrar carpeta")
-                log.log(f"WARNING: EL directorio {folder_path} ya no existe o fue borrado manualmente. {e}")
+                log.log(
+                    f"WARNING: EL directorio {folder_path} ya no existe o fue borrado manualmente. {e}")
             # elimina el elemento de la base de datos
             erase_element(element_id)
             # elimina el elemento de la interfaz
@@ -456,7 +480,7 @@ class MainWindow(QMainWindow):
         if tipo_documento == 1:
             if widgets.titulolineEdit.text() == "" and widgets.identificadoreslineEdit.text() == "":
                 QMessageBox.warning(self, "Error",
-                                      "El campo Título no puede estar vacío.", QMessageBox.Discard)
+                                    "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
                 return False
             else:
@@ -464,7 +488,7 @@ class MainWindow(QMainWindow):
         elif tipo_documento == 2:
             if widgets.titulodoclineEdit.text() == "" and widgets.identificadoresdoclineEdit.text() == "":
                 QMessageBox.warning(self, "Error",
-                                      "El campo Título no puede estar vacío.", QMessageBox.Discard)
+                                    "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formDocumento)
                 return False
             else:
@@ -472,7 +496,7 @@ class MainWindow(QMainWindow):
         elif tipo_documento == 3:
             if widgets.tituloimagenlineEdit.text() == "" and widgets.identificadoresimagenlineEdit.text() == "":
                 QMessageBox.warning(self, "Error",
-                                      "El campo Título no puede estar vacío.", QMessageBox.Discard)
+                                    "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formImagen)
                 return False
             else:
@@ -480,7 +504,7 @@ class MainWindow(QMainWindow):
         elif tipo_documento == 4:
             if widgets.nombreserlineEdit.text() == "" and widgets.identificadoreserlineEdit.text() == "":
                 QMessageBox.warning(self, "Error",
-                                      "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
+                                    "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSeriada)
                 return False
             else:
@@ -488,7 +512,7 @@ class MainWindow(QMainWindow):
         elif tipo_documento == 5:
             if widgets.titulolibrolineEdit.text() == "" and widgets.identificadoresLibrolineEdit.text() == "":
                 QMessageBox.warning(self, "Error",
-                                      "El campo Título no puede estar vacío.", QMessageBox.Discard)
+                                    "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formLibro)
                 return False
             else:
@@ -496,12 +520,12 @@ class MainWindow(QMainWindow):
         elif tipo_documento == 6:
             if widgets.nombrearchivolineEdit.text() == "":
                 QMessageBox.warning(self, "Error",
-                                      "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
+                                    "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
                 return False
             elif widgets.folderlineEdit.text() == "":
                 QMessageBox.warning(self, "Error",
-                                      "El campo Directorio no puede estar vacío.", QMessageBox.Discard)
+                                    "El campo Directorio no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
                 return False
             else:
@@ -741,7 +765,7 @@ class MainWindow(QMainWindow):
     def zoom_dial_2(self):
         value = widgets.zoom_dial_2.value()
         widgets.zoom_valuedit_2.setText(str(value))
-    
+
     def exposicion_2(self):
         value = widgets.exposicionDial_2.value()
         widgets.exposicionValue_2.setText(str(value))
@@ -749,7 +773,6 @@ class MainWindow(QMainWindow):
     def selectCam(self, index_value):
         widgets.selectCamIzq.setCurrentIndex(index_value)
         widgets.selectCamDer.setCurrentIndex(index_value)
-
 
     def save_project_config(self, path, zoom, shutter, orientacion, dng, info):
         '''
@@ -776,7 +799,8 @@ class MainWindow(QMainWindow):
         #zoom_value = widgets.zoom_dial.value()
         zoom_value = widgets.zoom_valuedit.text()
         shutter_value = widgets.exposicionValue.text()
-        orientacion_value = ["vertical" if widgets.orientacionValue.currentIndex() == 0 else "horizontal"][0]
+        orientacion_value = [
+            "vertical" if widgets.orientacionValue.currentIndex() == 0 else "horizontal"][0]
 
         # dng_checkbox value
         if widgets.dng_check.isChecked():
@@ -813,7 +837,7 @@ class MainWindow(QMainWindow):
 
                 # save project_config.json file
                 self.save_project_config(folder_path, zoom_value,
-                                 shutter_value, orientacion_value, dng, info)
+                                         shutter_value, orientacion_value, dng, info)
 
                 # clean form fields
                 self.cleanForm(tipo_de_documento)
@@ -830,7 +854,8 @@ class MainWindow(QMainWindow):
         #zoom_value = widgets.zoom_dial.value()
         zoom_value = widgets.zoom_valuedit.text()
         shutter_value = widgets.exposicionValue.text()
-        orientacion_value = ["vertical" if widgets.orientacionValue.currentIndex() == 0 else "horizontal"][0]
+        orientacion_value = [
+            "vertical" if widgets.orientacionValue.currentIndex() == 0 else "horizontal"][0]
 
         # dng_checkbox value
         if widgets.dng_check.isChecked():
@@ -854,7 +879,7 @@ class MainWindow(QMainWindow):
 
             # save project_config.json file
             self.save_project_config(folder_path, zoom_value,
-                             shutter_value, orientacion_value, dng, info)
+                                     shutter_value, orientacion_value, dng, info)
 
             # clean form fields
             self.cleanForm(tipo_de_documento)
@@ -928,16 +953,16 @@ class MainWindow(QMainWindow):
                 f"ERROR: {e} en {__file__} linea {e.__traceback__.tb_lineno}")
             # single camera QMessageBox, accept retry cancel
             respuesta = QMessageBox.question(self, "Una cámara conectada",
-                                               "Solamente una cámara está conectada.\n \
+                                             "Solamente una cámara está conectada.\n \
                                         ¿Desea intentar escanear con ella?",
-                                               QMessageBox.Ok | QMessageBox.Retry | QMessageBox.Cancel)
+                                             QMessageBox.Ok | QMessageBox.Retry | QMessageBox.Cancel)
 
             if respuesta == QMessageBox.Ok:
                 return "single_camera_mode"
             elif respuesta == QMessageBox.Retry:
                 respuesta = QMessageBox.question(self, "Reintentar",
-                                                   "Asegúrese de que la cámara esté conectada y vuelva a intentarlo.",
-                                                   QMessageBox.Ok | QMessageBox.Cancel)
+                                                 "Asegúrese de que la cámara esté conectada y vuelva a intentarlo.",
+                                                 QMessageBox.Ok | QMessageBox.Cancel)
                 if respuesta == QMessageBox.Ok:
                     cam_response = Cams.cam()
                     return "dual_camera_mode"
@@ -961,7 +986,8 @@ class MainWindow(QMainWindow):
         widgets.elementoTituloLabel.setText(datos_elemento[1])
 
         # get config file
-        config_file = os.path.join(IMGDIR, str(datos_elemento[9]), 'config_project.json')
+        config_file = os.path.join(IMGDIR, str(
+            datos_elemento[9]), 'config_project.json')
 
         cfg_text = open(config_file, 'r')
         cfg_data = json.load(cfg_text)
@@ -985,6 +1011,10 @@ class MainWindow(QMainWindow):
     # Funciones de control de la cámara
 
     def capturar(self):
+        # asegurar el botón correcto
+        widgets.controlesCamstackedWidget.setCurrentWidget(
+            widgets.captura)
+
         # save the images
         element_ident = widgets.elementoIDLabel.text()
         element_id = getElementIdByMetadata(element_ident)
@@ -1050,20 +1080,9 @@ class MainWindow(QMainWindow):
         ), 'config_project.json'), 'r', encoding='utf-8')
         config_project = json.load(config_project)
 
-        try:
-            zoom = int(config_project['zoom'])
-        except:
-            zoom = 27
-
-        try:
-            shutter = config_project['shutter']
-        except:
-            shutter = '25'
-
-        try:
-            orientacion = config_project['orientacion']
-        except:
-            orientacion = 'vertical'
+        zoom = int(config_project['zoom'])
+        shutter = config_project['shutter']
+        orientacion = config_project['orientacion']
 
         try:
             # TODO: ¡Hacer que esto funcione!
@@ -1072,11 +1091,19 @@ class MainWindow(QMainWindow):
                          last_img_right, zoom, shutter, orientacion, dng_status)
         except TypeError as e:
             QMessageBox.warning(self, "Error",
-                                        "No se encontraron cámaras", QMessageBox.Ok)
+                                "No se encontraron cámaras", QMessageBox.Ok)
             log.log(
                 f'ERROR: No se encontraron cámaras en {__file__} linea {e.__traceback__.tb_lineno}')
 
-        # Este loop permite
+        # insert overlay to avoid unwanted clicks on capture button
+        # display validation buttons
+        movie = QMovie("imgs/ajax-loader.gif")
+        widgets.capturando.setMovie(movie)
+        movie.start()
+        widgets.controlesCamstackedWidget.setCurrentWidget(
+            widgets.validar)
+
+        # Este loop permite que haya una espera de 10 segundos hasta que se permita una nueva toma
         if Cams.len_devs() > 1:
             tolerancia = 0
             while not os.path.exists(left_img_path) or not os.path.exists(right_img_path):
@@ -1095,8 +1122,10 @@ class MainWindow(QMainWindow):
         left_img = QImage(left_img_path)
         right_img = QImage(right_img_path)
 
-        left_img = left_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
-        right_img = right_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
+        left_img = left_img.scaled(
+            200, 266, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
+        right_img = right_img.scaled(
+            200, 266, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
 
         widgets.imagenizqLabel.setPixmap(QPixmap.fromImage(left_img))
         widgets.imagederLabel.setPixmap(QPixmap.fromImage(right_img))
@@ -1108,11 +1137,12 @@ class MainWindow(QMainWindow):
 
         # display validation buttons
         widgets.controlesCamstackedWidget.setCurrentWidget(
-            widgets.validar)
+            widgets.captura)
 
     def validateCaptura(self):
         # actualiza la cantidad de imagenes en la carpeta
-        self.lenImagenesDir(Path(widgets.directorio_elementos.text(), 'data', 'JPG'))
+        self.lenImagenesDir(
+            Path(widgets.directorio_elementos.text(), 'data', 'JPG'))
         widgets.statusLabel.setText("Iniciar nueva captura")
         # back to captura widget
         widgets.controlesCamstackedWidget.setCurrentWidget(widgets.captura)
@@ -1147,7 +1177,7 @@ class MainWindow(QMainWindow):
         gentle close escanerPage and back to home
         '''
         if QMessageBox.question(self, "Cerrar el proyecto",
-                                  "¿Está seguro que desea cerrar el proyecto?", QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
+                                "¿Está seguro que desea cerrar el proyecto?", QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
             widgets.imagederLabel.setPixmap(QPixmap())
             widgets.imagenizqLabel.setPixmap(QPixmap())
             widgets.elementoIDLabel.setText('')
@@ -1169,7 +1199,7 @@ class MainWindow(QMainWindow):
         '''
         set config page
         '''
-        expo_pred =  config['camaras']['exposicion_predeterminada']
+        expo_pred = config['camaras']['exposicion_predeterminada']
         zoom_pred = config['camaras']['zoom_predeterminado']
 
         valor_dial_expo = [int(expo_pred) if expo_pred != '' else 25][0]
@@ -1183,7 +1213,6 @@ class MainWindow(QMainWindow):
 
         return self.open_cameras()
 
-
     def test_config(self):
         '''
         replica el comportamiento de la funcion capturar() de manera más sintética.
@@ -1193,19 +1222,23 @@ class MainWindow(QMainWindow):
         try:
             shutil.rmtree(Path(IMGDIR, 'test_config', 'data', 'JPG'))
         except Exception as e:
-            log.log(f'No se elimina la carpeta test_config porque no se ha creado. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+            log.log(
+                f'No se elimina la carpeta test_config porque no se ha creado. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             pass
 
         # get values from selectores
         expo = widgets.exposicionValue_2.text()
         zoom = widgets.zoom_valuedit_2.text()
         dng = False
-        
-        # test captura
-        Cams.captura("test_config", "0000", "0001", zoom, expo, "vertical", dng)
 
-        left_image_path = Path(IMGDIR, 'test_config', 'data', 'JPG', '0000.jpg')
-        right_image_path = Path(IMGDIR, 'test_config', 'data', 'JPG', '0001.jpg')
+        # test captura
+        Cams.captura("test_config", "0000", "0001",
+                     zoom, expo, "vertical", dng)
+
+        left_image_path = Path(IMGDIR, 'test_config',
+                               'data', 'JPG', '0000.jpg')
+        right_image_path = Path(IMGDIR, 'test_config',
+                                'data', 'JPG', '0001.jpg')
 
         tolerancia = 0
         while not os.path.exists(left_image_path) or not os.path.exists(right_image_path):
@@ -1213,7 +1246,7 @@ class MainWindow(QMainWindow):
             tolerancia += 1
             if tolerancia > 5:
                 break
-        
+
         # set Pixmap to empty
         widgets.imagenizqLabel_2.setPixmap(QPixmap())
         widgets.imagederLabel_2.setPixmap(QPixmap())
@@ -1224,19 +1257,20 @@ class MainWindow(QMainWindow):
         left_img = QImage(left_image_path)
         right_img = QImage(right_image_path)
 
-        left_img = left_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
-        right_img = right_img.scaled(250, 250, aspectRatioMode = Qt.KeepAspectRatio, transformMode = Qt.SmoothTransformation)
+        left_img = left_img.scaled(
+            250, 250, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
+        right_img = right_img.scaled(
+            250, 250, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
 
         widgets.imagenizqLabel_2.setPixmap(QPixmap.fromImage(left_img))
         widgets.imagederLabel_2.setPixmap(QPixmap.fromImage(right_img))
-
 
     def save_config(self):
         '''
         Guardar la configuración deseada en el archivo config.cfg
         '''
         # reload config.cfg
-        config.read('config.cfg')
+        config.read(CONFIG_PATH)
         # get values from selectores
         expo = widgets.exposicionValue_2.text()
         zoom = widgets.zoom_valuedit_2.text()
@@ -1248,7 +1282,8 @@ class MainWindow(QMainWindow):
             cam_izq = config['camaras']['serial_izq']
             cam_der = config['camaras']['serial_der']
 
-        print(f'Exposicion: {expo} Zoom: {zoom} DNG: {dng} Cam Izq: {cam_izq} Cam Der: {cam_der}')
+        print(
+            f'Exposicion: {expo} Zoom: {zoom} DNG: {dng} Cam Izq: {cam_izq} Cam Der: {cam_der}')
 
         # save config
         config['camaras']['serial_izq'] = cam_izq
@@ -1256,18 +1291,65 @@ class MainWindow(QMainWindow):
         config['camaras']['exposicion_predeterminada'] = expo
         config['camaras']['zoom_predeterminado'] = zoom
         config['camaras']['dng'] = dng
-        with open('config.cfg', 'w') as configfile:
+        with open(CONFIG_PATH, 'w') as configfile:
             config.write(configfile)
 
         # delete test_config folder
         try:
             shutil.rmtree(Path(IMGDIR, 'test_config'))
         except Exception as e:
-            log.log(f'WARNING: No se pudo borrar la carpeta test_config. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
-        
+            log.log(
+                f'WARNING: No se pudo borrar la carpeta test_config. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+
         # back to inicio
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
         Cams.close_dev()
+
+
+    def b2_config(self):
+        """
+        solamente pasa al formulario de configuración
+        """
+        widgets.b2conf.setCurrentWidget(widgets.b2confForm)
+        
+
+    def b2_config_set(self):
+        """
+        Recupera la información del formulario y 
+        crea con ella un archivo .env
+        """
+        
+        # get values from selectores
+        endpoint = widgets.endpointInput.text()
+        keyID = widgets.keyIDInput.text()
+        keyName = widgets.keyNameInput.text()
+        appKey = widgets.appKeyInput.text()
+
+        # save config
+        with open("setup/.env", "w") as f:
+            f.write(f"ENDPOINT={endpoint}\n")
+            f.write(f"KEY_ID={keyID}\n")
+            f.write(f"KEY_NAME={keyName}\n")
+            f.write(f"APP_KEY={appKey}\n")
+
+        widgets.b2conf.setCurrentWidget(widgets.b2ini)
+
+    def send2B2(self):
+        """
+        Sincroniza los archivos con el bucket en B2
+        Requiere previa configuración del archivo .env desde
+        el formulario en la página de configuración.
+        """
+
+        # crea objeto Sync
+        B2 = b2.Sync()
+        widgets.promtText.setText("Iniciando sincronización...")
+        B2.sync_dir()
+        widgets.promtText.setText("Sincronización finalizada.")
+        
+
+        
+      
 
     def gentle_close(self):
         '''
