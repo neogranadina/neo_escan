@@ -1339,10 +1339,20 @@ class MainWindow(QMainWindow):
         """
 
         # crea objeto Sync
-        B2 = b2.Sync()
-        widgets.promtText.setText("Iniciando sincronización...")
-        B2.sync_dir()
-        widgets.promtText.setText("Sincronización finalizada.")
+        widgets.promtText.setText("\nIniciando sincronización...")
+        app.processEvents()
+        try:
+            sync = b2.Sync()
+            widgets.promtText.setText(f"{widgets.promtText.text()}\nSincronizando... (no cierre esta ventana hasta finalizar la transferencia)")
+            app.processEvents()
+            sync.sync_dir()
+            widgets.promtText.setText(f"{widgets.promtText.text()}\nSincronización finalizada.\n{sync}")
+            app.processEvents()
+        except Exception as e:
+            log.log(
+                f'ERROR: No se pudo sincronizar. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
+            widgets.promtText.setText(
+                f"ERROR: No se pudo sincronizar. {e}")
         
 
     def gentle_close(self):

@@ -783,7 +783,7 @@ background-color: rgba(255, 255, 255,.5);
              <string notr="true"/>
             </property>
             <property name="currentIndex">
-             <number>3</number>
+             <number>4</number>
             </property>
             <widget class="QWidget" name="inicioPage">
              <property name="styleSheet">
@@ -909,8 +909,8 @@ QLabel {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>1107</width>
-                   <height>547</height>
+                   <width>65</width>
+                   <height>18</height>
                   </rect>
                  </property>
                  <layout class="QVBoxLayout" name="verticalLayout_20"/>
@@ -1232,7 +1232,7 @@ QPushButton#backtoInicioButton::hover {
                          <rect>
                           <x>0</x>
                           <y>0</y>
-                          <width>1072</width>
+                          <width>633</width>
                           <height>452</height>
                          </rect>
                         </property>
@@ -5290,15 +5290,20 @@ border-radius: 5px;</string>
                       <widget class="QPushButton" name="b2config">
                        <property name="minimumSize">
                         <size>
-                         <width>80</width>
+                         <width>100</width>
                          <height>30</height>
                         </size>
                        </property>
                        <property name="maximumSize">
                         <size>
-                         <width>80</width>
+                         <width>100</width>
                          <height>30</height>
                         </size>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <pointsize>10</pointsize>
+                        </font>
                        </property>
                        <property name="cursor">
                         <cursorShape>PointingHandCursor</cursorShape>
@@ -5687,9 +5692,15 @@ background-color: rgb(0, 0, 0);
                <rect>
                 <x>20</x>
                 <y>120</y>
-                <width>18</width>
-                <height>31</height>
+                <width>800</width>
+                <height>600</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>800</width>
+                <height>600</height>
+               </size>
               </property>
               <property name="widgetResizable">
                <bool>true</bool>
@@ -5699,13 +5710,25 @@ background-color: rgb(0, 0, 0);
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>18</width>
-                 <height>31</height>
+                 <width>800</width>
+                 <height>600</height>
                 </rect>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>800</width>
+                 <height>600</height>
+                </size>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_37">
                 <item>
                  <widget class="QLabel" name="promtText">
+                  <property name="minimumSize">
+                   <size>
+                    <width>800</width>
+                    <height>600</height>
+                   </size>
+                  </property>
                   <property name="text">
                    <string/>
                   </property>
