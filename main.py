@@ -1322,6 +1322,10 @@ class MainWindow(QMainWindow):
         with open(CONFIG_PATH, 'w') as configfile:
             config.write(configfile)
 
+        # assert endpoint starts with https://
+        if not endpoint.startswith('https://'):
+            endpoint = f'https://{endpoint}'
+
         # save config
         with open("setup/.env", "w") as f:
             f.write(f"ENDPOINT={endpoint}\n")

@@ -1,3 +1,4 @@
+# update gitignore
 historial_de_cambios.md
 update_theme.sh
 .*
@@ -16,3 +17,4 @@ db/neoscan_db.db
 *.log
 test*
 *.zip
+update*

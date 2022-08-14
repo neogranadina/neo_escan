@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.1.710] - 2022-07-26
+
+### Bugfixes
+
+Arreglado un bug que no permitía mostrar los mensajes de sincronización de archivos con B2.
+
 ## [0.1.700] - 2022-07-22
 
 Esta versión se dedica a la creación de un sistema para el envío de archivos desde el equipo local hacia un bucket en B2.

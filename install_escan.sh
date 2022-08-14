@@ -71,9 +71,9 @@ sudo mv /usr/lib/gvfs/gvfs-gphoto2-volume-monitor /usr/lib/gvfs/disable_gvfs-gph
 echo crear un ejecutable para el escáner
 touch /home/pi/Desktop/neo_escan.sh
 echo "#!/usr/bin/env bash" >> /home/pi/Desktop/neo_escan.sh
-echo "echo abrir Neo Escan" >/home/pi/Desktop/neo_escan.sh
-echo "cd /home/pi/Public/neo_escan" >>/home/pi/Desktop/neo_escan.sh
-echo "python3 main.py" >>/home/pi/Desktop/neo_escan.sh
+echo "echo abrir Neo Escan" >> /home/pi/Desktop/neo_escan.sh
+echo "cd /home/pi/Public/neo_escan" >> /home/pi/Desktop/neo_escan.sh
+echo "python3 main.py" >> /home/pi/Desktop/neo_escan.sh
 chmod +x /home/pi/Desktop/neo_escan.sh
 sudo mkdir /usr/share/neo-escan
 sudo mv /home/pi/Desktop/neo_escan.sh /usr/share/neo-escan/neo_escan.sh
