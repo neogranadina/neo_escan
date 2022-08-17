@@ -14,8 +14,8 @@ if not config.has_option('DEFAULT', 'last_update'):
     config['DEFAULT']['last_update'] = '1710'
 if not config.has_option('DEFAULT', 'next_update'):
     config['DEFAULT']['next_update'] = '1800'
-if not config.has_option('PROJECT', 'project_name'):
-    config['PROJECT']['project_name'] = 'neogranada'
+if not config.has_section('PROJECT'):
+    config['PROJECT'] = {'project_name' : 'neogranada'}
 
 with open(CONFIG_PATH, 'w') as configfile:
     config.write(configfile)
