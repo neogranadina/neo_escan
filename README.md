@@ -1,4 +1,4 @@
-# Escáner de Neogranadina *Nombre por definir :p
+# NeoScan
 
 > :warning: Este programa requiere [Lua](http://www.lua.org/home.html), por lo que se recomienda su instalación en sistemas Unix. El programa está construido para Raspberry Pi OS 32 bit "Buster".
 
