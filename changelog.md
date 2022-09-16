@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+## [0.1.711] - 2022-09-15
+
+### Bugfixes
+
+- Error en la orientación de las imágenes
+- Correción del contador de imágenes en la patalla de Escaner
+- Habilitación del comportamiento que oculta el botón de captura mientras se está capturando la imagen.
+- Corregido un *bug* que hacía que después de una cantidad considerable de imágenes se incrementara el uso de la memoria RAM. Se corrigió modificando el comportamiento de *bagit* para que no se actualice el manifiesto con cada captura sino al cerrar el proyecto.
+- Corrección de la orientación de las imágenes (se mostraban invertidas).
+- Hallado error de sobreescritura. Se debía a un error no identificado por errores al guardar el archivo JSON que impedía identificar la siguiente imagen. Se creó un script para arreglar el archivo y poder continuar.
+
 ## [0.1.710] - 2022-07-26
 
 ### Bugfixes

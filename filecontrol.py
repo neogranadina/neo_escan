@@ -15,15 +15,15 @@ import json
 import shutil
 import sys
 import chdkptp.util as util
-from pathlib import Path
 import os
 import datetime
 from db_handler import getElementIdByMetadata, wrap_imageWithElement
 from exif import Image
-import logging
 import configparser
 import bagit
 from logcontrol import LogControl as log
+import utils.fixJSON as fixJSON
+from json import JSONDecodeError
 
 # config
 
@@ -111,21 +111,19 @@ class DescargarIMGS:
                 self.nombre_proyecto, jpg_path, 'jpg')
         if orientacion == "vertical":
             img_num = int(jpg_path.split("/")[-1].split(".")[0])
-            orient = [8 if img_num % 2 == 0 else 6][0]
+            orient = [6 if img_num % 2 == 0 else 8][0]
         elif orientacion == "horizontal":
             orient = 1
 
         # asegurar orientación correcta
-        img = Image(jpg_path)
-        img.orientation = orient
+        with open(jpg_path, 'rb') as fr: # V0.1.710 fixed error "str" object has no "read" attribute
+            img = Image(fr)
+            img.orientation = orient
+
         with open(jpg_path, 'wb') as fp:
             fp.write(img.get_file())
 
         print(f"descargada img {jpg_path}")
-
-        # update bag
-        bag = bagit.Bag(os.path.join(IMGDIR, self.nombre_proyecto))
-        bag.save(manifests=True)
 
     def descarga_dng(self):
         '''
@@ -143,10 +141,6 @@ class DescargarIMGS:
                 self.associateImageWithElement(
                     self.nombre_proyecto, dng_path, 'dng')
                 print(f"descargada img {dng_path}")
-
-        # update bag
-        bag = bagit.Bag(os.path.join(IMGDIR, self.nombre_proyecto))
-        bag.save(manifests=True)
 
         self.dev.delete_files(img_path)
 
@@ -215,11 +209,21 @@ class DescargarIMGS:
             with open(metadata_path, 'w', encoding='utf-8') as fp:
                 json.dump({}, fp)
 
-        with open(metadata_path, 'r+', encoding='utf-8') as fp:
-            data = json.load(fp)
-            data[self.image_name(img_path)] = metadata
-            fp.seek(0)
-            json.dump(data, fp, indent=4, ensure_ascii=False)
+        try:
+            with open(metadata_path, 'r+', encoding='utf-8') as fp:
+                data = json.load(fp)
+                data[self.image_name(img_path)] = metadata
+                fp.seek(0)
+                json.dump(data, fp, indent=4, ensure_ascii=False)
+        except JSONDecodeError as e:
+            print("JSONDecodeError")
+            log.log(f"JSONDecodeError: {e} en {metadata_path}")
+            fixJSON.fixJSON(metadata_path)
+            with open(metadata_path, 'r+', encoding='utf-8') as fp:
+                data = json.load(fp)
+                data[self.image_name(img_path)] = metadata
+                fp.seek(0)
+                json.dump(data, fp, indent=4, ensure_ascii=False)
 
 
     def associateImageWithElement(self, metadata_text, img_path, tipo_img):
@@ -267,3 +271,14 @@ class DescargarIMGS:
         wrap_imageWithElement(element_id, order, size, mime_type, filename,
                               path, img_timestamp, img_modified_ts,
                               img_metadata)
+
+
+class UpdateFiles:
+
+    def __init__(self, nombre_proyecto):
+        self.nombre_proyecto = nombre_proyecto
+
+    def finish_and_update(self):
+        # update bag
+        bag = bagit.Bag(os.path.join(IMGDIR, self.nombre_proyecto))
+        bag.save(manifests=True)
