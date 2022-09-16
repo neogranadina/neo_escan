@@ -14,6 +14,9 @@ import glob
 from pathlib import Path
 import json
 import shutil
+import gc
+import psutil
+
 from locale import getdefaultlocale
 from PySide2 import QtCore
 from PySide2.QtGui import QIcon, QPixmap, QImage, QMovie
@@ -24,12 +27,13 @@ from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, Qt
 from ui_main import Ui_MainWindow
 from db_handler import connectToDatabase, createElement, getElementIdByMetadata, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection, getLastImgs, getDocumentTypeByID
 from camcontrol import Cam
+from filecontrol import UpdateFiles
 import configparser
 import ctypes
 import time
 from logcontrol import LogControl as log
 import filemanager.b2 as b2
-
+from utils.monitor import promedio_captura
 
 # config
 
@@ -906,7 +910,7 @@ class MainWindow(QMainWindow):
             num_imagenes = len(os.listdir(folder_path))
         except FileNotFoundError:
             num_imagenes = 0
-        
+
         widgets.cantidadimgsLabel.setText(str(num_imagenes))
 
     def open_cameras(self):
@@ -1092,6 +1096,8 @@ class MainWindow(QMainWindow):
         # insert overlay to avoid unwanted clicks on capture button
         # display validation buttons
         movie = QMovie("imgs/ajax-loader.gif")
+        # scale gif to 30 * 30 pixels
+        movie.setScaledSize(QSize(30, 30))
         widgets.capturando.setMovie(movie)
         movie.start()
         widgets.controlesCamstackedWidget.setCurrentWidget(
@@ -1108,6 +1114,10 @@ class MainWindow(QMainWindow):
                     break
         else:
             time.sleep(5)
+
+        # erase image labels
+        widgets.imagenizqLabel.setPixmap(QPixmap())
+        widgets.imagederLabel.setPixmap(QPixmap())
 
         # for some reason QPixmap is not working with PosixPath
         # raise TypeError. As a temporary solution transform PosixPath to str
@@ -1126,10 +1136,10 @@ class MainWindow(QMainWindow):
         widgets.imagederLabel.setPixmap(QPixmap.fromImage(right_img))
 
         self.lenImagenesDir(
-            Path(widgets.directorio_elementos.text(), 'data', 'JPG')) # Fix images count
-        
+            Path(widgets.directorio_elementos.text(), 'data', 'JPG'))  # Fix images count
+
         widgets.statusLabel.setText(
-            f"Capturadas {last_img_left} y {last_img_right}")
+            f"Capturadas {last_img_left} y {last_img_right}.\nTiempo promedio de captura {promedio_captura()}")
         log.log(
             f'INFO: Imágenes {last_img_left} y {last_img_right} capturadas')
 
@@ -1137,7 +1147,17 @@ class MainWindow(QMainWindow):
         widgets.controlesCamstackedWidget.setCurrentWidget(
             widgets.captura)
 
+        mem = psutil.virtual_memory()
+        log.log(f'INFO: Memoria libre: {mem.free / 1024 ** 2} MB')
+        if mem.available < 500 * 1024 * 1024:
+            log.log('INFO: Se ha liberado memoria')
+            gc.collect()
+
     def validateCaptura(self):
+        """
+        Función obsoleta. Se mantiene por compatibilidad con versiones anteriores.
+        """
+
         # actualiza la cantidad de imagenes en la carpeta
         self.lenImagenesDir(
             Path(widgets.directorio_elementos.text(), 'data', 'JPG'))
@@ -1176,9 +1196,12 @@ class MainWindow(QMainWindow):
         '''
         if QMessageBox.question(self, "Cerrar el proyecto",
                                 "¿Está seguro que desea cerrar el proyecto?", QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
+
             widgets.imagederLabel.setPixmap(QPixmap())
             widgets.imagenizqLabel.setPixmap(QPixmap())
+            nombre_proyecto = widgets.elementoIDLabel.text()
             widgets.elementoIDLabel.setText('')
+            titulo_proyecto = widgets.elementoTituloLabel.text()
             widgets.elementoTituloLabel.setText('')
             widgets.directorio_elementos.setText('')
             widgets.cantidadimgsLabel.setText('')
@@ -1186,13 +1209,26 @@ class MainWindow(QMainWindow):
             # back to home
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
             self.display_elements()
+            # add label to verticallayout
+            warning_label = QLabel(
+                f"El paquete del proyecto \"{titulo_proyecto}\" se está creando... Puede tomar unos minutos.")
+            warning_label.setStyleSheet("color: red")
+            widgets.verticalLayout_20.addWidget(warning_label)
+
             try:
                 Cams.pause_devs()
             except Exception as e:
                 log.log(
                     f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
 
+            app.processEvents()
+            UpdateFiles(nombre_proyecto).finish_and_update()
+            widgets.verticalLayout_20.removeWidget(warning_label)
+            warning_label.deleteLater()
+            app.processEvents()
+            self.display_elements()
     # Configuration page
+
     def set_config_page(self):
         '''
         set config page
@@ -1303,24 +1339,22 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
         Cams.close_dev()
 
-
     def b2_config(self):
         """
         solamente pasa al formulario de configuración
         """
         widgets.b2conf.setCurrentWidget(widgets.b2confForm)
-        
 
     def b2_config_set(self):
         """
         Recupera la información del formulario y 
         crea con ella un archivo .env
         """
-        
+
         # get values from selectores
         endpoint = widgets.endpointInput.text()
         keyID = widgets.keyIDInput.text()
-        keyName = widgets.keyNameInput.text() # nombre del bucket
+        keyName = widgets.keyNameInput.text()  # nombre del bucket
         appKey = widgets.appKeyInput.text()
 
         config['PROJECT']['project_name'] = keyName
@@ -1352,17 +1386,18 @@ class MainWindow(QMainWindow):
         app.processEvents()
         try:
             sync = b2.Sync()
-            widgets.promtText.setText(f"{widgets.promtText.text()}\nSincronizando... (no cierre esta ventana hasta finalizar la transferencia)")
+            widgets.promtText.setText(
+                f"{widgets.promtText.text()}\nSincronizando... (no cierre esta ventana hasta finalizar la transferencia)")
             app.processEvents()
             sync.sync_dir()
-            widgets.promtText.setText(f"{widgets.promtText.text()}\nSincronización finalizada.\n{sync}")
+            widgets.promtText.setText(
+                f"{widgets.promtText.text()}\nSincronización finalizada.\n{sync}")
             app.processEvents()
         except Exception as e:
             log.log(
                 f'ERROR: No se pudo sincronizar. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
             widgets.promtText.setText(
                 f"ERROR: No se pudo sincronizar. {e}")
-        
 
     def gentle_close(self):
         '''
