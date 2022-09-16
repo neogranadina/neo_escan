@@ -906,6 +906,7 @@ class MainWindow(QMainWindow):
             num_imagenes = len(os.listdir(folder_path))
         except FileNotFoundError:
             num_imagenes = 0
+        
         widgets.cantidadimgsLabel.setText(str(num_imagenes))
 
     def open_cameras(self):
@@ -1095,6 +1096,7 @@ class MainWindow(QMainWindow):
         movie.start()
         widgets.controlesCamstackedWidget.setCurrentWidget(
             widgets.validar)
+        app.processEvents()
 
         # Este loop permite que haya una espera de 10 segundos hasta que se permita una nueva toma
         if Cams.len_devs() > 1:
@@ -1123,6 +1125,9 @@ class MainWindow(QMainWindow):
         widgets.imagenizqLabel.setPixmap(QPixmap.fromImage(left_img))
         widgets.imagederLabel.setPixmap(QPixmap.fromImage(right_img))
 
+        self.lenImagenesDir(
+            Path(widgets.directorio_elementos.text(), 'data', 'JPG')) # Fix images count
+        
         widgets.statusLabel.setText(
             f"Capturadas {last_img_left} y {last_img_right}")
         log.log(

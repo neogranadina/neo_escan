@@ -116,8 +116,10 @@ class DescargarIMGS:
             orient = 1
 
         # asegurar orientación correcta
-        img = Image(jpg_path)
-        img.orientation = orient
+        with open(jpg_path, 'rb') as fr: # V0.1.710 fixed error "str" object has no "read" attribute
+            img = Image(fr)
+            img.orientation = orient
+
         with open(jpg_path, 'wb') as fp:
             fp.write(img.get_file())
 
