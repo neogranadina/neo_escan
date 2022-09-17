@@ -199,7 +199,8 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 log.log(
                     f'WARNING: No se pudieron detener las cámaras. {e} en {__file__} linea {e.__traceback__.tb_lineno}')
-            msgBox = QMessageBox
+            
+            msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Warning)
             msgBox.setText("¿Está seguro que desea salir del formulario?")
             msgBox.setWindowTitle("Volver al inicio")
@@ -407,7 +408,7 @@ class MainWindow(QMainWindow):
                 print("error al copiar imágenes")
                 log.log(f"ERROR al copiar imágenes {image_path}")
 
-        QMessageBox.information(
+        QMessageBox().information(
             widgets.stackedWidget, "Exportar", "Se ha exportado el elemento correctamente.")
 
     def delete_element(self, element_id, widgets_list, element_identifier):
@@ -416,7 +417,7 @@ class MainWindow(QMainWindow):
         '''
         folder_path = os.path.join(IMGDIR, element_identifier)
 
-        if QMessageBox.question(
+        if QMessageBox().question(
                 widgets.stackedWidget, "Eliminar", "¿Está seguro de eliminar el elemento?") == QMessageBox.Yes:
             # delete files from image_path
             # for file in os.listdir(folder_path):
@@ -433,7 +434,7 @@ class MainWindow(QMainWindow):
             for w in widgets_list:
                 widgets.elementslayout.removeWidget(w)
                 w.deleteLater()
-            QMessageBox.information(
+            QMessageBox().information(
                 widgets.stackedWidget, "Eliminar", "Se ha eliminado el elemento correctamente.")
 
         # return to home
@@ -480,7 +481,7 @@ class MainWindow(QMainWindow):
         '''
         if tipo_documento == 1:
             if widgets.titulolineEdit.text() == "" and widgets.identificadoreslineEdit.text() == "":
-                QMessageBox.warning(self, "Error",
+                QMessageBox().warning(self, "Error",
                                     "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formLegajo)
                 return False
@@ -488,7 +489,7 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 2:
             if widgets.titulodoclineEdit.text() == "" and widgets.identificadoresdoclineEdit.text() == "":
-                QMessageBox.warning(self, "Error",
+                QMessageBox().warning(self, "Error",
                                     "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formDocumento)
                 return False
@@ -496,7 +497,7 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 3:
             if widgets.tituloimagenlineEdit.text() == "" and widgets.identificadoresimagenlineEdit.text() == "":
-                QMessageBox.warning(self, "Error",
+                QMessageBox().warning(self, "Error",
                                     "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formImagen)
                 return False
@@ -504,7 +505,7 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 4:
             if widgets.nombreserlineEdit.text() == "" and widgets.identificadoreserlineEdit.text() == "":
-                QMessageBox.warning(self, "Error",
+                QMessageBox().warning(self, "Error",
                                     "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSeriada)
                 return False
@@ -512,7 +513,7 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 5:
             if widgets.titulolibrolineEdit.text() == "" and widgets.identificadoresLibrolineEdit.text() == "":
-                QMessageBox.warning(self, "Error",
+                QMessageBox().warning(self, "Error",
                                     "El campo Título no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formLibro)
                 return False
@@ -520,12 +521,12 @@ class MainWindow(QMainWindow):
                 return True
         elif tipo_documento == 6:
             if widgets.nombrearchivolineEdit.text() == "":
-                QMessageBox.warning(self, "Error",
+                QMessageBox().warning(self, "Error",
                                     "El campo Nombre no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
                 return False
             elif widgets.folderlineEdit.text() == "":
-                QMessageBox.warning(self, "Error",
+                QMessageBox().warning(self, "Error",
                                     "El campo Directorio no puede estar vacío.", QMessageBox.Discard)
                 widgets.tipoColeccion.setCurrentWidget(widgets.formSimple)
                 return False
@@ -676,7 +677,7 @@ class MainWindow(QMainWindow):
             widgets.isbnLibrolineEdit.setText(data[14])
             widgets.identificadoresLibrolineEdit.setText(data[9])
         elif tipo_documento == 6:
-            QMessageBox.information(
+            QMessageBox().information(
                 self, 'Error', 'No se puede editar un escaneo sencillo')
 
         # assesst editar button
@@ -935,7 +936,7 @@ class MainWindow(QMainWindow):
             cam_response = Cams.cam()
             intentos = 0
             while cam_response is False:
-                respuesta = QMessageBox.question(self, 'Error', 'No es posible iniciar \
+                respuesta = QMessageBox().question(self, 'Error', 'No es posible iniciar \
                  porque no se encontró ninguna cámara conectada.\n \
                      Por favor, conecte al menos una cámara y vuelva a intentarlo.',
                                                  QMessageBox.Ok | QMessageBox.Discard)
@@ -944,7 +945,7 @@ class MainWindow(QMainWindow):
                     cam_response = Cams.cam()
                     intentos += 1
                     if intentos == 3:
-                        QMessageBox.critical(
+                        QMessageBox().critical(
                             self, 'Error', 'No fue posible iniciar la cámara.')
                         log.log(f'ERROR: No fue posible iniciar la cámara después de tres intentos. \n \
                             cam_response = {cam_response}')
@@ -960,7 +961,7 @@ class MainWindow(QMainWindow):
             log.log(
                 f"ERROR: {e} en {__file__} linea {e.__traceback__.tb_lineno}")
             # single camera QMessageBox, accept retry cancel
-            respuesta = QMessageBox.question(self, "Una cámara conectada",
+            respuesta = QMessageBox().question(self, "Una cámara conectada",
                                              "Solamente una cámara está conectada.\n \
                                         ¿Desea intentar escanear con ella?",
                                              QMessageBox.Ok | QMessageBox.Retry | QMessageBox.Cancel)
@@ -968,7 +969,7 @@ class MainWindow(QMainWindow):
             if respuesta == QMessageBox.Ok:
                 return "single_camera_mode"
             elif respuesta == QMessageBox.Retry:
-                respuesta = QMessageBox.question(self, "Reintentar",
+                respuesta = QMessageBox().question(self, "Reintentar",
                                                  "Asegúrese de que la cámara esté conectada y vuelva a intentarlo.",
                                                  QMessageBox.Ok | QMessageBox.Cancel)
                 if respuesta == QMessageBox.Ok:
@@ -1098,7 +1099,7 @@ class MainWindow(QMainWindow):
             Cams.captura(element_ident, last_img_left,
                          last_img_right, zoom, shutter, orientacion, dng_status)
         except TypeError as e:
-            QMessageBox.warning(self, "Error",
+            QMessageBox().warning(self, "Error",
                                 "No se encontraron cámaras", QMessageBox.Ok)
             log.log(
                 f'ERROR: No se encontraron cámaras en {__file__} linea {e.__traceback__.tb_lineno}')
@@ -1204,7 +1205,7 @@ class MainWindow(QMainWindow):
         '''
         gentle close escanerPage and back to home
         '''
-        if QMessageBox.question(self, "Cerrar el proyecto",
+        if QMessageBox().question(self, "Cerrar el proyecto",
                                 "¿Está seguro que desea cerrar el proyecto?", QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
 
             widgets.imagederLabel.setPixmap(QPixmap())
