@@ -22,7 +22,7 @@ import multiprocessing as mp
 from filecontrol import DescargarIMGS
 import time
 import configparser
-from logcontrol import LogControl as log
+from utils.logcontrol import LogControl as log
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'setup/config.cfg')
 config = configparser.ConfigParser()

@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.1.712] - 2022-09-16
+
+### Bugfixes
+
+- Corregido el error que borraba los proyectos cuando se editaban directamente desde la vista de proyectos.
+
 ## [0.1.711] - 2022-09-15
 
 ### Bugfixes

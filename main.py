@@ -25,13 +25,13 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBo
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, Qt
 
 from ui_main import Ui_MainWindow
-from db_handler import connectToDatabase, createElement, getElementIdByMetadata, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection, getLastImgs, getDocumentTypeByID
+from db.db_handler import connectToDatabase, createElement, getElementIdByMetadata, insertInfo, editInfo, getElementInfo, getLastElementID, listofIDs, getElementMetadatabyID, erase_element, getImagesInfo, kill_connection, getLastImgs, getDocumentTypeByID
 from camcontrol import Cam
 from filecontrol import UpdateFiles
 import configparser
 import ctypes
 import time
-from logcontrol import LogControl as log
+from utils.logcontrol import LogControl as log
 import filemanager.b2 as b2
 from utils.monitor import promedio_captura
 
@@ -236,8 +236,12 @@ class MainWindow(QMainWindow):
 
         try:
             widgets.verticalLayout_20.removeItem(widgets.elementslayout)
+            # delete all elements
+            for i in reversed(range(widgets.elementslayout.count())):
+                widgets.elementslayout.itemAt(i).widget().setParent(None)
         except AttributeError:
             pass
+
 
         widgets.elementslayout = QGridLayout()
         widgets.elementslayout.setVerticalSpacing(10)
@@ -297,6 +301,20 @@ class MainWindow(QMainWindow):
             label1.setAlignment(Qt.AlignLeft)
             widgets.elementslayout.addWidget(label1, id, 1)
 
+            button1 = QPushButton()
+            # button.setText("Añadir imágenes")
+            button1.setObjectName(f"add_more_{element_id}")
+            button1.setMinimumSize(QSize(42, 42))
+            button1.setMaximumSize(QSize(42, 42))
+            icon1 = QIcon()
+            icon1.addFile("imgs/icons/camera-to-take-photos.svg",
+                          QSize(), QIcon.Normal, QIcon.Off)
+            button1.setIcon(icon1)
+            button1.setIconSize(QSize(20, 20))
+            button1.clicked[bool].connect(
+                lambda _, element_id=element_id: self.set_scanner_page(element_id))
+            widgets.elementslayout.addWidget(button1, id, 2)
+
             # Set four buttons in the grid
             button = QPushButton()
             # button.setText("Editar")
@@ -311,20 +329,6 @@ class MainWindow(QMainWindow):
             button.clicked[bool].connect(
                 lambda _, element_id=element_id: self.edit_element(element_id))
             widgets.elementslayout.addWidget(button, id, 3)
-
-            button1 = QPushButton()
-            # button.setText("Añadir imágenes")
-            button1.setObjectName(f"add_more_{element_id}")
-            button1.setMinimumSize(QSize(42, 42))
-            button1.setMaximumSize(QSize(42, 42))
-            icon1 = QIcon()
-            icon1.addFile("imgs/icons/camera-to-take-photos.svg",
-                          QSize(), QIcon.Normal, QIcon.Off)
-            button1.setIcon(icon1)
-            button1.setIconSize(QSize(20, 20))
-            button1.clicked[bool].connect(
-                lambda _, element_id=element_id: self.set_scanner_page(element_id))
-            widgets.elementslayout.addWidget(button1, id, 2)
 
             button2 = QPushButton()
             # button.setText("Exportar")
@@ -610,7 +614,7 @@ class MainWindow(QMainWindow):
         and write in its fields the information retrieved from the db
         '''
 
-        tipo_documento = getElementInfo(element_id)['document_type']
+        tipo_documento = getDocumentTypeByID(element_id)
         data = getElementMetadatabyID(element_id)
 
         if tipo_documento == 1:
@@ -680,6 +684,7 @@ class MainWindow(QMainWindow):
         widgets.botones_metadata.setCurrentWidget(widgets.editar)
         widgets.enviarFormEditButton.clicked[bool].connect(
             lambda _, element_id=element_id: self.editarForm(element_id))
+
 
     def cleanForm(self, tipo_de_documento):
         '''
@@ -842,7 +847,8 @@ class MainWindow(QMainWindow):
                 # set and config Scanner Page
                 self.set_scanner_page(id_element)
 
-    def editarForm(self, element_id):
+
+    def editarForm(self, element_id_editar):
         '''
         edita el elemento en la base de datos
         '''
@@ -851,14 +857,8 @@ class MainWindow(QMainWindow):
         #zoom_value = widgets.zoom_dial.value()
         zoom_value = widgets.zoom_valuedit.text()
         shutter_value = widgets.exposicionValue.text()
-        orientacion_value = [
-            "vertical" if widgets.orientacionValue.currentIndex() == 0 else "horizontal"][0]
-
-        # dng_checkbox value
-        if widgets.dng_check.isChecked():
-            dng = 'True'
-        else:
-            dng = 'False'
+        orientacion_value = "vertical" if widgets.orientacionValue.currentIndex() == 0 else "horizontal"
+        dng = "True" if widgets.dng_check.isChecked() else "False"
 
         # validate required items
         if self.requiredFields(tipo_de_documento):
@@ -867,9 +867,9 @@ class MainWindow(QMainWindow):
             info = self.get_fields_info(tipo_de_documento)
 
             # insert the info into the database
-            editInfo(element_id, info)
+            editInfo(element_id_editar, info)
 
-            datos_elemento = getElementMetadatabyID(element_id)
+            datos_elemento = getElementMetadatabyID(element_id_editar)
 
             # create project directory
             folder_path = os.path.join(IMGDIR, str(datos_elemento[9]))
@@ -883,7 +883,17 @@ class MainWindow(QMainWindow):
 
             # back to home
             widgets.stackedWidget.setCurrentWidget(widgets.inicioPage)
+            
+            # close button signal
+            widgets.enviarFormEditButton.clicked.disconnect()
+
+            log.log(f'INFO: Se editó el elemento {element_id_editar} con los datos {info}')
+
             self.display_elements()
+
+        else:
+            log.log(f"ERROR: No se pudo editar el elemento {element_id_editar} en {__file__} linea {sys._getframe().f_lineno}")
+
 
     def openimagesDir(self):
         '''
