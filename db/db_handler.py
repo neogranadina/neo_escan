@@ -20,7 +20,7 @@ from db.create_db import crear_basededatos
 from PySide2.QtCore import QDir
 from PySide2.QtSql import QSqlDatabase, QSqlQuery
 
-from logcontrol import LogControl as log
+from utils.logcontrol import LogControl as log
 
 
 def connectToDatabase():

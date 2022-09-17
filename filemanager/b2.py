@@ -9,7 +9,7 @@ from botocore.config import Config
 from dotenv import load_dotenv
 import os
 import configparser
-from logcontrol import LogControl as log
+from utils.logcontrol import LogControl as log
 
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__).replace("/filemanager", ""), 'setup/config.cfg')

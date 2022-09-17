@@ -17,11 +17,11 @@ import sys
 import chdkptp.util as util
 import os
 import datetime
-from db_handler import getElementIdByMetadata, wrap_imageWithElement
+from db.db_handler import getElementIdByMetadata, wrap_imageWithElement
 from exif import Image
 import configparser
 import bagit
-from logcontrol import LogControl as log
+from utils.logcontrol import LogControl as log
 import utils.fixJSON as fixJSON
 from json import JSONDecodeError
 
