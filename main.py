@@ -1309,16 +1309,10 @@ class MainWindow(QMainWindow):
         left_image_path = left_image_path.absolute().as_posix()
         right_image_path = right_image_path.absolute().as_posix()
 
-        left_img = QImage(left_image_path)
-        right_img = QImage(right_image_path)
-
-        left_img = left_img.scaled(
-            250, 250, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
-        right_img = right_img.scaled(
-            250, 250, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
-
-        widgets.imagenizqLabel_2.setPixmap(QPixmap.fromImage(left_img))
-        widgets.imagederLabel_2.setPixmap(QPixmap.fromImage(right_img))
+        # set Pixmap to image
+        widgets.imagenizqLabel_2.setPixmap(QPixmap(left_image_path))
+        widgets.imagederLabel_2.setPixmap(QPixmap(right_image_path))
+        
 
     def save_config(self):
         '''
