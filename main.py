@@ -19,7 +19,7 @@ import psutil
 
 from locale import getdefaultlocale
 from PySide2 import QtCore
-from PySide2.QtGui import QIcon, QPixmap, QImage, QMovie
+from PySide2.QtGui import QIcon, QPixmap, QImage, QMovie, QTransform
 
 from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGridLayout, QPushButton
 from PySide2.QtCore import QSize, QTranslator, QLibraryInfo, Qt
@@ -34,6 +34,7 @@ import time
 from utils.logcontrol import LogControl as log
 import filemanager.b2 as b2
 from utils.monitor import promedio_captura
+
 
 # config
 
@@ -1135,16 +1136,16 @@ class MainWindow(QMainWindow):
         left_img_path = left_img_path.absolute().as_posix()
         right_img_path = right_img_path.absolute().as_posix()
 
-        left_img = QImage(left_img_path)
-        right_img = QImage(right_img_path)
-
-        left_img = left_img.scaled(
-            200, 266, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
-        right_img = right_img.scaled(
-            200, 266, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
-
-        widgets.imagenizqLabel.setPixmap(QPixmap.fromImage(left_img))
-        widgets.imagederLabel.setPixmap(QPixmap.fromImage(right_img))
+        # display images
+        widgets.imagenizqLabel.setPixmap(QPixmap(left_img_path))
+        widgets.imagederLabel.setPixmap(QPixmap(right_img_path))
+        
+        # change images orientation
+        if orientacion == 'vertical':
+            widgets.imagenizqLabel.setPixmap(
+                widgets.imagenizqLabel.pixmap().transformed(QTransform().rotate(-90)))
+            widgets.imagederLabel.setPixmap(
+                widgets.imagederLabel.pixmap().transformed(QTransform().rotate(90)))
 
         self.lenImagenesDir(
             Path(widgets.directorio_elementos.text(), 'data', 'JPG'))  # Fix images count
@@ -1205,8 +1206,15 @@ class MainWindow(QMainWindow):
         '''
         gentle close escanerPage and back to home
         '''
-        if QMessageBox().question(self, "Cerrar el proyecto",
-                                "¿Está seguro que desea cerrar el proyecto?", QMessageBox.Yes | QMessageBox.No) == QMessageBox.Yes:
+        mesagequestion = QMessageBox()
+        mesagequestion.setIcon(QMessageBox.Question)
+        mesagequestion.setText("¿Está seguro que desea cerrar el proyecto?")
+        # Yes no option
+        mesagequestion.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        mesagequestion.setDefaultButton(QMessageBox.No)
+        # Execute message box
+        result = mesagequestion.exec_()
+        if result == QMessageBox.Yes:
 
             widgets.imagederLabel.setPixmap(QPixmap())
             widgets.imagenizqLabel.setPixmap(QPixmap())
@@ -1238,6 +1246,8 @@ class MainWindow(QMainWindow):
             warning_label.deleteLater()
             app.processEvents()
             self.display_elements()
+        
+
     # Configuration page
 
     def set_config_page(self):

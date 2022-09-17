@@ -48,13 +48,12 @@ chmod +x install_escan.sh
 
 > :warning: Antes de iniciar la aplicación, encienda ambas cámaras.
 
-En el escritorio de Raspberry pi OS se crea el archivo `neo_escan.sh` que puede ser ejecutado directamente
-o en una terminal.
+En el menú de inicio se crea un ícono para el inicio de la aplicación en la categoría "Otras".
 
 También puede iniciarse la aplicación desde una terminal, desde el directorio de la aplicación:
 
 ```shell
-cd ~/Public/neo_escan
+cd /home/pi/Public/neo_escan
 python3 main.py
 ```
 
