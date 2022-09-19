@@ -14,7 +14,6 @@ db/neo_escan_test.db
 tempCodeRunnerFile.py
 db/neo_escan.db
 db/neoscan_db.db
-*.log
 test*
 *.zip
 update*
